@@ -383,6 +383,78 @@ function buildChakraFlexMessage(activeChakras) {
 }
 
 /**
+ * 生成 Instagram Stories 用的圖片
+ * @param {string} title - 標題
+ * @param {string} text - 主要文字
+ * @param {string} bgColor - 背景色
+ */
+function generateInstagramImage(title, text, bgColor = '#F5F3F8') {
+  const canvas = document.createElement('canvas');
+  canvas.width = 1080;
+  canvas.height = 1920;
+  const ctx = canvas.getContext('2d');
+
+  // 背景
+  const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
+  gradient.addColorStop(0, bgColor);
+  gradient.addColorStop(1, '#FFF8F5');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 1080, 1920);
+
+  // 裝飾圓點
+  ctx.fillStyle = 'rgba(147,112,219,0.15)';
+  ctx.beginPath();
+  ctx.arc(100, 150, 80, 0, Math.PI * 2);
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(980, 1800, 120, 0, Math.PI * 2);
+  ctx.fill();
+
+  // 標題
+  ctx.font = 'bold 72px "Noto Serif TC", serif';
+  ctx.fillStyle = '#5A5059';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(title, 540, 400);
+
+  // 主文字
+  ctx.font = '48px "Noto Serif TC", serif';
+  ctx.fillStyle = '#3d3556';
+  const lineHeight = 80;
+  const maxWidth = 900;
+  let y = 700;
+
+  // 文字換行
+  const lines = [];
+  const words = text.split('');
+  let line = '';
+  for (let word of words) {
+    const testLine = line + word;
+    const metrics = ctx.measureText(testLine);
+    if (metrics.width > maxWidth) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = testLine;
+    }
+  }
+  lines.push(line);
+
+  // 繪製每一行
+  lines.forEach((l, i) => {
+    ctx.fillText(l, 540, y + i * lineHeight);
+  });
+
+  // Logo
+  ctx.font = '32px "Noto Serif TC", serif';
+  ctx.fillStyle = '#9b8db5';
+  ctx.textAlign = 'center';
+  ctx.fillText('每日色彩 Amnita Riga', 540, 1850);
+
+  return canvas.toDataURL('image/png');
+}
+
+/**
  * 建立「貓咪房間」Flex Message
  * @param {string} item1 - 選擇的物件1
  * @param {string} item2 - 選擇的物件2

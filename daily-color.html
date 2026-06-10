@@ -390,32 +390,32 @@
     }
 
     .ck-back-card-deeper {
-      font-size: 0.92rem;
-      line-height: 2;
-      letter-spacing: 0.02em;
+      font-size: 0.94rem;
+      line-height: 2.1;
+      letter-spacing: 0.01em;
       color: #6b5b95;
-      margin-bottom: 1.4rem;
-      padding: 1rem 1.1rem;
+      margin-bottom: 1.6rem;
+      padding: 1.1rem 1.3rem;
       background: linear-gradient(135deg, rgba(220,200,255,0.12) 0%, rgba(200,180,255,0.08) 100%);
       border-radius: 10px;
-      min-height: 4.2rem;
+      min-height: 4.4rem;
     }
 
     .ck-back-card-action-label {
-      font-size: 0.58rem;
-      letter-spacing: 0.28em;
+      font-size: 0.60rem;
+      letter-spacing: 0.3em;
       color: #c5c0b8;
       text-transform: uppercase;
       font-weight: 600;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.8rem;
     }
 
     .ck-back-card-action {
-      font-size: 0.95rem;
-      line-height: 1.95;
-      letter-spacing: 0.02em;
+      font-size: 0.97rem;
+      line-height: 2;
+      letter-spacing: 0.01em;
       color: #5a4a7a;
-      padding: 1rem 1.2rem;
+      padding: 1.1rem 1.3rem;
       background: linear-gradient(135deg, rgba(147,112,219,0.15) 0%, rgba(180,160,240,0.08) 100%);
       border-left: 3px solid rgba(147,112,219,0.35);
       border-radius: 10px;
@@ -1094,6 +1094,7 @@
 
             <div style="display: flex; gap: 0.8rem; margin-top: 1.3rem; justify-content: center; flex-wrap: wrap;">
               <button class="ck-share line-btn ta" id="ckShare">分享到 LINE ↗</button>
+              <button class="ck-share ta" id="igBtn" style="border-color: #E1306C; color: #E1306C;">保存 IG 限動 ↗</button>
               <button class="ck-share ta" id="roomBtn" style="border-color: #c098ff; color: #c098ff;">進入房間</button>
             </div>
           </div>
@@ -1816,6 +1817,39 @@ document.getElementById('ckShare').addEventListener('click', async function() {
   } catch(e) {}
   this.textContent = orig;
   this.disabled = false;
+});
+
+// ── Instagram 限動保存 ──
+document.getElementById('igBtn').addEventListener('click', function() {
+  if (!currentIC) return;
+
+  let chakra;
+  if (currentCK) {
+    chakra = currentCK;
+  } else if (currentIC.chakra !== undefined) {
+    chakra = CHAKRA_DATA[currentIC.chakra];
+  } else {
+    chakra = CHAKRA_DATA[Math.floor(Math.random() * CHAKRA_DATA.length)];
+  }
+
+  // 生成圖片
+  const bgColor = currentCK ? currentCK.color : CHAKRA_DATA[currentIC.chakra].color;
+  const imageData = generateInstagramImage(chakra.name, currentIC.text, bgColor);
+
+  // 下載圖片
+  const link = document.createElement('a');
+  link.href = imageData;
+  link.download = `daily-color-${new Date().toISOString().slice(0, 10)}.png`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // 提示用戶
+  const orig = this.textContent;
+  this.textContent = '已保存 ✓';
+  setTimeout(() => {
+    this.textContent = orig;
+  }, 2000);
 });
 
 // ── LIFF 初始化 + 個人化問候 ──
