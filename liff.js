@@ -449,7 +449,7 @@ function generateInstagramImage(title, text, bgColor = '#F5F3F8') {
   ctx.font = '32px "Noto Serif TC", serif';
   ctx.fillStyle = '#9b8db5';
   ctx.textAlign = 'center';
-  ctx.fillText('每日色彩 Amnita Riga', 540, 1850);
+  ctx.fillText('每日色彩 Anmita Riga', 540, 1850);
 
   return canvas.toDataURL('image/png');
 }
