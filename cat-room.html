@@ -199,19 +199,27 @@
     .color-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
+      gap: 1.8rem 1.5rem;
       width: 100%;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .color-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      cursor: pointer;
     }
 
     .color-swatch {
       width: 100%;
       aspect-ratio: 1;
-      border-radius: 20px;
+      border-radius: 24px;
       cursor: pointer;
       transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      border: 2px solid transparent;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      border: 2.5px solid transparent;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
       position: relative;
       overflow: hidden;
     }
@@ -220,22 +228,42 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 50%);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
 
     .color-swatch:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(-6px);
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
     }
 
     .color-swatch:hover::before { opacity: 1; }
 
     .color-swatch.selected {
-      border-color: rgba(0, 0, 0, 0.2);
-      transform: scale(1.02);
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+      border-color: #8b7f94;
+      transform: scale(1.04);
+      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.15);
+    }
+
+    .color-label {
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      color: #6b5b95;
+      font-weight: 500;
+      text-align: center;
+      transition: all 0.3s ease;
+      min-height: 1.4rem;
+    }
+
+    .color-item:hover .color-label {
+      color: #5a4a7a;
+      font-weight: 600;
+    }
+
+    .color-item:has(.color-swatch.selected) .color-label {
+      color: #5a4a7a;
+      font-weight: 600;
     }
 
     /* 顏色定義 */
@@ -558,7 +586,12 @@
       }
 
       .color-grid {
-        gap: 1rem;
+        gap: 1.6rem 1.2rem;
+        margin-bottom: 2.2rem;
+      }
+
+      .color-label {
+        font-size: 0.92rem;
       }
 
       .result-card {
@@ -808,12 +841,30 @@
     </div>
 
     <div class="color-grid">
-      <div class="color-swatch color-quartz" data-color="quartz"></div>
-      <div class="color-swatch color-mauve" data-color="mauve"></div>
-      <div class="color-swatch color-moonlight" data-color="moonlight"></div>
-      <div class="color-swatch color-mistblue" data-color="mistblue"></div>
-      <div class="color-swatch color-sage" data-color="sage"></div>
-      <div class="color-swatch color-apricot" data-color="apricot"></div>
+      <div class="color-item">
+        <div class="color-swatch color-quartz" data-color="quartz"></div>
+        <div class="color-label">石英粉</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch color-mauve" data-color="mauve"></div>
+        <div class="color-label">霧紫</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch color-moonlight" data-color="moonlight"></div>
+        <div class="color-label">月光白</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch color-mistblue" data-color="mistblue"></div>
+        <div class="color-label">霧藍</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch color-sage" data-color="sage"></div>
+        <div class="color-label">鼠尾草綠</div>
+      </div>
+      <div class="color-item">
+        <div class="color-swatch color-apricot" data-color="apricot"></div>
+        <div class="color-label">暖杏色</div>
+      </div>
     </div>
 
     <div class="button-group">
@@ -1275,8 +1326,9 @@ document.getElementById('next-to-color').addEventListener('click', () => {
 //  顏色選擇事件
 // ════════════════════════════════════════
 
-document.querySelectorAll('.color-swatch').forEach(swatch => {
-  swatch.addEventListener('click', () => {
+document.querySelectorAll('.color-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const swatch = item.querySelector('.color-swatch');
     document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
     swatch.classList.add('selected');
     selectedColor = swatch.dataset.color;
