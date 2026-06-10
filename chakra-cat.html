@@ -449,91 +449,99 @@
       font-style: italic;
     }
 
-    .card-states {
+    /* ════════════════════════════════════════
+       重新設計：簡化主卡片 + 強化延伸閱讀
+    ════════════════════════════════════════ */
+
+    /* 主內容區 - 清晰層級 */
+    .card-main-content {
       display: flex;
       flex-direction: column;
-      gap: 0.55rem;
-      margin-bottom: 1.4rem;
+      gap: 2.2rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    /* 標籤區 - 降低視覺權重 */
+    .card-states-minimal {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 1.8rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid rgba(147,112,219,0.1);
+      opacity: 0.7;
     }
     .state-row {
       display: flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.3rem;
       flex-wrap: wrap;
     }
     .state-label {
-      font-size: 0.58rem;
-      letter-spacing: 0.2em;
+      font-size: 0.54rem;
+      letter-spacing: 0.15em;
       color: #c5c0b8;
       flex-shrink: 0;
-      width: 2.4rem;
+      width: 2rem;
+      opacity: 0.8;
     }
     .state-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.3rem;
     }
     .state-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      padding: 0.3rem 0.75rem;
-      border-radius: 50px;
-      font-weight: 500;
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 40px;
+      font-weight: 400;
     }
     .state-tag.flow {
       color: #fff;
-      opacity: 1;
-      font-weight: 600;
+      opacity: 0.8;
+      font-weight: 500;
     }
     .state-tag.imbalance {
       background: transparent !important;
-      opacity: 1;
-      font-weight: 500;
-      border: 1.2px solid;
+      opacity: 0.7;
+      font-weight: 400;
+      border: 1px solid;
     }
 
-    .card-rule {
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(147,112,219,0.3), transparent);
-      margin: 1.3rem 0;
-    }
-
-    .card-desc-label {
-      font-size: 0.66rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #9b8db5;
-      margin-bottom: 0.7rem;
-    }
-    .card-desc {
-      font-size: 0.95rem;
-      line-height: 2.15;
-      letter-spacing: 0.055em;
-      color: #6b5b95;
-      margin-bottom: 1.4rem;
-      white-space: pre-line;
-      padding: 0.8rem 1rem;
-      background: rgba(220,200,255,0.2);
-      border-radius: 10px;
-    }
-
+    /* 隱藏標籤標題和分割線 */
+    .card-rule,
+    .card-desc-label,
     .card-action-label {
-      font-size: 0.66rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      font-weight: 600;
-      color: #9b8db5;
-      margin-bottom: 0.7rem;
+      display: none;
     }
+
+    /* 主內容 - 無背景 */
+    .card-desc {
+      font-size: 1.02rem;
+      line-height: 2.2;
+      letter-spacing: 0.02em;
+      color: #5a4a7a;
+      white-space: pre-line;
+      background: transparent;
+      padding: 0;
+      margin: 0;
+    }
+
     .card-action {
-      font-size: 0.88rem;
+      font-size: 0.96rem;
       line-height: 2;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.01em;
       color: #6b5b95;
-      padding: 0.8rem 1rem;
-      background: rgba(220,200,255,0.15);
-      border-left: 3px solid rgba(147,112,219,0.4);
+      padding: 1rem 1.2rem;
+      background: rgba(220,200,255,0.12);
+      border-left: 3px solid rgba(147,112,219,0.25);
       border-radius: 8px;
     }
 
@@ -557,28 +565,28 @@
 
 
     /* ══════════════════════════
-       延伸閱讀區塊
+       延伸閱讀區塊 (獨立大型區塊)
     ══════════════════════════ */
     .card-extra {
-      margin-top: 1.4rem;
-      border-top: 1px solid #ece8e2;
-      padding-top: 1rem;
+      margin-top: 2.4rem;
+      border-top: 1px solid rgba(147,112,219,0.12);
+      padding-top: 2rem;
     }
     .card-extra-toggle {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
       background: none;
       border: none;
       cursor: pointer;
       font-family: inherit;
-      font-size: 0.68rem;
-      letter-spacing: 0.32em;
-      color: #9b8db5;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: #5a4a7a;
       padding: 0;
       transition: color 0.2s;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-weight: 500;
+      text-align: left;
     }
     .card-extra-toggle:hover { color: #6b5b95; }
     .card-extra-arrow {
@@ -591,56 +599,61 @@
     .card-extra-body {
       display: none;
       flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 1.2rem;
-      padding: 0.8rem 1rem;
-      background: rgba(220,200,255,0.08);
-      border-radius: 10px;
+      gap: 1.6rem;
+      margin-top: 1.6rem;
+      padding: 1.6rem 1.4rem;
+      background: rgba(232,223,245,0.3);
+      border-radius: 12px;
+      border: 1px solid rgba(147,112,219,0.1);
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
     }
-    .card-extra-body.open { display: flex; }
+    .card-extra-body.open {
+      display: flex;
+      max-height: 800px;
+    }
 
     .extra-meta {
       display: flex;
-      gap: 2.2rem;
-      padding-bottom: 0.8rem;
+      gap: 2.4rem;
+      padding-bottom: 1.2rem;
       border-bottom: 1px solid rgba(147,112,219,0.15);
     }
     .extra-meta-item {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.4rem;
     }
     .extra-meta-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.3em;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
       color: #9b8db5;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-weight: 500;
     }
     .extra-meta-value {
-      font-size: 0.88rem;
-      letter-spacing: 0.08em;
-      color: #5a4a7a;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+      color: #6b5b95;
       font-weight: 500;
     }
     .extra-section-label {
-      font-size: 0.64rem;
-      letter-spacing: 0.32em;
-      color: #9b8db5;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: #6b5b95;
+      margin-bottom: 0.6rem;
+      font-weight: 500;
     }
     .extra-section-text {
-      font-size: 0.9rem;
-      line-height: 2;
-      letter-spacing: 0.04em;
+      font-size: 0.92rem;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
       color: #5a4a7a;
       white-space: pre-line;
-      padding: 0.6rem 0.8rem;
-      background: rgba(232,223,245,0.5);
+      padding: 0.8rem 1rem;
+      background: rgba(248,245,252,0.8);
       border-radius: 8px;
-      border-left: 3px solid rgba(147,112,219,0.3);
+      border-left: 2px solid rgba(147,112,219,0.25);
     }
 
     /* ════════════════════════════════════════
@@ -944,6 +957,7 @@
   <div class="card">
     <div class="card-strip" id="cardStrip"></div>
     <div class="card-body">
+      <!-- 標題區 -->
       <div class="card-head">
         <div class="card-dot-icon" id="cardDotIcon"></div>
         <div class="card-name-wrap">
@@ -951,14 +965,26 @@
           <div class="card-en"   id="cardEn"></div>
         </div>
       </div>
-      <div class="card-states" id="cardStates"></div>
-      <div class="card-rule"></div>
-      <div class="card-desc-label">💭 此刻狀態</div>
-      <div class="card-desc" id="cardDesc"></div>
-      <div class="card-rule"></div>
-      <div class="card-action-label">🎯 今天可以</div>
-      <div class="card-action" id="cardAction"></div>
+
+      <!-- 主內容區 -->
+      <div class="card-main-content">
+        <div class="card-section">
+          <div class="card-desc" id="cardDesc"></div>
+        </div>
+
+        <div class="card-section">
+          <div class="card-action" id="cardAction"></div>
+        </div>
+      </div>
+
+      <!-- 標籤區（降低視覺權重） -->
+      <div class="card-states-minimal" id="cardStates"></div>
+
+      <!-- 延伸閱讀區（獨立大型區塊） -->
       <div class="card-extra" id="cardExtra"></div>
+
+      <!-- 分享按鈕 -->
+      <div id="lineShareBtnContainer"></div>
     </div>
   </div>
 </div>
@@ -1228,7 +1254,7 @@ function showCard(i) {
 
   const toggle = document.createElement('button');
   toggle.className = 'card-extra-toggle';
-  toggle.innerHTML = `延伸閱讀 <span class="card-extra-arrow">▸</span>`;
+  toggle.innerHTML = `這隻脈輪貓還有話想跟你說 <span class="card-extra-arrow">▸</span>`;
 
   const body = document.createElement('div');
   body.className = 'card-extra-body';
@@ -1258,7 +1284,7 @@ function showCard(i) {
   body.appendChild(extraSection('能量理解', extra.insight));
   body.appendChild(extraSection('轉化方向', extra.transform));
   if (extra.meditation) {
-    body.appendChild(extraSection('🧘 冥想提示', extra.meditation));
+    body.appendChild(extraSection('冥想提示', extra.meditation));
   }
 
   toggle.addEventListener('click', () => {
