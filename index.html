@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>每日色彩</title>
-  <meta name="theme-color" content="#faf9ff">
+  <title>Amnita Riga 宇宙訊號</title>
+  <meta name="theme-color" content="#F5F3F8">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="每日色彩">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="宇宙訊號">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script src="liff.js"></script>
   <style>
@@ -18,46 +18,33 @@
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #faf9ff 0%, #f5f8ff 100%);
+      background: linear-gradient(180deg, #F5F3F8 0%, #F2EAE4 50%, #F5F3F8 100%);
       font-family: "Noto Serif TC", Georgia, serif;
       font-weight: 300;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 3rem 1.5rem;
-      color: #4a3f73;
+      padding: 4rem 1.8rem 5rem;
+      color: #5A5059;
       overflow-x: hidden;
       position: relative;
     }
 
+    /* 柔和背景光暈 - 莫蘭迪色系 */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 800px 400px at 20% 30%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
-        radial-gradient(ellipse 600px 350px at 75% 20%, rgba(147, 112, 219, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 700px 380px at 85% 75%, rgba(135, 206, 235, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 750px 400px at 15% 85%, rgba(255, 215, 100, 0.08) 0%, transparent 50%);
+        radial-gradient(ellipse 900px 500px at 15% 20%, rgba(216, 198, 240, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 800px 450px at 85% 25%, rgba(242, 234, 228, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 750px 400px at 50% 85%, rgba(232, 223, 245, 0.07) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* ── 星空 ── */
-    .star-field { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0; }
-    .star {
-      position: absolute;
-      background: #fff;
-      border-radius: 50%;
-      animation: twinkle var(--dur) ease-in-out infinite var(--delay);
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: var(--op); transform: scale(1); }
-      50%       { opacity: calc(var(--op) * 3.5); transform: scale(1.6); }
-    }
-
-    /* ── 主內容 ── */
+    /* 主內容 */
     .content {
       position: relative;
       z-index: 1;
@@ -67,37 +54,41 @@
       width: 100%;
     }
 
-    /* ── 標題 ── */
+    /* 標題區 */
     .hero {
       text-align: center;
-      margin-bottom: 3rem;
-    }
-    .hero-title {
-      font-size: 1.45rem;
-      font-weight: 400;
-      letter-spacing: 0.55em;
-      color: #6b5b95;
-      margin-bottom: 0.9rem;
-      text-shadow: 0 2px 8px rgba(180, 140, 240, 0.15);
-    }
-    .hero-sub {
-      font-size: 0.66rem;
-      letter-spacing: 0.38em;
-      color: #9b8db5;
-      line-height: 2;
+      margin-bottom: 5rem;
+      padding-top: 2rem;
     }
 
-    /* ── 入口容器 ── */
+    .hero-title {
+      font-size: 1.75rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #5A5059;
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .hero-sub {
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      color: #9A8A9A;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* 入口容器 - 高級留白 */
     .entries {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2.8rem;
+      gap: 3.5rem;
       width: 100%;
-      max-width: 280px;
+      max-width: 320px;
     }
 
-    /* ── 按鈕共用 ── */
+    /* 卡片按鈕 - 高級感 */
     .btn-entry {
       display: flex;
       flex-direction: column;
@@ -105,248 +96,202 @@
       text-decoration: none;
       cursor: pointer;
       gap: 0;
-      /* transform 統一套在這裡，hover/active 控制 */
-      transition: transform 0.26s ease-out;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
       -webkit-tap-highlight-color: transparent;
     }
 
-    .btn-entry:hover  { transform: translateY(-4px) scale(1.05); }
-    .btn-entry:active { transform: scale(0.97); transition-duration: 0.1s; }
+    .btn-entry:hover { transform: translateY(-6px); }
+    .btn-entry:active { transform: scale(0.98); transition-duration: 0.1s; }
 
-    /* ── 圖片 ── */
-    .btn-img {
-      width: 300px;
-      height: auto;
-      display: block;
-      transition: filter 0.28s ease-out;
+    /* 抽象漸層圖形 - 替代黑貓 */
+    .btn-visual {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      transition: all 0.5s ease;
+      position: relative;
+      box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        0 12px 40px rgba(0, 0, 0, 0.03);
+      overflow: hidden;
     }
 
-    /* ── 圖片下方文字 ── */
+    .btn-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: inherit;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .btn-entry:hover .btn-visual {
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        0 20px 60px rgba(0, 0, 0, 0.06);
+      transform: scale(1.05);
+    }
+
+    /* 脈輪光暈 */
+    .btn-visual::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      pointer-events: none;
+    }
+
+    .btn-entry:hover .btn-visual::after {
+      opacity: 1;
+    }
+
+    /* 三種卡片視覺 */
+    .blessing .btn-visual {
+      background: linear-gradient(135deg, #D8C6F0 0%, #E8DFF5 100%);
+    }
+
+    .blessing .btn-visual::after {
+      box-shadow: inset 0 0 40px rgba(216, 198, 240, 0.4);
+    }
+
+    .chakra .btn-visual {
+      background: linear-gradient(135deg, #E8DFF5 0%, #D8C6F0 100%);
+    }
+
+    .chakra .btn-visual::after {
+      box-shadow: inset 0 0 40px rgba(232, 223, 245, 0.4);
+    }
+
+    .room .btn-visual {
+      background: linear-gradient(135deg, #F2EAE4 0%, #E8DFF5 100%);
+    }
+
+    .room .btn-visual::after {
+      box-shadow: inset 0 0 40px rgba(242, 234, 228, 0.3);
+    }
+
+    /* 幾何符號 - 極簡 */
+    .btn-symbol {
+      font-size: 2.8rem;
+      line-height: 1;
+      opacity: 0.7;
+      transition: all 0.5s ease;
+    }
+
+    .btn-entry:hover .btn-symbol {
+      opacity: 1;
+      transform: scale(1.15);
+    }
+
+    /* 文字區 */
     .btn-text {
-      margin-top: 1.2rem;
       text-align: center;
+      width: 100%;
     }
+
     .btn-label {
-      font-size: 0.88rem;
+      font-size: 1.08rem;
       font-weight: 400;
-      letter-spacing: 0.3em;
-      margin-bottom: 0.4rem;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+      color: #5A5059;
+      line-height: 1.5;
     }
+
     .btn-desc {
-      font-size: 0.6rem;
-      letter-spacing: 0.18em;
-      line-height: 1.9;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+      color: #8A7A8A;
+      font-weight: 300;
     }
 
-    /* ══════════════════════════════
-       卡片一：接收你的祝福
-       粉紫色 glow，PNG 透明背景
-       drop-shadow 會沿貓咪輪廓發光
-    ══════════════════════════════ */
-    .blessing .btn-img {
-      animation: blessBreath 4.2s ease-in-out infinite;
-    }
-    @keyframes blessBreath {
-      0%, 100% {
-        filter:
-          drop-shadow(0 0 10px rgba(210, 155, 250, 0.38))
-          drop-shadow(0 0 26px rgba(185, 130, 230, 0.18));
-      }
-      50% {
-        filter:
-          drop-shadow(0 0 20px rgba(220, 168, 255, 0.60))
-          drop-shadow(0 0 50px rgba(195, 145, 240, 0.30));
-      }
-    }
-    .blessing:hover .btn-img {
-      filter:
-        drop-shadow(0 0 26px rgba(225, 175, 255, 0.80))
-        drop-shadow(0 0 65px rgba(205, 155, 250, 0.45)) !important;
-      animation: none;
-    }
-    .blessing:active .btn-img {
-      filter: drop-shadow(0 0 5px rgba(210, 155, 250, 0.28)) !important;
-      animation: none;
-    }
-    .blessing .btn-label { color: #8b6fb5; }
-    .blessing .btn-desc  { color: #9b8db5; }
-
-    /* ══════════════════════════════
-       卡片二：身體正在說什麼
-       藍紫色 glow
-    ══════════════════════════════ */
-    .chakra .btn-img {
-      animation: chakraBreath 5s ease-in-out infinite 1.8s;
-    }
-    @keyframes chakraBreath {
-      0%, 100% {
-        filter:
-          drop-shadow(0 0 10px rgba(130, 158, 235, 0.38))
-          drop-shadow(0 0 26px rgba(110, 138, 215, 0.18));
-      }
-      50% {
-        filter:
-          drop-shadow(0 0 22px rgba(155, 185, 250, 0.60))
-          drop-shadow(0 0 52px rgba(135, 162, 235, 0.30));
-      }
-    }
-    .chakra:hover .btn-img {
-      filter:
-        drop-shadow(0 0 28px rgba(170, 198, 255, 0.80))
-        drop-shadow(0 0 68px rgba(148, 175, 248, 0.45)) !important;
-      animation: none;
-    }
-    .chakra:active .btn-img {
-      filter: drop-shadow(0 0 5px rgba(130, 158, 235, 0.28)) !important;
-      animation: none;
-    }
-    .chakra .btn-label { color: #7a9bbe; }
-    .chakra .btn-desc  { color: #8fa9bf; }
-
-    /* ══════════════════════════════
-       卡片三：貓咪的房間
-       暖金色 glow
-    ══════════════════════════════ */
-    .room .btn-img {
-      animation: roomBreath 4.8s ease-in-out infinite 0.9s;
-    }
-    @keyframes roomBreath {
-      0%, 100% {
-        filter:
-          drop-shadow(0 0 10px rgba(200, 165, 100, 0.38))
-          drop-shadow(0 0 26px rgba(180, 145, 80, 0.18));
-      }
-      50% {
-        filter:
-          drop-shadow(0 0 22px rgba(220, 185, 115, 0.62))
-          drop-shadow(0 0 52px rgba(200, 165, 95, 0.30));
-      }
-    }
-    .room:hover .btn-img {
-      filter:
-        drop-shadow(0 0 26px rgba(230, 195, 125, 0.82))
-        drop-shadow(0 0 65px rgba(210, 175, 105, 0.45)) !important;
-      animation: none;
-    }
-    .room:active .btn-img {
-      filter: drop-shadow(0 0 5px rgba(200, 165, 100, 0.28)) !important;
-      animation: none;
-    }
-    .room .btn-label { color: #c9a876; }
-    .room .btn-desc  { color: #9b8b6a; }
-
-    /* ══════════════════════════════
-       卡片四：內在空間
-       粉紫色 glow
-    ══════════════════════════════ */
-    .space .btn-img {
-      animation: spaceBreath 4.5s ease-in-out infinite 2.5s;
-    }
-    @keyframes spaceBreath {
-      0%, 100% {
-        filter:
-          drop-shadow(0 0 10px rgba(190, 150, 230, 0.38))
-          drop-shadow(0 0 26px rgba(160, 120, 210, 0.18));
-      }
-      50% {
-        filter:
-          drop-shadow(0 0 22px rgba(210, 170, 245, 0.62))
-          drop-shadow(0 0 52px rgba(180, 140, 225, 0.30));
-      }
-    }
-    .space:hover .btn-img {
-      filter:
-        drop-shadow(0 0 26px rgba(220, 180, 255, 0.82))
-        drop-shadow(0 0 65px rgba(195, 155, 240, 0.45)) !important;
-      animation: none;
-    }
-    .space:active .btn-img {
-      filter: drop-shadow(0 0 5px rgba(190, 150, 230, 0.28)) !important;
-      animation: none;
-    }
-    .space .btn-label { color: #9882b5; }
-    .space .btn-desc  { color: #9b8db5; }
-
-    /* ── 底部小字 ── */
+    /* 底部標語 */
     .footer-note {
-      margin-top: 3.5rem;
-      font-size: 0.57rem;
-      letter-spacing: 0.28em;
-      color: #b5a9c9;
+      margin-top: 5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: #A8999A;
       text-align: center;
+      font-weight: 300;
+      line-height: 1.8;
     }
 
-    /* ── 淡出轉場 ── */
-    .fade-out { animation: fadeOut 0.4s ease forwards; }
+    /* 淡出轉場 */
+    .fade-out { animation: fadeOut 0.5s ease forwards; }
     @keyframes fadeOut {
       from { opacity: 1; }
       to   { opacity: 0; }
+    }
+
+    /* 響應式 */
+    @media (max-width: 480px) {
+      body { padding: 3rem 1.5rem 4rem; }
+      .hero { margin-bottom: 4rem; }
+      .hero-title { font-size: 1.5rem; }
+      .entries { gap: 3rem; max-width: 280px; }
+      .btn-visual { width: 160px; height: 160px; margin-bottom: 1.5rem; }
+      .btn-symbol { font-size: 2.4rem; }
+      .btn-label { font-size: 0.95rem; }
+      .btn-desc { font-size: 0.7rem; }
     }
   </style>
 </head>
 <body>
 
-  <div class="star-field" id="starField"></div>
-
   <div class="content">
 
     <div class="hero">
-      <div class="hero-title">每日色彩</div>
-      <div class="hero-sub">選擇今天的探索方式</div>
+      <div class="hero-title">Amnita Riga</div>
+      <div class="hero-sub">宇 宙 訊 號</div>
     </div>
 
     <div class="entries">
 
       <a class="btn-entry blessing" href="daily-color.html">
-        <img class="btn-img" src="fairy-wand.PNG" alt="接收你的祝福">
+        <div class="btn-visual">
+          <div class="btn-symbol">◐</div>
+        </div>
         <div class="btn-text">
-          <div class="btn-label">接收你的祝福</div>
-          <div class="btn-desc">抽一張顏色卡<br>讓今天有一個錨點</div>
+          <div class="btn-label">接收祝福</div>
+          <div class="btn-desc">今日的色彩訊息<br>給你一個靜觀的起點</div>
         </div>
       </a>
 
       <a class="btn-entry chakra" href="chakra-cat.html">
-        <img class="btn-img" src="heart.PNG" alt="身體正在說什麼">
+        <div class="btn-visual">
+          <div class="btn-symbol">◆</div>
+        </div>
         <div class="btn-text">
-          <div class="btn-label">身體正在說什麼</div>
-          <div class="btn-desc">點擊七個能量中心<br>觀察此刻的狀態</div>
+          <div class="btn-label">覺察能量</div>
+          <div class="btn-desc">感受七個能量中心<br>聆聽身體此刻的聲音</div>
         </div>
       </a>
 
       <a class="btn-entry room" href="cat-room.html">
-        <img class="btn-img" src="cat-room-bg.png" alt="貓咪的房間">
+        <div class="btn-visual">
+          <div class="btn-symbol">◈</div>
+        </div>
         <div class="btn-text">
-          <div class="btn-label">貓咪的房間</div>
-          <div class="btn-desc">選兩個物件和一個顏色<br>用很輕的方式靠近自己</div>
+          <div class="btn-label">靜觀空間</div>
+          <div class="btn-desc">透過色彩與物件的組合<br>發現內在的靜謐角落</div>
         </div>
       </a>
 
     </div>
 
-    <div class="footer-note">每一天都是一個重新開始的機會</div>
-
+    <div class="footer-note">每一刻都是一個重新開始的機會</div>
 
   </div>
 
 <script>
-  // ── 星空生成 ──
-  const field = document.getElementById('starField');
-  for (let i = 0; i < 90; i++) {
-    const s = document.createElement('div');
-    s.className = 'star';
-    const size = (Math.random() * 1.8 + 0.4).toFixed(1);
-    const op   = (Math.random() * 0.22 + 0.05).toFixed(2);
-    s.style.cssText = [
-      `width:${size}px`, `height:${size}px`,
-      `top:${(Math.random()*100).toFixed(2)}%`,
-      `left:${(Math.random()*100).toFixed(2)}%`,
-      `--dur:${(Math.random()*3 + 2.5).toFixed(1)}s`,
-      `--delay:-${(Math.random()*5).toFixed(1)}s`,
-      `--op:${op}`
-    ].join(';');
-    field.appendChild(s);
-  }
-
   // ── PWA Service Worker ──
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(() => {});
@@ -361,7 +306,7 @@
       e.preventDefault();
       const href = this.getAttribute('href');
       document.body.classList.add('fade-out');
-      setTimeout(() => { window.location.href = href; }, 390);
+      setTimeout(() => { window.location.href = href; }, 490);
     });
   });
 </script>
