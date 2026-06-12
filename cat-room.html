@@ -134,6 +134,24 @@
       font-weight: 300;
     }
 
+    /* ── 選擇計數器 ── */
+    .selection-counter {
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      color: #6b5b95;
+      font-weight: 500;
+      padding: 0.6rem 1rem;
+      background: rgba(232, 223, 245, 0.3);
+      border-radius: 20px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+    .selection-counter.selected {
+      background: rgba(147, 112, 219, 0.15);
+      color: #5a4a7a;
+    }
+
     /* ════════════════════════════════════════
        物件選擇網格
     ════════════════════════════════════════ */
@@ -667,6 +685,7 @@
       <div class="step-num">01 ／ 03</div>
       <h1 class="step-title">今天，你想靠近什麼？</h1>
       <p class="step-subtitle">憑直覺選擇一個物件</p>
+      <div class="selection-counter" id="objectCounter">未選</div>
     </div>
 
     <div class="objects-grid">
@@ -1337,6 +1356,16 @@ document.querySelectorAll('.object-btn').forEach(btn => {
     document.querySelectorAll('.object-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
     selectedObject = btn.dataset.object;
+
+    // 更新計數器
+    const counter = document.getElementById('objectCounter');
+    const selectedBtn = document.querySelector('.object-btn.selected');
+    if (selectedBtn) {
+      const name = selectedBtn.querySelector('.object-label').textContent;
+      counter.textContent = `已選：${name}`;
+      counter.classList.add('selected');
+    }
+
     document.getElementById('next-to-color').disabled = false;
   });
 });
