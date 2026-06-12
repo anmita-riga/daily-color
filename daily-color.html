@@ -171,6 +171,18 @@
     .back-card.flipping {
       animation: none;
     }
+    .back-card.loading {
+      animation: card-breathe 2s ease-in-out infinite;
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+    .back-card.loading .back-hint {
+      animation: breathing-loading 1.8s ease-in-out infinite;
+    }
+    @keyframes breathing-loading {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
     @keyframes card-breathe {
       0%, 100% { transform: scale(1);     box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 0 0 rgba(180,150,220,0); }
       50%       { transform: scale(1.013); box-shadow: 0 12px 40px rgba(0,0,0,0.22), 0 0 28px rgba(180,150,220,0.18); }
@@ -1812,10 +1824,21 @@ function handleDraw() {
 
   drawBtn.classList.add('gone');
   const backCard = backScene.querySelector('.back-card');
+
+  // 顯示 Loading 狀態
+  backCard.classList.add('loading');
+  const hint = backCard.querySelector('.back-hint');
+  const originalHint = hint.textContent;
+  hint.textContent = '宇宙在思考\n請稍等...';
+
   spawnHalo(backCard);
 
   // 背面卡翻轉動畫 + 粒子
-  backCard.classList.add('flipping');
+  setTimeout(() => {
+    backCard.classList.remove('loading');
+    backCard.classList.add('flipping');
+    hint.textContent = originalHint;
+  }, 600);
   // spawnParticles('#b89ad8'); // 禁用粒子效果
 
   // 背面卡淡出
