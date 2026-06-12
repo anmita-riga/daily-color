@@ -336,12 +336,13 @@
       padding: 2.4rem 2rem;
       border-radius: 24px;
       opacity: 1;
-      transition: opacity 0.6s ease;
+      transition: opacity 0.6s ease, transform 0.6s ease;
       z-index: 1;
     }
     .ck-back.hidden {
       opacity: 0;
       pointer-events: none;
+      transform: translateY(-6px);
     }
 
     .ck-back::before {
@@ -737,8 +738,8 @@
     /* 文字淡入上浮 */
     .ta {
       opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.52s ease, transform 0.52s ease;
+      transform: translateY(10px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
     .ta.in { opacity: 1; transform: translateY(0); }
 
@@ -1700,10 +1701,13 @@ function fillCK(ck, spirit = null) {
   document.querySelectorAll('#ckFront .ta').forEach(el => el.classList.remove('in'));
 }
 
-// ── 文字淡入 ──
+// ── 文字淡入（節奏感分層）──
 function animateCKText() {
-  document.querySelectorAll('#ckFront .ta').forEach((el, i) => {
-    setTimeout(() => el.classList.add('in'), 300 + i * 95);
+  const elements = document.querySelectorAll('#ckFront .ta');
+  // 分三批淡入：脈輪名稱 → 祝福文字 → 行動建議
+  const delays = [0, 120, 240, 360, 520, 800, 1100, 1400];
+  elements.forEach((el, i) => {
+    setTimeout(() => el.classList.add('in'), 300 + (delays[i] ?? i * 150));
   });
 }
 
@@ -1756,7 +1760,6 @@ function flipCKIn() {
 
   setTimeout(() => {
     animateCKText();
-    ckScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }, 300);
 }
 
@@ -1787,34 +1790,40 @@ function showPair(pair) {
     fillCK(pair.ck, null);
   }
 
+  // 背景色漸層改為卡片色系
+  const tintColor = pageTint(cardColor);
+  document.body.style.backgroundColor = tintColor;
+  document.body.style.backgroundImage = `radial-gradient(ellipse 60% 50% at 50% 40%, ${hexAlpha(cardColor, 0.12)} 0%, transparent 70%)`;
+
   // 卡1：直覺祝福 淡入
   icWrap.style.display = 'block';
   void icWrap.offsetWidth;
   icWrap.classList.add('appear');
 
-  // 卡2：脈輪卡/靈性指引卡 翻入（延遲 0.9s）
-  // 背景色漸層改為卡片色系
-  const tintColor = pageTint(cardColor);
-  document.body.style.backgroundColor = tintColor;
-  document.body.style.backgroundImage = `radial-gradient(ellipse 60% 50% at 50% 40%, ${hexAlpha(cardColor, 0.12)} 0%, transparent 70%)`;
-  ckScene.classList.add('active');
-
+  // 卡1 出現後，自動平滑捲動到卡1 讓用戶閱讀
   setTimeout(() => {
-    // 顯示結果卡片（延遲隱藏提示）
-    showResultCard(true);
-    // spawnParticles(cardColor); // 禁用粒子效果
+    icWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 200);
 
-    // 延遲 1.5 秒才翻卡，確保用戶看到結果卡片內容
+  // 卡2：延遲 2.8 秒再出現（讓用戶充分閱讀卡1）
+  setTimeout(() => {
+    ckScene.classList.add('active');
+    showResultCard(true);
+
+    // 再等 0.6 秒後翻入，並平滑捲動到卡2
     setTimeout(() => {
       flipCKIn();
-    }, 1500);
-  }, 900);
+      setTimeout(() => {
+        ckScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 400);
+    }, 600);
+  }, 2800);
 
-  // 換一張按鈕（延遲時間 = 900 + 1500 + 750(翻卡動畫)）
+  // 「再抽一張」等卡2 完全顯示後才出現（2800 + 600 + 1400 文字淡入完成）
   setTimeout(() => {
     redrawBtn.classList.add('visible');
     state = 'shown';
-  }, 3150);
+  }, 5200);
 }
 
 // ── 抽牌觸發 ──
