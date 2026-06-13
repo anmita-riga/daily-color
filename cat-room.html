@@ -5,41 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>靜觀空間 | Anmita Riga</title>
   <meta name="description" content="靜觀空間 - 透過色彩與物件的組合，發現內在的靜謐角落。今天的自己，想靠近什麼？">
-  <meta name="theme-color" content="#F5F3F8">
+  <meta property="og:title" content="靜觀空間 | Anmita Riga">
+  <meta property="og:description" content="透過色彩與物件的組合，發現內在的靜謐角落。今天的自己，想靠近什麼？">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://euphonious-lebkuchen-60376f.netlify.app/icon-512.png">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="靜觀空間 | Anmita Riga">
+  <meta name="twitter:description" content="透過色彩與物件的組合，發現內在的靜謐角落。">
+  <meta name="theme-color" content="#47406A">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="靜觀儀式">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500&display=swap" rel="stylesheet">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script src="liff.js"></script>
   <style>
+    /* ── Design Tokens ── */
+    :root {
+      --ink-deepest: #3A3255;
+      --ink-deep:    #47406A;
+      --gold:        #E8C97A;
+      --gold-soft:   #F0D898;
+      --gold-line:   rgba(232, 201, 122, 0.65);
+      --lavender:        #C4AADF;
+      --lavender-soft:   #D4C0EC;
+      --lavender-deep:   #9B82C4;
+      --quartz:        #8EC4D8;
+      --quartz-soft:   #A8D4E4;
+      --text-primary:   #F5EFF8;
+      --text-secondary: #D8CFDF;
+      --text-muted:     #A89DB5;
+      --ease-silk: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+      /* 靜觀空間頁面專屬色 — 石英藍 */
+      --page-accent:       #8EC4D8;
+      --page-accent-soft:  #A8D4E4;
+      --page-accent-deep:  #6AAEC4;
+      --page-accent-line:  rgba(142, 196, 216, 0.65);
+      --page-accent-faint: rgba(142, 196, 216, 0.14);
+    }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { background: #EEF7FB; }
 
     body {
       min-height: 100vh;
-      background: linear-gradient(180deg, #F5F3F8 0%, #F2EAE4 50%, #F5F3F8 100%);
+      background:
+        radial-gradient(ellipse 100% 55% at 50% 0%,   rgba(255, 255, 255, 0.90) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 10% 30%,   rgba(142, 196, 216, 0.30) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 45% at 92% 20%,   rgba(196, 228, 240, 0.38) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 50% at 50% 100%,  rgba(220, 240, 248, 0.45) 0%, transparent 60%),
+        radial-gradient(ellipse 55% 40% at 20% 80%,   rgba(255, 242, 220, 0.35) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 40% at 80% 65%,   rgba(208, 236, 244, 0.30) 0%, transparent 55%),
+        linear-gradient(170deg, #E8F6FB 0%, #F4FAFD 30%, #FDF8F2 65%, #EDF7FB 100%);
       font-family: "Noto Serif TC", Georgia, serif;
       font-weight: 300;
-      color: #5A5059;
+      color: #4A5A6A;
       overflow-x: hidden;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* 柔光流動 */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 900px 500px at 20% 25%, rgba(216, 198, 240, 0.06) 0%, transparent 50%),
-        radial-gradient(ellipse 800px 450px at 80% 30%, rgba(232, 223, 245, 0.05) 0%, transparent 50%),
-        radial-gradient(ellipse 750px 400px at 50% 80%, rgba(242, 234, 228, 0.04) 0%, transparent 50%);
+        radial-gradient(ellipse 600px 400px at 15% 20%, rgba(142, 196, 216, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 350px at 85% 15%, rgba(196, 228, 240, 0.22) 0%, transparent 55%),
+        radial-gradient(ellipse 550px 380px at 70% 75%, rgba(255, 235, 200, 0.20) 0%, transparent 55%),
+        radial-gradient(ellipse 450px 320px at 25% 80%, rgba(180, 220, 236, 0.16) 0%, transparent 55%);
       pointer-events: none;
       z-index: 0;
+      animation: dawnFlow 28s ease-in-out infinite alternate;
+    }
+    @keyframes dawnFlow {
+      0%   { opacity: 0.7; transform: scale(1); }
+      50%  { opacity: 1;   transform: scale(1.04); }
+      100% { opacity: 0.8; transform: scale(1) translate(12px, -8px); }
+    }
+
+    /* 暖光暈染 */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 400px 280px at 50% 8%,  rgba(255, 248, 230, 0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 360px 260px at 80% 90%, rgba(142, 196, 216, 0.20) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+      animation: warmGlow 22s ease-in-out infinite alternate;
+    }
+    @keyframes warmGlow {
+      0%   { opacity: 0.6; transform: translate(0, 0); }
+      100% { opacity: 1;   transform: translate(-15px, 10px); }
     }
 
     .container {
@@ -55,34 +121,39 @@
 
     .back-link {
       position: fixed;
-      top: 1.8rem;
-      left: 1.8rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      color: #A8999A;
+      top: 1.2rem;
+      left: 1.4rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: var(--page-accent-deep);
       text-decoration: none;
       z-index: 100;
-      transition: all 0.35s ease;
-      font-weight: 300;
+      transition: all 0.4s var(--ease-silk);
+      font-weight: 400;
+      opacity: 0.8;
     }
-    .back-link:hover { color: #5A5059; transform: translateX(-3px); }
+    .back-link:hover {
+      color: var(--page-accent);
+      transform: translateX(-4px);
+      opacity: 1;
+    }
 
     /* ── 底部回首頁鏈接 ── */
     .footer-home-link {
       display: inline-block;
       margin-top: 3rem;
       margin-bottom: 2rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: #A8999A;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      color: #8AAABB;
       text-decoration: none;
-      transition: all 0.3s ease;
-      font-weight: 300;
-      opacity: 0.8;
+      transition: all 0.4s var(--ease-silk);
+      font-weight: 400;
     }
     .footer-home-link:hover {
-      color: #5A5059;
-      opacity: 1;
+      color: var(--page-accent-deep);
       transform: translateY(-2px);
     }
 
@@ -111,45 +182,48 @@
     }
 
     .step-num {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: #A8999A;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.30em;
+      color: #8AAABB;
       margin-bottom: 1rem;
       font-weight: 400;
     }
 
     .step-title {
-      font-size: 1.65rem;
-      font-weight: 400;
+      font-size: 1.55rem;
+      font-weight: 300;
       letter-spacing: 0.08em;
-      color: #5A5059;
+      color: #3A5060;
       margin-bottom: 1rem;
     }
 
     .step-subtitle {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       letter-spacing: 0.05em;
-      color: #8A7A8A;
-      line-height: 1.8;
+      color: #6A8898;
+      line-height: 1.9;
       font-weight: 300;
     }
 
     /* ── 選擇計數器 ── */
     .selection-counter {
       margin-top: 1.2rem;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       letter-spacing: 0.08em;
-      color: #6b5b95;
-      font-weight: 500;
-      padding: 0.6rem 1rem;
-      background: rgba(232, 223, 245, 0.3);
+      color: var(--page-accent-deep);
+      font-weight: 400;
+      padding: 0.6rem 1.2rem;
+      background: rgba(142, 196, 216, 0.15);
+      border: 1px solid rgba(142, 196, 216, 0.35);
       border-radius: 20px;
       display: inline-block;
       transition: all 0.3s ease;
     }
     .selection-counter.selected {
-      background: rgba(147, 112, 219, 0.15);
-      color: #5a4a7a;
+      background: rgba(142, 196, 216, 0.25);
+      color: var(--page-accent-deep);
+      border-color: rgba(142, 196, 216, 0.55);
     }
 
     /* ════════════════════════════════════════
@@ -170,27 +244,29 @@
       align-items: center;
       gap: 1rem;
       padding: 1.8rem 1.4rem;
-      border: 1.2px solid rgba(216, 198, 240, 0.25);
+      border: 1px solid rgba(142, 196, 216, 0.30);
       border-radius: 16px;
-      background: linear-gradient(135deg, rgba(245, 243, 248, 0.4) 0%, rgba(242, 234, 228, 0.2) 100%);
+      background: linear-gradient(160deg, rgba(255,255,255,0.82) 0%, rgba(224,242,248,0.60) 100%);
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      transition: all 0.4s var(--ease-silk);
+      box-shadow: 0 4px 16px rgba(100,160,190,0.10);
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .object-btn:hover {
       transform: translateY(-4px);
-      border-color: rgba(216, 198, 240, 0.4);
-      background: linear-gradient(135deg, rgba(245, 243, 248, 0.6) 0%, rgba(242, 234, 228, 0.35) 100%);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border-color: rgba(142, 196, 216, 0.55);
+      background: linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(210,238,248,0.75) 100%);
+      box-shadow: 0 12px 28px rgba(100,160,190,0.18);
     }
 
     .object-btn.selected {
-      border-color: rgba(216, 198, 240, 0.6);
-      background: linear-gradient(135deg, rgba(216, 198, 240, 0.25) 0%, rgba(232, 223, 245, 0.15) 100%);
-      box-shadow: 0 12px 32px rgba(216, 198, 240, 0.15);
+      border-color: var(--page-accent);
+      background: linear-gradient(160deg, rgba(255,255,255,0.96) 0%, rgba(195,232,245,0.70) 100%);
+      box-shadow: inset 3px 0 0 0 var(--page-accent), 0 8px 24px rgba(142,196,216,0.22);
     }
 
     .object-icon {
@@ -204,21 +280,21 @@
     .object-icon svg {
       width: 100%;
       height: 100%;
-      stroke: #5A5059;
+      stroke: #4A7A8A;
       stroke-width: 1.2;
       fill: none;
-      opacity: 0.7;
+      opacity: 0.75;
       transition: all 0.3s ease;
     }
 
     .object-btn:hover .object-icon svg {
-      opacity: 0.9;
+      opacity: 0.95;
       stroke-width: 1.4;
     }
 
     .object-btn.selected .object-icon svg {
       opacity: 1;
-      stroke: #5A5059;
+      stroke: #3A3255;
       stroke-width: 1.5;
     }
 
@@ -227,7 +303,7 @@
       font-weight: 400;
       letter-spacing: 0.05em;
       text-align: center;
-      color: #5A5059;
+      color: #3A5A6A;
     }
 
     /* ════════════════════════════════════════
@@ -236,10 +312,17 @@
 
     .color-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.8rem 1.5rem;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.4rem 1rem;
       width: 100%;
       margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 479px) {
+      .color-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem 0.8rem;
+      }
     }
 
     .color-item {
@@ -253,11 +336,11 @@
     .color-swatch {
       width: 100%;
       aspect-ratio: 1;
-      border-radius: 24px;
+      border-radius: 16px;
       cursor: pointer;
       transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      border: 2.5px solid transparent;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+      border: 2px solid transparent;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
       position: relative;
       overflow: hidden;
     }
@@ -285,32 +368,70 @@
     }
 
     .color-label {
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
-      color: #6b5b95;
-      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      color: #7A9AAA;
+      font-weight: 400;
       text-align: center;
       transition: all 0.3s ease;
-      min-height: 1.4rem;
+      min-height: 1.2rem;
+      line-height: 1.3;
     }
 
     .color-item:hover .color-label {
-      color: #5a4a7a;
-      font-weight: 600;
+      color: #3A5A6A;
+      font-weight: 500;
     }
 
     .color-item:has(.color-swatch.selected) .color-label {
-      color: #5a4a7a;
-      font-weight: 600;
+      color: var(--page-accent-deep);
+      font-weight: 500;
     }
 
     /* 顏色定義 */
-    .color-quartz { background: linear-gradient(135deg, #E8DFF5 0%, #DFD6F0 100%); }
-    .color-mauve { background: linear-gradient(135deg, #B8A0D0 0%, #AE96C8 100%); }
+    /* 原有 6 色 */
+    .color-quartz    { background: linear-gradient(135deg, #E8DFF5 0%, #DFD6F0 100%); }
+    .color-mauve     { background: linear-gradient(135deg, #B8A0D0 0%, #AE96C8 100%); }
     .color-moonlight { background: linear-gradient(135deg, #F9F7FC 0%, #F5F3F8 100%); }
-    .color-mistblue { background: linear-gradient(135deg, #9DB8D4 0%, #95B0CC 100%); }
-    .color-sage { background: linear-gradient(135deg, #A8B89C 0%, #9FB093 100%); }
-    .color-apricot { background: linear-gradient(135deg, #E0C8A8 0%, #D8BF9F 100%); }
+    .color-mistblue  { background: linear-gradient(135deg, #9DB8D4 0%, #95B0CC 100%); }
+    .color-sage      { background: linear-gradient(135deg, #A8B89C 0%, #9FB093 100%); }
+    .color-apricot   { background: linear-gradient(135deg, #E0C8A8 0%, #D8BF9F 100%); }
+
+    /* 粉紅系 */
+    .color-blush     { background: linear-gradient(135deg, #F2D0D0 0%, #EBC8C8 100%); }
+    .color-petal     { background: linear-gradient(135deg, #F5C6D8 0%, #EEBDD1 100%); }
+    .color-dustyrose { background: linear-gradient(135deg, #C8929A 0%, #BF8990 100%); }
+    .color-nude      { background: linear-gradient(135deg, #ECD9D0 0%, #E4D0C6 100%); }
+
+    /* 紫色系 */
+    .color-lavender  { background: linear-gradient(135deg, #C9B8E8 0%, #C0AEDE 100%); }
+    .color-iris      { background: linear-gradient(135deg, #8880C0 0%, #8078B5 100%); }
+    .color-plum      { background: linear-gradient(135deg, #7A5C7A 0%, #725474 100%); }
+    .color-lilac     { background: linear-gradient(135deg, #D4C0E0 0%, #CBB8D8 100%); }
+
+    /* 藍色系 */
+    .color-sky       { background: linear-gradient(135deg, #C0D8EE 0%, #B8D0E5 100%); }
+    .color-dusk      { background: linear-gradient(135deg, #8898B8 0%, #8090B0 100%); }
+    .color-navy      { background: linear-gradient(135deg, #5868A0 0%, #506098 100%); }
+    .color-pearl     { background: linear-gradient(135deg, #E8EEF5 0%, #E0E8EE 100%); }
+
+    /* 綠色系 */
+    .color-mint      { background: linear-gradient(135deg, #B8D8C8 0%, #B0D0C0 100%); }
+    .color-eucalyptus{ background: linear-gradient(135deg, #809880 0%, #789078 100%); }
+    .color-moss      { background: linear-gradient(135deg, #909870 0%, #889068 100%); }
+    .color-celadon   { background: linear-gradient(135deg, #C0D0B8 0%, #B8C8B0 100%); }
+
+    /* 暖色系 */
+    .color-clay      { background: linear-gradient(135deg, #C89878 0%, #C09070 100%); }
+    .color-amber     { background: linear-gradient(135deg, #D8B870 0%, #D0B068 100%); }
+    .color-sand      { background: linear-gradient(135deg, #E8D8B8 0%, #E0D0B0 100%); }
+    .color-terra     { background: linear-gradient(135deg, #B87860 0%, #B07058 100%); }
+
+    /* 中性系 */
+    .color-smoke     { background: linear-gradient(135deg, #C8C8C8 0%, #C0C0C0 100%); }
+    .color-fog       { background: linear-gradient(135deg, #E0DED8 0%, #D8D6D0 100%); }
+    .color-charcoal  { background: linear-gradient(135deg, #787878 0%, #707070 100%); }
+    .color-ivory     { background: linear-gradient(135deg, #F5F0E0 0%, #EDE8D8 100%); }
 
     /* ════════════════════════════════════════
        結果頁
@@ -318,14 +439,19 @@
 
     .result-card {
       width: 100%;
-      background: linear-gradient(135deg, rgba(245, 243, 248, 0.7) 0%, rgba(242, 234, 228, 0.5) 100%);
-      border: 1px solid rgba(216, 198, 240, 0.25);
+      background: linear-gradient(160deg, rgba(255,255,255,0.90) 0%, rgba(220,242,250,0.75) 100%);
+      border: 1px solid rgba(142, 196, 216, 0.35);
       padding: 3rem 2.5rem;
       border-radius: 28px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.05);
+      box-shadow:
+        inset 3px 0 0 0 var(--page-accent),
+        0 12px 40px rgba(100,160,190,0.14),
+        0 4px 12px rgba(100,160,190,0.08);
       margin-bottom: 2.5rem;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .result-card::before {
@@ -333,8 +459,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 25% 25%, rgba(216, 198, 240, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 75% 75%, rgba(232, 223, 245, 0.06) 0%, transparent 40%);
+        radial-gradient(circle at 25% 25%, rgba(142,196,216,0.12) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(255,235,200,0.10) 0%, transparent 40%);
       pointer-events: none;
       z-index: 0;
     }
@@ -368,7 +494,7 @@
     .result-icon svg {
       width: 100%;
       height: 100%;
-      stroke: #5A5059;
+      stroke: #5A4A7A;
       stroke-width: 1.2;
       fill: none;
       opacity: 0.8;
@@ -384,9 +510,9 @@
 
     .result-title {
       font-size: 1.6rem;
-      font-weight: 500;
+      font-weight: 400;
       letter-spacing: 0.06em;
-      color: #3D3556;
+      color: #2A4A5A;
       margin-bottom: 0;
       line-height: 1.5;
     }
@@ -398,31 +524,108 @@
     }
 
     .result-section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: #A8999A;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.70rem;
+      letter-spacing: 0.22em;
+      color: var(--page-accent-deep);
       margin-bottom: 0.9rem;
-      text-transform: uppercase;
-      font-weight: 400;
+      font-weight: 500;
     }
 
     .result-section-content {
       font-size: 1.05rem;
       line-height: 2.1;
       letter-spacing: 0.02em;
-      color: #5A5059;
+      color: #2A4A5A;
       padding: 1.4rem 1.6rem;
-      background: linear-gradient(135deg, rgba(232, 223, 245, 0.2) 0%, rgba(242, 234, 228, 0.15) 100%);
-      border: 1px solid rgba(216, 198, 240, 0.25);
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid rgba(142, 196, 216, 0.25);
+      border-left: 3px solid rgba(142, 196, 216, 0.55);
       border-radius: 12px;
     }
 
     .result-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(216, 198, 240, 0.2), transparent);
+      background: linear-gradient(90deg, transparent, var(--page-accent-line), transparent);
       margin: 1.8rem 0;
       position: relative;
       z-index: 1;
+    }
+
+    /* ════════════════════════════════════════
+       顏色深度區塊
+    ════════════════════════════════════════ */
+    .color-depth-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .color-depth-arrow {
+      font-size: 0.65rem;
+      color: var(--page-accent);
+      transition: transform 0.3s ease;
+    }
+    .color-depth-arrow.open {
+      transform: rotate(180deg);
+    }
+    .color-depth-content {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.45s ease;
+    }
+    .color-depth-content.open {
+      max-height: 800px;
+    }
+    .color-depth-companion {
+      font-size: 1rem;
+      line-height: 2;
+      letter-spacing: 0.02em;
+      color: #4A4070;
+      margin: 1.2rem 0 1.4rem;
+      padding: 1.4rem 1.6rem;
+      background: rgba(142, 196, 216, 0.10);
+      border: 1px solid rgba(142, 196, 216, 0.22);
+      border-radius: 12px;
+    }
+    .color-depth-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.7rem;
+      margin-bottom: 1rem;
+    }
+    .color-depth-item {
+      background: rgba(255, 252, 248, 0.65);
+      border: 1px solid rgba(142, 196, 216, 0.18);
+      border-radius: 10px;
+      padding: 0.8rem 1rem;
+    }
+    .color-depth-item.full {
+      grid-column: 1 / -1;
+    }
+    .color-depth-tag {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.20em;
+      color: var(--page-accent-deep);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+    .color-depth-val {
+      font-size: 0.88rem;
+      color: #2A4A5A;
+      line-height: 1.6;
+    }
+    .color-depth-awareness {
+      font-size: 0.88rem;
+      font-style: italic;
+      color: #4A7A8A;
+      border-top: 1px solid rgba(142, 196, 216, 0.22);
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+      line-height: 1.8;
     }
 
     /* ════════════════════════════════════════
@@ -438,36 +641,40 @@
     }
 
     .btn {
-      background: linear-gradient(135deg, rgba(216, 198, 240, 0.15) 0%, rgba(232, 223, 245, 0.1) 100%);
-      border: 1.2px solid rgba(216, 198, 240, 0.3);
-      color: #5A5059;
-      font-family: inherit;
-      font-size: 0.95rem;
-      letter-spacing: 0.2em;
-      padding: 0.95rem 3rem;
+      background: linear-gradient(135deg,
+        rgba(142, 196, 216, 0.18) 0%,
+        rgba(180, 225, 240, 0.12) 100%);
+      border: 1px solid rgba(142, 196, 216, 0.55);
+      color: var(--page-accent-deep);
+      font-family: "Noto Serif TC", serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.25em;
+      padding: 0.9rem 2.8rem;
       border-radius: 100px;
       cursor: pointer;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      transition: all 0.4s var(--ease-silk);
       font-weight: 400;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 4px 16px rgba(142, 196, 216, 0.15);
     }
 
     .btn:hover {
-      background: linear-gradient(135deg, rgba(216, 198, 240, 0.25) 0%, rgba(232, 223, 245, 0.18) 100%);
-      border-color: rgba(216, 198, 240, 0.5);
-      color: #3D3556;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      background: linear-gradient(135deg,
+        rgba(142, 196, 216, 0.30) 0%,
+        rgba(180, 225, 240, 0.22) 100%);
+      border-color: var(--page-accent);
+      color: #2A6A80;
+      box-shadow: 0 6px 24px rgba(142, 196, 216, 0.28);
       transform: translateY(-2px);
     }
 
     .btn:disabled {
-      opacity: 0.5;
+      opacity: 0.4;
       cursor: not-allowed;
     }
 
     .btn-line {
-      background: linear-gradient(135deg, rgba(6, 199, 85, 0.12) 0%, rgba(6, 199, 85, 0.06) 100%);
-      border-color: #06C755;
+      background: transparent;
+      border-color: rgba(6, 199, 85, 0.7);
       color: #06C755;
     }
 
@@ -486,14 +693,18 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(180deg, rgba(245, 243, 248, 0) 0%, rgba(245, 243, 248, 0.8) 20%, rgba(245, 243, 248, 0.98) 100%);
-      border-top: 1px solid rgba(216, 198, 240, 0.15);
+      background: linear-gradient(180deg,
+        rgba(238, 247, 251, 0) 0%,
+        rgba(220, 242, 250, 0.88) 25%,
+        rgba(210, 238, 248, 0.97) 100%);
+      border-top: 1px solid rgba(142, 196, 216, 0.25);
       padding: 2.5rem 1.8rem 2.2rem;
       display: none;
       gap: 1.2rem;
       justify-content: center;
       z-index: 20;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     .share-footer.visible {
@@ -512,7 +723,7 @@
     .loading-overlay {
       position: fixed;
       inset: 0;
-      background: linear-gradient(180deg, #F5F3F8 0%, #F2EAE4 50%, #F5F3F8 100%);
+      background: linear-gradient(170deg, #E8F6FB 0%, #F4FAFD 40%, #EDF7FB 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -538,8 +749,8 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(216, 198, 240, 0.3), rgba(232, 223, 245, 0.1));
-      border: 2px solid rgba(216, 198, 240, 0.4);
+      background: radial-gradient(circle, rgba(142, 196, 216, 0.35), rgba(200, 232, 244, 0.15));
+      border: 2px solid rgba(142, 196, 216, 0.50);
       animation: breathing 3s ease-in-out infinite;
       position: relative;
     }
@@ -549,9 +760,9 @@
       position: absolute;
       inset: 8px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #D8C6F0 0%, #E8DFF5 100%);
+      background: linear-gradient(135deg, #A8D8EC 0%, #D0EEF8 100%);
       animation: breathing-inner 3s ease-in-out infinite;
-      opacity: 0.3;
+      opacity: 0.45;
     }
 
     @keyframes breathing {
@@ -588,7 +799,7 @@
     .loading-text {
       font-size: 0.95rem;
       letter-spacing: 0.15em;
-      color: #8A7A8A;
+      color: var(--page-accent-deep);
       font-weight: 300;
       animation: fadeInOut 2s ease-in-out infinite;
     }
@@ -624,7 +835,6 @@
       }
 
       .color-grid {
-        gap: 1.6rem 1.2rem;
         margin-bottom: 2.2rem;
       }
 
@@ -880,30 +1090,43 @@
     </div>
 
     <div class="color-grid">
-      <div class="color-item">
-        <div class="color-swatch color-quartz" data-color="quartz"></div>
-        <div class="color-label">石英粉</div>
-      </div>
-      <div class="color-item">
-        <div class="color-swatch color-mauve" data-color="mauve"></div>
-        <div class="color-label">霧紫</div>
-      </div>
-      <div class="color-item">
-        <div class="color-swatch color-moonlight" data-color="moonlight"></div>
-        <div class="color-label">月光白</div>
-      </div>
-      <div class="color-item">
-        <div class="color-swatch color-mistblue" data-color="mistblue"></div>
-        <div class="color-label">霧藍</div>
-      </div>
-      <div class="color-item">
-        <div class="color-swatch color-sage" data-color="sage"></div>
-        <div class="color-label">鼠尾草綠</div>
-      </div>
-      <div class="color-item">
-        <div class="color-swatch color-apricot" data-color="apricot"></div>
-        <div class="color-label">暖杏色</div>
-      </div>
+      <!-- 原有 6 色 -->
+      <div class="color-item"><div class="color-swatch color-quartz" data-color="quartz"></div><div class="color-label">石英粉</div></div>
+      <div class="color-item"><div class="color-swatch color-mauve" data-color="mauve"></div><div class="color-label">霧紫</div></div>
+      <div class="color-item"><div class="color-swatch color-moonlight" data-color="moonlight"></div><div class="color-label">月光白</div></div>
+      <div class="color-item"><div class="color-swatch color-mistblue" data-color="mistblue"></div><div class="color-label">霧藍</div></div>
+      <div class="color-item"><div class="color-swatch color-sage" data-color="sage"></div><div class="color-label">鼠尾草綠</div></div>
+      <!-- 粉紅系 -->
+      <div class="color-item"><div class="color-swatch color-apricot" data-color="apricot"></div><div class="color-label">暖杏色</div></div>
+      <div class="color-item"><div class="color-swatch color-blush" data-color="blush"></div><div class="color-label">淡玫瑰</div></div>
+      <div class="color-item"><div class="color-swatch color-petal" data-color="petal"></div><div class="color-label">花瓣粉</div></div>
+      <div class="color-item"><div class="color-swatch color-dustyrose" data-color="dustyrose"></div><div class="color-label">舊玫瑰</div></div>
+      <div class="color-item"><div class="color-swatch color-nude" data-color="nude"></div><div class="color-label">裸膚</div></div>
+      <!-- 紫色系 -->
+      <div class="color-item"><div class="color-swatch color-lavender" data-color="lavender"></div><div class="color-label">薰衣草</div></div>
+      <div class="color-item"><div class="color-swatch color-iris" data-color="iris"></div><div class="color-label">鳶尾紫</div></div>
+      <div class="color-item"><div class="color-swatch color-plum" data-color="plum"></div><div class="color-label">梅子深紫</div></div>
+      <div class="color-item"><div class="color-swatch color-lilac" data-color="lilac"></div><div class="color-label">淡丁香</div></div>
+      <!-- 藍色系 -->
+      <div class="color-item"><div class="color-swatch color-sky" data-color="sky"></div><div class="color-label">天空藍</div></div>
+      <div class="color-item"><div class="color-swatch color-dusk" data-color="dusk"></div><div class="color-label">黃昏藍</div></div>
+      <div class="color-item"><div class="color-swatch color-navy" data-color="navy"></div><div class="color-label">深海藍</div></div>
+      <div class="color-item"><div class="color-swatch color-pearl" data-color="pearl"></div><div class="color-label">珍珠白</div></div>
+      <!-- 綠色系 -->
+      <div class="color-item"><div class="color-swatch color-mint" data-color="mint"></div><div class="color-label">薄荷綠</div></div>
+      <div class="color-item"><div class="color-swatch color-eucalyptus" data-color="eucalyptus"></div><div class="color-label">尤加利</div></div>
+      <div class="color-item"><div class="color-swatch color-moss" data-color="moss"></div><div class="color-label">苔蘚綠</div></div>
+      <div class="color-item"><div class="color-swatch color-celadon" data-color="celadon"></div><div class="color-label">青瓷綠</div></div>
+      <!-- 暖色系 -->
+      <div class="color-item"><div class="color-swatch color-clay" data-color="clay"></div><div class="color-label">陶土棕</div></div>
+      <div class="color-item"><div class="color-swatch color-amber" data-color="amber"></div><div class="color-label">琥珀黃</div></div>
+      <div class="color-item"><div class="color-swatch color-sand" data-color="sand"></div><div class="color-label">沙丘米</div></div>
+      <div class="color-item"><div class="color-swatch color-terra" data-color="terra"></div><div class="color-label">赤陶磚</div></div>
+      <!-- 中性系 -->
+      <div class="color-item"><div class="color-swatch color-smoke" data-color="smoke"></div><div class="color-label">煙霧灰</div></div>
+      <div class="color-item"><div class="color-swatch color-fog" data-color="fog"></div><div class="color-label">晨霧白</div></div>
+      <div class="color-item"><div class="color-swatch color-charcoal" data-color="charcoal"></div><div class="color-label">炭灰</div></div>
+      <div class="color-item"><div class="color-swatch color-ivory" data-color="ivory"></div><div class="color-label">象牙白</div></div>
     </div>
 
     <div class="button-group">
@@ -972,6 +1195,33 @@
           <!-- 延伸體驗動態填入 -->
         </div>
       </div>
+
+      <div class="result-divider"></div>
+
+      <div class="result-section">
+        <div class="color-depth-toggle" onclick="toggleColorDepth(this)">
+          <div class="result-section-label" style="margin-bottom:0;">🎨 這個顏色在說什麼</div>
+          <span class="color-depth-arrow open">▾</span>
+        </div>
+        <div class="color-depth-content open">
+          <div class="color-depth-companion" id="color-depth-companion"></div>
+          <div class="color-depth-grid">
+            <div class="color-depth-item">
+              <div class="color-depth-tag">色彩主題</div>
+              <div class="color-depth-val" id="color-depth-theme"></div>
+            </div>
+            <div class="color-depth-item">
+              <div class="color-depth-tag">對應部位</div>
+              <div class="color-depth-val" id="color-depth-body"></div>
+            </div>
+            <div class="color-depth-item full">
+              <div class="color-depth-tag">可能的情緒狀態</div>
+              <div class="color-depth-val" id="color-depth-emotion"></div>
+            </div>
+          </div>
+          <div class="color-depth-awareness" id="color-depth-awareness"></div>
+        </div>
+      </div>
     </div>
 
     <div class="button-group" style="margin-bottom: 2rem;">
@@ -1008,12 +1258,272 @@ const OBJECTS = {
 };
 
 const COLORS = {
-  quartz: { name: '石英粉', hex: '#E8DFF5' },
-  mauve: { name: '霧紫', hex: '#B8A0D0' },
-  moonlight: { name: '月光白', hex: '#F9F7FC' },
-  mistblue: { name: '霧藍', hex: '#9DB8D4' },
-  sage: { name: '鼠尾草綠', hex: '#A8B89C' },
-  apricot: { name: '暖杏色', hex: '#E0C8A8' }
+  // 原有 6 色
+  quartz:      { name: '石英粉',   hex: '#E8DFF5', mood: 'soft',   energy: '溫柔、夢幻、放鬆' },
+  mauve:       { name: '霧紫',     hex: '#B8A0D0', mood: 'deep',   energy: '深邃、神祕、內化' },
+  moonlight:   { name: '月光白',   hex: '#F9F7FC', mood: 'pure',   energy: '純淨、空靈、清明' },
+  mistblue:    { name: '霧藍',     hex: '#9DB8D4', mood: 'cool',   energy: '冷靜、理性、距離' },
+  sage:        { name: '鼠尾草綠', hex: '#A8B89C', mood: 'earth',  energy: '古老、療癒、紮根' },
+  apricot:     { name: '暖杏色',   hex: '#E0C8A8', mood: 'warm',   energy: '溫暖、懷舊、舒適' },
+  // 粉紅系
+  blush:       { name: '淡玫瑰',   hex: '#F2D0D0', mood: 'tender', energy: '嬌嫩、脆弱、柔情' },
+  petal:       { name: '花瓣粉',   hex: '#F5C6D8', mood: 'tender', energy: '純真、新生、浪漫' },
+  dustyrose:   { name: '舊玫瑰',   hex: '#C8929A', mood: 'mature', energy: '成熟、豐盛、歷練' },
+  nude:        { name: '裸膚',     hex: '#ECD9D0', mood: 'bare',   energy: '真實、赤裸、本質' },
+  // 紫色系
+  lavender:    { name: '薰衣草',   hex: '#C9B8E8', mood: 'dream',  energy: '夢境、靈感、冥想' },
+  iris:        { name: '鳶尾紫',   hex: '#8880C0', mood: 'spirit', energy: '靈性、洞見、轉化' },
+  plum:        { name: '梅子深紫', hex: '#7A5C7A', mood: 'power',  energy: '力量、尊嚴、沉澱' },
+  lilac:       { name: '淡丁香',   hex: '#D4C0E0', mood: 'soft',   energy: '細膩、輕盈、輕觸' },
+  // 藍色系
+  sky:         { name: '天空藍',   hex: '#C0D8EE', mood: 'open',   energy: '開闊、自由、可能' },
+  dusk:        { name: '黃昏藍',   hex: '#8898B8', mood: 'calm',   energy: '沉靜、過渡、等待' },
+  navy:        { name: '深海藍',   hex: '#5868A0', mood: 'depth',  energy: '深沉、專注、勇氣' },
+  pearl:       { name: '珍珠白',   hex: '#E8EEF5', mood: 'clear',  energy: '清澈、光潔、優雅' },
+  // 綠色系
+  mint:        { name: '薄荷綠',   hex: '#B8D8C8', mood: 'fresh',  energy: '清新、恢復、呼吸' },
+  eucalyptus:  { name: '尤加利',   hex: '#809880', mood: 'heal',   energy: '療癒、淨化、安慰' },
+  moss:        { name: '苔蘚綠',   hex: '#909870', mood: 'still',  energy: '靜默、隱匿、耐心' },
+  celadon:     { name: '青瓷綠',   hex: '#C0D0B8', mood: 'gentle', energy: '淡雅、從容、寧靜' },
+  // 暖色系
+  clay:        { name: '陶土棕',   hex: '#C89878', mood: 'ground', energy: '接地、手作、踏實' },
+  amber:       { name: '琥珀黃',   hex: '#D8B870', mood: 'glow',   energy: '光芒、創造、活力' },
+  sand:        { name: '沙丘米',   hex: '#E8D8B8', mood: 'drift',  energy: '漂浮、空曠、遼闊' },
+  terra:       { name: '赤陶磚',   hex: '#B87860', mood: 'fire',   energy: '熱情、堅定、行動' },
+  // 中性系
+  smoke:       { name: '煙霧灰',   hex: '#C8C8C8', mood: 'veil',   energy: '模糊、過渡、朦朧' },
+  fog:         { name: '晨霧白',   hex: '#E0DED8', mood: 'soft',   energy: '柔和、靜好、朝露' },
+  charcoal:    { name: '炭灰',     hex: '#787878', mood: 'solid',  energy: '沉穩、清醒、簡潔' },
+  ivory:       { name: '象牙白',   hex: '#F5F0E0', mood: 'warm',   energy: '溫潤、典雅、珍貴' },
+};
+
+// ════════════════════════════════════════
+//  色彩深度資料（陪伴式）
+// ════════════════════════════════════════
+const COLOR_DEPTH = {
+  // ── 原有 6 色 ──
+  quartz: {
+    companion: '你靠近了這個粉，不一定是因為喜歡甜美的感覺。有時候我們靠近粉色，是因為內心某個地方在渴望被溫柔對待——被自己溫柔對待。不是要你表現得更好，不是要你改變什麼，只是想問你：你今天有沒有好好愛自己一下？就算只是一個小小的善意，對那個最疲憊的你。',
+    theme: '自愛與接納',
+    body: '心輪（胸口）',
+    emotion: '渴望被愛 / 自我批判 / 委屈感',
+    awareness: '你對別人的溫柔，也可以先給自己一份。'
+  },
+  mauve: {
+    companion: '霧紫是一種帶著重量的顏色。它不是輕巧的，它有深度，有悲傷，有那種說不清楚是什麼的內在沉重。如果你選了它，也許你的靈魂正在經歷某種轉化——從一個舊的自己走向另一個的過程。這個過程不需要快，也不需要讓任何人看見。',
+    theme: '轉化與服務',
+    body: '頂輪（頭頂）',
+    emotion: '深沉悲傷 / 靈性追尋 / 渴望超越',
+    awareness: '轉化中的你不需要解釋，只需要繼續走。'
+  },
+  moonlight: {
+    companion: '白色是所有顏色的總和，也是一種讓你無所遁形的光。你現在可能處在一種「什麼都想整頓、什麼都想清理」的狀態，或者相反——你感到某種空白，不知道下一步是什麼。月光白說：不需要立刻知道，讓光先把眼前照亮就好。',
+    theme: '淨化與重啟',
+    body: '全身（清理各能量層）',
+    emotion: '追求完美 / 迷茫空白 / 渴望重新開始',
+    awareness: '允許光照亮你還沒準備好面對的地方。'
+  },
+  mistblue: {
+    companion: '你選了藍，也許是因為你的內心需要一點安靜——不是逃避，而是真正的安靜。那種不用做任何事，只是讓自己靜下來，感受一下天空還在那裡的安靜。霧藍也在問你：你有沒有什麼話還沒說出口？不一定要說給誰聽，先讓自己聽見就好。',
+    theme: '平靜與信任',
+    body: '喉輪（喉嚨）',
+    emotion: '難以開口 / 壓抑的平靜 / 對外界的疏離',
+    awareness: '你的靜默裡藏著一些話，給它們一個機會被你自己聽見。'
+  },
+  sage: {
+    companion: '鼠尾草的綠，是一種古老的、有歷史的綠。它不是鮮嫩的，是成熟的、有根的、帶著時間的。如果你現在靠近它，也許你正在尋找一種「站穩腳跟、找到方向」的感覺。你不需要衝動地做任何事，你需要的是：給自己空間，讓下一步自然浮現。',
+    theme: '方向與空間',
+    body: '心輪（胸口）',
+    emotion: '迷失方向 / 尋找定位 / 輕微的嫉妒或比較',
+    awareness: '你的心已經知道答案了，給它一點空間說出來。'
+  },
+  apricot: {
+    companion: '暖杏色像是一個下午的陽光，讓你想起某個曾經很舒服的時刻。它帶著溫暖，也帶著一絲懷念——也許你想回到那種輕鬆的感覺，或者，你正在釋放一些很久以前積壓下來的東西。橘色系的顏色有一種特別的力量：幫助你把過去的驚嚇和衝擊，慢慢地鬆動和釋放出來。',
+    theme: '喜悅與深層療癒',
+    body: '臍輪（丹田）',
+    emotion: '積壓的驚恐 / 渴望喜悅 / 依賴與獨立的拉扯',
+    awareness: '讓那些很久以前的事，今天輕輕地再鬆動一點。'
+  },
+
+  // ── 粉紅系 ──
+  blush: {
+    companion: '你靠近了這個最嬌嫩的粉。它讓我想問你：你今天有沒有哪裡需要被溫柔對待？不是別人對你，而是你自己對自己。我們常常忘記，最嚴苛的那個評論者住在我們自己裡面。淡玫瑰說：你不需要堅強，你可以今天只是軟的。',
+    theme: '溫柔與脆弱',
+    body: '心輪（胸口）',
+    emotion: '情感脆弱 / 渴望撫慰 / 害怕被評判',
+    awareness: '你的脆弱不是弱點，是你真實感受力最深的所在。'
+  },
+  petal: {
+    companion: '花瓣粉是一種幾乎要透明的粉，像是清晨剛開的花，不帶任何功利或目的。你選了它，也許你的無意識正在呼喚那個最本來的你——那個在生活還沒把你磨礪太多之前的你。你沒有失去它，它只是藏起來了，在等你回去。',
+    theme: '純真與本質',
+    body: '心輪（胸口）',
+    emotion: '渴望純粹 / 疲於表演 / 尋找初心',
+    awareness: '你最純真的自己，一直在等你回去找它。'
+  },
+  dustyrose: {
+    companion: '舊玫瑰不是新鮮的，它是有歲月的。有一種美麗，只有走過一些事情之後才有——你現在可能就帶著那種美麗。如果你正在回望過去，感到有些懷念或遺憾，舊玫瑰說：那些都是真實的，它們讓你更有深度，不是讓你更沉重。',
+    theme: '豐盛與歷練',
+    body: '心輪（胸口）',
+    emotion: '懷舊感 / 對過去的溫柔 / 成熟的情感',
+    awareness: '你的歷練，是你的厚度，不是你的傷痕。'
+  },
+  nude: {
+    companion: '裸膚是最接近你皮膚本身的顏色。它在問一個問題：如果今天你什麼都不表演、什麼角色都不扮演，你是誰？這不是一個容易回答的問題，但光是問了，就已經是一種誠實。你不需要今天就找到答案，只是讓自己坐在這個問題裡一下。',
+    theme: '真實與素顏',
+    body: '全身（皮膚邊界）',
+    emotion: '疲於偽裝 / 渴望真實 / 想卸下面具',
+    awareness: '你最真實的樣子，才是最讓人感到安全的那個你。'
+  },
+
+  // ── 紫色系 ──
+  lavender: {
+    companion: '薰衣草是夢與現實之間的顏色，是你半睡半醒的時刻，是那些有時候比清醒更真實的靈感的顏色。如果你現在靠近它，也許你的靈魂正在做某種夢——一個關於可能性的夢，或者一個你還沒看清楚的方向。不要急著分析它，先讓自己停在那個半夢半醒的地方。',
+    theme: '夢境與靈感',
+    body: '眉心輪（前額）',
+    emotion: '迷離感 / 創意的枯竭或充沛 / 渴望逃進夢裡',
+    awareness: '你的夢境比你的邏輯知道更多，讓它說話。'
+  },
+  iris: {
+    companion: '鳶尾紫是一種讓人感到「不只是這樣」的顏色——你靠近它，可能是因為你正在感受到某種比日常更大的事情正在運作。你的直覺最近有沒有在告訴你什麼？不是你的頭腦，是那個更深的地方，那個有時候你選擇忽視的聲音？鳶尾說：聽它一次。',
+    theme: '直覺與洞見',
+    body: '眉心輪（第三眼）',
+    emotion: '靈性困惑 / 強烈的直覺浮現 / 尋求更高指引',
+    awareness: '你的直覺一直在說話，只是你有時候不敢相信它。'
+  },
+  plum: {
+    companion: '深紫是一種需要一點勇氣才能靠近的顏色，因為它不是輕巧的。它帶著你可能一直迴避的那些深沉的東西：那些埋得很深的情緒，那些還沒有整合的經歷。但梅子深紫說的不是痛苦，它說的是：正是這些黑暗，讓你擁有了別人無法複製的深度和力量。',
+    theme: '轉化與陰影整合',
+    body: '頂輪（頭頂）',
+    emotion: '深層壓抑的情緒 / 正在蛻變 / 面對自己的陰暗面',
+    awareness: '你最黑暗的地方，藏著你最有力量的資源。'
+  },
+  lilac: {
+    companion: '淡丁香是還沒完全開放的花的顏色，是清晨的、剛剛開始的、還很嫩的顏色。你現在可能正在某件事的開始——一個新的階段，一個還沒成形的想法，一個剛剛萌芽的感受。淡丁香說：不要急著讓它長大，先好好照顧這個嫩芽。',
+    theme: '溫柔覺醒',
+    body: '頂輪（頭頂）',
+    emotion: '不確定感 / 輕微的期待 / 正在萌芽的渴望',
+    awareness: '最脆弱的開始，需要最溫柔的對待。'
+  },
+
+  // ── 藍色系 ──
+  sky: {
+    companion: '你選了天空藍，你是不是今天需要一點呼吸的空間？天空藍代表的是那種「可以看很遠、可以感受到廣闊」的感覺。也許你最近一直盯著眼前的事，忘記了還有更大的景色存在。停一下，抬頭看看，你的生命比你現在看到的更廣闊。',
+    theme: '自由與廣闊',
+    body: '喉輪（喉嚨）',
+    emotion: '感到侷限 / 渴望自由 / 需要呼吸空間',
+    awareness: '你比你現在的框架更廣闊，讓自己抬頭看看。'
+  },
+  dusk: {
+    companion: '黃昏是一天裡最有詩意也最複雜的時刻——光和影同時存在，告別和期待也同時在。你選了這個顏色，也許你也在一個這樣的當中：事情還沒結束，也還沒真正開始，你不完全確定自己是什麼感受。這種複雜是誠實的，不需要解決它。',
+    theme: '過渡與蛻變',
+    body: '喉輪（喉嚨）',
+    emotion: '複雜矛盾 / 告別中的哀愁 / 過渡期的不確定',
+    awareness: '在過渡期不需要有清楚的答案，複雜本身就是誠實的。'
+  },
+  navy: {
+    companion: '深海藍是最深的藍，它不在表面，它在底部。你選了它，也許你今天的一部分在尋找某種真實——那種即使說出來會很重，但不說又不對的真實。深海藍有一種讓人必須誠實的力量。你有沒有什麼事情，是你其實早就知道答案，但一直在逃避承認？',
+    theme: '真理與深度',
+    body: '眉心輪（第三眼）',
+    emotion: '深沉壓抑 / 尋找真實 / 需要勇氣說出口的事',
+    awareness: '最深的誠實需要最大的勇氣，但它讓你最自由。'
+  },
+  pearl: {
+    companion: '珍珠不是天生就亮的，它是被摩擦出來的。你選了這個顏色，也許你正在感受到或剛剛走過一段有摩擦的時期——那些讓你不舒服的、讓你被磨礪的經歷。珍珠說：那些摩擦讓你有光，那些不舒服讓你有深度，那些你不想要的事情，給了你別人羨慕不來的光澤。',
+    theme: '智慧與光澤',
+    body: '頂輪（頭頂）',
+    emotion: '剛走過困難 / 正在被磨礪 / 尋找意義',
+    awareness: '你走過的摩擦，讓你有了別人沒有的光。'
+  },
+
+  // ── 綠色系 ──
+  mint: {
+    companion: '薄荷綠是一種讓你馬上感受到「清新」的顏色。也許你現在的狀態有一點沉悶，或者你在某件事上感到思緒打結——薄荷說：給自己一個清新的起點。不需要把所有事都搞清楚，只需要先讓自己呼吸一口新鮮空氣，感受思路重新流動的感覺。',
+    theme: '清明與更新',
+    body: '心輪（胸口）',
+    emotion: '思緒混濁 / 輕微的疲憊 / 渴望重新開始',
+    awareness: '清新不是沒有問題，是帶著新的眼光看同樣的問題。'
+  },
+  eucalyptus: {
+    companion: '尤加利有一種強大的淨化力量——它不是輕柔的療癒，而是認真的清理。你選了它，也許你感受到自己需要一次真正的清理：清理那些積壓的情緒，那些塞住的關係能量，那些你一直帶著但其實早就該放下的東西。這不容易，但它讓你更輕。',
+    theme: '淨化與釋放',
+    body: '心輪（胸口）',
+    emotion: '積壓的停滯感 / 渴望清理 / 能量的阻塞',
+    awareness: '真正的放下不是遺忘，是讓那個東西不再耗費你的力量。'
+  },
+  moss: {
+    companion: '苔蘚是最安靜的成長——它不需要陽光，它不急，它只是慢慢地、持續地、安靜地在那裡。你選了苔蘚綠，也許你今天需要的不是任何行動，而是允許自己不急。你的成長和你的生命，不需要被看見才有意義。安靜地在那裡，已經很夠了。',
+    theme: '耐心與深根',
+    body: '根輪（大地連結）',
+    emotion: '疲憊想停下來 / 安靜的堅持 / 尋找踏實',
+    awareness: '你安靜地在那裡，已經是一種很深的力量。'
+  },
+  celadon: {
+    companion: '青瓷綠是一種帶著優雅的從容——不是因為沒有什麼事情，而是選擇了以從容的方式回應一切。你靠近它，也許是你的身體和心正在告訴你：慢下來，讓事情以它自己的節奏發生，你不需要一直推動每一件事。',
+    theme: '從容與優雅',
+    body: '心輪（胸口）',
+    emotion: '焦躁與急促 / 渴望沉澱 / 想放慢節奏',
+    awareness: '從容不是懶惰，是對自己節奏最深的尊重。'
+  },
+
+  // ── 暖色系 ──
+  clay: {
+    companion: '陶土是最接地氣的材料，你用雙手捧著它，它才成形。你選了陶土棕，也許你今天需要的是那種「用手做點什麼」的踏實感——讓身體參與，讓事情從想像進入現實。你有很多東西在腦子裡醞釀，但它需要你的雙手讓它成形。',
+    theme: '落地與創造',
+    body: '根輪（骨盆 / 雙腳）',
+    emotion: '漂浮感 / 渴望踏實 / 需要實際行動',
+    awareness: '把你腦子裡的一件事，今天讓它進入現實世界，哪怕只是一個很小的步驟。'
+  },
+  amber: {
+    companion: '琥珀黃是一種被時光封存的光——幾千萬年前的陽光，凝結成了你現在看見的這塊金黃。你選了它，也許你的創造力或生命力正在需要被喚醒，或者你正在回顧某段時光，感受到它給你的光和溫度。你的創造力是你的太陽，讓它照亮你。',
+    theme: '創造力與光芒',
+    body: '太陽神經叢（胃部）',
+    emotion: '創造力待被喚醒 / 渴望表達自己 / 尋找內在光源',
+    awareness: '你的創造力是你的光，它不需要任何外在許可就可以燃燒。'
+  },
+  sand: {
+    companion: '沙是廣闊的，也是流動的——它沒有固定的形狀，風一吹就改變。你選了沙丘米，也許你正在感受到某種「一切都在流動、沒有什麼是永久的」的輕鬆，或者那種廣闊讓你感到一點孤獨。沙說：無常不是失去，是自由的另一個名字。',
+    theme: '無常與廣闊',
+    body: '太陽神經叢（胃部）',
+    emotion: '漂浮感 / 廣闊中的孤獨 / 放下執著',
+    awareness: '讓事情流動，就像沙一樣，不強求固定的形狀。'
+  },
+  terra: {
+    companion: '赤陶是大地的顏色，也是火的顏色——帶著充沛的生命力，帶著在地球上活著的強烈感受。你選了它，也許你今天感到充滿力量，或者你正在尋找那種力量——那種讓你感到「我在這裡，我活著，我有熱情」的感受。赤土說：你有這個力量，允許它出來。',
+    theme: '生命力與行動',
+    body: '根輪（脊椎底部）',
+    emotion: '充沛的行動力 / 憤怒或挫折 / 渴望落地和扎根',
+    awareness: '你的熱情是生命在說話，允許它全力燃燒。'
+  },
+
+  // ── 中性系 ──
+  smoke: {
+    companion: '煙霧是最難捉摸的東西——它不是固體，不是液體，它只是在移動，在改變，在消失和再現之間。你選了它，也許你現在的狀態也是這樣：說不清楚自己在哪裡，不確定接下來是什麼，在消失的自己和即將出現的自己之間。這個朦朧是真實的，也是必要的。',
+    theme: '過渡與蛻變',
+    body: '眉心輪（前額）',
+    emotion: '不確定感 / 身份轉換中 / 難以定義此刻的自己',
+    awareness: '你現在的朦朧，是蛻變的過程，不是你迷失了。'
+  },
+  fog: {
+    companion: '晨霧是清晨獨有的禮物——它把一切都變得柔和，讓邊界不那麼清晰，讓世界感覺還有可能。你選了它，也許你今天想要的就是這種柔和：一種「什麼都還沒確定，但都還有可能」的輕盈感。晨霧說：在它散去之前，讓自己先停在這份柔和裡。',
+    theme: '柔和與可能',
+    body: '眉心輪（前額）',
+    emotion: '疲憊但柔軟 / 尚未清晰 / 溫柔地期待',
+    awareness: '在霧散之前，先享受這份什麼都還有可能的柔和。'
+  },
+  charcoal: {
+    companion: '炭灰是燃燒過後剩下的東西——去掉了所有多餘的，只剩下最本質的。你選了這個顏色，也許你正在或剛剛經歷某種「燃燒」，讓你去掉了很多不重要的，看見了真正重要的是什麼。炭灰說：你現在看見的，是提煉後的真實，那是很珍貴的清醒。',
+    theme: '清醒與本質',
+    body: '根輪（穩定與落地）',
+    emotion: '清醒的疲憊 / 剛走過一段考驗 / 看見真相',
+    awareness: '你現在的清醒，是走過一切之後才有的禮物。'
+  },
+  ivory: {
+    companion: '象牙白不是純白，它帶著一點溫度，一點時間的痕跡，一點那種「不需要完美才有價值」的優雅。你選了它，也許你今天不需要閃亮，只需要溫潤——一種不張揚、但讓人感到溫暖和珍貴的存在方式。你本來就已經夠了。',
+    theme: '珍貴與溫潤',
+    body: '頂輪（頭頂）',
+    emotion: '不想張揚 / 渴望沉澱的優雅 / 對自身價值的確認',
+    awareness: '你不需要完美才有價值，溫潤本身就是一種珍貴。'
+  },
 };
 
 // 結果訊息矩陣（10物件 × 6顏色 = 60組合）
@@ -1021,226 +1531,226 @@ const COLORS = {
 const RESULTS = {
   // 月亮 × 6色（無意識、直覺、隱藏的自我）
   moon_quartz: {
-    message: '石英粉的溫柔淡化了你的邊界。你的無意識在消融，有些感受正在變得模糊。但這不是遺忘，而是一種溫和的放下。月亮見證了這一刻：你可以停止緊抓不放。',
-    reminder: '注意，你正在放鬆對什麼的把控？淡粉色說：這是可以的。',
-    action: '坐著，不做任何事，讓感受自己流動。感受邊界消融的柔和。'
+    message: '石英粉是最輕柔的自我愛語，它在問你一個溫柔的問題：你最近有沒有好好對待自己？月亮和這個淡粉色一起守著你的無意識——那些你沒有說出口的疲憊，那些你還沒有給自己的溫柔，都被它們看見了。你不需要變得更好才值得被善待，現在的你，就足夠了。',
+    reminder: '你對別人輕易給出的溫柔，也可以先給自己一份。石英粉的月光說：這不是自私，這是必要的。',
+    action: '今晚，做一件只為讓自己感到被愛的事——一杯熱茶、一首喜歡的歌、或者只是早點躺下來。'
   },
   moon_mauve: {
-    message: '霧紫的深邃打開了你的內在通道。深深的內向正在發生。你的直覺有話要說，但它用的是夜晚的語言——沈默、深層、不易被理解。月亮在深色裡引導你走進自己。',
-    reminder: '這個時刻，邏輯沒有用。傾聽身體，那才是真實的聲音。',
-    action: '在完全黑暗中待著，讓深色和月光一起守護你。聽自己的聲音。'
+    message: '你選了霧紫，在月亮的時刻，這個組合說的是你正在經歷某種內在的蛻變——舊的自己正在瓦解，新的還沒成形。霧紫是靈魂深處那種「說不清楚是悲是喜」的重量，月亮照見它，不是要你解決，而是要你見證這個過渡的深邃與珍貴。你不需要在黑暗裡急著找光。',
+    reminder: '轉化中的人，看起來常常什麼都沒做。霧紫說：內在的工作是最費力的，即使外表安靜。',
+    action: '在安靜的夜裡，寫下現在你正在告別的一件事，以及你隱約感受到的新可能。不需要清晰，模糊就夠了。'
   },
   moon_moonlight: {
-    message: '月光白的純淨與月亮共鳴。純粹的虛無感。無意識正在清空，留下一個很大的空。這個空可能令人不安，但白色說：空本身就是可能性的開始。',
-    reminder: '空不是問題。問題是你害怕空。但月光白和月亮都說：虛無是種力量。',
-    action: '面對一個你通常會快速填滿的空白時刻。讓它空著，看看會發生什麼。'
+    message: '月光白遇上月亮，是所有顏色裡最安靜的組合。這個白色裝載著所有色彩的總和，也象徵著一次清空的渴望——你的無意識可能正在進行一種洗滌，把積累太久的東西輕輕沖走。月亮說：不需要知道下一步是什麼，只需要讓這個清空發生。',
+    reminder: '空白不是失落，它是重新開始之前的準備。月光白說：允許自己不知道，是最誠實的狀態。',
+    action: '今晚臨睡前，把腦海裡所有「待辦」都想像成雲，讓它們一片一片地飄走。只是放空五分鐘。'
   },
   moon_mistblue: {
-    message: '霧藍的冷靜為你的距離著色。你在無意識層面保持距離，可能是保護，也可能是逃避。月亮在遠方看著你，冷藍的色調說：距離本身就是一種觀看方式。',
-    reminder: '冷靜背後，是什麼在躲？霧藍邀請你面對這個問題。',
-    action: '承認一個你一直沒說出口的感受。冷色會支持你的坦白。'
+    message: '霧藍的月光是一種帶著距離感的守護——你可能正在保持一種安靜的觀察，不輕易靠近，也不輕易說出口。這個組合說的是你內心有一些話還沒有形狀，你不確定它們是不是真的，所以還在等待。霧藍說：你不需要急著搞清楚，先讓自己安靜地感受就好。',
+    reminder: '你壓著的那份平靜裡，藏著一些還沒說出口的真實。霧藍的月亮說：你可以先讓自己聽見它。',
+    action: '在紙上寫下一件你「感覺到但還不確定」的事，不需要解釋，只是讓它被你的眼睛看見一次。'
   },
   moon_sage: {
-    message: '鼠尾草綠的古老智慧喚醒了月亮。古老的知識在蘇醒。你的身體記得很多東西——比你的腦子更多。綠色連接你與古老的、本能的、被遺忘的智慧。',
-    reminder: '信任那些你不能解釋的知道。綠色和月亮都指向內在的古老智慧。',
-    action: '做一個你身體想做，但腦子會質疑的事。相信你更深的知道。'
+    message: '鼠尾草綠是古老的、有根的智慧，它在月亮的光下喚醒你身體裡那些比語言更深的記憶。你的無意識比你的大腦知道更多——那些「說不出為什麼，但就是知道」的感覺，就是它在說話。這個組合說：停止用邏輯分析，讓你的身體帶路。',
+    reminder: '你體內有一種古老的知道，比任何建議都更準確。鼠尾草綠說：信任你沒辦法解釋的那些感受。',
+    action: '今天讓身體做一個你腦子沒有計劃的事——走一條陌生的路、吃一個沒想好的食物、停在某個讓你有感覺的地方。'
   },
   moon_apricot: {
-    message: '暖杏色帶著時間的重量。懷舊正在敲門。月亮照亮了過去，不是要你回去，而是要你看清楚。溫暖的色彩説：過去並不是敵人，只是教材。',
-    reminder: '過去的人和事，教會了你什麼？暖色邀請你用溫暖而不是後悔去看待它。',
-    action: '看一張舊照片，但只是看，不要評論。溫暖的眼光會改變你對過去的感受。'
+    message: '暖杏色是承載過去傷痕的溫度，它帶著一種橘黃的力量，幫助你把很久以前的驚嚇和積壓，慢慢地鬆動釋放。月亮照見的那個過去，不是要你再次受傷，而是要你帶著溫柔重新看看它——也許有些事，現在的你已經可以跟它和解了。',
+    reminder: '有些過去一直沉在底部，等待被好好看一眼。暖杏色說：用溫暖而不是評判去凝視它，會讓你更輕。',
+    action: '想一件「以前覺得很難受，現在再看看」的事，試著用比當時更溫柔的眼光去看它，哪怕只是一分鐘。'
   },
 
   // 種子 × 6色（潛力、隱藏的可能性、等待）
   seed_quartz: {
-    message: '石英粉軟化了你對成果的執著。潛力在淡化中。也許你不是還沒開始，而是正在放下某個舊的期待。淡色說：不生長，有時候也是一種狀態。',
-    reminder: '不發芽的種子，有時候就是在沈澱。淡粉色提醒你：停滯也有它的意義。',
-    action: '停止期待任何結果，只是照顧當下。看看種子在什麼都不做的時候告訴你什麼。'
+    message: '石英粉帶著一種「不需要立刻長大」的溫柔。這顆種子在你手中，它不急，你也不需要急。自我接納的心理語言就是這樣的——它不要求你證明自己已經「夠好」才值得被澆水，它只是說：你現在這個樣子，就可以開始了。',
+    reminder: '不是因為你有了什麼成果才值得被善待，而是在還沒長成之前，你就已經值得了。石英粉說：停止等待自己「準備好」。',
+    action: '今天做一件你「不完美也沒關係」的事——畫一張歪歪的畫、學一個不標準的動作，讓自己享受起步的過程。'
   },
   seed_mauve: {
-    message: '霧紫的深邃容納了種子的秘密。深藏的可能性正在內化。種子還沒有破土，但根已經在黑暗中尋找營養。深色陪伴著看不見的成長。',
-    reminder: '最深的成長發生在看不見的地方。霧紫的黑暗不是陷阱，而是孕育室。',
-    action: '寫下一個你從未敢想的可能性。在深色的安全裡，想像最隱密的夢。'
+    message: '霧紫的深色是一個最安全的孕育空間——它不要求你解釋，不要求你展示，它只是靜靜地容納著你最深處的可能性。你現在也許有一個連自己都不太敢相信的夢，它在黑暗中慢慢生根。霧紫說：不需要現在就讓任何人看見它，先讓它在你心裡慢慢長。',
+    reminder: '最深的夢不需要立刻說出口，它需要的是你願意在黑暗中為它守護。霧紫說：現在先保護它就夠了。',
+    action: '在一張紙上寫下你最私密、最不敢說出口的一個渴望。折起來收著，不給任何人看。讓這個秘密安全地存在。'
   },
   seed_moonlight: {
-    message: '月光白清空了成長的定義。虛無中的潛力。這顆種子可能永遠不會發芽，或者會以你從未想到的方式發芽。純淨的白色說：不知道結局，反而最自由。',
-    reminder: '不是所有的種子都要開花。月光白提醒你：存在本身就足夠了。',
-    action: '放下對「該長成什麼樣」的想像。讓種子按照它自己的律動生長。'
+    message: '月光白讓種子的意義變得透明而清淨——它沒有說這顆種子一定會長成什麼，它說的是：也許什麼都不需要確定。你現在可能正在某個「什麼都還沒有定論」的時期，月光白說：不知道也沒關係，存在本身就是一種完整。',
+    reminder: '不是所有的開始都需要知道結局。月光白說：你可以帶著這份不確定，好好地繼續過日子。',
+    action: '這週，試著讓一件「不知道結果」的事情自然發展，不去追問也不去控制，只是觀察它。'
   },
   seed_mistblue: {
-    message: '霧藍的耐心陪伴了等待。冷靜的等待。種子需要時間，你也是。這種冷漠的等待，其實是一種深層的耐心。冷色說：時間會做它該做的。',
-    reminder: '急不得。有些東西就是要時間。霧藍的冷靜給你不著急的許可。',
-    action: '計劃一個長期的、不著急的目標。信任時間的力量。'
+    message: '霧藍的種子在等待，是那種沉著的、不慌不忙的等待。這個顏色的心理語言是信任——對時間的信任，對過程的信任，對宇宙節奏的信任。你也許正在等待一件事成熟，霧藍說：你不需要一直去挖開土看它有沒有在長，你需要的是靜下心來相信它在。',
+    reminder: '焦急地確認，有時候會打擾那個正在安靜發生的過程。霧藍說：試著相信，不要一直去確認。',
+    action: '選一件你最近一直在追問進度的事，今天刻意放下，讓它自己走一天，看看你的焦慮是否真的有幫助。'
   },
   seed_sage: {
-    message: '鼠尾草綠知道種子的節奏。自然的規律。這顆種子知道何時該動，但現在還不是時候。綠色連接你與四季的循環、與自然的時序。',
-    reminder: '你比你想像的更懂得何時該行動。綠色提醒你：你也有自己的季節。',
-    action: '觀察一個自然的過程——水蒸發、植物生長、天色變化。學習它們的耐心。'
+    message: '鼠尾草綠的種子知道自己的季節。這個古老的綠色連接著自然的循環智慧——每顆種子都有自己的時序，沒有任何一顆種子需要在冬天強迫自己開花。你現在可能正在某個沉潛的時期，而這個顏色說：這個時期不是浪費，它是準備。',
+    reminder: '你不是「還沒開始」，你是正在以你的方式準備著。鼠尾草綠說：信任你自己的節奏，不要用別人的時序衡量自己。',
+    action: '寫下你這段時間「做了但看不見成果的事」，承認它們是土壤，不是白費。'
   },
   seed_apricot: {
-    message: '暖杏色為種子提供了溫暖的土壤。溫暖的孕育。這顆種子正被舊的土地溫柔地抱著，等待重生。溫色說：良好的環境讓一切自然發生。',
-    reminder: '有些東西需要在舒適的懷抱裡才能成長。暖色提醒你：為自己創造溫暖。',
-    action: '找一個對你來說溫暖和安全的地方，在那裡待著。讓溫度喚醒你的潛力。'
+    message: '暖杏色的種子需要的是一個安全、溫暖的土壤——不是壓力，不是比較，而是那種讓你自然放鬆的環境。橘杏色帶著釋放舊有積壓的能量，也許你有一些舊的包袱一直壓著這顆種子，讓它沒辦法好好長。溫暖的杏色說：先把那些舊的東西鬆動，新的才有空間進來。',
+    reminder: '有時候種子長不出來，不是種子的問題，而是土壤太擠了。暖杏色說：先騰出一點空間，讓舊的走。',
+    action: '清理一個實際的空間——一個抽屜、一個書架角落。讓這個實際的清空，象徵著為新的你騰位置。'
   },
 
   // 窗戶 × 6色（觀看、邊界、內外分界）
   window_quartz: {
-    message: '石英粉模糊了玻璃的邊界。邊界正在消融。你不知道自己在看什麼，也不知道什麼在看你。淡色說：邊界本來就是透明的幻象。',
-    reminder: '你真的想看清楚，還是只是想保持安全的距離？淡粉色邀請你放下執著。',
-    action: '打開一個你一直關著的窗戶——或心理上的，或真實的。感受邊界的消融。'
+    message: '石英粉站在窗邊，帶著一種溫柔的猶豫——你看向外面，但窗玻璃讓一切都有點模糊。也許你對「往外走一步」有些說不清楚的遲疑，不知道自己是真的想走出去，還是想先繼續在這裡。石英粉說：這個猶豫不需要立刻解決，可以帶著它，再站一會兒。',
+    reminder: '你不是因為不夠勇敢才遲疑，你是因為在乎才謹慎。淡粉的窗說：先讓自己知道你真正想要的是什麼。',
+    action: '在窗邊靜靜地待五分鐘，觀察外面的世界而不分析它。讓自己只是看，不決定。'
   },
   window_mauve: {
-    message: '霧紫的權力感開啟了觀看的遊戲。觀看與被看的權力遊戲。你在窗邊想什麼，有人可能正在看。深色說：被看見需要勇敢，但被看見也是被承認。',
-    reminder: '被看見會很恐懼，但被忽視也會。霧紫邀請你選擇：你想被看見嗎？',
-    action: '坦白一個你一直在隱藏的一面。深色會為你的脆弱著色。'
+    message: '霧紫的窗是一種深沉的觀看——你在看外面，同時也在看自己的投影。這個顏色帶著靈性的重量，它說的是：你現在透過窗看見的，不只是外面的世界，也是你內心某個還沒整合的部分。被看見令你恐懼，但霧紫說：那份被看見，也是被真正承認。',
+    reminder: '你展示給外界的，和你真正是的，也許中間有一段距離。霧紫邀請你縮短那個距離，哪怕只是在自己心裡。',
+    action: '今天，對一個你信任的人，說出一件你通常不會讓人看見的真實感受。讓自己練習被看見。'
   },
   window_moonlight: {
-    message: '月光白清空了窗外的世界。空的觀看。窗外什麼都沒有，或者說，你看不到外面。內外都是虛無。純淨的色彩說：看不見，有時候就是全部的真相。',
-    reminder: '有時候看不見並不是看不到，只是你的眼睛關了。月光白問：你想睜開嗎？',
-    action: '觀察透明的玻璃，而不是透過它看外面。看見玻璃本身。'
+    message: '月光白的窗是透明而空的——它反映著光，卻不遮擋任何東西。你現在可能正在一種「看不清楚該往哪走」的狀態，窗外是霧，窗內也是安靜。月光白說：這個不清晰不是問題，它是在邀請你先讓自己清空，再重新凝視。',
+    reminder: '有時候我們看不清楚，是因為眼前有太多的「應該」擋著真實的視野。月光白說：先把那些清掉，再看看你真的想往哪走。',
+    action: '列出三件你覺得「自己應該做但其實不想做」的事，承認它們，然後問自己：如果沒有這些「應該」，你會怎麼選？'
   },
   window_mistblue: {
-    message: '霧藍的分離強化了窗框的邊界。冷的分離。窗框是邊界，你在這一邊，世界在那一邊。保持距離讓人安全。冷色說：有些距離是必要的保護。',
-    reminder: '距離可以是保護，也可以是囚禁。霧藍問：這個距離，你選擇嗎？',
-    action: '決定一個你想要拉近還是推遠的關係。冷色支持你的邊界。'
+    message: '霧藍的窗帶著一種清醒的距離感——你在這一邊，世界在那一邊，而窗框成了你選擇的邊界。這個顏色說的是你現在需要的那種「保護性的觀察距離」：你可以看，你可以感受，但你選擇不讓外面的一切直接衝進來。這是一種成熟的保護，而不是逃避。',
+    reminder: '保持距離有時候是最清醒的選擇。霧藍說：你有權利選擇什麼進入你的空間，什麼留在外面。',
+    action: '今天刻意減少一個會讓你感到消耗的輸入——某個社群媒體、某個消息，讓自己的窗只開一半。'
   },
   window_sage: {
-    message: '鼠尾草綠看見了窗的真相。自然的邊界。窗就是窗，它不是牆，也不是入口。它讓你同時在兩個世界裡。綠色說：邊界可以既分離又連接。',
-    reminder: '你可以既觀察，也被觀察。兩者都可以。綠色給你在邊界上生活的許可。',
-    action: '在窗邊坐著，同時感受內側和外側。你不必只屬於一個世界。'
+    message: '鼠尾草綠知道窗的古老哲學——它既是邊界，又是連接，既讓你看見外面，又讓你留在裡面。這個顏色有一種成熟的空間感，它說：你不需要非此即彼，你可以同時處於兩個狀態。站在窗邊，就是站在那個既在內又在外的位置，這個位置有它的智慧。',
+    reminder: '你不需要選邊站——既觀察世界，也觀察自己，這兩者可以同時存在。鼠尾草綠說：邊界不是隔牆，是讓兩邊都能呼吸的空間。',
+    action: '今天試著對一件事採取「觀察者視角」——不立刻判斷，不立刻反應，只是先讓自己看清楚它的全貌。'
   },
   window_apricot: {
-    message: '暖杏色穿過了玻璃。溫暖的連接。窗框提醒你，即使有分隔，溫暖的光線依然能穿過。溫色說：連接從不因邊界而斷絕。',
-    reminder: '邊界並不斷絕連接，只是改變它的形式。暖色提醒你：溫度會穿透任何玻璃。',
-    action: '在窗邊和某個人對話，讓光線見證你們的對話。溫暖穿過邊界。'
+    message: '暖杏色的窗是溫暖的——光從外面穿透玻璃，落在你的臉上，帶著一種橘黃色的記憶感。這個顏色有一種「重新連接」的力量，它在釋放那些讓你不敢靠近窗戶的舊包袱，輕輕地說：外面的世界，沒有你想的那麼危險。你可以再靠近一點點。',
+    reminder: '也許有些事讓你學會了保持距離，但暖杏色說：那段距離可以慢慢縮短了，你已經比那時候的你更有力量了。',
+    action: '聯絡一個你已經很久沒有主動接觸的人，就算只是一句簡單的「最近還好嗎」，讓那道窗稍微透一點氣。'
   },
 
   // 羽毛 × 6色（思想、輕盈、自由）
   feather_quartz: {
-    message: '石英粉讓念頭變得更輕。思想在淡化。一個念頭剛剛形成，又馬上消散。你的思緒像羽毛一樣輕。淡色說：想法本來就不該被抓住。',
-    reminder: '輕，有時候就是沒有重量、沒有執著。淡粉色教你放下。',
-    action: '不要抓住任何念頭，讓它們飄過去。看看你能空出多少思想的空間。'
+    message: '石英粉的羽毛是思緒裡最輕柔的那一片——它剛剛浮上來，還沒有形狀，你甚至不確定它是不是真的感受。但淡粉色的心理語言就是這樣的：它允許你的感受不清晰，允許你帶著模糊繼續往前。有些念頭不需要抓住，讓它們飄著，它們自然會告訴你它們是否重要。',
+    reminder: '不是每一個浮現的念頭都需要被整理清楚。石英粉說：輕輕地讓它們在你腦海裡飄過，你不需要每一片都接住。',
+    action: '今天，當腦子裡出現擔憂的念頭時，試著不立刻分析它——只是觀察它飄過，看看它是否真的需要你的注意。'
   },
   feather_mauve: {
-    message: '霧紫的深度權衡了飛翔的恐懼。靈性的飛翔——但還沒起飛。羽毛在思考逃脫，但身體還沒準備好。深色說：想飛是第一步，但需要整個自己。',
-    reminder: '想飛和真的飛，中間隔著什麼？霧紫邀請你面對那個恐懼。',
-    action: '承認一個你想要但害怕的自由。深色會陪伴你的勇敢。'
+    message: '霧紫的羽毛帶著一種想飛但還沒起飛的重量——這個顏色連結著靈性的渴望，那種感覺自己的靈魂比目前的生活更大、更廣的隱隱的渴望。你也許正在想著某種更自由的可能，霧紫說：想飛的感覺本身就是真實的，不需要等到所有條件都準備好才算數。',
+    reminder: '想要更多自由，是靈魂在說話，不是貪心。霧紫說：那個渴望值得你認真對待，而不是壓下去。',
+    action: '寫下一種你想要但還不敢完全允許自己擁有的自由。只是承認它，不需要立刻去追求它。'
   },
   feather_moonlight: {
-    message: '月光白見證了漂浮。虛空中的漂浮。羽毛沒有目的地，沒有重量，沒有方向。它只是存在於空氣中。純淨的白色說：沒有目的，反而最自由。',
-    reminder: '不知道去哪裡，也許反而是最自由的狀態。月光白給你漂浮的許可。',
-    action: '做一件完全沒有目的的事——只是為了做。體驗無目的的快樂。'
+    message: '月光白的羽毛在空中漂浮著，沒有重力，沒有方向，沒有任何義務。這個組合說的是一種最純粹的輕盈——不是因為沒有問題，而是暫時讓自己脫離所有的問題。月光白說：你可以允許自己不帶任何目的地存在片刻，什麼都不需要解決，只是飄著。',
+    reminder: '你每天都在努力往某個方向走，有時候讓自己什麼方向都不去，反而是最深的休息。月光白給你這個許可。',
+    action: '今天給自己三十分鐘，不做任何有「目的」的事——不進修、不社交、不生產，只是讓自己存在著。'
   },
   feather_mistblue: {
-    message: '霧藍的冷漠陪伴了孤獨的飛翔。冷的輕盈。羽毛在冷風中飄動，距離越來越遠。有種冷漠的自由感。冷色說：獨自飛翔，也有它的美麗。',
-    reminder: '自由有時候是孤獨的。霧藍提醒你：孤獨並不是失敗。',
-    action: '走一條你從未去過的路，完全沒有計劃。體驗獨自探索的自由。'
+    message: '霧藍的羽毛在冷風中獨自飄動，有種清醒的孤獨感。這個顏色說的是那種「一個人也可以」的安靜自由——不是苦的孤獨，而是有意識地選擇獨處，在那個沒有人的空間裡，找回屬於自己的思緒。霧藍說：有些事，必須一個人去想清楚。',
+    reminder: '不是所有的孤獨都需要被填滿。霧藍說：試著在獨處中找到陪伴自己的能力，那是一種很深的自由。',
+    action: '安排一個人的半天，不帶手機，不安排行程，去一個你喜歡的地方，只是讓自己自由地待著。'
   },
   feather_sage: {
-    message: '鼠尾草綠知道羽毛的使命。自然的解脫。羽毛從鳥身上掉落，既不是失去，也不是傷害，只是改變形式。綠色說：放手，本身就是成長。',
-    reminder: '放手並不是失敗，有時候是成長。綠色教你看到放下的意義。',
-    action: '放掉一個你一直在緊握的東西——物質的或心理的。讓它像羽毛一樣飄走。'
+    message: '鼠尾草綠的羽毛懂得放開——它從鳥身上輕輕脫落，不是傷害，不是失去，只是改變了形式，繼續漂流在空氣中。這個古老的綠色說：有些事，在你放開它之後，反而變得更輕、更自由。你現在有沒有什麼是你握得太緊、讓兩邊都透不過氣的？',
+    reminder: '緊握不一定代表珍惜，有時候是恐懼。鼠尾草綠說：真正珍貴的東西，放開之後，自然會留下來。',
+    action: '想一件你還沒辦法放手的事，今天試著做一個象徵性的放開——寫下來然後撕掉，或者對著空氣說一聲「我放你走了」。'
   },
   feather_apricot: {
-    message: '暖杏色托舉了上升的羽毛。溫暖的上升氣流。羽毛在暖風中高飛，輕盈而有溫度。溫色說：你不必用力，溫暖會帶著你上升。',
-    reminder: '也許你不需要用力，只需要讓溫暖帶著你上升。暖色給你休息的許可。',
-    action: '相信一個好的力量正在托舉你。停止用力，感受被承載的感覺。'
+    message: '暖杏色的羽毛被溫暖的氣流托著往上升——它不需要拍打翅膀，只是乘著那股上升的溫度，輕盈地越來越高。橘杏色有一種療癒過去衝擊的力量，它說：你過去也許學過「必須靠自己努力才能往上」，但現在有些力量在托舉你，你可以試著讓自己被承載。',
+    reminder: '不是所有的前進都需要用力。有些時候，讓自己被溫暖托著走，比拼命努力更輕盈。暖杏色說：試著接受被幫助。',
+    action: '今天讓一個人幫你做一件你通常自己扛的事，並且真心地說謝謝——讓自己練習被承載的感覺。'
   },
 
   // 鑰匙 × 6色（秘密、進入、選擇）
   key_quartz: {
-    message: '石英粉模糊了鑰匙的用途。鎖變得模糊。你有鑰匙，但門在哪裡已經不重要了。開或不開，界線在消融。淡色說：也許開啟本身沒有那麼重要。',
-    reminder: '有些鎖我們打開過，有些我們遺忘了。淡粉色問：這把鑰匙，你真的想用嗎？',
-    action: '找一把你有鑰匙但從未打開過的門。看看不打開，會怎樣。'
+    message: '石英粉握著一把鑰匙，帶著一種「也許不用現在就開」的溫柔。也許你面前有一個機會、一個選擇、一個可能性的入口，而你有能力打開它——但淡粉色說：不需要因為有鑰匙就必須開門，你可以帶著這把鑰匙，等到你真的準備好的時候。這不是逃避，是對自己的溫柔。',
+    reminder: '擁有選擇的權利，不代表必須立刻使用它。石英粉說：你可以帶著鑰匙，慢慢走向那扇門。',
+    action: '想一個你已經「有能力做但還沒做」的選擇，今天不需要做決定，只是承認你有這個選擇，讓自己感受一下那個自由。'
   },
   key_mauve: {
-    message: '霧紫的沈默保護了秘密。秘密的鑰匙。你知道什麼在鎖著，但你選擇不開。這個選擇本身就是力量。深色說：保守秘密，需要另一種勇敢。',
-    reminder: '知道秘密但保守它，需要另一種勇敢。霧紫尊重你的沈默。',
-    action: '決定一個秘密，你要永遠把它鎖著。這也是力量的表現。'
+    message: '霧紫的鑰匙守護著那些你選擇不輕易打開的部分——你的秘密、你的傷痛、你最深的渴望。這個顏色帶著一種靈性的保護力，它說：有些門你知道在那裡，你也知道裡面有什麼，但你選擇在對的時機才打開。這不是逃避，而是智慧的等待。',
+    reminder: '你不是因為害怕才沒有打開，你是因為知道時機不到。霧紫說：守護自己的門，是一種深刻的自我尊重。',
+    action: '想一件你「知道但還沒準備好去面對」的事，今天對自己承認它的存在，但同時允許自己說：我還不需要現在就打開。'
   },
   key_moonlight: {
-    message: '月光白質疑了開啟的必要。虛無的鑰匙。門可能不存在，鎖也可能沒有意義。這把鑰匙只是一個符號。純淨的白色說：也許什麼都不需要打開。',
-    reminder: '我們執著於開啟，但也許什麼都不需要打開。月光白給你放下的許可。',
-    action: '放掉對解答或突破的執著。看看不尋找答案，生活會怎樣。'
+    message: '月光白的鑰匙問了一個簡單又深遠的問題：你真的知道你在找什麼嗎？這個純淨的白色有時候會讓所有的問題都變得透明——你發現自己一直在尋找一個出口，一個答案，一個突破，但也許這些追尋本身遮蔽了當下。月光白說：先停下來，感受一下你此刻站在哪裡。',
+    reminder: '我們常常太急著找答案，以至於沒有真正感受到問題。月光白說：有時候，放下找答案的衝動，答案自己會浮現。',
+    action: '今天，放下一個你一直在追問的問題，讓它休息一天，看看當你不主動尋找時，有什麼自然浮現。'
   },
   key_mistblue: {
-    message: '霧藍的保留尊重了你的邊界。冷的禁制。這把鑰匙在你手中，但你決定不使用它。距離和保留是一種力量。冷色說：不使用權力，有時候是最聰慧的選擇。',
-    reminder: '不用鑰匙，有時候比用它更強大。霧藍給你拒絕的權利。',
-    action: '拒絕進入你有機會進入的一個空間。體驗說不的力量。'
+    message: '霧藍的鑰匙有一種清醒的邊界感——你知道你有能力進入某個空間，但你選擇不進。這個顏色說的是一種清醒的「不」：不是因為恐懼，而是因為你很清楚那扇門裡面的代價。霧藍說：保持這個邊界，是一種成熟的自我保護，不需要為它解釋。',
+    reminder: '你有權利不使用手中的鑰匙。霧藍說：清楚地知道什麼對你不好，然後選擇不進入，這是很深的智慧。',
+    action: '想一個你有能力靠近但選擇保持距離的情境（一段關係、一個話題），今天給自己肯定：這個選擇是對的。'
   },
   key_sage: {
-    message: '鼠尾草綠見證了鑰匙的歷史。古老的進入。這把鑰匙見證了很多代人的開啟與關閉。你只是暫時的管理者。綠色說：你是秘密的看守者，不是所有者。',
-    reminder: '你不是這個秘密的所有者，只是它的看守者。綠色給你責任和敬畏。',
-    action: '想像一個比你更古老的故事正在這把鑰匙裡。你是它的延續。'
+    message: '鼠尾草綠的鑰匙帶著歷史的重量——它是古老的、有厚度的，它見證過很多道門的開與關。你現在手中的這個選擇，可能不只是你自己的選擇，它連接著一個更長的故事。鼠尾草綠說：在你打開那扇門之前，先問問自己：你是否真的理解這把鑰匙的重量？',
+    reminder: '有些選擇影響的不只是現在，也影響著那些在你之後的人和事。鼠尾草綠說：帶著尊敬和敬畏去做你的選擇。',
+    action: '面對一個重要的決定，今天不急著做，先問自己：「五年後的我，會怎麼看這個選擇？」聽聽那個更深的聲音說什麼。'
   },
   key_apricot: {
-    message: '暖杏色溫暖了回家的路。溫暖的進入。門後有什麼，你已經知道了。這把鑰匙是回家的許可。溫色說：家會一直在那裡等你。',
-    reminder: '有些東西在等著你回去。暖色邀請你回家。',
-    action: '打開一扇很久沒有打開的門——回到一個舊的地方或舊的關係。溫暖在等你。'
+    message: '暖杏色的鑰匙是一種「回家」的象徵——那扇門後面有溫暖、有熟悉、有你曾經放下的某種輕鬆。橘杏色的心理語言說的是重新連接的喜悅，也許你已經好一段時間和某個人、某個地方、某個自己的部分失去了聯繫，現在是時候把那把鑰匙找出來了。',
+    reminder: '有些連接你放棄得太早了。暖杏色說：那扇門還在，那把鑰匙也還在你手裡，隨時可以回去。',
+    action: '今天，做一件「重新連接」的事——聯絡一個老朋友、回到一個曾經讓你快樂的習慣，或者做一件讓你想起舊時的自己的事。'
   },
 
   // 燭光 × 6色（光、孤獨、陪伴）
   candle_quartz: {
-    message: '石英粉溫柔地見證著火焰的消逝。微弱的光在淡化。火焰搖晃，光在變小。但這不是黑暗，只是更靠近消失。淡色說：消逝本身可以很溫柔。',
-    reminder: '光總是在消逝。問題是你是否願意看著它，溫柔地看著。淡粉色給你陪伴。',
-    action: '點一根蠟燭，注視著火焰，直到它自己熄滅。不悲傷，只是見證。'
+    message: '石英粉的燭光是最溫柔的那種光——它不刺眼，不耀眼，只是靜靜地照亮你周圍很小的一圈。這個顏色說的是：你現在不需要照亮整個世界，也不需要為別人成為光源。你可以只是為自己點一盞小燭，照亮你自己的今晚就夠了。自我愛護，從這一盞燈開始。',
+    reminder: '你不必總是成為那個為別人發光的人。石英粉說：今晚，只為自己點一盞燈，讓那個光只屬於你。',
+    action: '今晚用燭光取代電燈，坐在那個溫柔的光裡，做一件讓自己感到放鬆的事。'
   },
   candle_mauve: {
-    message: '霧紫的深邃擁抱了燭光的孤獨。孤獨的光。在黑暗的房間裡，這盞燭光就是全部。足夠嗎？或者太少了？深色說：孤獨的光，有時候就是全部的宇宙。',
-    reminder: '一個人在房間裡，有時候只需要一盞燈。霧紫陪伴你的孤獨。',
-    action: '在黑暗中待著，看看你能多久不點亮什麼。發現一個人就足夠。'
+    message: '霧紫和燭光在一起，是一個深邃而孤獨的夜晚的顏色。你可能正在某種「一個人承受著某些東西」的狀態——不是悲傷，而是那種深沉的、需要安靜的重量。霧紫的燭光不會說「要振作」，它只是陪著你，讓那個重量安靜地存在，不需要被解決。',
+    reminder: '有些時刻，你只需要一個不評判的陪伴。霧紫說：就算只是一盞燭光，它都在這裡，和你一起待著。',
+    action: '今晚點一根蠟燭，讓它在黑暗中陪你，把這段時間只留給你自己。可以哭，可以靜靜坐著，不需要有任何產出。'
   },
   candle_moonlight: {
-    message: '月光白清空了燭光的意義。無意義的光。燭火和空氣都是虛無。光照不了什麼，因為根本沒有什麼可照的。純淨的白色說：有時候光只是光。',
-    reminder: '有些時刻，光只是光，不代表什麼。月光白解放你對光的期待。',
-    action: '點一根蠟燭，但不為任何目的。只是為了看著它存在。'
+    message: '月光白的燭火是一種輕盈而清淨的光——它照亮，但不留下陰影，它存在，但不附帶任何期待。你現在可能需要的就是這樣的存在：不帶目的，不帶要求，只是純粹地在這裡。月光白的燭光說：允許自己什麼都不是，只是活著，就夠了。',
+    reminder: '你的存在不需要意義才有價值。月光白說：就像燭火，你什麼都不做，也在照亮著什麼。',
+    action: '今晚點一根蠟燭，不帶任何目的地看著它燃燒，讓自己進入那個「什麼都不需要」的狀態，哪怕只有幾分鐘。'
   },
   candle_mistblue: {
-    message: '霧藍的冷靜為燭光的隔離著色。冷的照明。燭光把你從黑暗裡隔離出來，但也把你從世界隔離了。冷色說：有時候我們需要隔離的光。',
-    reminder: '保護自己有時候需要照亮自己的孤獨。霧藍尊重你的邊界。',
-    action: '承認你需要一個隱私的空間，並為自己創造它。冷色守護你的隱私。'
+    message: '霧藍的燭光是清醒而安靜的——它照亮了空間，但讓人感到一種清醒的距離感，不過熱，不過近。你現在可能需要的就是這樣的照明：不是熱烈的、感性的，而是讓你能夠清楚地看見自己現在在哪裡、需要什麼的那種光。霧藍說：清明，是一種力量。',
+    reminder: '有時候我們需要的不是溫暖，而是清醒。霧藍的燭光說：先讓自己看清楚，再決定下一步要去哪裡。',
+    action: '在燭光下，寫下你現在最需要的三件事。不是「應該需要」，是真的需要。讓清醒的光幫你看清楚。'
   },
   candle_sage: {
-    message: '鼠尾草綠連接了燭火的古老傳統。古老的儀式。人類點燭火已經好幾千年了。你只是在重複一個古老的動作。綠色說：你與所有過去點燭火的人相連。',
-    reminder: '你不是第一個在黑暗中尋找光的。綠色讓你感受到這個傳統的厚重。',
-    action: '點燭火的時候，想像所有在你之前做過這件事的人。你是他們的延續。'
+    message: '鼠尾草綠的燭火是一種古老的儀式感——人類在黑暗中點火已經好幾千年了，每一次點燃，都是在說「我在這裡，我選擇創造光」。你現在點下這根蠟燭，連接著所有曾經在黑暗裡尋找光的人。這個古老的綠色說：你的存在，是一個延續，不是孤立的。',
+    reminder: '你不是第一個在黑暗中點燃自己的。鼠尾草綠說：你背後有一長串同樣這樣走過來的人，你並不孤單。',
+    action: '今晚點燭火的時候，花一分鐘感謝一個在你生命裡曾經「在黑暗中為你點燈」的人，無論他們是否還在你身邊。'
   },
   candle_apricot: {
-    message: '暖杏色為燭光注入了陪伴的溫度。溫暖的陪伴。燭火不只是照亮，還帶來溫度。它就像一個在黑暗中陪著你的人。溫色說：光的真正價值是溫度。',
-    reminder: '有時候我們需要的不是光，而是溫度。暖色提醒你什麼才是真正的陪伴。',
-    action: '和某個人一起點一根蠟燭，只是坐著，感受溫暖和陪伴。'
+    message: '暖杏色的燭光是溫暖而治癒的陪伴——那種橘黃色的火焰帶著人的溫度，讓你想起某個被照顧過的夜晚。這個顏色有釋放過去積壓情感的能力，也許你有些需要溫暖但一直沒有被好好接住的時刻，暖杏的燭光說：那些時刻，我願意在這裡補上那份溫度。',
+    reminder: '也許有些你從未得到過的溫暖，今天可以先從自己給起。暖杏色說：你有能力成為自己最溫暖的陪伴。',
+    action: '今晚，為自己布置一個有溫度的空間——燭光、熱飲、一條溫暖的毛毯——讓自己體驗被好好照顧的感覺，哪怕照顧者是你自己。'
   },
 
   // 河流 × 6色（流動、改變、循環）
   river_quartz: {
-    message: '石英粉軟化了河水的邊界。流動在軟化。河水變得遲緩，邊界模糊。什麼在流動，什麼在停滯，已經不清楚。淡色說：有時候流動和靜止沒有區別。',
-    reminder: '有時候停滯和流動沒有區別。淡粉色解放你對運動的執著。',
-    action: '觀察水，但不評判它流動的速度。看見流動本身，而不是方向。'
+    message: '石英粉的河流是溫柔緩慢的——它不急，不快，沿著自己的路徑輕輕流淌。也許你現在正在某個「好像應該要更快，但就是快不起來」的時期，而淡粉色的河流說：這個節奏是對的。不是每條河都需要奔流，有些河最美的地方，就是它那份緩慢的優雅。',
+    reminder: '你不是因為懶才走得慢，有時候是因為你在慢中感受著什麼。石英粉說：允許自己用自己的節奏流動。',
+    action: '今天把一件通常你想快點完成的事，故意放慢節奏來做，觀察那個慢裡有什麼平常你沒注意到的東西。'
   },
   river_mauve: {
-    message: '霧紫的深邃傾聽了河流的沈默。深流的沈思。河水深而暗，流動但無聲。底部有什麼，你看不見。深色說：深的地方往往沈默不語。',
-    reminder: '深的地方往往沈默不語。霧紫邀請你傾聽這個沈默。',
-    action: '說出你一直沒有說出口的東西。深色會為你的聲音增添重量。'
+    message: '霧紫的河流是深沉而安靜的——表面看起來平靜，但底部有巨大的流動在進行。你現在可能外表安靜，但內心正在發生某種深層的轉化。霧紫說：最重要的改變往往是在水面下進行的，別人看不見，但你知道那個深流有多強。',
+    reminder: '你的內在工作，即使沒有人看見，也是真實的、重要的。霧紫說：繼續讓那個深流流動，它在帶你去你需要去的地方。',
+    action: '花十分鐘寫下你最近感受到的「內在的流動」——那些說不清楚但感覺到的轉變。不需要解釋，只是記錄下來。'
   },
   river_moonlight: {
-    message: '月光白照亮了河流的終點。虛無的流動。河流存在，但它流向無。一切最終都流向空無。純淨的白色說：改變是唯一的永恆。',
-    reminder: '改變是唯一的永恆。月光白給你接納無常的寧靜。',
-    action: '接受某件事即將結束。看見終點，同時看見新的開始。'
+    message: '月光白的河流是所有終點也是所有起點——水流向海，蒸發成雲，再降回山上，永不消失，只是改變形式。你現在經歷的某種結束，也是另一種開始的準備。月光白說：不要害怕消失和改變，那是自然最深的智慧。',
+    reminder: '沒有任何東西真正消失，只是改變了形式。月光白說：那些你以為失去的，只是換了一個方式繼續存在。',
+    action: '想一件你正在結束或失去的事，試著找到它「改變了形式繼續存在」的角度——那個結束之後，有什麼仍然留著？'
   },
   river_mistblue: {
-    message: '霧藍的冷漠見證了河流的無情。冷的流離。河水很冷，流動很快。你被迫離開一些東西。這不是選擇，是被帶走。冷色說：有時候我們無法抗拒。',
-    reminder: '有些時候我們無法抗拒改變。霧藍教你接納你無法控制的事。',
-    action: '放手一個你一直想控制的局面。停止游泳，讓河流帶著你。'
+    message: '霧藍的河流是清醒而有力的——它知道自己要去哪裡，不需要任何人指引，只是清醒地順著重力走。你現在可能正在被某股力量帶著走，有點不確定這是你的選擇還是命運的安排。霧藍說：有時候，放棄一點控制，讓自己被清醒的流帶著走，反而能到達更對的地方。',
+    reminder: '並不是所有的放手都是失控，有時候是一種清醒的信任。霧藍說：你可以放開一點，讓那個流帶著你。',
+    action: '想一個你一直試圖控制但始終控制不了的情況，今天試著對它說：「我讓它自然發展。」觀察你的感受。'
   },
   river_sage: {
-    message: '鼠尾草綠知道河流的本能。自然的循環。河流知道去哪裡。它不思考，不計劃，只是順著地形流。綠色說：信任比計劃更聰慧。',
-    reminder: '信任你的本能會帶你去該去的地方。綠色教你相信自然的智慧。',
-    action: '停止規劃，跟著你的直覺走一天。看看本能會帶你去哪裡。'
+    message: '鼠尾草綠的河流是最古老的導航師——它從不迷路，因為它只是順著地形走，讓重力帶路。這個顏色帶著一種對自然智慧的深深信任，說的是：你的直覺和本能，就像水一樣，知道哪裡是下坡，哪裡是出口。停止用頭腦畫地圖，讓身體的智慧帶路。',
+    reminder: '你的本能比你的計劃更了解你該走的路。鼠尾草綠說：信任那個「說不清楚為什麼，但就是感覺對」的方向。',
+    action: '今天在一個選擇上，完全憑感覺做決定，不分析不計算，只問自己：「我的身體說要走哪邊？」'
   },
   river_apricot: {
-    message: '暖杏色溫暖了河流的循環。溫暖的承載。河流溫柔地流動，帶走和帶來，循環往復。溫色說：你也是某個更大循環的一部分。',
-    reminder: '你也是某個更大循環的一部分。暖色讓你看見你在宇宙中的位置。',
-    action: '感謝一個把你帶往新地方的改變。看見循環中的溫暖。'
+    message: '暖杏色的河流帶著溫度——它不是冷冰冰地往前衝，而是溫柔地承載著你，帶你穿過每一個彎道。橘杏色有一種療癒的能量，它說：你經歷的那些衝擊和顛簸，都是河流的一部分，不是錯誤。每一個把你帶到不同地方的改變，都在帶你走向一個更溫暖的出口。',
+    reminder: '你現在站的地方，是所有以前的流動帶你來的。暖杏色說：感謝那些帶你來這裡的彎路，它們都是必要的。',
+    action: '想一個過去曾經讓你很難受的改變，試著找到它把你帶到了哪個更好的地方——感謝那條河，感謝它的流動。'
   },
 
   // 信封 × 6色（潛意識的書寫與表達 + 顏色心理）
@@ -1277,66 +1787,1286 @@ const RESULTS = {
 
   // 植物 × 6色（成長、緩慢、滋養）
   plant_quartz: {
-    message: '石英粉軟化了植物的形態。成長在軟化。植物還在長，但邊界模糊。它長成什麼形狀已經不重要。淡色說：完美的形狀是人的執著，不是生命的律動。',
-    reminder: '完美的形狀是人的執著，不是植物的。淡粉色教你放下對型態的控制。',
-    action: '停止塑形，讓某件事自己長。看看它會變成什麼樣子。'
+    message: '石英粉的植物不需要長得完美才算美——它長出來的每一片葉子，歪歪斜斜也好，有一個破洞也好，都是它真實的生命。淡粉色的心理語言就是自我接納：你現在的樣子，有粗糙的地方，有還沒長好的地方，但那不是需要被修正的缺陷，那是你真實的成長狀態。',
+    reminder: '你不需要長成某個特定的形狀才算「長好了」。石英粉說：現在歪歪的你，也是完整的你。',
+    action: '今天找出一個你覺得自己「不夠好」的地方，試著換一種眼光看它——如果它是植物的一片葉子，它只是在用自己的方式生長。'
   },
   plant_mauve: {
-    message: '霧紫的深邃見證了看不見的根。深層的根系。你看到的只是葉子，但力量在地下無聲地工作。深色說：最重要的發展發生在看不見的地方。',
-    reminder: '最重要的成長發生在看不見的地方。霧紫邀請你信任那個看不見的過程。',
-    action: '投資在看不到回報的地方。信任根的力量。'
+    message: '霧紫的植物大部分的工作都在地下進行——那些深扎的根，那些在黑暗中伸展的地下莖，是力量的來源，但你看不見。你現在的「成長」也許也是這樣：沒有明顯的進展，外表看起來安靜，但深層的某個整合正在默默進行。霧紫說：相信那個看不見的工作。',
+    reminder: '你不是停滯，你是在深根。霧紫說：最深的成長發生在地下，不在表面，不需要展示給別人看。',
+    action: '想想你最近做了什麼「不會馬上看到成果，但在為未來打根基」的事，承認那些是真實的工作，哪怕別人看不見。'
   },
   plant_moonlight: {
-    message: '月光白清空了成長的目標。沒有方向的成長。植物在虛無中伸展，不知道自己在長什麼。純淨的白色說：無知的成長，有時候最自然。',
-    reminder: '有時候我們只需要成長，不需要知道為什麼。月光白給你盲目成長的許可。',
-    action: '做一件沒有目標的自我提升。讓身體或心靈自己決定方向。'
+    message: '月光白的植物不知道自己在長成什麼——它只是按著內在的律動生長，不問目的，不問方向。你現在也許也在某個「不知道自己在往哪走」的時期，而月光白說：這種不知道不是迷失，有時候它是最自由的成長狀態，因為沒有預設的框架來限制你。',
+    reminder: '不知道自己要長成什麼，才有機會長成最自然的樣子。月光白說：放下那個「應該長成什麼」的藍圖，先讓自己長。',
+    action: '這個星期，讓一個選擇完全隨著感受走，不計劃、不分析，只是跟著「今天想做什麼」去做，看看你會去哪裡。'
   },
   plant_mistblue: {
-    message: '霧藍的冷漠見證了自足的植物。冷漠的滋養。植物照顧自己，不尋求任何人的讚賞。冷色說：自足就是力量。',
-    reminder: '自足是種力量。霧藍給你獨立的權力。',
-    action: '做一件只為自己的事，不為任何人看。體驗自足的快樂。'
+    message: '霧藍的植物有一種清醒的自足——它不依賴任何人的目光，不需要被讚美才繼續生長。這個顏色說的是一種安靜的獨立：你可以在沒有掌聲、沒有人看見的情況下，仍然繼續你的成長。霧藍說：真正的根基，是在你自己心裡建立的，不需要外界的確認。',
+    reminder: '你的成長不需要觀眾。霧藍說：試著在沒有任何人知道的情況下，為自己做一件讓你進步的事。',
+    action: '今天做一件「不會po出來、不會告訴任何人」的自我成長——閱讀、練習、沈思。讓它只屬於你自己。'
   },
   plant_sage: {
-    message: '鼠尾草綠知道植物的四季輪迴。自然的規律。植物知道春天何時來，秋天何時去。它信任季節，綠色連接你與時序的智慧。',
-    reminder: '你也有自己的季節。綠色提醒你：你不是一成不變的。',
-    action: '觀察你自己的成長週期，而不是強迫進度。看見你的四季。'
+    message: '鼠尾草綠的植物信任四季——它知道有些時候是生長的，有些時候是沈潛的，有些時候是開花的，有些時候是凋落的。這個古老的綠色說：你也有自己的季節，不需要在冬天強迫自己開花，也不需要在秋天為自己的凋落感到羞愧。你的節奏，是你的智慧。',
+    reminder: '你不是一成不變的，你也不需要一直開花。鼠尾草綠說：你現在處於哪個季節，那個季節就是對的季節。',
+    action: '思考一下，你現在處於人生的哪個「季節」？接受它，不對它施壓，讓那個季節自然地完成它的工作。'
   },
   plant_apricot: {
-    message: '暖杏色為植物提供了綻放的環境。溫暖的滋養。植物在溫暖的陽光下綻放。你也需要這樣的溫暖環境。溫色說：成長需要溫度。',
-    reminder: '良好的環境讓成長自然發生。暖色邀請你創造你的溫暖環境。',
-    action: '為自己創造一個能讓你綻放的環境。溫暖會改變一切。'
+    message: '暖杏色是植物最喜歡的那種陽光——不是炎熱的正午，而是午後斜照進來的那種溫柔的橘黃色光。這個顏色說的是：你需要讓自己沐浴在一種支持你成長的溫暖裡。你周圍有沒有那樣的人、那樣的環境、那樣的氛圍？暖杏色說：你值得被那樣的溫暖環繞。',
+    reminder: '不是所有的土壤都適合你生長，有時候需要換一個更有溫度的地方。暖杏色說：你有權利尋找讓你綻放的環境。',
+    action: '今天花時間和一個讓你感到溫暖和被支持的人在一起，讓那份溫度滋養你，就像午後的陽光滋養植物一樣。'
   },
 
   // 鏡子 × 6色（自我認知、映像、反思）
   mirror_quartz: {
-    message: '石英粉模糊了鏡中的映像。映像在淡化。鏡子裡的你變得越來越模糊，邊界消融。你看不清自己了。淡色說：看不清自己，有時候是種解脫。',
-    reminder: '有時候看不清自己，反而是種解脫。淡粉色給你放下自我檢視的許可。',
-    action: '停止檢查自己，讓鏡子休息一天。體驗不看的自由。'
+    message: '石英粉站在鏡子前，帶著一種溫柔的疑問——那個鏡子裡的人，你有多久沒有好好看了？不是挑剔地看，不是評估地看，而是帶著一點善意，像看一個你在乎的朋友那樣看。淡粉色說：你對別人很容易看見優點，試著今天也用同樣的眼光看看鏡中的自己。',
+    reminder: '你不需要先變成某個樣子，才值得被自己用溫柔的眼光看見。石英粉說：現在這個版本的你，就已經可以被善待了。',
+    action: '今天對著鏡子，說一句真心的讚美——不是表演給自己的，是你真的相信的那一句。讓那句話在心裡停留一下。'
   },
   mirror_mauve: {
-    message: '霧紫的深邃打開了你的內在房間。深的自我凝視。鏡子反射的不是你的臉，而是你的秘密。深色說：鏡子看得比你更清楚。',
-    reminder: '鏡子看得比你更清楚。霧紫邀請你面對那個深層的自己。',
-    action: '面對鏡子，說出一個你從未承認過的真相。深色會守護你的秘密。'
+    message: '霧紫的鏡子是深沉的——它照出的不只是你的臉，還有你藏在眼神裡的那些沒說出口的故事。你選了這個顏色，也許你正處於一種「面對深層自我」的時刻，那些你通常不願意正視的部分，霧紫說：它們不是你的缺陷，它們是你最複雜、也最有深度的部分。',
+    reminder: '你最不敢看的那個部分，往往藏著你最強的力量。霧紫說：不需要逃開，帶著好奇心去凝視那個深層的自己。',
+    action: '今天在鏡子前，不評判地注視自己五秒鐘，讓那個深色的凝視發生——看見自己的眼睛，感受你自己的存在。'
   },
   mirror_moonlight: {
-    message: '月光白質疑了自我的存在。虛無的映像。鏡子反射的是空，或者說，鏡子本身就是空。純淨的白色說：也許根本沒有一個固定的「你」。',
-    reminder: '也許根本沒有一個固定的「你」。月光白解放你對恆定自我的執著。',
-    action: '接受自己不是一個固定的東西。看見自己在每一刻都在改變。'
+    message: '月光白的鏡子是最清澈也最自由的——它告訴你，那個「固定的你」其實是一種幻象，你在每一個當下都在變化，都在流動。你不需要每天都是同一個人，你不需要一致到讓自己感到窒息。月光白說：你可以是今天這個樣子，明天再成為另一個樣子，這都是真的你。',
+    reminder: '你不需要用一個固定的身份來定義自己。月光白說：你比你以為的更流動、更廣闊，允許自己改變。',
+    action: '想想你現在和一年前的自己有什麼不同，承認那些改變，感謝自己一直在流動而不是停滯。'
   },
   mirror_mistblue: {
-    message: '霧藍的冷靜區分了自我批評和認知。冷的自我反思。鏡子很冷，映像也很冷。你在審視自己，但沒有溫度。冷色說：觀察而不評判。',
-    reminder: '自我批評和自我認知不同。霧藍教你冷靜地看自己，而不是評判。',
-    action: '在鏡子前，試著只是看，不要評判。看見自己，但保持中立。'
+    message: '霧藍的鏡子是清醒而公正的——它照出你真實的樣子，不美化也不醜化，只是如實地反映。這個顏色說的是一種清醒的自我認識：不評判、不逃避，只是清楚地看見自己現在在哪裡、是什麼狀態。霧藍說：這種清醒，是你給自己最誠實的禮物。',
+    reminder: '自我批評和自我認識是兩件不同的事。霧藍說：認識自己是清醒的力量，批評自己是消耗自己的能量。',
+    action: '在鏡子前問自己：「我現在真實的狀態是什麼？」不評判，只是如實回答，然後問：「我需要什麼？」'
   },
   mirror_sage: {
-    message: '鼠尾草綠連接了你與所有鏡觀者。古老的認知。人類對著鏡子已經幾千年。你的映像連接著過去所有試圖認識自己的人。綠色說：你不孤獨。',
-    reminder: '你不是第一個試圖認識自己的人。綠色讓你感受到這個古老傳統的陪伴。',
-    action: '想像你的祖先在鏡子前看到了什麼。你是他們的延續。'
+    message: '鼠尾草綠的鏡子連接著時間的長度——你現在站在鏡子前的這個動作，無數的人在你之前做過。每一個試圖認識自己的人，每一個在鏡中尋找答案的靈魂，都和你站在同樣的地方。這個古老的綠色說：你不孤單，認識自己的旅程，有長長的陪伴在你身後。',
+    reminder: '你探索自己的努力，連接著所有曾經這樣做過的人。鼠尾草綠說：這個旅程是古老的，也是你自己的，你有前人為你探出的路。',
+    action: '今天花時間問自己一個你很久沒有問過的問題：「我真正的樣子，和我一直以為的自己，有什麼不同？」'
   },
   mirror_apricot: {
-    message: '暖杏色為鏡中的你著上溫度。溫暖的自我擁抱。鏡子裡的你是可愛的，值得溫暖的眼光。溫色說：用愛的眼光看自己。',
-    reminder: '你能像對待他人一樣溫柔地對待自己嗎？暖色邀請你自我擁抱。',
-    action: '對著鏡子，說一句你真正相信的關於自己的好話。溫暖會改變映像。'
+    message: '暖杏色的鏡子帶著一種「可以喜歡自己」的溫度——那種橘黃色的光落在你臉上，讓你看起來溫暖而真實。這個顏色有一種修復舊傷的力量，也許你過去有些鏡子裡的自己讓你覺得不夠好，而暖杏色說：那些舊的眼光可以放下了，今天你可以用一個全新的溫柔重新看見自己。',
+    reminder: '鏡子裡那個人，值得比你現在給她/他的更多溫柔。暖杏色說：今天試著用對待你最愛的朋友的眼光，看看那個映像。',
+    action: '對著鏡子做一件讓自己感到被愛的事——微笑、說一聲謝謝你今天這麼努力、或者只是溫柔地看著自己一會兒。'
+  },
+
+  // ── 月亮 × 新色 ──
+  moon_blush: {
+    message: '淡玫瑰喚起的是你內心最柔軟的防線——那個你用溫柔包裹起來的脆弱核心。月亮照見了它。淡粉的心理語言是：允許被看見，允許不堅強。你的無意識正在練習一件最難的事：不躲避自己的細膩。',
+    reminder: '脆弱不是你的弱點，是你感受力最深的地方。淡玫瑰說：你可以不用再假裝沒感覺。',
+    action: '今天，讓一個你通常壓下去的感受，被你自己安靜地接住。不需要解決它，只是承認它在。'
+  },
+  moon_petal: {
+    message: '花瓣粉召喚的是你最初始的那個自己——在任何人教你「要堅強」之前的那個。月亮在花瓣粉裡看見了你未被磨損的純真，它沒有消失，只是藏在最深處等待被允許出來。純真不是幼稚，它是你與世界之間最原始的信任。',
+    reminder: '你的純真是你最深的力量，不是需要被長大取代的東西。花瓣粉說：你可以回去找它。',
+    action: '回憶一件小時候做過、讓你全心全意快樂的事。今天，用任何方式重現那種感受，哪怕只有五分鐘。'
+  },
+  moon_dustyrose: {
+    message: '舊玫瑰帶著被歲月暈染過的溫度——這是玫瑰開過之後、被時間柔化了稜角的顏色。你的無意識正在進行一種整合：把那些曾經刺痛你的經歷，緩慢地轉化成質地。傷痕不再是傷痕，它們正在變成你獨有的厚度和重量。',
+    reminder: '你不是在帶著傷前進，你是帶著轉化了的力量前進。舊玫瑰說：歷練讓你更豐盛，不是更沉重。',
+    action: '想一件曾經讓你很痛、但現在已經成為你一部分的事。今天承認它讓你變得更有深度了。'
+  },
+  moon_nude: {
+    message: '裸膚是去掉所有覆蓋之後剩下的那個顏色——沒有色彩的修飾，沒有情緒的偽裝。月亮在裸膚色裡要你停下表演，看看當你不再扮演任何角色的時候，你是誰。這是最需要勇氣的探索：面對沒有包裝的自己。',
+    reminder: '你最真實的樣子，不需要修飾才值得被看見。裸膚說：今天不需要是任何人期待的版本。',
+    action: '今天選一個平常你會「表演」的場合，試著不表演，只是做自己。觀察有什麼不同。'
+  },
+  moon_lavender: {
+    message: '薰衣草是夢與醒之間的顏色，它屬於那個邊界模糊的地帶——半睡半醒、半信半疑。月亮和薰衣草一起打開了你通往夢境的通道，那裡儲存著你清醒時說不出口的訊息。你的無意識今晚想跟你說話，但它只說夢的語言。',
+    reminder: '夢境不是大腦在胡說，是無意識選擇的表達方式。薰衣草說：記得留意。',
+    action: '今晚睡前，在枕邊放紙筆。明早醒來，在做任何事之前，先寫下你記得的任何夢境片段或感受。'
+  },
+  moon_iris: {
+    message: '鳶尾紫是第三眼的顏色——那個超越邏輯、直接感知真實的能力。月亮在鳶尾紫裡打開了你靈性洞見的通道，那些「無緣無故」的預感、那些說不清楚的知道，都是這個能力在說話。你的直覺正在升級，開始接收更細微的頻率。',
+    reminder: '你的感知力比你的分析力更古老、更準確。鳶尾紫說：那個說不出為什麼的感覺，值得被信任。',
+    action: '今天，相信一個你完全沒有邏輯依據、但強烈感受到的直覺，並且根據它採取一個行動。'
+  },
+  moon_plum: {
+    message: '梅子深紫是你不願意輕易靠近的那個深處——那裡有尚未被整合的陰影，有你一直迴避的真相。月亮潛入深紫，不是要嚇你，而是陪你一起進入。最深的轉化發生在最黑暗的地方，而你現在有足夠的力量去面對。',
+    reminder: '陰影不是你的敵人，是你還沒認識的自己的一部分。梅子深紫說：進去吧，你安全的。',
+    action: '寫下一件你一直不想看見、不想承認的關於自己的事。只是寫下來，不需要解決它。'
+  },
+  moon_lilac: {
+    message: '淡丁香是春天最初的顏色——那種還不確定自己是否站得穩的、輕輕試探的嫩。你的無意識有什麼東西正在初次萌動，非常細小，幾乎察覺不到。不要急著定義它，不要急著讓它長大，就讓它輕輕地在那裡。',
+    reminder: '最珍貴的事物，最初都是脆弱的。淡丁香說：輕輕地，給它一點時間。',
+    action: '今天注意一個非常微小的、在你內心剛剛開始移動的感受或想法，給它一點空間，不評判。'
+  },
+  moon_sky: {
+    message: '天空藍是思想最自由的顏色——它沒有邊界，往任何方向延伸都不會碰到盡頭。月亮在天空藍裡擴展了你的無意識，讓它感受到：你不必被那些重複的思維模式困住。意識可以像天空一樣開放，讓念頭自由飄過，而不是被捉住。',
+    reminder: '你的思維比你的習慣更廣闊。天空藍說：念頭只是過客，不是你。',
+    action: '找一個能看到天空的地方，凝視五分鐘。讓腦子裡的念頭像雲一樣飄過，不跟著任何一個走。'
+  },
+  moon_dusk: {
+    message: '黃昏藍是一天裡最難以定義的時刻——既不是白天，也不是夜晚，是正在告別一件事、卻還沒抵達另一件事的懸空。月亮在黃昏藍裡見證你的過渡，這個轉折點有它自己的美麗，即使它讓你感到不安。你正在離開某個你熟悉的地方。',
+    reminder: '過渡是真實的，不是問題。黃昏藍說：你不需要急著抵達，在這裡也是一個地方。',
+    action: '承認一件你正在告別的事——一個身份、一段關係、一個版本的自己。不評判，只是承認它正在結束。'
+  },
+  moon_navy: {
+    message: '深海藍是真相的顏色——那些沉在最底部、重得無法浮起來的知道。月亮潛入深海藍，到達那些你平時不願靠近的部分：你最深的恐懼、你最誠實的渴望、你從來沒有對任何人說過的事。這裡有你需要的答案，但需要勇氣才能潛下去。',
+    reminder: '最深的部分不是最危險的，而是最真實的。深海藍說：你潛得下去，你有那個力量。',
+    action: '問自己一個你一直不敢真正回答的問題，把答案寫下來，只給自己看。'
+  },
+  moon_pearl: {
+    message: '珍珠白是經過摩擦之後才有的光澤——珍珠不是天生就美麗的，它是沙礫在柔軟的內裡一遍一遍打磨的結果。你的無意識正在醞釀一種這樣的轉化：那些讓你不舒服的、反覆刺激你的事，正在被慢慢轉化成你獨特的光芒。',
+    reminder: '你的光澤是你的歷練造就的，不是天生的。珍珠白說：那些讓你痛的，也在讓你發光。',
+    action: '看見你身上一個因為困難而生成的優點，今天感謝那個讓你產生它的經歷。'
+  },
+  moon_mint: {
+    message: '薄荷綠帶來的是心理上的清醒——那種霧氣散去、能看清楚的感覺。你的無意識有一些舊的模式、舊的故事、舊的解讀方式正在鬆動。薄荷的心理語言是：呼出舊氣，讓新鮮的視角進來。你其實比你以為的更清醒。',
+    reminder: '清醒不是一次性的頓悟，是每次你願意重新看的時候。薄荷說：讓舊的模式散去吧。',
+    action: '今晚睡前，深呼吸五次，每次呼氣都想像有一個舊的、讓你沉重的念頭離開你的身體。'
+  },
+  moon_eucalyptus: {
+    message: '尤加利是儀式性淨化的顏色——它的香氣在許多文化裡被用來清除空間裡的舊能量。你的無意識正在進行一種類似的清理：有些你攜帶太久的東西，有些不再屬於你的模式，正在被認出並且放下。淨化之後，才有空間迎接新的。',
+    reminder: '你不需要帶著所有東西繼續前進。尤加利說：是時候清理了，為真正重要的東西騰出空間。',
+    action: '清理一個實體空間（桌面、抽屜或一個角落），同時有意識地想：有什麼心理上的東西也可以一起清掉？'
+  },
+  moon_moss: {
+    message: '苔蘚綠是時間的顏色——它覆蓋在古老的石頭上，安靜地、幾十年如一日地存在著。月亮在苔蘚綠裡告訴你：有些事不需要現在就有答案。靜默本身是一種智慧，等待本身是一種行動。你的無意識在學習古老的耐心。',
+    reminder: '急著找答案，有時候只是在逃避不確定的不適。苔蘚說：你可以先不知道，這樣也沒關係。',
+    action: '對一個你一直想要答案的懸而未決的事，今天練習只是和它同在，不試著解決它。'
+  },
+  moon_celadon: {
+    message: '青瓷綠是修煉之後才有的從容——那種不是漠然、而是深深在場的平靜。月亮在青瓷綠裡顯現出你的無意識正在整合某種內在的平衡，不是強迫自己冷靜，而是真正從容了。這種從容需要時間，而你正在抵達。',
+    reminder: '真正的從容不是壓抑感受，是感受穿透你之後你依然在場。青瓷說：你越來越能承載了。',
+    action: '今天做一件事，不緊不慢，把注意力完全放在過程上。感受那種從容的質地。'
+  },
+  moon_clay: {
+    message: '陶土棕是身體記憶的顏色——那些儲存在肌肉和骨頭裡、比語言更古老的知道。月亮在陶土色裡呼喚你的本能，那些不需要思考就知道的事，那些直覺反應背後更深的身體智慧。你的無意識想要紮根，想要被土地接住。',
+    reminder: '你的身體比你的頭腦更誠實。陶土說：先感受你的身體，再問你的腦子。',
+    action: '赤腳站在地板上一分鐘，感受你的重量、你的根。讓身體的重量告訴你：你是真實存在的。'
+  },
+  moon_amber: {
+    message: '琥珀黃是時間被封存的顏色——遠古的樹脂凝固了億萬年前的光，讓它永遠在那裡。你的無意識裡也有這樣的東西：某個時刻的洞見、某段記憶的智慧，被完整地保存著，等待你去取用。月亮在琥珀裡讓你看見：你早就有你需要的答案了。',
+    reminder: '你已經擁有的智慧，比你以為的更多。琥珀說：往回看，你的過去已經給了你很多。',
+    action: '回想一個過去你曾有過的重要洞見或領悟，今天把它重新取出來，看它現在還有什麼要告訴你。'
+  },
+  moon_sand: {
+    message: '沙丘米是廣闊的顏色——沙漠裡沒有邊界，往任何方向走都是無盡的延伸。月亮在沙丘色裡讓你的無意識感受到：你比你知道的更自由，你的可能比你設定的邊界更廣大。那些你以為的限制，有多少是真實的，有多少是你自己畫的線？',
+    reminder: '你對自己設的限制，往往比真實的限制更小。沙丘說：往那個你一直告訴自己不行的方向走一步。',
+    action: '想一個你一直對自己說「我不行」的事，今天質疑這個信念：這是真的嗎？還是我只是這樣以為？'
+  },
+  moon_terra: {
+    message: '赤陶磚是地中海的太陽烤進土裡的那種熱——古老的、有重量的、充滿生命力的熱情。你的無意識裡有一股這樣的能量在醞釀，不是衝動，是帶著根基的熱情，是你最深的渴望在發聲。月亮見證它，等它準備好燃燒。',
+    reminder: '你的熱情不是不理性，是你最真實的方向在呼喚你。赤土說：那個渴望是真的，別再壓它了。',
+    action: '想一件你一直很想做、但一直告訴自己「再等一下」的事。今天邁出最小的那一步。'
+  },
+  moon_smoke: {
+    message: '煙霧灰是蛻變中的顏色——煙既不是火，也不是空氣，它是兩者之間的過渡狀態。你的無意識正在這樣一個模糊的時期：某些舊的東西已經開始消散，新的還沒有形成。不清晰不是問題，它是轉化正在發生的證明。',
+    reminder: '模糊是蛻變的外殼，不是你迷失了。煙霧說：在不清晰裡待著，轉化需要這個空間。',
+    action: '今天允許自己不需要知道答案，不需要有計畫。只是看看，在沒有確定性的情況下，你還能做什麼。'
+  },
+  moon_fog: {
+    message: '晨霧白是清晨最誠實的時刻——在任何人告訴你今天應該做什麼、應該感受什麼之前，在你的防衛機制完全清醒之前，你的無意識最容易說真話。晨霧保護了這個柔軟的窗口，讓最真實的感受先於一切出現。',
+    reminder: '你剛睡醒時的第一個感受，往往是最誠實的訊號。晨霧說：在世界進來之前，先聽自己。',
+    action: '明天早上醒來，在拿手機或做任何事之前，先靜靜躺著一分鐘，注意你第一個感受是什麼。'
+  },
+  moon_charcoal: {
+    message: '炭灰是一切燃燒殆盡之後剩下的——那些裝飾、那些多餘的、那些表面的，全都被燒掉了，剩下的才是真的。月亮在炭灰色裡要你看見：當你去掉所有的干擾之後，你的核心是什麼？什麼是你真正的本質，無法被燒掉的那部分？',
+    reminder: '你最真實的核心，是那些任何情況都無法拿走的東西。炭灰說：找到它，以它為根。',
+    action: '問自己：如果失去所有外在的身份和角色，我還剩下什麼？今天和那個核心的自己待在一起。'
+  },
+  moon_ivory: {
+    message: '象牙白是白色裡最有溫度的那個——它不是冷白，它帶著時間的暖意，是被好好珍藏過的東西特有的光澤。你的無意識正在認識一件事：你是珍貴的，不是因為你完美或有用，而是因為你本身就有價值。這個認識需要慢慢地、溫柔地長進來。',
+    reminder: '你的價值不來自你的表現或成就。象牙白說：你珍貴，是因為你存在，就是這樣。',
+    action: '今天對自己說一句話：「我值得被好好對待。」不論你信不信，就說。每天說，讓它慢慢長進來。'
+  },
+
+  // ── 種子 × 新色 ──
+  seed_blush: {
+    message: '淡玫瑰是最初的嬌嫩——那個還沒有被評判、還沒有被定義的脆弱起點。你正在孕育的，是一種需要被溫柔對待的可能，它太新了，還不能被拿出來被人審視。種子在淡玫瑰的光裡學習：脆弱的起點，不代表軟弱的結果。',
+    reminder: '你正在孕育的東西，現在最需要的是保護，而不是評判。淡玫瑰說：先讓它在溫柔裡待一會兒。',
+    action: '有一個你最近開始的想法或嘗試，今天給它溫柔的關注，不批評，不要求它立刻變成什麼。'
+  },
+  seed_petal: {
+    message: '花瓣粉是純真的期待——在任何失敗的記憶介入之前，你對這個可能抱著最天真的希望。種子在花瓣粉裡還不知道土壤有多硬、陽光有多不穩定，它只知道它想長。這種純真的衝動，是所有成長最重要的起點。',
+    reminder: '你最純粹的期待裡有你最真實的渴望。花瓣粉說：先相信，後面的事後面再說。',
+    action: '寫下三個你對某個新開始最天真、最不顧現實的期待。讓自己完全相信它們，哪怕只是五分鐘。'
+  },
+  seed_dustyrose: {
+    message: '舊玫瑰是被時間豐盛了的顏色——它不是花剛開的新鮮，它是花開過之後、被歲月暈染出來的厚度。你的過去不是廢土，而是最肥沃的土壤。每一次失敗、每一段痛苦、每一個走過的彎路，都在成為你現在這顆種子最好的養分。',
+    reminder: '你不是從零開始，你帶著所有的歷練在重新開始。舊玫瑰說：你的過去是你最好的資源。',
+    action: '找出一個過去的失敗或困難，問它：你給了我什麼，讓我現在的這個開始更有根基？'
+  },
+  seed_nude: {
+    message: '裸膚是去掉所有包裝之後的樣子——沒有別人的期待，沒有社會給的定義，就只是你最真實的渴望。你真正想成為什麼？不是應該成為什麼，不是別人希望你成為什麼。種子在裸膚的光裡問你：如果沒有人在看，你的根想往哪裡伸？',
+    reminder: '你真正的潛力不是別人說你擅長的東西，是你自己最深的渴望指向的方向。裸膚說：去掉所有的應該，你想要什麼？',
+    action: '問自己：如果沒有任何外在的評判或期待，我最想發展的是什麼？誠實地寫下來。'
+  },
+  seed_lavender: {
+    message: '薰衣草讓種子進入夢境的空間——那個允許你想像遠超現實可能的地方。你的潛力需要被夢想滋養，而不只是被計畫推動。薰衣草的心理語言是：在你去「怎麼做」之前，先讓自己完整地想像「如果成真了，會是什麼感覺」。',
+    reminder: '夢想不是逃避現實，是你在為可能性留空間。薰衣草說：先讓自己真正夢一下，再談步驟。',
+    action: '今天花十分鐘，完全不管現實可不可行，想像你的某個潛力完全實現之後的樣子，越細節越好。'
+  },
+  seed_iris: {
+    message: '鳶尾紫連接著靈性的智慧，它提醒你：你的潛力不只是個人的技能，它有更大的意義。種子在鳶尾紫的光裡感受到：你天生帶來的這個能力或傾向，是有目的的——它指向一個服務、一種貢獻、一個只有你能做的事。',
+    reminder: '你的才能不是偶然的，它是你來到這裡的一部分原因。鳶尾紫說：想想它要如何服務更大的整體。',
+    action: '想像你最核心的才能或潛力完全開花，問自己：這會如何幫助到某個人或某件事？讓這個意義成為你的動力。'
+  },
+  seed_plum: {
+    message: '梅子深紫是在地底最深處、最黑暗的地方等待的顏色。種子在開始發芽之前，需要在黑暗裡待夠久——那個黑暗不是問題，是必要的沉澱和準備。你的某個潛力或可能正在經歷這個階段，它需要時間、需要黑暗、需要你的耐心。',
+    reminder: '最深的成果需要最長的等待。梅子深紫說：它不是沒有在生長，只是在地底，你還看不見。',
+    action: '有一個你等了很久、還沒有看到結果的努力，今天重新確認：你願意繼續等嗎？為什麼？'
+  },
+  seed_lilac: {
+    message: '淡丁香是初春最細微的那種移動——連你自己都幾乎感覺不到的、非常輕非常輕的開始。你的某個潛力正在這個細小的狀態，一個剛剛萌動的傾向，一個還沒有名字的渴望。不要急著讓它長大，就讓它輕輕地在那裡存在。',
+    reminder: '細小的開始是真實的開始。淡丁香說：給最微小的萌動一點關注，它比你以為的更重要。',
+    action: '今天注意一個非常微小的、在你內心剛出現的新興趣或傾向。只是承認它的存在，給它一點空間。'
+  },
+  seed_sky: {
+    message: '天空藍讓種子看見它可以長多高——沒有天花板，往上延伸到哪裡都是可以的。你給自己設的限制，往往比真實的限制小很多。種子不會告訴自己「我最多只能長這麼高」，它只是盡力往光的方向生長，讓陽光決定它能到多遠。',
+    reminder: '你對自己的設限，大部分是學來的，不是真實的。天空藍說：你比你以為的更有可能。',
+    action: '找出一個你一直對自己說「我不行做這個」的事，今天只做一件最小的事來挑戰這個信念。'
+  },
+  seed_dusk: {
+    message: '黃昏藍是辨別的時刻——在白天的行動和夜晚的靜止之間，有一個自然的停頓，讓你評估今天、準備明天。你的種子正在這個時刻：不是停止，是在辨別下一步的方向。這個等待是有智慧的，是你在確認自己是往自己的路走，還是別人的。',
+    reminder: '等待和逃避是不同的。黃昏藍問你：你現在的停頓，是在辨別方向，還是在迴避行動？',
+    action: '誠實地問自己：那件一直在等「對的時機」的事，我是真的在辨別時機，還是在逃避開始的恐懼？'
+  },
+  seed_navy: {
+    message: '深海藍讓種子往最深的土壤裡紮根——那個表面看不見、但決定了整棵樹能長多高的根系。你最核心的才能不是那些明顯的、容易被看見的技能，而是更深層的特質：你的感知方式、你的本能反應、你看世界的角度。那才是真正的根。',
+    reminder: '你最深的才能往往是你自己最難看見的，因為它對你來說太自然了。深海藍說：往深處找，那裡才是真正的根。',
+    action: '問一個你信任的人：你覺得我最獨特的特質是什麼？然後問自己：我是否真的重視和使用了它？'
+  },
+  seed_pearl: {
+    message: '珍珠白讓種子帶著摩擦生成的光澤。種子在突破土壤的過程中，那個阻力、那個需要用力穿透的厚度，正是讓它變得強壯的原因。你的潛力有一種這樣的優雅——它是在克服困難的過程中被打磨出來的，有自己獨特的光。',
+    reminder: '你的才能因為你克服過的困難而更有光澤。珍珠白說：那些讓你費力的，讓你的能力更獨特了。',
+    action: '想一個你的才能或優點，它是如何因為某段困難的經歷而變得更強、更有深度的？今天感謝那個困難。'
+  },
+  seed_mint: {
+    message: '薄荷綠帶來的是思路的清醒——那種霧氣散去、突然看清楚的感覺。你的潛力需要這種清醒的眼光：去掉那些別人加在你身上的標籤，去掉你自己多年來對自己的舊有設定，用新鮮的眼光看看，現在的你真正擅長什麼，真正在意什麼。',
+    reminder: '你對自己的很多設定已經過期了，需要更新。薄荷說：用現在的眼光重新看自己的可能。',
+    action: '想一件你很久以前就決定「這不是我擅長的」或「這不適合我」的事，今天重新評估：現在的你，還是這樣嗎？'
+  },
+  seed_eucalyptus: {
+    message: '尤加利淨化了種子生長的空間——清除那些佔據土壤養分的雜草，才能讓真正重要的得到滋養。你有太多的「應該」、太多別人種在你心裡的期待，正在和你真正的潛力搶奪資源。是時候清除一些了，讓真正屬於你的才能得到空間。',
+    reminder: '你在「應該」上花的精力，是從你真正的可能那裡拿走的。尤加利說：清理那些不是你的東西。',
+    action: '列出三件你在做、但不是真的出於自己渴望的事（而是出於應該或別人期待）。選一件開始減少它的份量。'
+  },
+  seed_moss: {
+    message: '苔蘚綠讓種子學習古老的耐心——不是週或月的時間尺度，而是年和十年。有些潛力需要很長很長的時間，它的生長是靜悄悄的，看不見的，別人不會注意到，甚至你自己也很難感知到。但它一直在。這種看不見的成長，往往是最深的。',
+    reminder: '你看不見的成長，往往是最重要的。苔蘚說：不需要讓別人看見，你在長。',
+    action: '回想三年前的自己，看見你這三年靜悄悄長出來的一個改變或能力，今天承認這個成長。'
+  },
+  seed_celadon: {
+    message: '青瓷綠是從容的顏色——不急，不催，按照自己的節奏。你的潛力有它自己的成熟時間，不需要按照外界的進度表。青瓷的心理語言是：信任這個過程，不需要比較，不需要催促，每個人的種子在自己的時間裡開花。',
+    reminder: '你的潛力有它自己的節奏，不需要和任何人賽跑。青瓷說：從容地成長，比急著到達更重要。',
+    action: '今天不和任何人比較你的進度，只問自己：相對於上個月的我，我有在往前嗎？'
+  },
+  seed_clay: {
+    message: '陶土棕讓種子扎進最真實的土地——那個需要雙手勞作、需要汗水澆灌的地方。你的潛力最終需要具體的行動來實現，不是想像，不是計畫，是真正去做。陶土的心理語言是：夢想要落地，需要你的雙手。',
+    reminder: '一個沒有被行動支持的潛力，只是一個還沒實現的可能。陶土說：今天做一件具體的事。',
+    action: '針對你最想發展的潛力，今天做一件非常實際的、你可以用手觸摸到結果的行動。'
+  },
+  seed_amber: {
+    message: '琥珀黃是被太陽封存在時間裡的光——那種溫暖、創造性的能量，億萬年後依然發光。你的創造力是這樣的：它不需要外部條件完美才能燃起，它本身就有光，只是需要你允許它出來。種子在琥珀的光裡感受到：創造的衝動是你最古老的本能。',
+    reminder: '你的創造力不是偶爾有的技能，是你最古老的本能之一。琥珀說：讓它出來，不要繼續壓著它。',
+    action: '今天做一件創意的事，不管結果好不好看，不管有沒有用。只是讓創造的衝動說話。'
+  },
+  seed_sand: {
+    message: '沙丘米是廣闊的顏色——沙漠裡的每一粒沙都是獨立的，但合在一起構成了無邊的遼闊。你的潛力不需要被定義成某一件特定的事，它可以是廣闊的、多面向的、跨越邊界的。不要過早把自己框住。你比任何標籤都更廣闊。',
+    reminder: '你不需要用一個標籤定義自己的全部。沙丘說：你可以是多個方向都在生長的。',
+    action: '今天嘗試一件和「你通常做的事」或「你通常的身份」完全不同的事，感受自己的多面向。'
+  },
+  seed_terra: {
+    message: '赤陶磚是地中海大地的顏色——那種充滿熱情、充滿生命力、被太陽深深烤進去的活力。你的潛力不只需要耐心，也需要熱情的意志去推動。種子在赤土裡感受到一股力量：那個想要實現的強烈渴望，是讓夢想成真最重要的燃料。',
+    reminder: '你的熱情是你最重要的資源，不是多餘的情緒。赤土說：讓它燃燒，用它驅動你。',
+    action: '找一件你真的很想做但一直說「再等一下」的事，今天設定一個具體的日期，讓它成真。'
+  },
+  seed_smoke: {
+    message: '煙霧灰是孕育期的顏色——種子在土裡還沒發芽的時候，從外面看是什麼都看不見的，但一切都在發生。你可能正在一個這樣的階段：不清楚方向，看不見進展，不確定這一切是否有意義。那種模糊，就是孕育的狀態。',
+    reminder: '看不見進展不代表沒有進展。煙霧說：地底的事，需要時間才會出現在地面上。',
+    action: '對一個你不確定還值不值得繼續的事，問自己：這個不確定，是因為方向錯了，還是只是因為還看不見結果？'
+  },
+  seed_fog: {
+    message: '晨霧白讓種子沐浴在清晨最柔和的濕潤裡——那種不強迫、不要求，只是輕輕滋養的方式。你的潛力在壓力下反而長不好，它需要的是溫柔的關注，是允許它按照自己的節奏，是不評判的空間。',
+    reminder: '對你的潛力太嚴苛，反而阻礙它生長。晨霧說：溫柔地對待你的才能，它才能開放。',
+    action: '今天以最溫柔、最不施壓的方式，做一件和你想發展的才能或目標相關的事。'
+  },
+  seed_charcoal: {
+    message: '炭灰是清醒的顏色——它讓你去掉幻想，看清楚真實的狀況。你的潛力需要清醒的評估，不是自我批判，而是誠實地看見：你現在真正的強項在哪裡？你的限制又在哪裡？清醒地看見自己，才能有效地成長。',
+    reminder: '清醒評估自己不是自我否定，是尊重自己的第一步。炭灰說：看清楚，才能真正前進。',
+    action: '誠實評估一個你的才能：它的真正強項是什麼？它目前的限制是什麼？這兩個都承認，不誇大也不貶低。'
+  },
+  seed_ivory: {
+    message: '象牙白讓種子感受到自己的珍貴——不是因為它未來會長成什麼，而是因為它本身就是獨一無二的。你的潛力是你獨有的組合，沒有任何人和你一模一樣。這個獨特性本身就是你最大的才能，不需要變成別人才有價值。',
+    reminder: '你的獨特性不是缺點，是你最珍貴的資產。象牙白說：成為你自己，就是你最重要的才能。',
+    action: '找出一件只有你才能做的事——那個結合了你獨特的性格、經歷和方式的事——今天珍視它，而不是拿它和別人比較。'
+  },
+
+  // ── 窗戶 × 新色 ──
+  window_blush: {
+    message: '淡玫瑰染上了窗玻璃，讓你對窗外的一切都帶著溫柔的濾鏡。你渴望看見一個被善意對待的世界——不是天真，而是你內心深處知道：當你用溫柔的眼光看出去，你會找到你在找的東西。你的感知方式，正在決定你看見什麼。',
+    reminder: '你帶著什麼眼光看世界，就會看見什麼世界。淡玫瑰說：先讓你的眼光變得溫柔，再出去看。',
+    action: '今天刻意用溫柔的眼光看一個你平常覺得困難的人或情境，觀察你看見了什麼不同的東西。'
+  },
+  window_petal: {
+    message: '花瓣粉讓窗外的世界回到了你最初見到它的樣子——在你學會懷疑、學會防衛之前，你曾經以純粹的好奇心面對一切。那個好奇心還在你裡面，被壓在防衛的下面。窗戶在花瓣粉的光裡問你：你願不願意再試一次，以純真的眼光連結世界？',
+    reminder: '你的防衛是後天學來的，你的純真才是本來的樣子。花瓣粉說：讓裡面那個好奇的你出來。',
+    action: '今天帶著初學者的心態做一件熟悉的事，假裝你是第一次遇見它，看看你注意到什麼新的東西。'
+  },
+  window_dustyrose: {
+    message: '舊玫瑰讓窗透出一種成熟之後才有的深度——你看世界的眼光帶著歲月的厚度。你不再只看表面，你能感知層次，能聽見故事背後的故事。這不是冷漠，是一種更深的在場，一種更豐富的看見。你的閱歷讓你看得更遠。',
+    reminder: '你因為走過的路而看得更深，這是一種寶貴的能力，不是沉重。舊玫瑰說：你的眼光是有厚度的禮物。',
+    action: '今天和一個比你年長許多的人聊天，不是要尋求建議，只是想聽他們看世界的方式。'
+  },
+  window_nude: {
+    message: '裸膚讓窗玻璃變成了最純粹的透明——沒有色彩的過濾，沒有期待的遮蔽，就只是看見真實的樣子。你一直習慣帶著某個框架看世界，帶著某個期待看人。今天，窗戶邀請你嘗試不帶任何框架地看出去：世界本來的樣子，是什麼？',
+    reminder: '你的期待，有時候讓你看見你想看見的，而不是真實存在的。裸膚說：試著不帶期待地看一次。',
+    action: '今天暫停使用社群媒體一天，只看真實在你眼前的世界，觀察你的感受有什麼不同。'
+  },
+  window_lavender: {
+    message: '薰衣草讓窗外的景色帶上了夢境的質地——那些尋常的事物開始有了不尋常的意義，那些平凡的遇見開始閃著某種光。你的想像力正在工作，它為你看見的一切加上了詩意的第二層。這是一種天賦：能在日常裡看見非日常。',
+    reminder: '你對世界的詩意感知，不是幻想，是創造力的根源。薰衣草說：讓你的想像力為世界加注意義。',
+    action: '今天帶著「這件事可能有更深的意義」的眼光出門，留意一個讓你有感覺的遇見或細節。'
+  },
+  window_iris: {
+    message: '鳶尾紫讓窗成為了靈性感知的入口——你開始看見表面現象背後的模式，看見那些「巧合」裡可能存在的連結。你的感知力正在擴展到語言無法完全描述的層面：某些遇見不是隨機的，某些時機不是偶然的。你能感覺到，即使說不清楚。',
+    reminder: '你那些說不清楚為什麼、但有強烈感覺的察覺，是一種真實的感知。鳶尾紫說：相信你的感知力。',
+    action: '今天留意一個你覺得「不太像巧合」的遇見或情境，問自己：如果這不是偶然，它想告訴我什麼？'
+  },
+  window_plum: {
+    message: '梅子深紫讓窗透出世界更深、更真實的那一層——你正在看見的不只是表面的樣子，而是更深層的本質。這需要勇氣：深深地看見意味著深深地感受，你無法假裝看不見。但也只有願意深深看見的人，才能真正理解和連結。',
+    reminder: '深深看見，需要你願意承受深深感受的能力。梅子深紫說：你有那個能力，不要閉上眼睛。',
+    action: '今天選一個情境或一個人，試著看穿表面，問自己：在這個表面的背後，真正發生的是什麼？'
+  },
+  window_lilac: {
+    message: '淡丁香讓窗輕輕地、試探性地打開了一道縫——不是全部敞開，只是一點點。你正在試著往外看，試著讓一點點新的東西進來，這已經很勇敢了。不需要一次全開，每一個小小的向外探索，都是你在擴展你與世界的連結。',
+    reminder: '每一個小小的向外嘗試，都是真實的勇敢。淡丁香說：這一道縫，就夠了，先從這裡開始。',
+    action: '今天做一件讓你輕微走出舒適圈的小事，不需要是大的冒險，就一件小的嘗試就好。'
+  },
+  window_sky: {
+    message: '天空藍讓窗和外界完全融合——窗框消失了，裡面和外面之間不再有分隔。你渴望的那種自由，那種和世界連通的感覺，其實比你以為的更近。你一直站在窗邊猶豫，但天空藍告訴你：那扇窗其實早就開著，走出去就好了。',
+    reminder: '你在等的那個「準備好了」的感覺，可能永遠不會完全到來。天空藍說：先走出去，準備是在路上完成的。',
+    action: '今天做一件你一直說「等我準備好了再做」的事的第一步。不需要準備好，就先出發。'
+  },
+  window_dusk: {
+    message: '黃昏藍讓窗口停在了一天裡最難以言說的時刻——那種光線和黑暗交接時的美麗和惆悵。你現在正在一個這樣的過渡點：某個熟悉的階段正在結束，某個還不清晰的新的開始正在等待。黃昏是真實的，即使它即將過去。',
+    reminder: '你不需要急著從黃昏抵達黑夜，也不需要拉住黎明。黃昏藍說：在這裡，感受這個時刻。',
+    action: '為你正在告別的這個生命階段寫一句話，為你即將迎接的寫一句話。讓這個過渡有它的重量。'
+  },
+  window_navy: {
+    message: '深海藍讓窗透出的世界充滿了深度和分量——你渴望的不是輕盈的連結，而是那種能讓你感受到真實重量的相遇。你在找的是有深度的人、有深度的對話、有深度的意義。深海藍告訴你：這樣的連結存在，你值得它。',
+    reminder: '你渴望深度的連結，不是要求太多，是你真正需要的東西。深海藍說：不要為了表面的連結妥協。',
+    action: '今天和一個你真正在意的人，聊一個你們平常不會聊的、更深入的話題。'
+  },
+  window_pearl: {
+    message: '珍珠白讓窗透出一種柔和的、帶著光澤的世界——你看見的外部充滿了值得被珍視的細節，那些被大多數人忽略的小美麗，你能看見。這是一種感知的天賦：能在平凡中看見非凡，能在日常裡發現值得感謝的光。',
+    reminder: '你看見美的能力，是一種特別的天賦，不要讓它被習慣和疲憊淹沒。珍珠說：繼續帶著這個眼光出門。',
+    action: '今天找出三件你平常走過但沒有停下來注意的美麗事物，讓自己真正地、完整地看見它們。'
+  },
+  window_mint: {
+    message: '薄荷綠讓窗外吹進了清新的空氣——那種讓你的感官重新清醒、讓你的思維重新開放的新鮮感。你有時候太習慣用舊有的方式看世界，用同樣的路線、同樣的眼光，看見的永遠是同樣的東西。薄荷說：換一個視角，世界會不一樣。',
+    reminder: '你的感知在習慣裡會變得遲鈍。薄荷說：讓新鮮感清醒你，去用不同的方式看一次世界。',
+    action: '今天走一條你平常不走的路，或用不同的方式做一件日常的事，觀察你注意到了什麼新的東西。'
+  },
+  window_eucalyptus: {
+    message: '尤加利淨化了窗和外界之間的空氣——清除了那些讓你對外部世界感到疲倦、懷疑或封閉的雜質。有時候你不是真的不想與世界連結，只是積累了太多讓你退縮的舊傷或疲憊。尤加利說：清一清，你對世界的開放感還在。',
+    reminder: '你對世界的疲倦，不代表你失去了連結的能力。尤加利說：清理之後，再試一次。',
+    action: '今天去接觸一些自然——樹、草、水、泥土。讓自然淨化你對外部世界積累的疲憊感。'
+  },
+  window_moss: {
+    message: '苔蘚綠讓窗外呈現出一種古老的、不需要表演的靜默。你渴望一種和世界連結的方式，不需要社交表演，不需要話語，只是安靜地存在在同一個空間裡。苔蘚和石頭之間有一種最古老的相處方式：不說話，但彼此知道對方在。',
+    reminder: '真正的連結不一定需要語言。苔蘚說：你可以靜靜地和世界在一起，這也是連結。',
+    action: '今天獨自在一個自然環境裡安靜地待十五分鐘，不說話，不滑手機，只是和這個空間在一起。'
+  },
+  window_celadon: {
+    message: '青瓷綠讓窗外的世界呈現出一種從容的步調——你渴望一種不急不慢的生活方式，一種允許你慢慢看、慢慢感受的節奏。你現在的生活步調可能讓你來不及真正看見窗外的世界，一切都太快了，快到你只能掃過表面。',
+    reminder: '快速掃過的世界，你其實沒有真正看見。青瓷說：慢下來，讓世界有機會進來。',
+    action: '今天比平常慢兩倍的速度做一件事，感受在放慢節奏之後，你注意到了什麼平常錯過的細節。'
+  },
+  window_clay: {
+    message: '陶土棕讓窗透出的世界是真實的、有重量的——你渴望的不是Instagram式的美麗，而是帶著土地氣息的真實生活。那些真正有質感的東西：一頓親手做的飯、一段真實的對話、一個雙手觸碰過的物件。你渴望真實的質地。',
+    reminder: '你渴望的是真實的、有重量的生活，而不是表面的光鮮。陶土說：往真實的、有質地的地方走。',
+    action: '今天做一件非常實際、非常具體、讓你的雙手觸碰到真實世界的事。感受它的重量和質地。'
+  },
+  window_amber: {
+    message: '琥珀黃讓窗透出溫暖的、充滿創造光芒的外部世界——你看見的不只是現實，還有它的可能性。你帶著一種創造者的眼光看世界：這裡可以更好，那裡可以不同，這個可以被轉化。你的才能是要被帶出去、與世界分享的。',
+    reminder: '你的創造力不是個人的事，它是你和世界之間的橋梁。琥珀說：帶著你的才能走出去。',
+    action: '今天主動分享一件你擅長或熱愛的事——給一個人，以任何形式——讓你的才能接觸外部世界。'
+  },
+  window_sand: {
+    message: '沙丘米讓窗外呈現出一種遼闊的、沒有邊界的廣大——你渴望的是一種不受限制的生活方式，一種允許你往任何方向延伸的空間。你現在感到的侷促，有多少是真實的限制，有多少是你自己書的邊界線？',
+    reminder: '你的世界可以比現在更廣闊，但擴展從來都是從裡面開始的。沙丘說：先讓內心擴展，外在的廣闊才會跟來。',
+    action: '想一個能讓你的生活更廣闊的改變，哪怕很小，今天邁出一步往那個方向走。'
+  },
+  window_terra: {
+    message: '赤陶磚讓窗外充滿了充沛的、有根基的熱情——那種知道自己在做什麼、為什麼做的踏實的熱情。外面的世界有很多值得你全心投入的事，等待你的能量和熱情。你的熱情是你和世界之間最真實的橋梁，不要讓它只停留在內心。',
+    reminder: '你的熱情不是為了自己，它是你與世界連結的方式。赤土說：帶著它走出去，讓它遇見世界。',
+    action: '今天主動做一件你真心熱愛的事，讓自己的熱情接觸外部世界，不管形式多小。'
+  },
+  window_smoke: {
+    message: '煙霧灰讓窗外的景色朦朧——你現在可能看不清楚外部世界對你意味著什麼，不確定應該往哪個方向前進，不確定什麼值得追求。這個朦朧不是問題，是你正在過渡、正在重新定位的狀態。不清楚的時候，先停下來觀察。',
+    reminder: '在不清晰的時候，最好的行動往往是先觀察，而不是強行決定。煙霧說：先看，不要急著動。',
+    action: '今天不做任何關於方向或未來的重大決定，只是觀察和記錄你對外部世界的感受。'
+  },
+  window_fog: {
+    message: '晨霧白讓窗外呈現出清晨最柔和的面貌——世界還沒有完全清醒，邊界是模糊的，一切都帶著可能性的柔和。每一個早晨的窗外，都是世界最溫柔的那個版本。你今天看見的，是一個充滿了「還未決定」的世界——充滿可能性。',
+    reminder: '清晨的模糊是一種可能性的空間，不是需要被填滿的空白。晨霧說：在這個柔軟的開始裡，什麼都還可以。',
+    action: '明天早上，在窗前靜靜地站一分鐘，看著外面，感受這個新的一天帶來的可能性。'
+  },
+  window_charcoal: {
+    message: '炭灰讓窗透出清醒的外景——你用清醒的眼光看見世界真實的樣子，不帶幻想，也不帶失望。這種清醒需要被珍惜：它讓你能看見問題，也讓你能看見機會；它讓你不被騙，也讓你不自欺。清醒的眼光是智慧的一種。',
+    reminder: '清醒地看世界，不是悲觀，是你尊重現實的方式。炭灰說：帶著清醒的眼光，才能真正有效地行動。',
+    action: '誠實地審視一個你對外部世界（某段關係、某個情境）的期待，問自己：這個期待是真實的，還是我在自欺？'
+  },
+  window_ivory: {
+    message: '象牙白讓窗透出溫潤的外景——不是冷漠的距離，而是一種帶著溫度的觀看。你看見的世界是珍貴的，充滿了值得被慢慢品味的細節。那些被時間沉澱過的東西，那些不搶眼但有質地的美好，只有你的眼光才能看見。',
+    reminder: '你看世界的眼光裡有一種珍視的溫度，這讓你能看見別人錯過的美。象牙白說：繼續帶著這個眼光。',
+    action: '今天寫下三件你真正感激的、關於外部世界的事——那些你有了但沒有真正停下來感謝的東西。'
+  },
+
+  // ── 羽毛 × 新色 ──
+  feather_blush: {
+    message: '淡玫瑰讓羽毛染上了溫柔的色澤——放下，不一定需要剛強，可以是最嬌嫩的方式。你一直以為放下需要力氣，需要某種決斷，但淡玫瑰告訴你：最深的放手，往往是在溫柔中發生的，當你對自己足夠溫柔的時候，那些緊抓著的東西自然會鬆開。',
+    reminder: '溫柔地放手，比用力掙脫更有效。淡玫瑰說：你可以輕輕地，讓那個重量從你身上滑落。',
+    action: '今天選一件讓你感到沉重的事，不是用意志力強行放下，而是用溫柔的方式讓自己和它保持距離。'
+  },
+  feather_petal: {
+    message: '花瓣粉召喚的是那個還沒有那麼多擔子的你——在你學會憂慮、學會過度負責之前，你曾經擁有的那種輕盈。那個輕盈不是幼稚，是你本來的狀態。羽毛在花瓣粉裡問你：你是什麼時候開始覺得必須扛這麼多的？那是真的必要嗎？',
+    reminder: '你承擔的很多重量，不是你的責任決定的，是你習慣決定的。花瓣粉說：試試放下不屬於你的那些。',
+    action: '回憶一件你小時候做過、讓你全心投入、毫無負擔的事。今天用任何方式重現那種狀態，哪怕五分鐘。'
+  },
+  feather_dustyrose: {
+    message: '舊玫瑰讓羽毛帶著歷練的輕盈——這是走過很多之後、依然能選擇不沉重的那種輕。它不是因為沒有重量，而是因為你學會了辨別：哪些值得帶著，哪些只是在消耗你。你的閱歷讓你更懂得什麼是真正需要珍惜的，什麼可以放下了。',
+    reminder: '歷練給了你辨別的智慧：什麼值得帶，什麼該放下了。舊玫瑰說：你現在夠智慧了，可以決定了。',
+    action: '想一個你帶了很久的身份、期待或故事，問自己：它現在還真的屬於我嗎？還是我只是習慣帶著它？'
+  },
+  feather_nude: {
+    message: '裸膚讓羽毛回到最輕盈的本質——去掉所有的外殼，你本來就是輕的。你一直以為那些重量是你的一部分，但裸膚說：那些都是後天加上去的。你的本質沒有那麼重，是你穿了太多層的盔甲，是你帶了太多不屬於你的故事。',
+    reminder: '你本來就是輕盈的，那些沉重是後天學來的。裸膚說：試試脫掉一層，感受你本來的重量。',
+    action: '今天嘗試在一個場合裡不戴任何面具，不扮演任何期待的角色，只是做自己。觀察那種輕盈。'
+  },
+  feather_lavender: {
+    message: '薰衣草讓羽毛飄入夢境的領域——那個不受重力限制、不被邏輯約束的地方。你的靈魂渴望一種夢境般的輕盈：允許自己幻想不可能，允許自己想像沒有限制的自由。這不是逃避現實，是讓你的靈魂呼吸的必要空間。',
+    reminder: '夢想和幻想是你靈魂的氧氣，不是浪費時間。薰衣草說：讓自己完全自由地做夢一會兒。',
+    action: '今天給自己十分鐘，完全不管現實可不可行，盡情想像一種完全自由的生活是什麼樣子。'
+  },
+  feather_iris: {
+    message: '鳶尾紫讓羽毛找到它靈性的飛行方向——你的輕盈不是隨機的漂流，它有更深的指引。每一次真正的放下，都是在為某個更高的可能讓出空間。你放下的重量，正在讓你能飛向你真正該去的地方。相信這個方向。',
+    reminder: '你放下的，是在為更重要的東西讓出空間。鳶尾紫說：你不是在失去，你是在讓路。',
+    action: '想一件你正在考慮放下的事，問自己：如果我放下它，我會有空間和力氣去做什麼？那個是我真正想要的嗎？'
+  },
+  feather_plum: {
+    message: '梅子深紫讓羽毛在最深的黑暗裡依然能感受到輕盈的可能——即使在最沉重的時刻，選擇輕盈的力量依然在你裡面。這不是否認黑暗，而是在黑暗裡也不放棄那一點點浮力。你不需要變得不感受，只需要找到那個依然可以呼吸的地方。',
+    reminder: '即使在最沉重的時刻，你體內也有那一點點可以浮起來的力量。梅子紫說：找到它，抓住它。',
+    action: '在你現在感到最沉重的那個地方，找出一件——哪怕非常小的——你能放下的事，今天放掉它。'
+  },
+  feather_lilac: {
+    message: '淡丁香讓羽毛以最輕柔的方式觸碰一切——不緊抓，不強迫，輕輕地接觸，輕輕地離開。你對待事物的方式可以是這樣的：完整地投入，但不執著於結果；深深地在意，但不用沉重來證明你在意。輕盈和深度可以同時存在。',
+    reminder: '輕輕觸碰，比緊緊抓住更能真正連結。淡丁香說：你可以在意，同時不執著。',
+    action: '今天在一件你很在意的事上，練習輕輕接觸、不強迫結果，感受那種輕盈的在意是什麼感覺。'
+  },
+  feather_sky: {
+    message: '天空藍讓羽毛感受到廣大的飛行空間——沒有天花板，往任何方向都是開放的。你渴望一種廣闊的自由，不只是身體的移動，而是一種內心的開放感：你可以選擇，你可以改變，你可以成為任何你選擇成為的樣子。',
+    reminder: '你的自由比你想像的更廣大。天空藍說：你的翅膀是真實的，勇敢讓自己飛起來。',
+    action: '今天做一件讓你感覺自由的事，不管多小——哪怕只是走一段沒有目的地的路。'
+  },
+  feather_dusk: {
+    message: '黃昏藍讓羽毛在過渡的天空裡飛翔——你正在從一個狀態轉移到另一個，像鳥在黃昏裡找到新的棲息地。過渡中的飛翔需要一種特別的輕盈：既能放下你正在離開的，又能對你正在前往的保持開放。',
+    reminder: '你不需要抓住正在離開的，也不需要急著抵達還沒到的。黃昏藍說：在過渡中，輕盈地飛就好。',
+    action: '在你目前的轉變中，找出一件你可以選擇放下的憂慮，讓它比羽毛更輕，讓自己更容易前進。'
+  },
+  feather_navy: {
+    message: '深海藍讓羽毛找到真正自由的深度——真正的輕盈不是逃避重量，而是有勇氣面對讓你沉重的事，然後選擇不被它壓垮。你身上最重的那個負擔，你一直不敢正視它。但深海藍說：看見它，才能真正放下它。',
+    reminder: '真正的輕盈在勇氣的另一邊。深海藍說：你需要先面對那個重量，才能真正放下它。',
+    action: '找出你身上最重的那個負擔——那個你一直不想直視的——今天讓自己安靜地看它一眼，承認它的存在。'
+  },
+  feather_pearl: {
+    message: '珍珠白讓羽毛帶著優雅的輕盈——不是輕率地扔掉，而是有智慧地選擇不再帶著。你的輕盈是有品質的：你知道什麼值得放下，你知道怎麼以有尊嚴的方式放手，你知道輕盈可以和深度同時存在。這是修煉出來的智慧。',
+    reminder: '真正有品質的輕盈，是在深深理解之後做出的選擇。珍珠白說：你的放手是有智慧的，不是逃跑。',
+    action: '今天以最有尊嚴、最優雅的方式，處理一件你需要放下的事。讓放手本身變成一個有品質的行為。'
+  },
+  feather_mint: {
+    message: '薄荷綠讓羽毛在清新的空氣裡飛翔——放下之後，那種如釋重負的清爽感正在等著你。你還沒有完全感受到，因為你還沒完全放下。但薄荷的心理語言是：放下之後有一種只有那個時刻才有的清爽，那種感覺值得你去選擇它。',
+    reminder: '放下之後的清爽感，是真實的。薄荷說：那個輕鬆在等著你，你只需要先放手。',
+    action: '放下一件讓你沉重的事，然後停下來，真正感受一下那個放下之後的空氣感和輕鬆感。'
+  },
+  feather_eucalyptus: {
+    message: '尤加利淨化了羽毛飛翔的空間——清除了那些阻礙你輕盈的雜質：那些別人加在你身上的期待，那些你一直背著的舊怨，那些早已過期卻還在佔據你的東西。清除之後，你才能真正感受到飛翔本來應該是什麼感覺。',
+    reminder: '你攜帶的很多重量，不是你的責任，是你習慣的積累。尤加利說：是時候清理了。',
+    action: '今天清理一件讓你沉重但其實不需要你繼續背負的東西——一個舊怨、一個過期的期待、一個不再屬於你的角色。'
+  },
+  feather_moss: {
+    message: '苔蘚綠讓羽毛安靜地停在一個地方——輕盈不只是飛翔，也是知道什麼時候停下來的智慧。有時候最輕盈的選擇不是繼續移動，而是安靜地停歇，讓自己在靜默中恢復那種本然的輕。你現在可能需要的，不是更多行動，而是休息。',
+    reminder: '知道何時停歇，是輕盈的一部分。苔蘚說：讓自己安靜下來，輕盈會在靜默中回來。',
+    action: '今天允許自己什麼都不做地休息一段時間，不帶任何生產力的壓力，只是讓自己的重量落到地上。'
+  },
+  feather_celadon: {
+    message: '青瓷綠讓羽毛從容地順著風飄落——輕盈是從容的，它不急著到達任何地方，只是順著當下的風向自然移動。你有時候把輕盈和漫無目的混淆了，其實從容的輕盈是有方向的，只是它信任過程，不強迫結果。',
+    reminder: '順著生命的流向前，比逆流掙扎更輕盈，也更有效。青瓷說：今天試試順流，而不是逆流。',
+    action: '今天選一件你一直在硬撐或強迫的事，試試順著它自然的走向，看看有什麼不同。'
+  },
+  feather_clay: {
+    message: '陶土棕讓羽毛落地——輕盈不是沒有根，真正的輕盈是因為根扎得夠深，所以不需要抓著什麼。你越是知道自己是誰、你的核心是什麼，你就越能輕盈地面對外在的一切，因為你知道即使放手也不會失去自己。',
+    reminder: '根扎得越深，你越能輕盈。陶土說：先找到你的根，輕盈才會是真實的。',
+    action: '今天感受你的根——你最核心的價值觀，你愛的人，你真正在乎的事——讓這個根給你放手的安全感。'
+  },
+  feather_amber: {
+    message: '琥珀黃讓羽毛帶著創造的光芒飛翔——輕盈的你，才是最有創造力的你。當你放下那些讓你沉重的東西之後，你會發現被它們壓著的，不只是你的肩膀，還有你的創造衝動。輕盈和創造力是連在一起的。',
+    reminder: '放下重量，你的創造力才能自由飛翔。琥珀說：輕盈的你，是最有能量創造的你。',
+    action: '今天以最輕盈、最自由的心態做一件創意的事，不帶任何壓力或評判，只是讓創造的衝動帶著你。'
+  },
+  feather_sand: {
+    message: '沙丘米讓羽毛漂浮在廣闊的空間裡——你渴望的自由是廣大的，像沙漠一樣沒有邊界。你比你知道的更自由，但你為自己設的邊界讓你感覺被困住。問問那些「我不得不」的背後：有多少是真的不得不，有多少是你選擇的習慣？',
+    reminder: '你比你以為的更自由。沙丘說：那些你以為不得不的限制，仔細看，有些是你自己畫的線。',
+    action: '今天想像如果你完全自由，沒有任何限制，你會選擇怎麼度過這一天？讓這個想像告訴你什麼是你真正渴望的。'
+  },
+  feather_terra: {
+    message: '赤陶磚讓羽毛充滿了帶根基的飛翔熱情——不是漫無目的的漂泊，而是知道自己要去哪裡的、充滿意志力的自由。你有熱情追求真正的自由，去飛向你真正想去的地方。這種熱情是你最重要的翅膀。',
+    reminder: '你的熱情是你最強的翅膀，它知道方向。赤土說：讓熱情帶著你飛，不要只是想。',
+    action: '找出一個你一直想追求的自由——一種生活方式、一個可能——今天採取一個具體的行動去接近它。'
+  },
+  feather_smoke: {
+    message: '煙霧灰讓羽毛在不確定中飄飛——你不確定自己要飛向哪裡，但這不妨礙你先飛起來。煙霧的心理語言是：方向不需要在出發之前完全清楚，有時候飛起來之後，風會告訴你它要帶你去哪裡。先飛，再說。',
+    reminder: '你不需要先看清楚方向才能行動。煙霧說：有時候方向在飛翔中才會變得清晰。',
+    action: '今天先採取一個行動，不等到方向完全清楚。讓自己在行動中找到下一步的方向。'
+  },
+  feather_fog: {
+    message: '晨霧白讓羽毛在最柔軟的清晨裡輕盈飛翔——每一個新的早晨都是一次重新選擇輕盈的機會。昨天的重量不需要帶到今天，昨天的故事不需要繼續是今天的故事。清晨是最容易放下的時刻，因為一切都還是新的。',
+    reminder: '每一個早晨都是重新選擇輕盈的機會。晨霧說：昨天的重量，今天不需要繼續帶著。',
+    action: '明早醒來，在做任何事之前，有意識地選擇：今天我要以輕盈開始，不帶昨天的重量。然後感受這個選擇。'
+  },
+  feather_charcoal: {
+    message: '炭灰讓羽毛清醒地選擇輕盈——不是逃避，而是清楚地知道什麼值得放下。炭灰的清醒讓你能辨別：這個重量是我真正需要承擔的責任，還是我習慣扛著的多餘負擔？清醒的放手，比糊塗的緊抓更有力量，也更有尊嚴。',
+    reminder: '清醒地選擇放下，和習慣性地放棄是完全不同的事。炭灰說：帶著清醒放手，那是真正的力量。',
+    action: '清醒地選擇放下一件事，並且能說出你為什麼選擇放下它——不是因為放棄，而是因為它不再屬於你了。'
+  },
+  feather_ivory: {
+    message: '象牙白讓羽毛的輕盈變得珍貴——不是所有人都能在沉重的生活裡，依然選擇輕盈。你能選擇不讓自己被壓垮，能選擇在沉重中尋找輕盈的出口，這是一種被很多人視而不見的珍貴能力。今天感謝你擁有它。',
+    reminder: '你能選擇輕盈，是一種難得的能力。象牙白說：珍視這個能力，也珍視那個選擇輕盈的自己。',
+    action: '今天用感謝的心，感受你生命裡一個輕盈的時刻——那個你成功地不讓自己被重量壓垮的時刻。'
+  },
+
+  // ── 鑰匙 × 新色 ──
+  key_blush: {
+    message: '淡玫瑰讓鑰匙帶著溫柔的重量——你即將開啟的改變，不需要是激烈的、戲劇性的，它可以是最溫柔的方式發生。淡粉的心理語言是：打開一扇門，可以是輕輕地推，而不是猛然撞開。溫柔的改變，有時候比強迫的更持久。',
+    reminder: '你不需要用力才能改變。淡玫瑰說：輕輕地，用溫柔的方式，門一樣可以打開。',
+    action: '今天溫柔地嘗試一件你一直在猶豫的事，不是硬著頭皮，而是帶著自我關懷地試一下。'
+  },
+  key_petal: {
+    message: '花瓣粉讓鑰匙充滿了初學者的純真——你即將開啟的，是一個全新的、還沒有被任何先入為主的概念污染的可能。最好的開始是帶著純真的心：不假設結果，不評判過程，只是好奇地探索。這種純真本身就是最好的鑰匙。',
+    reminder: '初學者的心是最好的鑰匙。花瓣粉說：暫時放下你的「已知」，帶著純粹的好奇心去開門。',
+    action: '今天對一件你自以為很了解的事，試著用完全第一次接觸的眼光重新看待它，看看你發現了什麼。'
+  },
+  key_dustyrose: {
+    message: '舊玫瑰讓鑰匙帶著歲月磨出的厚度——你帶著所有走過的路、所有的成功和失敗去開啟新的門。這不是沉重，而是最好的裝備。你現在的鑰匙是經過時間打磨的，它比任何新鑰匙都更有份量，更配得上那扇重要的門。',
+    reminder: '你的過去不是包袱，是讓你的鑰匙更有力量的東西。舊玫瑰說：帶著你的歷練，那是你最好的資格。',
+    action: '回想一個你曾經克服的困難，問自己：它給了我什麼能力，讓我現在面對這個新的門更有把握？'
+  },
+  key_nude: {
+    message: '裸膚讓鑰匙回到最本質——去掉所有應該做的、應該選擇的，你真正想打開的那扇門是什麼？你有時候把「我想要」和「我應該想要」混淆了。裸膚說：去掉所有別人的聲音之後，你自己的渴望指向哪裡？那才是你真正的鑰匙。',
+    reminder: '你真正的鑰匙是你最誠實的渴望，不是別人告訴你應該有的。裸膚說：去掉應該，找到你真正想要的。',
+    action: '誠實地問自己：如果沒有任何外在的評判，我最想打開的那扇門通往哪裡？不管它合不合邏輯。'
+  },
+  key_lavender: {
+    message: '薰衣草讓鑰匙帶著夢境的魔力——你要開啟的門，通往的不只是現實的可能，還有你一直在夢中看見的那個世界。薰衣草說：夢想本身就是一把鑰匙，它知道哪扇門後面是你真正渴望的東西，讓夢想帶你找到那扇門。',
+    reminder: '你的夢想不只是夢，它是一把指向你真實渴望的鑰匙。薰衣草說：讓夢帶你找到那扇門。',
+    action: '今天為你最深的一個夢想做一件最小的具體行動，哪怕只是研究一下或寫下來。讓夢想開始接觸現實。'
+  },
+  key_iris: {
+    message: '鳶尾紫讓鑰匙連接了靈性的智慧——你選擇開啟哪扇門，不只是邏輯和分析的問題，還有你內在更深的感知在引導你。那個讓你「感覺對了」的方向，那個不需要理由但就是知道的直覺，是比任何分析都更可靠的指引。',
+    reminder: '你的直覺知道哪扇門是真的。鳶尾紫說：相信那個說不清楚為什麼、但感覺就是對的選擇。',
+    action: '面對一個你在分析和直覺之間拉扯的選擇，今天選擇相信你的直覺，然後觀察你的感受。'
+  },
+  key_plum: {
+    message: '梅子深紫讓鑰匙帶著深沉的勇氣——你要開啟的那扇門，需要你面對你一直不想面對的東西。深紫的心理語言是：真正重要的改變，往往在最難以開啟的門後面。那個讓你一直猶豫不敢去觸碰的，很可能正是你最需要的。',
+    reminder: '你一直不敢碰的那扇門後面，往往是你最需要的東西。梅子深紫說：你有那個勇氣，進去吧。',
+    action: '面對一個你一直以「時機不對」或「還沒準備好」為由迴避的可能，今天採取一個最小的試探性行動。'
+  },
+  key_lilac: {
+    message: '淡丁香讓鑰匙以最輕柔的方式轉動——不需要大力，只是輕輕地，一點點，門就會移動。你把改變想得太重了，以為需要巨大的決心和努力。但淡丁香告訴你：有時候只需要一個輕輕的轉動，一個最小的改變，就能讓整扇門開始移動。',
+    reminder: '不需要用大力推，輕輕轉動就夠了。淡丁香說：最小的行動，可以讓最大的門開始移動。',
+    action: '找一個可以只用輕輕嘗試來開啟的改變——不是大的決定，只是一個最小的試探——今天就試試。'
+  },
+  key_sky: {
+    message: '天空藍讓鑰匙開向廣闊的可能——門後面是無限的空間，比你能想像的更開放。你習慣在行動之前就預測結果，設定好期望，但天空藍說：有些門只有打開了你才能看見裡面是什麼。等待「準備好」的感覺，可能意味著永遠等待。',
+    reminder: '「準備好的感覺」有時候永遠不會來。天空藍說：先開門，準備在裡面完成。',
+    action: '今天做一件你一直在說「等我準備好了」的事的第一步，不等準備好，就先開那扇門。'
+  },
+  key_dusk: {
+    message: '黃昏藍讓鑰匙停在過渡的門口——你正站在一個重要的轉折點，一手握著要離開的，一手即將觸碰要到達的。這個門口的時刻本身是珍貴的，你正在兩個世界之間，那種同時擁有和即將失去的感覺，值得被感受。',
+    reminder: '你現在站的這個門口，有它自己的意義和美麗。黃昏藍說：在離開之前，先感受這一刻的完整。',
+    action: '在你目前的轉折點，寫下兩句話：一句告別你正在離開的，一句迎接你即將進入的。'
+  },
+  key_navy: {
+    message: '深海藍讓鑰匙通向你最深的真實——那扇門後面不是更多的可能，而是更多的真實。你要開啟的是一種更深、更誠實的生活方式，是去掉表面、去掉偽裝之後的你。這需要最深沉的勇氣，因為面對真實的自己，是最難的事之一。',
+    reminder: '深入的改變不是外部的，而是對自己更誠實。深海藍說：那扇通向真實的門，今天可以試著推開了。',
+    action: '做一個你一直在迴避但知道是對的決定，哪怕只是在心裡先承認它的存在。'
+  },
+  key_pearl: {
+    message: '珍珠白讓鑰匙帶著智慧打磨過的優雅——你的改變不需要是劇烈的、破壞性的，它可以是有品質的、甚至是美麗的。真正深刻的轉化，往往是安靜而優雅的，不需要任何人在旁邊見證，你自己知道那扇門打開了。',
+    reminder: '改變可以是優雅的。珍珠白說：讓你的轉化帶著它應有的品質和尊嚴。',
+    action: '以最有品質、最優雅的方式處理一個你正在面對的改變，讓這個過程本身值得被珍視。'
+  },
+  key_mint: {
+    message: '薄荷綠讓鑰匙帶著清新的開啟——門後面不是更多複雜的東西，而是更清新、更乾淨的可能。你有時候把改變想得太沉重了，薄荷說：有些門打開之後帶來的是輕鬆和清新，不是更多的責任和重量。允許改變是輕的。',
+    reminder: '改變可以是清新的，不一定是沉重的。薄荷說：允許你的新開始輕盈而清爽。',
+    action: '今天開啟一件你一直認為「改變很難」的小事，讓自己感受改變帶來的清新感，而不是重量。'
+  },
+  key_eucalyptus: {
+    message: '尤加利淨化了鑰匙通往的道路——在你能真正開啟新的門之前，需要先清理阻擋在路上的東西。那些讓你一直停在門口的，不一定是你不夠勇敢，而是有什麼東西在阻礙你：一個舊的信念、一個未解的心結、一個佔據你心理空間的恐懼。',
+    reminder: '阻礙你開門的，可能不是缺乏勇氣，而是需要先清理什麼。尤加利說：先清理，再開門。',
+    action: '找出一件讓你一直無法邁出那一步的阻礙——是什麼？今天做一件讓這個阻礙減少的事。'
+  },
+  key_moss: {
+    message: '苔蘚綠讓鑰匙在靜默中等待——不是所有的門都需要立刻開啟，有時候等待合適的時機，比強行現在就開更有智慧。苔蘚以幾十年的時間尺度生長，它知道什麼是真正的等待。你現在的停頓，是真正的辨別，還是在逃避？',
+    reminder: '等待合適的時機是智慧，但需要你能誠實分辨：我在等，還是在逃？苔蘚說：要清楚地知道。',
+    action: '誠實地問自己：那件我在等「對的時機」的事，我真的在辨別時機，還是在逃避開始的恐懼？'
+  },
+  key_celadon: {
+    message: '青瓷綠讓鑰匙從容地轉動——不焦急，不強迫，在合適的節奏裡，門自然會打開。你對這個改變可能太焦急了，越是急著想打開，越容易用錯力。青瓷的心理語言是：放鬆你的握力，信任這個過程，門在對的時候會打開的。',
+    reminder: '焦急地推門，不如從容地找到門的開法。青瓷說：放鬆，相信過程，它有自己的時機。',
+    action: '對一個你很急著想推進的改變，今天練習放鬆，讓它按照自己的節奏，觀察有什麼不同。'
+  },
+  key_clay: {
+    message: '陶土棕讓鑰匙紮實地開啟改變——最真實的改變不是發生在想法裡，而是在雙手的實際行動裡。你可以想很多，計畫很多，但如果沒有踏實的行動，門只是繼續關著。陶土說：每一個具體的行動，都是在轉動那把鑰匙。',
+    reminder: '改變發生在行動裡，不在想法裡。陶土說：把手放到鑰匙上，轉動它，不要只是站在門前看。',
+    action: '做一件非常具體的、你可以用雙手去做的、直接推進你想要的改變的行動，今天就做。'
+  },
+  key_amber: {
+    message: '琥珀黃讓鑰匙帶著創造的光芒——你即將開啟的那扇門，通往你的創造力和才能的空間。琥珀封存的是太陽最燦爛的光，而你的才能也是這樣：有一種儲存已久的光在裡面，等待你給它一個出口。那扇門後面，是你還沒有完全展開的自己。',
+    reminder: '你的才能和創造力還沒有被完全展開。琥珀說：那扇門後面有你還沒認識的自己，去開它。',
+    action: '今天大膽地展示或使用一個你一直私藏著、不太敢讓人看見的才能或創意。'
+  },
+  key_sand: {
+    message: '沙丘米讓鑰匙開向廣大的、沒有邊界的可能——你即將開啟的門後面，比你預想的更遼闊。你習慣在開門之前就預設裡面的空間有多大，但沙丘說：那些可能比你設定的框架大得多，不要在開門之前就限制了你能進入的空間。',
+    reminder: '你對可能性的預設，往往比真實的可能更小。沙丘說：先開門，讓自己被那個廣闊驚喜到。',
+    action: '對你目前最想開啟的一個可能，想像它比你通常假設的還要廣闊五倍，那會是什麼樣子？'
+  },
+  key_terra: {
+    message: '赤陶磚讓鑰匙充滿了帶根基的行動熱情——不只是衝動，而是有根有源的、知道自己為什麼要開這扇門的熱情。赤土說：你的熱情是你最好的鑰匙，因為它知道方向，它知道為什麼，它讓你即使面對困難也不輕易放棄。',
+    reminder: '你的熱情是最有力量的鑰匙，因為它知道方向。赤土說：用熱情去開門，那是最誠實的力量。',
+    action: '找出你對某件事最深的熱情，讓這個熱情今天驅動你去開啟一個機會或行動。'
+  },
+  key_smoke: {
+    message: '煙霧灰讓鑰匙在不確定中試探——你不確定門後面是什麼，這完全可以理解。但煙霧說：不確定不是不行動的理由，你可以在不確定中試探，可以輕輕地轉一下，看看有什麼反應，再決定是否繼續。不確定中的試探，是智慧的行動。',
+    reminder: '你可以在不確定中試探，不需要先看清楚才能行動。煙霧說：輕輕試試，看看發生什麼。',
+    action: '對一個你不確定的可能，做一個最小的、低風險的試探性行動，不承諾結果，只是試試看。'
+  },
+  key_fog: {
+    message: '晨霧白讓鑰匙在新的一天裡找到它的門——每一個清晨都帶來新的可能，新的門在晨霧裡等待被發現。你不需要知道今天的所有機會在哪裡，只需要保持開放的感知，在晨霧裡走著，那些等待你的門自然會讓你感受到它的存在。',
+    reminder: '每一天的清晨都有新的門在等你。晨霧說：帶著開放和好奇心開始這一天，機會會顯現。',
+    action: '今天帶著「這一天裡有什麼新的可能在等我」的眼光出門，主動留意一個你平常不會注意到的機會。'
+  },
+  key_charcoal: {
+    message: '炭灰讓鑰匙清醒地辨別它的門——在所有的可能和選擇之中，你清楚地知道哪一扇是真正重要的，哪一扇是在迴避，哪一扇是真正在呼喚你。炭灰的心理語言是：清醒的選擇比盲目的嘗試更有力量，知道為什麼才是最好的鑰匙。',
+    reminder: '知道為什麼，讓你的行動更有力量。炭灰說：清醒地選擇你要開的門，不要隨便亂開。',
+    action: '清醒地確認：你現在最需要開啟的那扇門是什麼？為什麼是它？讓這個清醒成為你的力量。'
+  },
+  key_ivory: {
+    message: '象牙白讓鑰匙帶著珍貴的溫潤——你手中握著的，是通往你最珍視的東西的鑰匙。不要隨意把它用在不值得的門上，也不要讓它一直放在口袋裡從未被使用。你最珍視的可能，值得你拿出這把最珍貴的鑰匙，鄭重地去開它。',
+    reminder: '你手中有一把通往你最珍視的東西的鑰匙，不要讓它一直放在那裡沒被使用。象牙白說：是時候了。',
+    action: '確認一個你真正珍視、但一直沒有認真去追求的目標，今天鄭重地把它放在最重要的位置。'
+  },
+
+  // ── 燭光 × 新色 ──
+  candle_blush: {
+    message: '淡玫瑰讓燭光以最嬌嫩的方式燃燒——你的內在之光不需要熊熊大火才算有價值，它可以是最細小、最柔軟的一點火苗，依然是真實的光。淡粉的心理語言是：允許你的希望是脆弱的，允許你的光是小的，小小的光也是光。',
+    reminder: '你的內在之光不需要盛大才有意義。淡玫瑰說：保護那個嬌嫩的小火苗，它是真實的。',
+    action: '今天做一件照顧你那個最脆弱、最需要被保護的希望的事，不是讓它變大，只是讓它繼續燃著。'
+  },
+  candle_petal: {
+    message: '花瓣粉讓燭光保有純真的明亮——在任何失望和疲憊介入之前，你曾經擁有的那種純粹的希望感。你現在的希望是否還帶著那個最初的純真？還是已經被「現實的」擔憂和「理性的」懷疑遮蓋了？花瓣粉說：試著找回那個最純粹的希望的感覺。',
+    reminder: '你最純粹的希望，比被分析過的更接近你真正想要的東西。花瓣粉說：先感受，後思考。',
+    action: '回想你對某個夢想或希望最初的感受，在任何懷疑介入之前。今天帶著那個最初的感受重新接觸它。'
+  },
+  candle_dustyrose: {
+    message: '舊玫瑰讓燭光帶著歷練之後的韌性——這不是新鮮的、容易被第一陣風吹熄的火苗，而是在風雨裡活下來過的、知道自己能撐過去的光。你的希望因為經歷過質疑和失望而更真實，更有韌性。它在你最難的時刻活下來了。',
+    reminder: '在困難中存活的希望，比從未受過考驗的更堅韌。舊玫瑰說：你的希望是有韌性的，它活下來了。',
+    action: '回想一個你的希望在最困難的時候如何撐下來的故事，今天從那個故事中汲取力量。'
+  },
+  candle_nude: {
+    message: '裸膚讓燭光回到最本質的光——去掉所有的裝飾和表演，你的光是什麼？不是你表現給別人看的那個光，不是你應該要有的那個光，而是在你最安靜、最誠實的時刻，你感受到自己身上的那種光芒。它一直都在，只是需要被允許。',
+    reminder: '你最真實的光不需要任何表演才能存在。裸膚說：安靜下來，感受你本來就有的那個光。',
+    action: '今天不為任何人表演，只是真實地做自己，讓你本來的光自然地發出來，不強迫，不收斂。'
+  },
+  candle_lavender: {
+    message: '薰衣草讓燭光照入夢境的空間——你的光不只照亮現實的道路，它還連接著你的夢想和靈感。在薰衣草的氣息裡，你的燭光變成了一盞在夢境和現實之間穿行的燈，讓你的靈魂在夢中看見那些清醒時不敢看見的可能。',
+    reminder: '你的希望和夢想是相連的，夢是你的靈魂在說：這是你真正渴望的。薰衣草說：聆聽你的夢。',
+    action: '今晚睡前，帶著你對某個希望的感受入睡，讓它進入你的夢。明早記錄你記得的任何夢境片段。'
+  },
+  candle_iris: {
+    message: '鳶尾紫讓燭光帶著靈性的光輝——你的內在之光不只是個人的，它連接著某個更大的智慧和方向。你的直覺、你的靈感、那些突然出現的洞見，都是這個靈性之光在透過你發光。你是一個管道，光透過你，而不只是來自你。',
+    reminder: '你的光連接著比你更大的東西。鳶尾紫說：安靜下來，感受那個透過你流動的光。',
+    action: '靜靜坐著十分鐘，不做任何事，只是感受內在那個最深的知道，讓它的光慢慢變得清晰。'
+  },
+  candle_plum: {
+    message: '梅子深紫讓燭光在最深的黑暗裡更加顯眼——黑暗越深，那一點光越珍貴。你的希望在你最艱難的時刻，不是變得不重要了，而是變得更重要了。在那個黑暗裡，那一點燭光的存在本身，就是你繼續前行的理由。',
+    reminder: '你的希望在最黑暗的時候最重要。梅子深紫說：找到那一點光，緊緊護著它。',
+    action: '在你現在最困難的那件事裡，找到一個哪怕很微小的希望的火苗，今天讓自己好好看見它。'
+  },
+  candle_lilac: {
+    message: '淡丁香讓燭光輕輕閃爍著——那種非常細微、需要你安靜下來才能感受到的光。你的希望不一定是熾烈的，它可以是這樣輕柔的閃爍：在最安靜的時刻才能感知到，在最細微的地方才能看見。但輕輕閃爍的光，也是真實的光。',
+    reminder: '微小的希望和閃爍的光，也是真實的。淡丁香說：不要因為它小就忽視它。',
+    action: '今天注意一件微小的、讓你的心感到一點點溫暖的事，讓自己完整地感受那個微小的光。'
+  },
+  candle_sky: {
+    message: '天空藍讓燭光照向廣闊的可能——你的希望不是窄小的、只指向一個結果的，它是開放的，可以往任何方向延伸的。天空藍說：你的希望不需要被一個特定的結果所限定，它本身就是一種開放的可能性，一種你對未來的根本信任。',
+    reminder: '你的希望比任何具體的結果更廣闊。天空藍說：讓你的希望開放，不要把它困在一個特定的結果裡。',
+    action: '今天把你的希望從一個具體的結果，擴展成一個更廣闊的可能性，感受那種開放帶來的輕鬆。'
+  },
+  candle_dusk: {
+    message: '黃昏藍讓燭光在最難以言說的過渡時刻守護著你——在你既不知道自己在哪裡、也不確定要去哪裡的時候，那一盞燭光的存在告訴你：你不是一個人在黑暗裡。過渡期最難熬，但燭光就是為了這個時刻而存在的。',
+    reminder: '在過渡期，你的內在之光是你唯一可以確定的方向。黃昏藍說：跟著那個光，它知道路。',
+    action: '在你目前的轉變期，每天早晨提醒自己：我的內在有光，那個光知道我該往哪裡走。讓這成為你的日常。'
+  },
+  candle_navy: {
+    message: '深海藍讓燭光成為深海裡的燈塔——在最幽暗、最讓你感到孤立無援的深處，你的希望仍然燃燒著。它不需要別人看見，不需要被認可，只是在那裡，安靜而堅定地燃燒。那個光是你的，它不會因為黑暗而熄滅，除非你自己放棄它。',
+    reminder: '你的光在最深的黑暗裡依然燃燒。深海藍說：找到它，抓住它，它沒有熄滅。',
+    action: '在你最深的困境或最難熬的地方，安靜地找到那個還沒有熄滅的希望。今天讓自己好好看見它。'
+  },
+  candle_pearl: {
+    message: '珍珠白讓燭光發出溫潤的、有品質的光——你的希望是有深度的，它不是輕浮的樂觀，而是在看見了困難之後仍然選擇的那種希望。這種希望是珍貴的，是需要被好好珍視的。它是你最有價值的內在資源之一。',
+    reminder: '你的希望是珍貴的，是你最重要的內在資源。珍珠白說：好好珍惜它，它值得被認真對待。',
+    action: '今天做一件滋養和珍惜你的希望的事，不是強迫它變大，只是讓它知道你在珍視它。'
+  },
+  candle_mint: {
+    message: '薄荷綠讓燭光重新換了一口清新的空氣——你的希望有時候會因為疲憊和失望而失去新鮮感，薄荷說：是時候讓新鮮的空氣進來了。你可以對同一個希望重新點燃熱情，就像蠟燭可以一次次被重新點燃一樣。',
+    reminder: '你的希望可以被重新點燃。薄荷說：讓新鮮感回來，給你的希望一口新鮮的空氣。',
+    action: '選一件你已經有點失去熱情的目標或希望，今天用全新的眼光重新看它，讓自己重新感受最初的那個感動。'
+  },
+  candle_eucalyptus: {
+    message: '尤加利淨化了燭光周圍的空間——清除那些讓你的希望窒息的東西：那些讓你懷疑自己的聲音，那些消耗你能量的執念，那些不屬於你的期待。清除之後，你的光才能在乾淨的空氣裡真正燃燒，你的希望才能呼吸。',
+    reminder: '清除讓你的希望窒息的東西，它才能真正燃燒。尤加利說：讓你的光有乾淨的空氣呼吸。',
+    action: '找出一個讓你的希望模糊或窒息的東西——一個懷疑的聲音或消耗性的念頭——今天有意識地讓它遠離你。'
+  },
+  candle_moss: {
+    message: '苔蘚綠讓燭光在靜默中穩定地燃燒——最可靠的光不是熊熊大火，而是安靜、穩定、不張揚的小火焰，在任何風吹來的時候都能護住自己的那種。你的希望不需要讓所有人看見，它只需要繼續安靜地在那裡，穩定地燃著。',
+    reminder: '安靜而穩定的希望，比熱烈而脆弱的更持久。苔蘚說：讓你的光安靜地、穩定地燃燒就好。',
+    action: '今天靜靜地維護一個你的長期希望，不是要它更大或更快，只是讓它繼續穩定地燃燒。'
+  },
+  candle_celadon: {
+    message: '青瓷綠讓燭光從容地閃爍——你的希望不被焦急和外在的壓力所動搖，它有自己從容的節奏。青瓷說：希望不需要被催促，它在從容中反而燃得更穩、更久。當你放鬆對結果的緊張，你的光反而更清晰。',
+    reminder: '從容讓你的希望不被動搖。青瓷說：放鬆對結果的緊張，你的光會燃得更穩。',
+    action: '當你感到焦慮或對希望失去耐心的時候，回到那個從容的燭光的意象，讓它平靜你的緊張。'
+  },
+  candle_clay: {
+    message: '陶土棕讓燭光扎根在踏實的現實裡——希望不只是感覺，它需要每天的具體行動來維持燃料。你的希望需要實際的事情來支撐它，需要你的雙手去做的東西。沒有行動的希望會慢慢熄滅，有行動的希望越燒越旺。',
+    reminder: '踏實的行動是讓希望持續燃燒的燃料。陶土說：今天做一件具體的事，讓你的希望有燃料。',
+    action: '今天做一件非常具體的、直接支持你的一個希望的行動，讓這個行動成為你的希望的燃料。'
+  },
+  candle_amber: {
+    message: '琥珀黃讓燭光發出最溫暖、最充沛的光芒——你的希望和創造力正在最飽滿的狀態，這是一個讓它盡情發光的時刻。琥珀封存的是太陽最燦爛的光，而你現在擁有的這個希望和熱情，也值得被完整地釋放出來，不要再壓著它了。',
+    reminder: '你的希望和熱情現在正在充沛的狀態，讓它發光。琥珀說：不要再收斂了，現在是時候了。',
+    action: '今天讓你的希望和熱情盡情表達一次，以任何形式——說出來、寫下來、或是行動——讓它完整地發光。'
+  },
+  candle_sand: {
+    message: '沙丘米讓燭光照亮了廣闊的沙漠——你的希望不是窄小的，它是廣大的，照亮的範圍比你以為的更遠。你的光能到達你想像不到的地方，能影響你沒有意識到的人。不要低估你的光的範圍，它比你以為的更有力量。',
+    reminder: '你的光的影響範圍，比你以為的更廣。沙丘說：讓你的希望照亮它能照到的地方，不要低估它。',
+    action: '想像你的希望完全實現了，它會如何影響你周圍的人？讓這個廣闊的意義給你繼續前行的力量。'
+  },
+  candle_terra: {
+    message: '赤陶磚讓燭光充滿了有根基的熱情——不只是情緒的起伏，而是知道自己為什麼燃燒的、帶著方向的熱情。希望加上熱情，是你最強大的組合：希望讓你知道往哪裡去，熱情讓你有力量去走那條路。',
+    reminder: '希望加熱情，是你最強大的狀態。赤土說：帶著這個組合去行動，沒有什麼是做不到的。',
+    action: '今天帶著你對某個希望的全部熱情去做一件相關的事，讓熱情驅動行動，讓行動支持希望。'
+  },
+  candle_smoke: {
+    message: '煙霧灰讓燭光在朦朧和不確定中閃爍——你不清楚前路是什麼，但那一點光仍然在那裡。煙霧說：在最不清晰的時候，你不需要看清楚整條路，只需要看清楚那一步，下一步在哪裡。你的燭光只需要照亮下一步就夠了。',
+    reminder: '你不需要看清整條路，只需要那一點光照亮下一步。煙霧說：跟著那一點光，一步一步地走。',
+    action: '在你現在最不清晰的地方，只問：下一步是什麼？不需要看更遠，只看下一步，然後走那一步。'
+  },
+  candle_fog: {
+    message: '晨霧白讓燭光在清晨的柔和裡閃耀——新的一天，你的希望被重新點燃了。每一個清晨都是你重新選擇相信的機會，在昨天的疲憊還沒完全清醒之前，你最純粹的希望有機會先出現。讓清晨成為你每天重新點燃希望的儀式。',
+    reminder: '每一個清晨都是重新點燃希望的機會。晨霧說：在世界進來之前，先感受那個新的光。',
+    action: '明天早上設定一個晨間儀式，在做任何事之前，先花一分鐘靜靜感受你的希望，讓它先於焦慮出現。'
+  },
+  candle_charcoal: {
+    message: '炭灰讓燭光在清醒的光線裡燃燒——你清醒地知道你的希望是真實的，不是幻想，也不是自我欺騙。清醒的希望是最有力量的：它見過困難，它知道現實，它依然選擇相信可能。這種清醒加上希望的組合，是你最成熟的力量。',
+    reminder: '清醒的希望，是在看見了困難之後仍然選擇相信的那種，這是最有力量的。炭灰說：帶著清醒去希望。',
+    action: '誠實評估你的一個希望：它是真實可能的，還是在逃避現實？如果是真實的，今天讓清醒和希望一起支持你。'
+  },
+  candle_ivory: {
+    message: '象牙白讓燭光帶著珍貴的溫潤——你的希望是你最珍視的東西之一，它值得被認真對待，值得被保護，值得你為它投入時間和能量。不要隨便地對待你的希望，就像你不會隨便對待你最珍貴的東西一樣。',
+    reminder: '你的希望是珍貴的，值得被你最認真地對待。象牙白說：珍視你的希望，就是珍視你自己。',
+    action: '今天做一件特別的、珍視和滋養你最深的希望的事，讓這個希望感受到你在認真對待它。'
+  },
+
+  // ── 河流 × 新色 ──
+  river_blush: {
+    message: '淡玫瑰讓河流以溫柔的方式流動——不是急流，不是激流，而是那種輕輕地、帶著溫柔的力量往前移動的水。你的生命轉化可以是溫柔的，不需要是戲劇性的突破。淡粉的心理語言是：溫柔的流動，同樣能穿透最堅硬的岩石。',
+    reminder: '溫柔的、持續的流動，比激烈的衝撞更能創造改變。淡玫瑰說：讓你的轉化以溫柔的方式發生。',
+    action: '今天以最溫柔的方式，讓一件你一直在用力推動的事自然流動，觀察當你放鬆之後會發生什麼。'
+  },
+  river_petal: {
+    message: '花瓣粉讓河流保有純真的流向——在沒有算計、沒有控制的情況下，生命知道它自己想去哪裡。你有時候試著過度控制生命的流向，但花瓣粉說：最純粹的流動，是當你放下控制，讓生命自然知道它的方向的時候。',
+    reminder: '放開控制，讓生命自然知道它的方向。花瓣粉說：試試不計劃、不分析，只是順流。',
+    action: '今天對一件你一直在努力控制結果的事，試著放下控制，讓它自然發展，觀察會發生什麼。'
+  },
+  river_dustyrose: {
+    message: '舊玫瑰讓河流帶著歲月積累的深度——你的生命之流是有厚度的，帶著你所有走過的路、所有的轉折和學習，奔流向前。你的每一個經歷都成為這條河的水量，讓它更寬廣、更深邃、更有力量。你的過去豐盛了你的流動。',
+    reminder: '你的每一段經歷都讓你的生命之流更豐盛。舊玫瑰說：你帶著所有的歷練在流動，那讓你更有力量。',
+    action: '回想你生命中一個重要的轉折，想想它如何豐盛了你現在的流動，讓那個豐盛成為你的力量。'
+  },
+  river_nude: {
+    message: '裸膚讓河流回到最自然的狀態——水不需要被告知怎麼流，它本能地找到最自然的路徑。你的本性也是這樣的：當你去掉所有的「應該」和「不應該」，你的生命自然知道它想去哪裡。問題不是你不知道方向，是你有太多東西在干擾這個本能。',
+    reminder: '你的本性知道你的方向，它一直都知道。裸膚說：去掉干擾，你的本能會告訴你流向哪裡。',
+    action: '在沒有任何分析的情況下，問你的身體：如果讓我自然流動，現在最想去哪裡？聽聽它說什麼。'
+  },
+  river_lavender: {
+    message: '薰衣草讓河流流進夢境和靈感的領域——你的生命之流不只是實際的行動，也包含著夢想和靈感的流向。薰衣草說：讓靈感成為你的河流的一條支流，讓它帶著你去一些你用邏輯規劃不到的地方。',
+    reminder: '你的靈感知道一些你的邏輯不知道的路。薰衣草說：讓靈感帶著你流，不要總是用計劃阻攔它。',
+    action: '今天跟隨一個突然出現的靈感或直覺，不分析它，只是讓自己被帶著去一個新的方向，看看流到哪裡。'
+  },
+  river_iris: {
+    message: '鳶尾紫讓河流帶著靈性的方向流動——你的生命之流不是隨機的，它有更深的意圖在引導著它。那些看似是轉折或意外的時刻，那些「偶然」的相遇，可能都是這條河在帶你去你本來就要去的地方。你的流動有靈性的方向。',
+    reminder: '你的生命轉化有它的方向和意圖，即使你現在看不清楚。鳶尾紫說：相信這條河知道它在流向哪裡。',
+    action: '靜下來感受你的生命現在正在往哪個方向流，不用頭腦分析，只是感受，你感受到什麼？'
+  },
+  river_plum: {
+    message: '梅子深紫讓河流流入最深的轉化——不是表面的改變，而是從最核心的地方發生的那種蛻變。你的生命之流正在進入一個深層的整合，那些舊的模式、舊的故事、舊的自我認識，正在被這條深色的河流帶走，讓新的自己浮現。',
+    reminder: '真正的轉化從最深的地方開始，那裡也是最難去的地方。梅子深紫說：讓自己沉下去，讓深層的改變發生。',
+    action: '承認一個你正在經歷的深層轉化，不逃避它，讓自己真正感受這個深層改變的重量和意義。'
+  },
+  river_lilac: {
+    message: '淡丁香讓河流以最輕柔的方式流動——那種幾乎感覺不到的、細細的移動，但一直都在往前的流動。你的生命改變不需要是劇烈的才算真實，這種輕柔的、幾乎察覺不到的持續流動，有時候是最深刻的轉化方式。',
+    reminder: '輕柔而持續的流動，也是真實的生命力。淡丁香說：不要因為小就忽視它，它一直在流。',
+    action: '今天做一個非常小的、幾乎不需要力氣的改變，感受即使是最細微的流動，也是真實在發生的。'
+  },
+  river_sky: {
+    message: '天空藍讓河流流向廣闊的空間——不受岸邊的限制，往開放的方向延伸。你的生命轉化正在帶你去一個更廣闊的地方，一個比你目前的框架更開放的可能。天空藍說：不要讓舊的河岸限制了你的流向，允許河流改道。',
+    reminder: '你的生命之流有潛力流向更廣闊的地方，如果你允許它的話。天空藍說：讓它流，不要用舊的框架攔截。',
+    action: '今天允許自己往一個更廣闊的可能流去，哪怕只是一個想法或一個小小的嘗試。'
+  },
+  river_dusk: {
+    message: '黃昏藍讓河流在最美麗的過渡時刻流動——那種染著黃昏光線的水，帶著告別和即將的複雜情感奔流。你正在一個這樣的流動裡：有失去，有期待，有說不清的複雜情緒。這種複雜是過渡期獨有的美麗，不需要解決它，只是隨它流。',
+    reminder: '過渡期的流動有它複雜的美麗。黃昏藍說：帶著所有複雜的感受一起流，不需要先解決它。',
+    action: '允許自己在目前的過渡期帶著複雜的感受繼續前進，不要等情緒整理好了才繼續流動。'
+  },
+  river_navy: {
+    message: '深海藍讓河流流向它最真實的方向——那個需要勇氣才能承認、需要誠實才能選擇的方向。你的生命之流有一個真實的方向，但它需要你有勇氣跟隨。深海藍說：最真實的流動，往往不是最容易的那個，但它是最讓你完整的那個。',
+    reminder: '跟隨你的生命最真實的流向，需要真正的勇氣。深海藍說：那個困難的、真實的方向，才是你的方向。',
+    action: '面對一個你一直知道是對的、但一直在迴避的生命方向，今天承認它，並且採取一個往那個方向的行動。'
+  },
+  river_pearl: {
+    message: '珍珠白讓河流發出溫潤的光澤——你的轉化是有品質的，是以優雅的方式在流動的。不是混濁的、衝動的流動，而是清澈的、有方向的、帶著智慧的流。你的生命轉化可以是這樣：不失去深度，不失去自己，以優雅的方式流向新的地方。',
+    reminder: '你的轉化可以是優雅的，不必是劇烈的。珍珠白說：讓你的改變帶著它應有的品質和清澈。',
+    action: '以最優雅、最清醒的方式完成一個你正在進行的轉化，讓這個過程本身有它的尊嚴。'
+  },
+  river_mint: {
+    message: '薄荷綠讓河流帶著清新的氣息流動——流動本身就是一種清理，把舊的帶走，讓新鮮的進來。你的生命改變帶來的不只是不同，還有一種如釋重負的清爽：那些積累在你身上的舊模式、舊故事，正在隨著這條清新的河流被帶走。',
+    reminder: '改變帶來清新，讓那些積累太久的東西隨流而去。薄荷說：讓你的轉化也成為一次清理。',
+    action: '讓一個改變今天發生，然後停下來感受那種改變帶來的清爽感——那個空間感和輕鬆感。'
+  },
+  river_eucalyptus: {
+    message: '尤加利讓河流淨化了它流過的一切——這條河不只是在移動，它在清理，帶走那些累積的、不需要繼續帶著的東西。你的生命之流是一條淨化的河：它淨化了你走過的路，為你清理了前方的空間，讓你繼續前進。',
+    reminder: '你的生命流動同時也是淨化。尤加利說：允許這條河帶走不再需要的，你會走得更輕。',
+    action: '想想有什麼東西可以隨著你目前的生命流動被帶走？今天承認它，讓它隨河流去。'
+  },
+  river_moss: {
+    message: '苔蘚綠讓河流在靜默中緩緩流動——不是每一條河都是激流，有些最深的河是最安靜的。你的生命改變可能不是任何人都看得見的，但它一直在發生。苔蘚式的成長：安靜的、持續的、不需要觀眾的。那是最真實的流動。',
+    reminder: '你的成長和改變，比任何人（包括你自己）看見的更深。苔蘚說：安靜的流動，也是真實的流動。',
+    action: '回顧三年前的自己，看見你這三年靜悄悄發生的成長和改變，今天感謝那些沒有被看見的流動。'
+  },
+  river_celadon: {
+    message: '青瓷綠讓河流從容地、不緊不慢地流向它的目的地——你的生命不需要跟著外界的急促節奏走。每條河有自己的流速，有自己的彎曲，有自己的到達時間。青瓷說：你的生命之流有它自己的節奏，不需要為了別人的期待而加速。',
+    reminder: '你的生命之流有自己的節奏，不需要迎合外界的急促。青瓷說：按照你自己的速度流動。',
+    action: '今天刻意放慢你的節奏，讓你的生命之流按照自己的自然速度前進，觀察放慢帶來什麼感受。'
+  },
+  river_clay: {
+    message: '陶土棕讓河流流過真實的大地——這條河是踏實的，它流的是真實的地形，不是想像的路徑。你的生命之流也需要踏實的行動來讓它真正前進：那些具體的、可以觸碰的、雙手可以做的事。每一個踏實的行動，都讓你的河流往前一步。',
+    reminder: '踏實的行動讓你的生命之流真正前進。陶土說：不要只是想流，去做讓你流動的具體的事。',
+    action: '今天做一件踏實的、讓你的生命轉化更穩固、更真實的具體行動。讓它成為你的河流的前進動力。'
+  },
+  river_amber: {
+    message: '琥珀黃讓河流帶著創造的光芒流動——你的生命之流不只是在轉化，它在創造。你是你的生命的作者，每一個選擇、每一個轉折，都是你在書寫這個故事的下一頁。琥珀說：你的生命是一個創作，不只是發生在你身上的事情。',
+    reminder: '你的生命是你的創作，你是作者。琥珀說：有意識地選擇下一步，讓你的故事朝著你想要的方向流。',
+    action: '把你的生命當作一個創作，今天有意識地選擇「下一筆」——你想讓你的故事往哪個方向流？'
+  },
+  river_sand: {
+    message: '沙丘米讓河流流入廣闊的沙漠——在這裡，河流不受任何岸邊的限制，可以往任何方向流動。你的生命之流有潛力是廣闊的，不受任何固定框架的限制。沙丘說：允許你的流動超越你目前能看見的邊界，往更廣大的地方去。',
+    reminder: '你的生命之流比你以為的更自由，可以流到你想像不到的地方。沙丘說：讓它流，不要人為設限。',
+    action: '想像如果你的生命之流沒有任何限制，它會流向哪裡？讓這個想像給你對現在方向的啟示。'
+  },
+  river_terra: {
+    message: '赤陶磚讓河流充滿了充沛的、有根基的流動熱情——這條河知道它要去哪裡，帶著熱情和意志力奔流。你的生命之流由你的熱情驅動，那是最強大的動力：知道自己為什麼在流動，知道自己在流向什麼，帶著熱情走每一步。',
+    reminder: '熱情是你的生命之流最強大的驅動力。赤土說：讓你的熱情驅動你的流動，那是最有力量的前進。',
+    action: '讓你對某件事的深切熱情今天驅動你的一個行動，帶著這個熱情去流，感受它帶來的力量。'
+  },
+  river_smoke: {
+    message: '煙霧灰讓河流在不確定中繼續流動——你看不清前方是什麼，但你的生命之流仍然在移動。煙霧說：在不確定中繼續流動，本身就是答案。你不需要看見終點才能前進，只需要繼續流動，方向會在過程中清晰。',
+    reminder: '在不確定中繼續流動，就是答案。煙霧說：不等清晰，就先流。',
+    action: '即使不確定結果，今天也繼續往你感覺對的方向行動一步，讓流動本身帶給你下一步的清晰。'
+  },
+  river_fog: {
+    message: '晨霧白讓河流在清晨的清澈裡重新開始——昨天的渾濁在新的一天裡沉澱了，你的生命之流重新變得清澈和新鮮。每一個清晨都是你的河流重新校準方向的機會，帶著清醒和清新的心繼續流動，讓昨天的雜質隨著清晨散去。',
+    reminder: '每一天的清晨，你的生命之流都可以重新清澈。晨霧說：帶著清新的心開始今天的流動。',
+    action: '今天以清澈的心開始流動，有意識地放下昨天讓你的流動變得渾濁的情緒和念頭。'
+  },
+  river_charcoal: {
+    message: '炭灰讓河流清醒地選擇它的方向——不是被水流帶著走，而是清醒地知道自己在流向哪裡，為什麼流向那裡。清醒的流動不是不自由，是最深的自由：你知道你的選擇，你為自己的方向負責，那是主動的、有意義的流動。',
+    reminder: '清醒地知道你在流向哪裡，讓你的流動有力量和意義。炭灰說：帶著清醒流動，那是主動的自由。',
+    action: '清醒地確認：你現在的生命之流，你真正想要它流向哪裡？這個方向是你選擇的嗎？'
+  },
+  river_ivory: {
+    message: '象牙白讓河流帶著珍貴的流動——你的生命之流是珍貴的，它帶著你的所有、你的故事、你的轉化，去到你需要去的地方。每一個彎曲、每一個急流、每一個平靜的段落，都是這條珍貴的河流的一部分。感謝它帶你走到了這裡。',
+    reminder: '你的生命之流是珍貴的，每一段都是完整故事的一部分。象牙白說：珍視你走過的每一段流動。',
+    action: '今天感謝你的生命之流——感謝它帶你走過的所有彎曲和轉折，感謝它帶你走到了今天這裡。'
+  },
+
+  // ── 信封 × 新色 ──
+  letter_blush: {
+    message: '淡玫瑰讓信件帶著最柔軟的表達——那種你平時用堅強包裹起來、不輕易讓人看見的溫柔心意。你有話想說，但你一直不確定說出來是否安全。淡粉的心理語言是：允許你的脆弱出現在文字裡，那反而是你最真實的力量。',
+    reminder: '你用溫柔表達的話，比用防衛包裹的話更能真正觸動人。淡玫瑰說：讓你的柔軟出現在文字裡。',
+    action: '給一個你想說卻沒說的人寫幾行字，不需要完美——只要真實，只要讓你的溫柔能被接收到。'
+  },
+  letter_petal: {
+    message: '花瓣粉讓信件回到最原初的純粹——沒有算計，沒有期待回應，只是想把這份感受傳遞出去。你有一份純粹的情感，它不需要任何策略，只需要被誠實地說出來。花瓣說：最打動人的，往往是最不加修飾的那幾個字。',
+    reminder: '純粹的心意不需要完美的文字。花瓣說：不要等到想好了再說，先說，讓真誠本身成為語言。',
+    action: '今天寫下你最純粹的感受，不修飾、不解釋、不加任何前因後果，讓它就這樣直接存在。'
+  },
+  letter_dustyrose: {
+    message: '舊玫瑰讓信件帶著歲月積累的溫度——你的表達不只是此刻的感受，它帶著你所有走過的路賦予你的深度和重量。那些你說出的話，因為你的生命厚度而有了別人無法複製的份量。',
+    reminder: '你的生命經歷讓你的表達有了深度。舊玫瑰說：你說出的話，帶著你走過的所有路的重量。',
+    action: '把你一直想說、但一直覺得時機未到的話寫下來。你的積累讓你現在說的比任何時候都有份量。'
+  },
+  letter_nude: {
+    message: '裸膚讓信件回到最沒有包裝的誠實——沒有優美的措辭，沒有預設的目的，只是你真正的樣子。你花了太多力氣修飾你的表達，試著讓每一句話都顯得更好。但最讓人信任的，往往是那個去掉所有修飾的你。',
+    reminder: '最真實的話，才能真正被對方接收到。裸膚說：去掉修飾，讓你的話回到它最真實的樣子。',
+    action: '今天說一句你平時會修飾的話，把修飾去掉，只留下核心——就算不完美，讓它是真的。'
+  },
+  letter_lavender: {
+    message: '薰衣草讓信件流進夢想和靈感的領域——你有一些在夢與醒之間浮現的想法，那些你在理性清醒時不敢承認的希望和渴望。薰衣草說：把它們寫下來。寫下來，是讓它們成真的第一步。',
+    reminder: '你的靈感和夢想值得被文字接住。薰衣草說：把那個你一直在內心醞釀的想法寫下來，給它一個形體。',
+    action: '今天把一個你在夢裡、在心裡一直有的希望或想法寫下來，不管它聽起來是否「合理」。'
+  },
+  letter_iris: {
+    message: '鳶尾紫讓信件成為靈性智慧的載體——你的洞見不只是個人的感受，它來自一個更深的地方，是你的高我想要透過你表達的。你有一些理解，是別人需要聽到的，即使你自己還不確定它有多重要。',
+    reminder: '你的洞見有它需要被說出來的理由。鳶尾紫說：那個你一再在內心出現的深刻感悟，它值得被分享。',
+    action: '今天把一個你最近反覆在想、感覺很深刻的洞見寫下來或說出來，讓它從你的內在流動到外在。'
+  },
+  letter_plum: {
+    message: '梅子深紫讓信件成為深層轉化的見證——你正在經歷某種根本性的改變，而把它寫下來、說出來，是讓這個轉化完整的一部分。表達，是整合的方式；文字，是讓內在的蛻變被外在接住的橋梁。',
+    reminder: '表達你的深層轉化，是讓它完整的一部分。梅子說：寫出來，讓你的蛻變被文字見證。',
+    action: '把你正在經歷的某個深層改變用文字描述出來，不需要有結論，只是讓這個過程被你自己的眼睛看見。'
+  },
+  letter_lilac: {
+    message: '淡丁香讓信件帶著最初萌芽的輕柔感受——你有一份剛剛開始的感情、一個剛剛浮現的想法，它還很嫩，還很脆弱，還不確定自己是什麼。淡丁香說：輕柔地把它說出來，不需要它已經成熟，讓它在表達中慢慢長大。',
+    reminder: '剛萌芽的感受值得被輕柔地表達。淡丁香說：不要等它長大了再說，先輕柔地讓它出現在語言裡。',
+    action: '今天表達一個你剛剛開始感受到的感受或想法，輕柔地讓它出現，不要求它完整，只讓它被說出來。'
+  },
+  letter_sky: {
+    message: '天空藍讓信件沒有邊界地自由表達——你有廣闊的想法、不確定怎麼說、不確定說了是否合適。天空藍說：先讓表達是自由的，先讓文字是沒有限制的，先讓你的思想翱翔，然後再看什麼是你真正想說的。',
+    reminder: '讓你的表達像天空一樣廣闊和自由。天空藍說：先寫，不要先審查，讓自由的表達帶你去你想說的地方。',
+    action: '今天自由地、不帶任何審查地寫下你想說的話——寫完了再決定要不要修改，但先讓自由說話。'
+  },
+  letter_dusk: {
+    message: '黃昏藍讓信件帶著過渡期獨有的複雜情感——那種告別和期待同時存在的矛盾心情，那種說不清楚是悲傷還是感謝的感受。你正在一個轉折點，你想說的話也是複雜的。不需要整理它，讓它帶著複雜被說出來。',
+    reminder: '過渡期的複雜感受值得被誠實地表達。黃昏藍說：帶著你所有複雜的感情說話，不要先整理它。',
+    action: '今天誠實地表達你在目前這個轉變期中最複雜的感受，允許你的話裡有矛盾、有不確定、有多種情緒同時存在。'
+  },
+  letter_navy: {
+    message: '深海藍讓信件帶著說真實話的勇氣——那些你一直知道需要說、但因為害怕而沒說的話。深海藍的心理語言是：最深的誠實，需要最大的勇氣。那些難說的真話，往往是最能改變一段關係的。',
+    reminder: '說真實的話需要勇氣，但那些話往往是最重要的。深海藍說：鼓起勇氣說那句你一直在迴避的真話。',
+    action: '今天說出一句你一直知道是對的、但一直在迴避的真實的話——給別人，或者給你自己。'
+  },
+  letter_pearl: {
+    message: '珍珠白讓信件帶著歲月磨礪後的智慧光澤——你的表達不只是當下的感受，它帶著你所有的摩擦和學習凝聚而成的洞見。珍珠說：你說出的話，帶著你成為今天這個人的所有過程，那讓它珍貴。',
+    reminder: '你的表達有它的智慧和重量，請珍視它。珍珠說：你說的話，比你以為的更值得被對方珍惜。',
+    action: '今天以你最真實的智慧，表達一個你感受深刻的洞見，讓它以你能給予的最好方式被說出來。'
+  },
+  letter_mint: {
+    message: '薄荷綠讓信件帶著清新的澄清力量——那些積累了太久的誤解、沒說清楚的話、一直在心裡藏著的困惑，可以在這裡被清新地整理和說出來。薄荷說：一句清澈的話，可以清除很多長期積累的渾濁。',
+    reminder: '清新的溝通讓關係更清爽。薄荷說：去說出那件你一直沒說清楚的事，讓空氣流通起來。',
+    action: '今天澄清一個你和某人之間一直沒說清楚的事——不是為了爭輸贏，只是讓它變得清晰。'
+  },
+  letter_eucalyptus: {
+    message: '尤加利讓信件帶著淨化和清理的力量——你的表達可以是一次清理：清理那些積累的誤解、沒說出口的情緒、卡在中間的關係能量。說出來，是讓空間清潔的方式，也是讓自己自由的方式。',
+    reminder: '誠實的表達是最好的淨化。尤加利說：說出那些積壓在心裡的話，讓空間變清潔。',
+    action: '今天說出一件你一直在心裡藏著、讓關係或心情不清潔的事，讓表達成為一次清理。'
+  },
+  letter_moss: {
+    message: '苔蘚綠讓信件帶著久遠積累的深刻理解——你有一些體悟，不是今天才有的，是你這些年默默思考和積累的結果。苔蘚式的智慧：安靜的、深沉的、不需要大聲說的，但當它說話的時候，有著不可動搖的重量。',
+    reminder: '你的生命積累了值得分享的深刻智慧。苔蘚說：那個你默默思考了很久的體悟，今天可以說出來了。',
+    action: '今天把一個你從自己的生命積累中學到的重要體悟寫下來或分享出去，讓這份深沉的理解被傳遞。'
+  },
+  letter_celadon: {
+    message: '青瓷綠讓信件從容地、不被任何外力催促地表達——你說話的節奏，你表達的方式，都可以有自己的優雅節奏。不需要因為對方的期待或外界的壓力而急著說你還沒準備好說的話。青瓷說：從容的表達，才能傳達你真正的心意。',
+    reminder: '從容的表達，更能傳達真實的心意。青瓷說：以你自己的節奏說話，不要讓外力打亂你的表達節奏。',
+    action: '今天以你自己的節奏，沉穩地說出一個重要的想法，感受從容的表達和被催促的表達有什麼不同。'
+  },
+  letter_clay: {
+    message: '陶土棕讓信件帶著踏實的誠意——沒有華麗的詞藻，沒有修辭技巧，只有最真實的、用雙手做出來的質樸表達。你最踏實的話，是你最有力量的話：因為它真實，所以它重，所以它能夠被接收到。',
+    reminder: '踏實的誠意比華麗的詞藻更有力量。陶土說：用你最質樸的方式說話，那才是你真正的語言。',
+    action: '今天用最踏實、最沒有修飾的方式，說出你最想表達的話——就像你在對最信任的人說話時那樣。'
+  },
+  letter_amber: {
+    message: '琥珀黃讓信件帶著創造性的靈感光芒——你有一些想法，不只是你個人的感受，而是可以成為別人的啟發的東西。你的想法有創造性的能量，當你把它說出來或寫下來，它可以照亮別人，就像琥珀封存的光，千年後依然閃亮。',
+    reminder: '你的靈感值得被分享，它可能成為別人需要的光。琥珀說：把你的創造性想法說出來，讓它發光。',
+    action: '今天分享一個你認為有啟發性的想法或靈感——給一個人，或者寫下來，讓它從你內在流向外在。'
+  },
+  letter_sand: {
+    message: '沙丘米讓信件帶著廣闊的包容和接納——你的表達是開放的，不設前提，不附帶判斷，讓對方感到被接受、被看見、被允許是他們自己。沙丘說：有時候，最有力量的表達，不是你說了什麼，而是你的話讓對方感到安全。',
+    reminder: '開放和包容的表達，讓對方感到安全。沙丘說：讓你的話成為一個讓對方被接納的空間。',
+    action: '今天以完全的包容和不評判，表達一件你平時可能有所保留的感受，讓你的話成為一個接納的空間。'
+  },
+  letter_terra: {
+    message: '赤陶磚讓信件充滿熱情的能量——你有強烈的感受、充沛的熱情想要表達，不要壓制它，讓它在你的話語裡流動。赤土說：帶著熱情說的話，最能讓對方感受到你的真實；你的熱情，是你最有力量的語言。',
+    reminder: '帶著熱情的表達最能感動人心。赤土說：讓你的熱情在語言裡流動，不要壓制它，讓它燃燒。',
+    action: '今天帶著你對某件事的真實熱情，說出你想說的話，讓你的熱情成為表達最有力量的部分。'
+  },
+  letter_smoke: {
+    message: '煙霧灰讓信件帶著還沒成形的思考——你有一些模糊的、還不清晰的想法，它們在你腦海裡像煙霧一樣飄著，不確定是什麼形狀。煙霧說：把它說出來，不需要清晰才開口。說出來，往往就是讓它成形的方式。',
+    reminder: '有時候，說出來就是讓思考成形的方式。煙霧說：先說，讓語言幫你思考，不要等清晰再開口。',
+    action: '今天說出一個你自己還不完全清楚的想法，讓說的過程幫助你思考，看說完之後它變得更清晰了嗎。'
+  },
+  letter_fog: {
+    message: '晨霧白讓信件帶著清晨最清澈的開始——在這一天正式展開之前，在頭腦還沒有被太多事情填滿之前，你的表達是最清新、最接近本質的。晨霧說：清晨的第一個想法，清晨的第一封信，有時候是你最真實的自己。',
+    reminder: '清晨的表達往往最接近本質。晨霧說：趁你的頭腦還清澈，說出那個清晨第一個浮現的想法。',
+    action: '今天以清晨的心情說一件讓你微笑或感謝的事，讓你的話帶著清晨的清澈和輕盈。'
+  },
+  letter_charcoal: {
+    message: '炭灰讓信件帶著精煉後的清醒力量——你說的話是精準的，每一個字都有它的重量，不多不少。炭灰說：最有力量的表達，往往是最簡潔的。去掉所有不必要的，讓你想說的那件事以最清醒的方式呈現。',
+    reminder: '精準的表達比繁多的詞語更有力量。炭灰說：去掉所有不需要的詞，讓你最想說的那句話獨自站立。',
+    action: '今天用最少的字，說出你最想說的那一件事。練習讓你的話精煉到只剩下核心，感受它的力量。'
+  },
+  letter_ivory: {
+    message: '象牙白讓信件帶著珍貴的溫潤質感——你的表達是有溫度的，它值得被好好寫下來，值得被對方珍視。不是每一封信都要宏大，有時候一句小小的話，帶著你誠實的溫度，就是最珍貴的禮物。',
+    reminder: '你的話語有它的溫度和珍貴。象牙白說：珍視你的表達，因為你誠實說出的話，對對方來說可能是意想不到的禮物。',
+    action: '今天寫一封你珍視的信——給未來的自己，或者給一個重要的人，讓它帶著你真實的溫度被傳遞出去。'
+  },
+
+  // ── 植物 × 新色 ──
+  plant_blush: {
+    message: '淡玫瑰讓植物以最溫柔、最嬌嫩的方式生長——不是急著長高，而是輕輕地、帶著感受地，一片葉子一片葉子地展開。你的成長不需要戲劇性，它可以是這樣溫柔的：每天一點點，每天帶著你的感受，每天允許自己的脆弱同樣是成長的一部分。',
+    reminder: '溫柔的成長也是真實的成長，它甚至更深。淡玫瑰說：帶著你的感受成長，那才是完整的。',
+    action: '今天以最溫柔的眼光看待你的成長——不批評自己長得不夠快，只是看見你確實在長的地方，並輕輕感謝它。'
+  },
+  plant_petal: {
+    message: '花瓣粉讓植物帶著純粹的生命驅力生長——植物不需要理由去長，它只是長。你的生命力也是這樣的：在你沒有過度分析、過度計劃的時候，它自然知道自己要去哪裡、要長成什麼樣子。純粹的成長，是不需要說服自己的那種。',
+    reminder: '你的生命力是自然的，不需要理由或計劃。花瓣說：讓你的成長回到它最純粹的驅力，不要用太多思考阻攔它。',
+    action: '讓自己做一件純粹因為喜歡、因為想要、不帶任何目的的事，感受那種純粹的生命力在你身上流動。'
+  },
+  plant_dustyrose: {
+    message: '舊玫瑰讓植物帶著風吹雨打後的豐盛姿態——不是沒有受過傷的植物，而是因為受過傷所以根更深、枝更粗、葉子更有光澤的那種。你的每一個困難、每一次考驗，都成為你成長的養分，讓你比從沒受過風雨的更茂盛。',
+    reminder: '你的歷練是你的豐盛，不是傷痕。舊玫瑰說：那些讓你長出厚度的困難，其實都是養分。',
+    action: '看見一個曾經讓你很困難的經歷，想一想它給你帶來了什麼茂盛：你因此長出了什麼？'
+  },
+  plant_nude: {
+    message: '裸膚讓植物回到最自然的、去掉所有人為的成長——植物不需要被說服、被催促、被強迫，它的本能知道什麼是成長、什麼時候休息。你的本能也是這樣的：當你停止強迫自己，你的生命自然知道它需要什麼、想要什麼。',
+    reminder: '你的本性知道你的成長需要什麼。裸膚說：停止強迫，讓你的生命本能帶著你成長。',
+    action: '今天不強迫自己成長，讓成長自然發生——只做你的身體和心真正想做的事，觀察會發生什麼。'
+  },
+  plant_lavender: {
+    message: '薰衣草讓植物被靈感和夢境滋養——植物需要陽光，你的靈性成長需要靈感、夢想、和那些讓你感到更廣闊的東西。薰衣草說：讓靈感成為你成長的陽光，讓夢想成為你的養分，讓你的成長向著那些讓你嚮往的事物延伸。',
+    reminder: '靈感是你成長的陽光，去讓它照在你身上。薰衣草說：讓你的成長向著靈感和夢想的方向生長。',
+    action: '今天尋找一個讓你感到嚮往、感到廣闊的靈感，讓它成為你成長的養分，讓你朝著它生長。'
+  },
+  plant_iris: {
+    message: '鳶尾紫讓植物帶著靈性目的生長——你的成長不只是個人的，它連接著更大的意義和目的。你在成長，不只是為了變得更好，也是為了成為能夠服務更大事物的自己。鳶尾說：問問你的成長，它在往哪個方向生長，那個方向有更大的意義嗎？',
+    reminder: '你的成長有它的靈性目的。鳶尾說：你的蛻變不只是個人的，它連接著更大的事情。',
+    action: '想想你的成長如何能夠服務或滋養更大的意義——你的成長如何讓周圍的人或世界也受益？'
+  },
+  plant_plum: {
+    message: '梅子深紫讓植物深根生長——最豐盛的成長，往往發生在地底下看不見的地方。你的根正在深入黑暗的土壤，那些深層的整合、深層的療癒、深層的自我認識，是你最重要的成長，即使沒有人能看見它。',
+    reminder: '你看不見的深根成長，往往是最重要的。梅子說：那些在黑暗中發生的深層成長，正在為你未來的高度打基礎。',
+    action: '感謝那些看不見的、在你內心默默發生的深層成長——那些你沒辦法向任何人展示、但你能感受到的改變。'
+  },
+  plant_lilac: {
+    message: '淡丁香讓植物以最細膩、最輕柔的方式生長——那種嫩芽剛剛破土、還很嬌嫩、還需要被溫柔對待的成長狀態。你有一些剛剛開始的成長，它還很細膩，還很需要你溫柔對待。淡丁香說：不要急著長，先讓這個嫩芽被細心照顧。',
+    reminder: '細膩而輕柔的成長也是真實的成長。淡丁香說：溫柔對待你的嫩芽成長，不要因為它還小就忽視它。',
+    action: '注意一個你最近剛剛開始的、非常細微的成長，今天溫柔地照顧它，讓它感到被你看見和珍視。'
+  },
+  plant_sky: {
+    message: '天空藍讓植物向廣闊的天空生長——沒有天花板的成長，沒有「已經夠了」的界限。你的成長有潛力是廣闊的，超越你目前能看見的框架。天空藍說：讓你的成長向著那個廣闊延伸，不要讓舊的天花板限制了你能長到多高。',
+    reminder: '你的成長沒有天花板，除非你自己設定了一個。天空藍說：讓你的成長向著廣闊和無限生長。',
+    action: '想像你的成長在完全沒有任何限制的情況下會是什麼樣子，讓這個想像成為你朝向廣闊生長的方向。'
+  },
+  plant_dusk: {
+    message: '黃昏藍讓植物在最美麗的過渡中生長——你的成長正在一個轉折點上：舊的在告別，新的在醞釀，這個交界點雖然充滿不確定，卻也是成長最豐富的時刻。黃昏是最有詩意的時刻，因為它同時存在告別和期待。你的成長也是如此。',
+    reminder: '轉折期是成長最快、最豐盛的時期。黃昏藍說：在你的過渡期裡，看見那個正在發生的豐盛成長。',
+    action: '在你目前正在經歷的轉折點裡，看見你的成長：你現在學到了什麼？你現在長出了什麼以前沒有的東西？'
+  },
+  plant_navy: {
+    message: '深海藍讓植物深深扎根——那種根系延伸到地底深處、抓住黑暗土壤的根。真正的成長需要深根才能高長：你的核心價值、你的本質認識、你的最深層的自我理解，是讓你能夠長到任何高度的根基。',
+    reminder: '根紮得越深，成長越能高遠。深海藍說：為你的成長加深根基，讓你的核心價值成為穩固的根。',
+    action: '問自己：我最深層的核心價值是什麼？讓今天的行動和這個核心價值連結，讓根更深一點。'
+  },
+  plant_pearl: {
+    message: '珍珠白讓植物以有品質的方式生長——不是快速地、混亂地生長，而是清醒地、優雅地、帶著意圖的成長。你的成長可以是有品質的：每一步都是有意識選擇的，每一片新葉都是照顧出來的，不是偶然發生的。',
+    reminder: '好好照顧你的成長，讓它有它應有的品質。珍珠說：你的成長值得被精心照顧，不只是發生，而是被培育。',
+    action: '今天做一件你刻意為你的成長品質而做的事——不是隨便發生的成長，是你有意識選擇和照顧的成長。'
+  },
+  plant_mint: {
+    message: '薄荷綠讓植物充滿清新的生命力——那種讓周圍的空氣都清新起來的成長，不只是你自己長出了新的，也讓你周圍的空間更清爽、更有活力。你的成長有這樣的特質：它不只改變了你，也為你周圍帶來了清新的能量。',
+    reminder: '你的成長帶來清新的生命力，不只給你自己，也給周圍。薄荷說：讓你的成長成為周圍的清新。',
+    action: '今天為你的成長引入一個全新的元素，感受那種清新的能量在你的生命力裡流動，讓它讓你充滿活力。'
+  },
+  plant_eucalyptus: {
+    message: '尤加利讓植物在淨化中生長——清除了那些阻礙生長的病葉、枯枝、積累的能量，留下最健康的部分繼續成長。你的成長也需要這樣的淨化：清除阻礙你健康成長的舊模式、舊信念、舊習慣，讓成長更純粹、更有力。',
+    reminder: '清除阻礙成長的東西，讓成長更純粹。尤加利說：去掉那些讓你的成長不健康的元素，讓健康的部分更有力量。',
+    action: '今天清除一個你知道在阻礙你健康成長的習慣、信念或模式，讓這次清除成為你成長更純粹的開始。'
+  },
+  plant_moss: {
+    message: '苔蘚綠讓植物在靜默中深根生長——不需要掌聲，不需要觀眾，最深的成長是安靜發生的。苔蘚不需要陽光直射，它在陰涼和潮濕中慢慢地、持續地、安靜地生長，那種成長有著不需要被看見的完整性和尊嚴。',
+    reminder: '你最深的成長不需要被看見才有價值。苔蘚說：安靜地、持續地生長，你自己知道就夠了。',
+    action: '今天為你自己的成長鼓掌，不需要任何人看見——只是你自己承認：「我確實在長，我看見了。」'
+  },
+  plant_celadon: {
+    message: '青瓷綠讓植物按照自己的節奏從容地生長——沒有一棵植物因為被催促而長得更好。你的成長有自己的節奏，有自己的季節，有自己的快慢。青瓷說：不要和別人的成長速度比較，你的成長有它自己的時間。',
+    reminder: '你的成長有自己的節奏，不需要和任何人比較。青瓷說：按照你自己的自然速度成長，那才是最健康的。',
+    action: '今天完全不和任何人比較，只是按照你自己的節奏做你該做的事，感受不比較的成長是什麼感覺。'
+  },
+  plant_clay: {
+    message: '陶土棕讓植物在踏實的土壤中深根生長——最好的成長土壤是踏實的：真實的行動、誠實的自我認識、一步一腳印的積累。你的成長需要踏實作為土壤：不是空想、不是計劃，而是你真實做了的那些事。',
+    reminder: '踏實是最好的成長土壤。陶土說：你的成長需要真實的行動來滋養，不只是想。',
+    action: '今天做一件非常踏實的、和你的成長有關的具體行動，感受踏實的行動如何讓你的成長更有根基。'
+  },
+  plant_amber: {
+    message: '琥珀黃讓植物充滿創造的光合作用——植物把光轉化為生命，你把創造力轉化為成長。你的成長和你的創造力是連在一起的：當你在創造、在表達、在把內在的東西帶到外在的時候，你也在以最深刻的方式成長。',
+    reminder: '你的創造力是你成長的光合作用。琥珀說：讓創造成為你的養分，創作的時候你也在深層地成長。',
+    action: '今天用創造的方式促進你的成長——畫、寫、做、表達，讓創造成為你今天最重要的成長方式。'
+  },
+  plant_sand: {
+    message: '沙丘米讓植物在廣闊無邊的空間中生長——不是被盆子限制的成長，而是開放田野中的成長，可以往任何方向延伸。你的成長有潛力是廣闊的，超過你目前的框架和邊界。沙丘說：給你的成長廣大的空間，讓它自由延伸。',
+    reminder: '給你的成長廣大的空間，不要讓框架限制了它能去的地方。沙丘說：你的成長可以比你以為的更廣闊。',
+    action: '為你的成長創造更多的空間和自由——清除一個限制你成長的框架或「應該」，讓成長有更多空間伸展。'
+  },
+  plant_terra: {
+    message: '赤陶磚讓植物充滿熱情的生命力——那種帶著充沛熱情、帶著強烈生長驅力的植物，在任何土壤都能找到生存和生長的方式。你對生命的熱情，是你成長最好的肥料：當你帶著熱情去做、去學、去嘗試，你的成長是最有力量的。',
+    reminder: '熱情是你成長最好的肥料。赤土說：帶著熱情成長，那才是讓你的生命力充沛的方式。',
+    action: '讓你對某件事的熱情今天驅動你的成長行動，帶著熱情去做你想做的事，感受熱情如何滋養你的成長。'
+  },
+  plant_smoke: {
+    message: '煙霧灰讓植物在不確定中繼續生長——植物不需要知道自己在往哪個方向長，它的根會感知，它的葉子會尋找。你的成長也不需要完全清晰的方向，只要你繼續給它水分、繼續給它光，它自然知道怎麼找到路。',
+    reminder: '成長不需要完全清晰的方向。煙霧說：即使不確定，只要繼續給成長水分，它自然會找到路。',
+    action: '即使不確定你的成長方向，今天也繼續做一個讓你的成長有所滋養的行動，讓成長本身帶給你下一步的方向。'
+  },
+  plant_fog: {
+    message: '晨霧白讓植物在清晨的濕潤中得到滋養——清晨的霧是植物最珍貴的水分，輕輕地、全面地滋潤每一片葉子。你的成長在最清新的時刻——那些頭腦清醒、感受敏銳、還沒有被日常事務佔滿的時刻——得到最好的滋養。',
+    reminder: '清晨是成長最好的滋養時刻，因為你最清醒。晨霧說：用你的清晨滋養你的成長，那是最好的時機。',
+    action: '明早，在一天正式開始之前，做一件滋養你成長的事——讀、靜心、寫、思考，讓清晨成為成長的土壤。'
+  },
+  plant_charcoal: {
+    message: '炭灰讓植物清醒地、有意識地生長——不是隨機地長，而是清醒地知道自己在成長、在往哪個方向長、為了什麼而長。清醒的成長是最有目的性的：你知道你在做什麼，你知道這個行動在滋養你的哪個方向。',
+    reminder: '有意識的成長比無意識的更有力量和目的。炭灰說：清醒地看見你的成長，讓每一步都是有意識的選擇。',
+    action: '今天有意識地做一件你清楚知道「這在促進我的成長」的行動，讓清醒的意圖成為成長的力量。'
+  },
+  plant_ivory: {
+    message: '象牙白讓植物帶著珍貴的、有溫潤質感的生長——每一個成長的階段都值得被珍視，包括那些慢的階段、那些看似沒有進展的冬天、那些在地底深根的時期。你的每一個成長階段，都是完整生命故事的一部分。',
+    reminder: '珍視你每一個成長的階段，包括現在這個，包括最困難和最緩慢的。象牙白說：每個階段都有它的珍貴。',
+    action: '今天感謝你成長的每一個階段——包括最快速的，也包括最緩慢的、最困難的，感謝它們都是你的一部分。'
+  },
+
+  // ── 鏡子 × 新色 ──
+  mirror_blush: {
+    message: '淡玫瑰讓鏡子映出你最溫柔的那一面——不是那個堅強的、能幹的、負責任的你，而是那個嬌嫩的、需要被溫柔對待的你。你看自己的眼光，通常是嚴苛的。淡粉說：試試用你看最愛的人的眼光，來看鏡子裡的自己。',
+    reminder: '你值得被最溫柔的眼光看見，包括你自己的。淡玫瑰說：換一種眼光看你自己，你會看見不一樣的人。',
+    action: '今天站在鏡子前，用你能給予的最溫柔的眼光，看著你自己，停留至少一分鐘，說一句你平時不說的溫柔的話給自己。'
+  },
+  mirror_petal: {
+    message: '花瓣粉讓鏡子映出你最純真的本來面目——在所有的歷練、所有的防衛、所有的人設之下，那個最原初的你，那個在受傷之前的你，那個不需要表現任何東西的你，還在那裡。它沒有消失，只是被層層保護起來了。',
+    reminder: '你最純真的自己還在，它只是被保護起來了。花瓣說：那個本來的你，在等你找回來。',
+    action: '找一件能讓你感受到那個最純真的自己的事，讓它出來——那個不需要表演、不需要解釋的你，讓它出現一下。'
+  },
+  mirror_dustyrose: {
+    message: '舊玫瑰讓鏡子映出帶著歲月的豐盛——你的臉上、你的眼神裡，帶著你所有走過的路的印記。那些印記不是損耗，不是老去，而是豐盛：每一條痕跡，都是一個你走過的故事，一個讓你更深、更豐富的時刻。',
+    reminder: '你的歲月讓你更豐盛，不是更老。舊玫瑰說：你的臉上帶著的，是歷練的美麗，不是衰退的痕跡。',
+    action: '今天看著鏡子，主動去看見你的豐盛——看見那些歲月給你帶來的深度和光澤，而不是你失去的那些。'
+  },
+  mirror_nude: {
+    message: '裸膚讓鏡子映出最沒有包裝的你——不是化了妝的、不是濾鏡下的、不是某個角色或形象裡的你，而是那個最原始的、去掉所有表演的你的樣子。你最真實的樣子，就是最值得被愛的那個。不完美不是問題，不真實才是。',
+    reminder: '你最真實的樣子，才是最可愛的。裸膚說：去掉所有包裝，那個真實的你，才是你最珍貴的樣子。',
+    action: '不帶任何濾鏡地看自己的一張照片，練習說一句不評判、只是接受的話給那個真實的你：「我看見你了。」'
+  },
+  mirror_lavender: {
+    message: '薰衣草讓鏡子在夢境的光裡映出你——你看見的不只是現在的你，而是那個帶著夢想和靈感的你，那個心裡有詩意、有嚮往、有想像力的你。薰衣草說：你的夢想在你的眼睛裡，那讓你帶著光；讓它發光，不要遮掩它。',
+    reminder: '你的夢想讓你帶著光。薰衣草說：讓那個心裡有夢想、有靈感的你出現在你的眼睛裡。',
+    action: '想想一個你一直有的夢想或嚮往，讓它出現在你今天的眼神裡——讓你的夢想讓你的眼睛發光。'
+  },
+  mirror_iris: {
+    message: '鳶尾紫讓鏡子映出你的靈性深度——你不只是你看見的那個表面，你還有一個更深的自己，一個連接著更大智慧的自己，一個高我的自己。鳶尾說：你的眼睛裡有深度，有靈性的光，那才是你最本質的美麗。',
+    reminder: '你的靈性深度是你最深的美麗。鳶尾說：讓你的靈性深度成為你自信的來源，那才是你真正的力量。',
+    action: '靜靜看著鏡子裡自己的眼睛，感受你的靈性深度，感受那個更深的自己的存在，讓這個感受成為你的自信。'
+  },
+  mirror_plum: {
+    message: '梅子深紫讓鏡子映出你的深沉力量和尊嚴——那種不需要任何人認可的自我尊重，那種即使在黑暗中也不失去的力量。梅子說：你比你以為的更有力量，更有尊嚴。這個力量不是表演出來的，它從你的最深層升起。',
+    reminder: '你的力量和尊嚴比你以為的更深。梅子說：感受你的深沉力量，讓它從你的內部升起，不需要任何外在認可。',
+    action: '站在鏡子前，感受你的力量和尊嚴，讓你的身體表達這個力量：挺起胸、看見自己的眼睛，說：「我是有力量的。」'
+  },
+  mirror_lilac: {
+    message: '淡丁香讓鏡子輕輕映出你的細膩和敏感——那種對一切都有感受的敏銳，那種能夠感受到別人感受不到的細微之處的天賦。你可能一直把自己的敏感當成弱點，但淡丁香說：那是你最特別的天賦，是你感受力最深的地方。',
+    reminder: '你的敏感和細膩，是你特別的天賦，不是弱點。淡丁香說：今天為你的敏感感到驕傲，而不是愧疚。',
+    action: '今天為你的細膩和敏感感到驕傲——承認它是你的天賦，而不是問題，告訴自己：「我的感受力，是我的禮物。」'
+  },
+  mirror_sky: {
+    message: '天空藍讓鏡子映出你眼睛裡的廣闊——你的眼神裡有可能、有開放、有超越目前框架的廣闊視野。你比你以為的更廣闊，你的可能比你設定的天花板更高。天空藍說：用廣闊的眼光看自己，你會看見一個比你習慣以為的更大的你。',
+    reminder: '你的可能比你以為的更廣闊。天空藍說：讓你的眼光超越你對自己的習慣性設限，看見一個更廣闊的你。',
+    action: '今天用廣闊的眼光看自己，問自己：如果我對自己的限制少一點，我會允許自己是什麼樣的人？'
+  },
+  mirror_dusk: {
+    message: '黃昏藍讓鏡子映出過渡中的你——那個同時帶著告別和期待的你，那個不完全是舊的、也還不完全是新的你。過渡中的你有一種特別的美麗：它是真實的，因為它誠實地存在於這個當中，不逃避、不假裝、不提前跳到結果。',
+    reminder: '過渡中的你，有它自己特別的美麗。黃昏藍說：不要急著變成「完成」的樣子，在過渡中的你，同樣值得被欣賞。',
+    action: '欣賞這個正在過渡、正在轉變中的自己，在鏡子前說：「我現在這個樣子，這個過程中的我，也是完整的。」'
+  },
+  mirror_navy: {
+    message: '深海藍讓鏡子映出你的深度——你不只是表面的那些，你有深沉的、複雜的、不輕易被看穿的內在。你的深度是你最大的特質，但你可能一直在把它藏起來，因為你不確定它是否被歡迎。深海藍說：你的深度是力量，讓它出來。',
+    reminder: '你的深度讓你不同，它是你的力量，不是需要隱藏的東西。深海藍說：讓你的深度被看見，它值得被欣賞。',
+    action: '今天讓你的深度出現——讓自己真實地表達一個你通常保留不說的深刻想法，讓你的深度被一個你信任的人看見。'
+  },
+  mirror_pearl: {
+    message: '珍珠白讓鏡子映出摩擦之後才有的光澤——你的美麗不是天生就在那裡的、容易的、不費力的，而是你經歷摩擦、經歷困難、一層一層積累出來的光。那是最真實的光澤，因為它來自真實的過程。',
+    reminder: '你的光澤是你積累出來的，它因此更珍貴。珍珠說：那些讓你發光的，都是你走過的摩擦和磨礪。',
+    action: '今天讓自己的優雅和品質自然地展現——不是表演，而是讓那個被你的生命磨礪出來的光澤，自然地被人感受到。'
+  },
+  mirror_mint: {
+    message: '薄荷綠讓鏡子映出你清新的能量——那種讓人感到舒適、讓人喘一口氣、讓周圍的空氣都清新起來的你。你有這樣的特質：你的存在讓人感到清爽。薄荷說：讓你的清新能量今天被你自己感受到，你帶給別人的，你也可以先給自己。',
+    reminder: '你的清新能量是你特別的吸引力。薄荷說：讓你清新的本質先被你自己感受到，然後自然地流向周圍。',
+    action: '今天讓你的清新能量先滋養你自己，再感染周圍：做一件讓你感到清爽的事，讓清新從你內在流出。'
+  },
+  mirror_eucalyptus: {
+    message: '尤加利讓鏡子映出清理後的你——去掉了那些遮蔽你真實自我的東西：那些你扮演的角色、那些你表現給別人看的形象、那些你用來保護自己的面具。清理之後，你最真實的樣子出現了，那才是最有生命力的你。',
+    reminder: '你最真實的樣子，是最有生命力的。尤加利說：清除遮蔽你真實自我的面具，讓你真實的樣子出來。',
+    action: '今天清除一個你一直在對某個人或某個場合扮演的面具，讓你真實的樣子更多地出現，感受那種輕鬆。'
+  },
+  mirror_moss: {
+    message: '苔蘚綠讓鏡子靜靜映出你深沉的根和沉穩——你有很深的根，那些看不見的、在你內心深處的根，讓你能夠在任何風吹雨打中保持穩定。苔蘚說：你的沉穩不是冷漠，是深根；你的靜默不是沒有，是深深有。',
+    reminder: '你的沉穩來自深根，那是你最深的力量。苔蘚說：感受你內在的深根，讓它成為你面對任何事的自信來源。',
+    action: '感受你內在的沉穩和深根——在鏡子前，感受腳踩在地上的穩固，感受你內在的根，讓這個沉穩成為你的自信。'
+  },
+  mirror_celadon: {
+    message: '青瓷綠讓鏡子從容地映出你的優雅本質——你有一種從容的氣質，即使在忙碌和壓力中，你也有一種不著急的、沉得住氣的從容。這種從容是難得的，是一種難以複製的美麗，因為它來自你內在的穩定，而不是外在的表現。',
+    reminder: '從容是你最迷人的氣質，它來自你的內在穩定。青瓷說：讓你的從容自然地展現，它不需要被表演。',
+    action: '今天練習從容——在任何讓你感到急促的時刻，刻意放慢，讓你的從容出現，感受它是你天生的氣質。'
+  },
+  mirror_clay: {
+    message: '陶土棕讓鏡子映出你踏實的、有份量的存在——你不是輕飄飄的，你是真實的、有重量的、可以被依靠的。你的踏實讓你有一種特別的吸引力：人們感到你的真實、你的可靠、你的有份量，那是一種珍貴的特質。',
+    reminder: '你的踏實和真實是你特別的吸引力，它讓你可靠。陶土說：欣賞你踏實的那一面，它讓你有份量。',
+    action: '今天欣賞自己踏實和真實的那一面，向自己確認：「我的踏實是我的力量，我因為真實而讓人信任。」'
+  },
+  mirror_amber: {
+    message: '琥珀黃讓鏡子映出你創造性的光芒——你有一種獨特的、只屬於你的創造性能量，那是讓你發光的東西。你的創造力、你的想像力、你對美的感受，是你最特別的美麗。琥珀說：讓這個光從你眼睛裡發出來，不要壓住它。',
+    reminder: '你的創造力讓你發光，那是你最特別的美麗。琥珀說：讓你創造性的光芒今天自然地展現出來。',
+    action: '今天讓你的創造性光芒展現——做一件創造性的事，讓那個在你眼睛裡發光的創造力，今天被世界看見。'
+  },
+  mirror_sand: {
+    message: '沙丘米讓鏡子映出你的廣闊和包容——你能容納很多，你的心是開放的，你能包容複雜和矛盾，那是一種很大的美麗。沙丘說：你的廣闊和包容讓你的世界更豐富，讓更多不同的東西可以在你的生命裡共存。',
+    reminder: '你的包容和廣闊是你最大的美麗。沙丘說：欣賞你能容納複雜和矛盾的這個特質，它讓你的世界更豐富。',
+    action: '今天欣賞自己的包容心，向自己確認：「我能容納複雜，我能包容不同，這讓我的世界更廣闊和豐富。」'
+  },
+  mirror_terra: {
+    message: '赤陶磚讓鏡子映出你眼睛裡的熱情之火——你有強烈的感受、有充沛的熱情、有那種讓你活得充滿生命力的火。這個火是你最迷人的特質：人們能感受到你對事情的真實熱情，那是無可取代的吸引力。',
+    reminder: '你的熱情是你最迷人的特質，它讓你充滿生命力。赤土說：讓你眼睛裡的火今天燃燒起來，不要壓制它。',
+    action: '今天讓你的熱情在你的眼睛裡燃燒——對你真正在乎的事帶著熱情，讓那個火讓人感受到你的真實和活力。'
+  },
+  mirror_smoke: {
+    message: '煙霧灰讓鏡子在朦朧中映出正在蛻變的你——你現在的樣子是過渡中的，是不完全清晰的，是還在成形的。煙霧說：朦朧不是問題，蛻變中的不清晰是一種誠實的狀態。你不需要在蛻變完成之前就有清晰的樣子。',
+    reminder: '蛻變中的朦朧，也有它的美麗和誠實。煙霧說：欣賞你正在蛻變的過程，不要急著變成「完成」的樣子。',
+    action: '欣賞你目前不完整的、在過渡中的樣子，告訴自己：「這個蛻變中的我，是誠實的、是真實的，它是過程，不是缺陷。」'
+  },
+  mirror_fog: {
+    message: '晨霧白讓鏡子映出清晨最真實的你——那個還沒有戴上任何面具、還沒有開始表演任何角色、最接近你本質的清晨狀態。那個剛醒來的你、那個頭髮還亂的你、那個還沒有整理好表情的你，那就是你最真實的樣子。',
+    reminder: '清晨的你是最真實的。晨霧說：珍視那個還沒開始表演的清晨的你，那才是你最真實的本質。',
+    action: '明早醒來，在鏡子前靜靜看自己一分鐘，在你戴上任何面具之前，看著這個最真實的你，說一句接受的話。'
+  },
+  mirror_charcoal: {
+    message: '炭灰讓鏡子映出清醒看見自己的你——那種誠實地、不逃避地、也不過度批判地看見自己的樣子：優點、缺點、矛盾、不完整，全部都看見，全部都承認。炭灰說：清醒地看見自己，是一種勇氣，也是愛自己的最深的方式。',
+    reminder: '清醒地看見自己，是最深的自我接納。炭灰說：不逃避地看見你的全部，那才是真正認識和愛自己。',
+    action: '今天誠實地看見自己的一個你通常在迴避的部分——不評判，不自責，只是清醒地看見，說：「我看見你了，我接受你。」'
+  },
+  mirror_ivory: {
+    message: '象牙白讓鏡子映出你珍貴的、獨一無二的存在——你是珍貴的，不是因為你完美，不是因為你達到了什麼標準，而是因為你就是你，沒有任何人和你完全相同，那個獨特性本身就是珍貴的。你的存在，就是你的價值。',
+    reminder: '你是珍貴的，不是因為你完美，而是因為你是你，獨一無二。象牙白說：你的存在本身就是你的價值。',
+    action: '今天向自己確認：「我是珍貴的，就是現在的我，帶著我所有的不完整，我是珍貴的。」讓這句話在你心裡站穩。'
   }
 };
 
@@ -1498,11 +3228,29 @@ function showResult() {
   const extension = generateExtension(selectedObject);
   document.getElementById('result-extension').textContent = extension;
 
+  // 填入顏色深度資料
+  const depth = COLOR_DEPTH[selectedColor];
+  if (depth) {
+    document.getElementById('color-depth-companion').textContent = depth.companion;
+    document.getElementById('color-depth-theme').textContent = depth.theme;
+    document.getElementById('color-depth-body').textContent = depth.body;
+    document.getElementById('color-depth-emotion').textContent = depth.emotion;
+    document.getElementById('color-depth-awareness').textContent = '✦ ' + depth.awareness;
+  }
+
   // 填入物件icon的簡單表示
   const iconContainer = document.getElementById('result-icon-object');
   iconContainer.textContent = objectData.name;
   iconContainer.style.fontSize = '0.9rem';
   iconContainer.style.color = '#5A5059';
+}
+
+function toggleColorDepth(toggleEl) {
+  const content = toggleEl.parentElement.querySelector('.color-depth-content');
+  const arrow = toggleEl.querySelector('.color-depth-arrow');
+  const isOpen = content.classList.contains('open');
+  content.classList.toggle('open', !isOpen);
+  arrow.classList.toggle('open', !isOpen);
 }
 
 async function shareToLine() {

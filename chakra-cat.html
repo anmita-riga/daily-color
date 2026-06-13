@@ -5,42 +5,103 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>脈輪貓 | Anmita Riga</title>
   <meta name="description" content="脈輪貓 - 輕輕觸碰光點，感受身體此刻想說的故事。七個能量中心，聆聽內在的聲音。">
-  <meta name="theme-color" content="#faf9ff">
+  <meta property="og:title" content="脈輪貓 | Anmita Riga">
+  <meta property="og:description" content="輕輕觸碰光點，感受身體此刻想說的故事。七個能量中心，聆聽內在的聲音。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://euphonious-lebkuchen-60376f.netlify.app/icon-512.png">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="脈輪貓 | Anmita Riga">
+  <meta name="twitter:description" content="輕輕觸碰光點，感受身體此刻想說的故事。">
+  <meta name="theme-color" content="#47406A">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="每日色彩">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script src="liff.js"></script>
   <style>
+    /* ── Design Tokens ── */
+    :root {
+      --ink-deepest: #3A3255;
+      --ink-deep:    #47406A;
+      --gold:        #E8C97A;
+      --gold-soft:   #F0D898;
+      --gold-line:   rgba(232, 201, 122, 0.65);
+      --lavender:        #C4AADF;
+      --lavender-soft:   #D4C0EC;
+      --lavender-deep:   #9B82C4;
+      --quartz:        #8EC4D8;
+      --quartz-soft:   #A8D4E4;
+      --text-primary:   #F5EFF8;
+      --text-secondary: #D8CFDF;
+      --text-muted:     #A89DB5;
+      --ease-silk: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { background: var(--ink-deepest); }
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #faf9ff 0%, #f5f8ff 100%);
-      transition: background-color 1.4s ease;
+      background:
+        radial-gradient(ellipse 90% 45% at 50% 0%,   rgba(196, 170, 223, 0.28) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 35% at 15% 40%,  rgba(232, 201, 122, 0.14) 0%, transparent 55%),
+        radial-gradient(ellipse 65% 35% at 85% 60%,  rgba(196, 170, 223, 0.20) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(232, 201, 122, 0.18) 0%, transparent 60%),
+        linear-gradient(180deg, var(--ink-deep) 0%, var(--ink-deepest) 50%, var(--ink-deep) 100%);
+      transition: none;
       font-family: "Noto Serif TC", Georgia, serif;
       font-weight: 300;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 4rem 1.5rem 5rem;
-      color: #4a3f73;
+      padding: 4rem 1.5rem 6rem;
+      color: var(--text-secondary);
       position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* 星塵粒子 */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 600px 300px at 30% 20%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 500px 300px at 70% 15%, rgba(147, 112, 219, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse 600px 350px at 80% 80%, rgba(135, 206, 235, 0.08) 0%, transparent 50%);
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at  8% 14%, rgba(232, 201, 122, 0.70), transparent),
+        radial-gradient(1px   1px   at 25% 28%, rgba(196, 170, 223, 0.55), transparent),
+        radial-gradient(1.5px 1.5px at 72% 18%, rgba(232, 201, 122, 0.60), transparent),
+        radial-gradient(1px   1px   at 90% 42%, rgba(196, 170, 223, 0.50), transparent),
+        radial-gradient(1px   1px   at 38% 65%, rgba(232, 201, 122, 0.45), transparent),
+        radial-gradient(1.5px 1.5px at 55% 82%, rgba(196, 170, 223, 0.60), transparent),
+        radial-gradient(1px   1px   at 18% 78%, rgba(232, 201, 122, 0.40), transparent),
+        radial-gradient(1.5px 1.5px at 48%  6%, rgba(245, 235, 210, 0.65), transparent);
       pointer-events: none;
       z-index: 0;
+      animation: starBreath 20s ease-in-out infinite;
+    }
+    @keyframes starBreath {
+      0%, 100% { opacity: 0.6; }
+      50%       { opacity: 1; }
+    }
+
+    /* 極光漂浮 */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 500px 320px at 20% 25%, rgba(196, 170, 223, 0.20) 0%, transparent 65%),
+        radial-gradient(ellipse 420px 280px at 82% 68%, rgba(232, 201, 122, 0.16) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: auroraFlow 32s ease-in-out infinite alternate;
+    }
+    @keyframes auroraFlow {
+      0%   { transform: translate(0, 0); opacity: 0.7; }
+      100% { transform: translate(-20px, 15px); opacity: 1; }
     }
 
     /* ── 返回 ── */
@@ -48,31 +109,37 @@
       position: fixed;
       top: 1.2rem;
       left: 1.4rem;
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      color: #9b8db5;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: var(--lavender);
       text-decoration: none;
-      transition: color 0.2s;
+      transition: all 0.4s var(--ease-silk);
       z-index: 10;
+      font-weight: 400;
+      opacity: 0.85;
     }
-    .back-link:hover { color: #6b5b95; }
+    .back-link:hover {
+      color: var(--lavender-soft);
+      transform: translateX(-4px);
+      opacity: 1;
+    }
 
     /* ── 底部回首頁鏈接 ── */
     .footer-home-link {
       display: inline-block;
       margin-top: 3rem;
       margin-bottom: 2rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: #9b8db5;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      color: var(--text-muted);
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.4s var(--ease-silk);
       font-weight: 400;
-      opacity: 0.7;
     }
     .footer-home-link:hover {
-      color: #6b5b95;
-      opacity: 1;
+      color: var(--lavender);
       transform: translateY(-2px);
     }
 
@@ -85,17 +152,17 @@
     }
     .header h1 {
       font-size: 1rem;
-      font-weight: 400;
+      font-weight: 300;
       letter-spacing: 0.45em;
-      color: #6b5b95;
+      color: var(--text-secondary);
     }
     .header p {
       margin-top: 0.8rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.2em;
-      color: #6b5b95;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
       line-height: 1.9;
-      font-weight: 400;
+      font-weight: 300;
     }
 
     /* ── 黑貓 ── */
@@ -106,6 +173,7 @@
       position: relative;
       overflow: visible;
       margin-bottom: 1rem;
+      z-index: 1;
     }
     .cat-img {
       width: 100%;
@@ -126,6 +194,14 @@
       align-items: center;
       justify-content: center;
       transition: all 0.3s ease;
+      border-radius: 50%;
+    }
+    /* 隱形擴大觸控區域（不影響視覺） */
+    .chakra-group::before {
+      content: '';
+      position: absolute;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
     }
 
@@ -374,11 +450,13 @@
       margin-top: 2rem;
       font-size: 0.76rem;
       letter-spacing: 0.24em;
-      color: #9b8db5;
+      color: var(--text-muted);
       text-align: center;
       transition: opacity 0.5s ease;
-      font-weight: 400;
+      font-weight: 300;
       animation: hint-pulse-once 2.2s ease-in-out 0.8s;
+      position: relative;
+      z-index: 1;
     }
     @keyframes hint-pulse-once {
       0% { opacity: 0.5; }
@@ -397,6 +475,8 @@
       transform: translateY(14px);
       transition: opacity 0.52s ease, transform 0.52s ease;
       pointer-events: none;
+      position: relative;
+      z-index: 1;
     }
     .card-wrap.visible {
       opacity: 1;
@@ -405,11 +485,17 @@
     }
 
     .card {
-      background: #fefefc;
+      background: linear-gradient(160deg, rgba(255,252,248,0.96) 0%, rgba(240,232,255,0.88) 100%);
       border-radius: 18px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.055), 0 1px 4px rgba(0,0,0,0.035);
+      border: 1px solid rgba(196, 170, 223, 0.30);
+      box-shadow:
+        inset 3px 0 0 0 var(--lavender),
+        0 16px 48px rgba(58, 50, 85, 0.40),
+        0 4px 12px rgba(0,0,0,0.15);
       overflow: hidden;
       position: relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .card::before {
       content: '';
@@ -417,8 +503,8 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,100,200,0.3), transparent);
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(196, 170, 223, 0.55), transparent);
       z-index: 1;
     }
 
@@ -427,8 +513,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 30%, rgba(147,112,219,0.04) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(200,180,255,0.03) 0%, transparent 50%);
+        radial-gradient(circle at 20% 30%, rgba(196,170,223,0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(232,201,122,0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -465,14 +551,16 @@
       font-weight: 500;
       letter-spacing: 0.1em;
       line-height: 1.4;
-      color: #6b5b95;
+      color: #3A3255;
     }
     .card-en {
+      font-family: "Cormorant Garamond", serif;
       font-size: 0.68rem;
       letter-spacing: 0.22em;
-      color: #b5a9c9;
+      color: var(--lavender-deep);
       margin-top: 0.2rem;
       font-style: italic;
+      font-weight: 300;
     }
 
     /* ════════════════════════════════════════
@@ -497,48 +585,44 @@
     .card-states-minimal {
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.7rem;
       margin-top: 1.8rem;
-      padding-top: 1.8rem;
-      border-top: 1px solid rgba(147,112,219,0.1);
-      opacity: 0.7;
+      padding-top: 1.6rem;
+      border-top: 1px solid rgba(196, 170, 223, 0.22);
     }
     .state-row {
       display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
     }
     .state-label {
-      font-size: 0.54rem;
-      letter-spacing: 0.15em;
-      color: #c5c0b8;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: #7A6A9A;
       flex-shrink: 0;
-      width: 2rem;
-      opacity: 0.8;
+      width: 2.2rem;
     }
     .state-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.3rem;
+      gap: 0.4rem;
     }
     .state-tag {
-      font-size: 0.66rem;
-      letter-spacing: 0.1em;
-      padding: 0.25rem 0.6rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      padding: 0.32rem 0.75rem;
       border-radius: 40px;
       font-weight: 400;
     }
     .state-tag.flow {
       color: #fff;
-      opacity: 0.8;
       font-weight: 500;
     }
     .state-tag.imbalance {
       background: transparent !important;
-      opacity: 0.7;
       font-weight: 400;
-      border: 1px solid;
+      border: 1.5px solid;
     }
 
     /* 隱藏標籤標題和分割線 */
@@ -553,7 +637,7 @@
       font-size: 1.02rem;
       line-height: 2.2;
       letter-spacing: 0.02em;
-      color: #5a4a7a;
+      color: #4A4070;
       white-space: pre-line;
       background: transparent;
       padding: 0;
@@ -564,10 +648,10 @@
       font-size: 0.96rem;
       line-height: 2;
       letter-spacing: 0.01em;
-      color: #6b5b95;
+      color: #5A4A7A;
       padding: 1rem 1.2rem;
-      background: rgba(220,200,255,0.12);
-      border-left: 3px solid rgba(147,112,219,0.25);
+      background: rgba(232, 201, 122, 0.12);
+      border-left: 3px solid rgba(200, 160, 80, 0.50);
       border-radius: 8px;
     }
 
@@ -577,7 +661,7 @@
       width: fit-content;
       margin: 1.2rem auto 0;
       background: transparent;
-      border: 1px solid #06C755;
+      border: 1px solid rgba(6, 199, 85, 0.7);
       color: #06C755;
       font-family: inherit;
       font-size: 0.68rem;
@@ -595,7 +679,7 @@
     ══════════════════════════ */
     .card-extra {
       margin-top: 2.4rem;
-      border-top: 1px solid rgba(147,112,219,0.12);
+      border-top: 1px solid rgba(196, 170, 223, 0.20);
       padding-top: 2rem;
     }
     .card-extra-toggle {
@@ -608,13 +692,13 @@
       font-family: inherit;
       font-size: 0.78rem;
       letter-spacing: 0.06em;
-      color: #5a4a7a;
+      color: #5A4A7A;
       padding: 0;
       transition: color 0.2s;
       font-weight: 500;
       text-align: left;
     }
-    .card-extra-toggle:hover { color: #6b5b95; }
+    .card-extra-toggle:hover { color: #3A3255; }
     .card-extra-arrow {
       font-size: 0.6rem;
       display: inline-block;
@@ -628,9 +712,9 @@
       gap: 1.6rem;
       margin-top: 1.6rem;
       padding: 1.6rem 1.4rem;
-      background: rgba(232,223,245,0.3);
+      background: rgba(196, 170, 223, 0.08);
       border-radius: 12px;
-      border: 1px solid rgba(147,112,219,0.1);
+      border: 1px solid rgba(196, 170, 223, 0.18);
       max-height: 0;
       overflow: hidden;
       transition: all 0.4s ease;
@@ -654,19 +738,19 @@
     .extra-meta-label {
       font-size: 0.68rem;
       letter-spacing: 0.04em;
-      color: #9b8db5;
+      color: #8A7AAA;
       font-weight: 500;
     }
     .extra-meta-value {
       font-size: 0.95rem;
       letter-spacing: 0.02em;
-      color: #6b5b95;
+      color: #4A3A6A;
       font-weight: 500;
     }
     .extra-section-label {
       font-size: 0.7rem;
       letter-spacing: 0.08em;
-      color: #6b5b95;
+      color: #7A6A9A;
       margin-bottom: 0.6rem;
       font-weight: 500;
     }
@@ -674,12 +758,12 @@
       font-size: 0.92rem;
       line-height: 1.8;
       letter-spacing: 0.02em;
-      color: #5a4a7a;
+      color: #5A4A7A;
       white-space: pre-line;
       padding: 0.8rem 1rem;
-      background: rgba(248,245,252,0.8);
+      background: rgba(255, 252, 248, 0.70);
       border-radius: 8px;
-      border-left: 2px solid rgba(147,112,219,0.25);
+      border-left: 2px solid rgba(196, 170, 223, 0.45);
     }
 
     /* ════════════════════════════════════════
@@ -698,7 +782,7 @@
         font-size: 0.62rem;
       }
       .cat-wrap {
-        max-width: 80vw;
+        max-width: 90vw;
         margin-bottom: 1rem;
       }
       .chakra-group {
@@ -736,8 +820,8 @@
         font-weight: 600;
       }
       .state-tag {
-        font-size: 0.68rem;
-        padding: 0.25rem 0.6rem;
+        font-size: 0.74rem;
+        padding: 0.28rem 0.65rem;
       }
       .state-tag.flow {
         opacity: 1;
@@ -933,43 +1017,43 @@
 
   <!-- 海底輪：雙腿之間底部 -->
   <!-- 海底輪：雙腿之間底部 -->
-  <div class="chakra-group" data-i="0" style="left:50%;top:77%;--ck-color:#C17B7B;">
+  <div class="chakra-group" data-i="0" style="left:50.3%;top:72.4%;--ck-color:#C17B7B;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 臍輪：下腹 -->
-  <div class="chakra-group" data-i="1" style="left:50%;top:66%;--ck-color:#C9976C;">
+  <div class="chakra-group" data-i="1" style="left:50.3%;top:65.8%;--ck-color:#C9976C;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 太陽神經叢：肚臍上方 -->
-  <div class="chakra-group" data-i="2" style="left:50%;top:56%;--ck-color:#C9B86A;">
+  <div class="chakra-group" data-i="2" style="left:50.3%;top:59.0%;--ck-color:#C9B86A;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 心輪：胸口中央 -->
-  <div class="chakra-group" data-i="3" style="left:50%;top:46%;--ck-color:#7DAF88;">
+  <div class="chakra-group" data-i="3" style="left:50.3%;top:51.6%;--ck-color:#7DAF88;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 喉輪：頭身交界 -->
-  <div class="chakra-group" data-i="4" style="left:50%;top:36%;--ck-color:#7AA2C4;">
+  <div class="chakra-group" data-i="4" style="left:50.3%;top:45.2%;--ck-color:#7AA2C4;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 眉心輪：兩眼之間 -->
-  <div class="chakra-group" data-i="5" style="left:50%;top:24%;--ck-color:#7A7AAF;">
+  <div class="chakra-group" data-i="5" style="left:50.3%;top:30.6%;--ck-color:#7A7AAF;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 頂輪：頭頂正中 -->
-  <div class="chakra-group" data-i="6" style="left:50%;top:13%;--ck-color:#A882C2;">
+  <div class="chakra-group" data-i="6" style="left:50.3%;top:22.6%;--ck-color:#A882C2;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>

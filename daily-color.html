@@ -5,22 +5,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>今日祝福 | Anmita Riga</title>
   <meta name="description" content="每日祝福 - 透過色彩和脈輪，感受宇宙給你的訊息。輕輕地抽一張，看看今天該怎麼活著。">
-  <meta name="theme-color" content="#faf9ff">
+  <meta property="og:title" content="今日祝福 | Anmita Riga">
+  <meta property="og:description" content="透過色彩和脈輪，感受宇宙給你的訊息。輕輕地抽一張，看看今天該怎麼活著。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://euphonious-lebkuchen-60376f.netlify.app/icon-512.png">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="今日祝福 | Anmita Riga">
+  <meta name="twitter:description" content="透過色彩和脈輪，感受宇宙給你的訊息。">
+  <meta name="theme-color" content="#47406A">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="每日色彩">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@300;400&display=swap" rel="stylesheet">
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script src="liff.js"></script>
   <style>
+    /* ── Design Tokens ── */
+    :root {
+      --ink-deepest: #3A3255;
+      --ink-deep:    #47406A;
+      --gold:        #E8C97A;
+      --gold-soft:   #F0D898;
+      --gold-line:   rgba(232, 201, 122, 0.65);
+      --lavender:        #C4AADF;
+      --lavender-soft:   #D4C0EC;
+      --quartz:      #8EC4D8;
+      --text-primary:   #F5EFF8;
+      --text-secondary: #D8CFDF;
+      --text-muted:     #A89DB5;
+      --ease-silk: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body { background: var(--ink-deepest); }
 
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #faf8ff 0%, #f7f4ff 50%, #fff8f5 100%);
-      transition: background 1.6s ease;
+      background:
+        radial-gradient(ellipse 90% 45% at 50% 0%,   rgba(196, 170, 223, 0.28) 0%, transparent 60%),
+        radial-gradient(ellipse 65% 35% at 15% 40%,  rgba(232, 201, 122, 0.14) 0%, transparent 55%),
+        radial-gradient(ellipse 65% 35% at 85% 60%,  rgba(196, 170, 223, 0.20) 0%, transparent 55%),
+        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(232, 201, 122, 0.18) 0%, transparent 60%),
+        linear-gradient(180deg, var(--ink-deep) 0%, var(--ink-deepest) 50%, var(--ink-deep) 100%);
+      transition: none;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -28,47 +59,66 @@
       font-family: "Noto Serif TC", Georgia, serif;
       font-weight: 300;
       padding: 4rem 1.5rem 6rem;
-      color: #3d3556;
+      color: var(--text-secondary);
       overflow-x: hidden;
       position: relative;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* 背景柔和流動 */
+    /* 星塵粒子 */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 700px 400px at 25% 25%, rgba(255, 182, 193, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 600px 350px at 75% 20%, rgba(147, 112, 219, 0.1) 0%, transparent 50%),
-        radial-gradient(ellipse 650px 380px at 80% 80%, rgba(135, 206, 235, 0.09) 0%, transparent 50%),
-        radial-gradient(ellipse 700px 400px at 20% 75%, rgba(255, 215, 100, 0.08) 0%, transparent 50%);
+      position: fixed; inset: 0;
+      background-image:
+        radial-gradient(1.5px 1.5px at  8% 14%, rgba(232, 201, 122, 0.70), transparent),
+        radial-gradient(1px   1px   at 25% 28%, rgba(196, 170, 223, 0.55), transparent),
+        radial-gradient(1.5px 1.5px at 72% 18%, rgba(232, 201, 122, 0.60), transparent),
+        radial-gradient(1px   1px   at 90% 42%, rgba(196, 170, 223, 0.50), transparent),
+        radial-gradient(1px   1px   at 38% 65%, rgba(232, 201, 122, 0.45), transparent),
+        radial-gradient(1.5px 1.5px at 55% 82%, rgba(196, 170, 223, 0.60), transparent),
+        radial-gradient(1px   1px   at 18% 78%, rgba(232, 201, 122, 0.40), transparent),
+        radial-gradient(1.5px 1.5px at 48%  6%, rgba(245, 235, 210, 0.65), transparent);
       pointer-events: none;
-      animation: none;
       z-index: 0;
+      animation: starBreath 20s ease-in-out infinite;
     }
-    @keyframes ambient {
-      0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-      25%       { transform: translate(-3%, 2%) scale(1.08) rotate(5deg); }
-      50%       { transform: translate(2%, -2%) scale(1.04) rotate(0deg); }
-      75%       { transform: translate(-2%, -3%) scale(1.06) rotate(-5deg); }
+    @keyframes starBreath {
+      0%, 100% { opacity: 0.6; }
+      50%      { opacity: 1; }
+    }
+
+    /* 極光漂浮 */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 500px 320px at 20% 25%, rgba(196, 170, 223, 0.20) 0%, transparent 65%),
+        radial-gradient(ellipse 420px 280px at 82% 68%, rgba(232, 201, 122, 0.16) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+      animation: auroraFlow 32s ease-in-out infinite alternate;
+    }
+    @keyframes auroraFlow {
+      0%   { transform: translate(0, 0); opacity: 0.7; }
+      100% { transform: translate(-20px, 15px); opacity: 1; }
     }
 
     /* ── 返回 ── */
     .back-link {
       position: fixed;
       top: 1.2rem; left: 1.4rem;
-      font-size: 0.82rem;
-      letter-spacing: 0.2em;
-      color: #6b5b95;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: var(--lavender);
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.4s var(--ease-silk);
       z-index: 10;
-      font-weight: 500;
-      opacity: 0.9;
+      font-weight: 400;
+      opacity: 0.85;
     }
     .back-link:hover {
-      color: #5a4a7a;
+      color: var(--lavender-soft);
       transform: translateX(-4px);
       opacity: 1;
     }
@@ -78,56 +128,59 @@
       display: inline-block;
       margin-top: 3rem;
       margin-bottom: 2rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.2em;
-      color: #b5a9c9;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      color: var(--text-muted);
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.4s var(--ease-silk);
       font-weight: 400;
-      opacity: 0.7;
     }
     .footer-home-link:hover {
-      color: #6b5b95;
-      opacity: 1;
+      color: var(--lavender);
       transform: translateY(-2px);
     }
 
     /* ── 標題 ── */
     .headline {
-      font-size: 1.06rem;
-      color: #5a4a7a;
-      letter-spacing: 0.15em;
-      font-weight: 400;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      letter-spacing: 0.18em;
+      font-weight: 300;
       text-align: center;
       margin-bottom: 1.4rem;
       position: relative;
       z-index: 1;
-      line-height: 1.9;
+      line-height: 2;
     }
 
     /* ── 抽牌按鈕 ── */
     .draw-btn {
-      background: linear-gradient(135deg, rgba(147,112,219,0.12) 0%, rgba(200,180,255,0.08) 100%);
-      border: 1.5px solid rgba(147,112,219,0.35);
-      color: #6b5b95;
-      font-family: inherit;
-      font-size: 0.9rem;
+      background: linear-gradient(135deg,
+        rgba(232, 201, 122, 0.12) 0%,
+        rgba(196, 170, 223, 0.10) 100%);
+      border: 1px solid var(--gold-line);
+      color: var(--gold);
+      font-family: "Noto Serif TC", serif;
+      font-size: 0.88rem;
       font-weight: 400;
-      letter-spacing: 0.25em;
-      padding: 0.75rem 2.6rem;
+      letter-spacing: 0.28em;
+      padding: 0.85rem 2.8rem;
       border-radius: 100px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.5s var(--ease-silk);
       margin-bottom: 2.4rem;
       position: relative;
       z-index: 1;
-      box-shadow: 0 4px 15px rgba(147,112,219,0.08);
+      box-shadow: 0 4px 20px rgba(232, 201, 122, 0.12);
     }
     .draw-btn:hover {
-      background: linear-gradient(135deg, rgba(147,112,219,0.22) 0%, rgba(200,180,255,0.15) 100%);
-      border-color: rgba(147,112,219,0.55);
-      color: #5a4a7a;
-      box-shadow: 0 6px 20px rgba(147,112,219,0.15);
+      background: linear-gradient(135deg,
+        rgba(232, 201, 122, 0.22) 0%,
+        rgba(196, 170, 223, 0.18) 100%);
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      box-shadow: 0 6px 28px rgba(232, 201, 122, 0.25);
       transform: translateY(-2px);
     }
     .draw-btn:active { transform: scale(0.98); }
@@ -238,15 +291,24 @@
        第一張卡：直覺祝福
     ════════════════════════════════════════ */
     .ic-wrap {
-      border-radius: 24px;
+      border-radius: 16px;
       padding: 2.8rem 2.4rem 2.6rem;
-      box-shadow: 0 8px 28px rgba(147,112,219,0.1), 0 2px 8px rgba(0,0,0,0.06);
+      background: linear-gradient(180deg,
+        rgba(38, 32, 58, 0.88) 0%,
+        rgba(232, 201, 122, 0.09) 100%);
+      border: 1px solid rgba(232, 201, 122, 0.28);
+      box-shadow:
+        inset 3px 0 0 0 var(--gold),
+        0 12px 40px rgba(20, 16, 38, 0.55),
+        0 0 32px rgba(232, 201, 122, 0.08);
       display: none;
       opacity: 0;
       transform: translateY(14px);
       transition: opacity 0.62s ease, transform 0.62s ease;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
     .ic-wrap.appear { opacity: 1; transform: translateY(0); }
 
@@ -259,13 +321,14 @@
     }
 
     .ic-label {
-      font-size: 0.6rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.64rem;
       letter-spacing: 0.35em;
-      color: #9b8db5;
+      color: #8A78A8;
       text-align: center;
       margin-bottom: 1.5rem;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 500;
     }
     .ic-text {
       font-size: 1.42rem;
@@ -273,9 +336,18 @@
       letter-spacing: 0.08em;
       line-height: 2.2;
       text-align: center;
-      color: #3d3556;
+      color: #3A3255;
       white-space: pre-line;
       padding: 0 1rem;
+    }
+
+    .ic-hint {
+      text-align: center;
+      font-size: 0.70rem;
+      color: #9B87BC;
+      letter-spacing: 0.08em;
+      margin-top: 1.2rem;
+      padding-bottom: 0.4rem;
     }
 
     /* ════════════════════════════════════════
@@ -325,8 +397,15 @@
     /* 背面（結果卡片區） */
     .ck-back {
       min-height: 420px;
-      background: linear-gradient(180deg, #fefefc 0%, #fdfbf9 100%);
-      box-shadow: 0 8px 28px rgba(147,112,219,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+      background: linear-gradient(160deg,
+        rgba(255, 252, 248, 0.95) 0%,
+        rgba(240, 232, 255, 0.85) 100%);
+      border: 1px solid rgba(196, 170, 223, 0.35);
+      box-shadow:
+        inset 3px 0 0 0 var(--lavender),
+        0 16px 48px rgba(90, 70, 130, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -363,7 +442,7 @@
       text-align: center;
       font-size: 0.9rem;
       line-height: 1.8;
-      color: #9b8db5;
+      color: var(--lavender);
       font-weight: 300;
       letter-spacing: 0.05em;
       transition: opacity 0.5s ease;
@@ -407,12 +486,12 @@
 
     /* 第一層：訊息類別 */
     .ck-layer-1 {
-      font-size: 0.62rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.64rem;
       letter-spacing: 0.3em;
-      color: #9b8db5;
+      color: var(--lavender);
       text-transform: uppercase;
-      font-weight: 600;
-      opacity: 0.8;
+      font-weight: 500;
     }
 
     /* 第二層：卡牌名稱（最大標題） */
@@ -432,7 +511,7 @@
       font-size: 2rem;
       font-weight: 400;
       letter-spacing: 0.08em;
-      color: #3d3556;
+      color: #3A3255;
       line-height: 1.4;
       max-width: 220px;
     }
@@ -442,7 +521,7 @@
       font-size: 1.04rem;
       line-height: 2.1;
       letter-spacing: 0.02em;
-      color: #5a4a7a;
+      color: #4A4070;
       max-width: 300px;
       font-weight: 400;
     }
@@ -457,10 +536,10 @@
       font-size: 0.96rem;
       line-height: 1.95;
       letter-spacing: 0.01em;
-      color: #6b5b95;
+      color: #5A4A7A;
       padding: 1rem 1.2rem;
-      background: rgba(220,200,255,0.1);
-      border-left: 3px solid rgba(147,112,219,0.3);
+      background: rgba(196, 170, 223, 0.14);
+      border-left: 3px solid rgba(155, 120, 196, 0.55);
       border-radius: 8px;
       text-align: left;
     }
@@ -470,11 +549,31 @@
       font-size: 0.88rem;
       line-height: 1.9;
       letter-spacing: 0.01em;
-      color: #8A7A8A;
+      color: #8A7AAA;
       font-style: italic;
       font-weight: 300;
       max-width: 220px;
-      opacity: 0.85;
+    }
+
+    /* 點擊繼續提示 */
+    .ck-tap-continue {
+      margin-top: 1.8rem;
+      opacity: 0;
+      animation: tapPulse 1.8s ease-in-out infinite;
+      cursor: pointer;
+    }
+    .ck-tap-continue span {
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      border: 1px solid var(--gold-line);
+      border-radius: 20px;
+      padding: 0.5rem 1.2rem;
+    }
+    .ck-tap-continue.hidden { display: none; }
+    @keyframes tapPulse {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
     }
 
     /* 隱藏舊的不用樣式 */
@@ -501,8 +600,15 @@
       top: 0; left: 0; right: 0;
       width: 100%;
       min-height: 420px;
-      background: linear-gradient(180deg, #fefefc 0%, #fdfbf9 100%);
-      box-shadow: 0 8px 28px rgba(147,112,219,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+      background: linear-gradient(160deg,
+        rgba(255, 252, 248, 0.95) 0%,
+        rgba(240, 232, 255, 0.85) 100%);
+      border: 1px solid rgba(196, 170, 223, 0.35);
+      box-shadow:
+        inset 3px 0 0 0 var(--lavender),
+        0 16px 48px rgba(90, 70, 130, 0.18);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       overflow: hidden;
       border-radius: 24px;
       opacity: 0;
@@ -556,28 +662,30 @@
       font-size: 1.28rem;
       font-weight: 500;
       letter-spacing: 0.12em;
-      color: #5a4a7a;
+      color: #3A3255;
       line-height: 1.5;
       margin-bottom: 0.4rem;
     }
     .ck-en {
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
-      color: #a89bc3;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      color: var(--lavender);
       margin-top: 0.3rem;
       font-style: italic;
       font-weight: 300;
     }
 
     .ck-element-location {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
-      color: #9b8db5;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.20em;
+      color: var(--lavender);
       margin-top: 0.8rem;
       margin-bottom: 1rem;
       font-weight: 400;
-      padding: 0.6rem 1rem;
-      background: rgba(147,112,219,0.08);
+      padding: 0.5rem 1rem;
+      background: rgba(196, 170, 223, 0.10);
       border-radius: 12px;
       display: inline-block;
     }
@@ -588,32 +696,33 @@
       letter-spacing: 0.08em;
       line-height: 2.25;
       text-align: center;
-      color: #3d3556;
+      color: #3A3255;
       margin-bottom: 1.8rem;
       white-space: pre-line;
       padding: 0 0.6rem;
     }
     .ck-rule {
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(147,112,219,0.3), transparent);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
       margin: 1.3rem 0;
     }
     .ck-action-label {
+      font-family: "Cormorant Garamond", serif;
       font-size: 0.64rem;
-      letter-spacing: 0.28em;
-      color: #9b8db5;
+      letter-spacing: 0.30em;
+      color: var(--gold);
       margin-bottom: 0.7rem;
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 500;
     }
     .ck-action {
       font-size: 0.95rem;
       line-height: 1.95;
       letter-spacing: 0.02em;
-      color: #5a4a7a;
+      color: #5A4A7A;
       padding: 1rem 1.2rem;
-      background: linear-gradient(135deg, rgba(220,200,255,0.18) 0%, rgba(200,180,255,0.1) 100%);
-      border-left: 3px solid rgba(147,112,219,0.35);
+      background: rgba(232, 201, 122, 0.12);
+      border-left: 3px solid rgba(200, 160, 80, 0.55);
       border-radius: 10px;
     }
 
@@ -630,20 +739,21 @@
       max-height: 500px;
     }
     .ck-deeper-label {
-      font-size: 0.6rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.64rem;
       letter-spacing: 0.3em;
-      color: #9b8db5;
+      color: var(--quartz);
       text-transform: uppercase;
-      font-weight: 600;
+      font-weight: 500;
       margin-bottom: 0.5rem;
     }
     .ck-deeper-text {
       font-size: 0.92rem;
       line-height: 2;
       letter-spacing: 0.02em;
-      color: #5a4a7a;
+      color: var(--text-secondary);
       padding: 1rem 1.1rem;
-      background: linear-gradient(135deg, rgba(147,112,219,0.1) 0%, rgba(180,160,240,0.06) 100%);
+      background: rgba(142, 196, 216, 0.07);
       border-radius: 10px;
       margin-bottom: 1.2rem;
     }
@@ -651,10 +761,10 @@
       font-size: 0.92rem;
       line-height: 2;
       letter-spacing: 0.02em;
-      color: #6b5b95;
+      color: var(--text-muted);
       padding: 1rem 1.2rem;
-      background: linear-gradient(135deg, rgba(220,200,255,0.12) 0%, rgba(200,180,255,0.08) 100%);
-      border-left: 3px solid rgba(147,112,219,0.3);
+      background: rgba(142, 196, 216, 0.06);
+      border-left: 3px solid rgba(142, 196, 216, 0.40);
       border-radius: 10px;
       font-style: italic;
       font-weight: 300;
@@ -662,22 +772,36 @@
 
     /* 按鈕 "更多" */
     .ck-expand-btn {
-      display: inline-block;
-      margin-top: 0.8rem;
+      display: block;
+      width: calc(100% - 3.2rem);
+      margin: 1.2rem auto 0;
       background: transparent;
-      border: 1px solid rgba(147,112,219,0.3);
-      color: #9b8db5;
-      font-family: inherit;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      padding: 0.45rem 1rem;
-      border-radius: 50px;
+      border: 1px solid var(--gold-line);
+      color: var(--gold);
+      font-family: "Noto Serif TC", serif;
+      font-size: 0.80rem;
+      letter-spacing: 0.20em;
+      padding: 0.75rem 1.2rem;
+      border-radius: 100px;
       cursor: pointer;
-      transition: all 0.25s;
+      transition: all 0.4s var(--ease-silk);
+      text-align: center;
     }
     .ck-expand-btn:hover {
-      background: rgba(147,112,219,0.1);
-      border-color: rgba(147,112,219,0.5);
+      background: rgba(232, 201, 122, 0.10);
+      border-color: var(--gold);
+    }
+    .ck-expand-btn::after {
+      content: ' ↓';
+      opacity: 0.7;
+    }
+    .ck-expand-btn.expanded::after {
+      content: ' ↑';
+    }
+    .ck-expand-btn:hover {
+      background: linear-gradient(135deg, rgba(147,112,219,0.18) 0%, rgba(184,154,216,0.14) 100%);
+      border-color: rgba(147,112,219,0.65);
+      color: #6247a0;
     }
     /* 次要按鈕：分享 */
     .ck-share {
@@ -724,15 +848,17 @@
 
     /* ── LINE 個人化問候 ── */
     .line-greeting {
-      font-size: 0.72rem;
-      letter-spacing: 0.24em;
-      color: #8A7A8A;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.76rem;
+      letter-spacing: 0.28em;
+      color: var(--lavender);
       text-align: center;
       margin-bottom: 0.6rem;
       min-height: 1.4em;
       position: relative;
       z-index: 1;
       font-weight: 400;
+      font-style: italic;
     }
 
     /* 文字淡入上浮 */
@@ -752,23 +878,23 @@
     .redraw-btn {
       display: block;
       margin: 2.8rem auto 2rem;
-      background: linear-gradient(135deg, rgba(147,112,219,0.22) 0%, rgba(180,160,240,0.15) 100%);
-      border: 2px solid rgba(147,112,219,0.45);
-      color: #5a4a7a;
-      font-family: inherit;
-      font-size: 1rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      padding: 0.85rem 3rem;
+      background: transparent;
+      border: 1px solid var(--gold-line);
+      color: var(--gold);
+      font-family: "Noto Serif TC", serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.28em;
+      padding: 0.9rem 3rem;
       border-radius: 100px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.5s var(--ease-silk);
       opacity: 0;
       transform: translateY(10px);
       pointer-events: none;
       position: relative;
       z-index: 1;
-      box-shadow: 0 6px 24px rgba(147,112,219,0.12);
+      box-shadow: 0 4px 20px rgba(232, 201, 122, 0.10);
     }
     .redraw-btn.visible {
       opacity: 1;
@@ -776,10 +902,10 @@
       pointer-events: all;
     }
     .redraw-btn:hover {
-      background: linear-gradient(135deg, rgba(147,112,219,0.32) 0%, rgba(180,160,240,0.22) 100%);
-      border-color: rgba(147,112,219,0.65);
-      color: #3d3556;
-      box-shadow: 0 10px 32px rgba(147,112,219,0.18);
+      background: rgba(232, 201, 122, 0.12);
+      border-color: var(--gold);
+      color: var(--gold-soft);
+      box-shadow: 0 8px 28px rgba(232, 201, 122, 0.22);
       transform: translateY(-3px);
     }
     .redraw-btn:active { transform: scale(0.98); }
@@ -1144,6 +1270,7 @@
     <div class="ic-strip" id="icStrip"></div>
     <div class="ic-label">今天的直覺訊息</div>
     <div class="ic-text" id="icText"></div>
+    <div class="ic-hint">✦ 接下來還有一張脈輪卡，讀完後輕輕點擊繼續</div>
   </div>
 
   <!-- ── 第二張：脈輪卡 ── -->
@@ -1183,6 +1310,11 @@
 
             <!-- 第五層：自我提問 -->
             <div class="ck-layer-5" id="ckCardQuestion"></div>
+
+            <!-- 點擊繼續 -->
+            <div class="ck-tap-continue" id="ckTapContinue">
+              <span>準備好了，點這裡繼續 ↓</span>
+            </div>
           </div>
 
           <div class="ck-back-aura"></div>
@@ -1214,7 +1346,7 @@
               <div class="ck-transform ta" id="ckTransform"></div>
             </div>
 
-            <button class="ck-expand-btn ta" id="ckExpandBtn" style="display: none;">更多探索</button>
+            <button class="ck-expand-btn ta" id="ckExpandBtn" style="display: none;">深度理解 · 轉化方向</button>
 
             <div style="display: flex; gap: 0.8rem; margin-top: 1.3rem; justify-content: center; flex-wrap: wrap;">
               <button class="ck-share line-btn ta" id="ckShare">分享到 LINE ↗</button>
@@ -1504,8 +1636,9 @@ function pageTint(hex) {
   const r = parseInt(hex.slice(1,3),16);
   const g = parseInt(hex.slice(3,5),16);
   const b = parseInt(hex.slice(5,7),16);
-  const base = [245,243,239];
-  const t = 0.88;
+  // 混入深紫底色 #3A3255，保留 92% 深色 + 8% 卡片色
+  const base = [58, 50, 85];
+  const t = 0.92;
   return `rgb(${Math.round(r+(base[0]-r)*t)},${Math.round(g+(base[1]-g)*t)},${Math.round(b+(base[2]-b)*t)})`;
 }
 function hexAlpha(hex, a) {
@@ -1624,16 +1757,13 @@ function fillIC(ic, isSpirit = false) {
   document.getElementById('icText').textContent = ic.text;
   const strip = document.getElementById('icStrip');
 
-  if (isSpirit) {
-    // 靈性指引卡 - 使用卡牌自身的顏色
-    strip.style.background = `linear-gradient(90deg, ${hexAlpha(ic.color, 0.4)}, ${hexAlpha(ic.color, 0.15)}, ${hexAlpha(ic.color, 0.4)})`;
-    icWrap.style.background = `linear-gradient(135deg, ${ic.color}22 0%, ${ic.color}11 100%)`;
-  } else {
-    // 脈輪卡 - 使用脈輪顏色
-    const ck = CHAKRA_DATA[ic.chakra];
-    strip.style.background = `linear-gradient(90deg, ${hexAlpha(ck.color, 0.4)}, ${hexAlpha(ck.color, 0.15)}, ${hexAlpha(ck.color, 0.4)})`;
-    icWrap.style.background = ic.bg;
-  }
+  const color = isSpirit ? ic.color : CHAKRA_DATA[ic.chakra].color;
+  // 頂部細線
+  strip.style.background = `linear-gradient(90deg, transparent, ${hexAlpha(color, 0.9)}, ${hexAlpha(color, 0.6)}, transparent)`;
+  // 卡片背景：半透明亮底 + 卡片色暈染
+  icWrap.style.background = `linear-gradient(160deg, rgba(255,252,248,0.92) 0%, ${hexAlpha(color, 0.18)} 100%)`;
+  icWrap.style.boxShadow = `inset 3px 0 0 0 ${hexAlpha(color, 1)}, 0 16px 48px ${hexAlpha(color, 0.20)}, 0 4px 12px rgba(0,0,0,0.10)`;
+  icWrap.style.borderColor = hexAlpha(color, 0.30);
 }
 
 // ── 填充脈輪卡 或 靈性指引卡 ──
@@ -1688,7 +1818,7 @@ function fillCK(ck, spirit = null) {
     // 背卡內容：新的 5 層結構
     fillBackCard(
       `今日訊息 · ${ck.name}`,
-      ck.blessing,
+      ck.name,
       '✨',
       ck.deeper,
       ck.action,
@@ -1790,10 +1920,15 @@ function showPair(pair) {
     fillCK(pair.ck, null);
   }
 
-  // 背景色漸層改為卡片色系
+  // 背景色漸層：在深紫底色上加入卡片色光暈
   const tintColor = pageTint(cardColor);
   document.body.style.backgroundColor = tintColor;
-  document.body.style.backgroundImage = `radial-gradient(ellipse 60% 50% at 50% 40%, ${hexAlpha(cardColor, 0.12)} 0%, transparent 70%)`;
+  document.body.style.backgroundImage = `
+    radial-gradient(ellipse 90% 45% at 50% 0%, rgba(196,170,223,0.28) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 35% at 15% 40%, rgba(232,201,122,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 50% 50%, ${hexAlpha(cardColor, 0.14)} 0%, transparent 65%),
+    radial-gradient(ellipse 80% 40% at 50% 100%, rgba(232,201,122,0.18) 0%, transparent 60%)
+  `;
 
   // 卡1：直覺祝福 淡入
   icWrap.style.display = 'block';
@@ -1810,20 +1945,33 @@ function showPair(pair) {
     ckScene.classList.add('active');
     showResultCard(true);
 
-    // 再等 0.6 秒後翻入，並平滑捲動到卡2
+    // 捲動到卡2 讓用戶閱讀背面
     setTimeout(() => {
-      flipCKIn();
-      setTimeout(() => {
-        ckScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 400);
+      ckScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 300);
+
+    // 延遲 0.6 秒再綁定點擊，避免滾動瞬間誤觸
+    setTimeout(() => {
+      const tapContinue = document.getElementById('ckTapContinue');
+      tapContinue.classList.remove('hidden');
+
+      let flipped = false;
+      const doFlip = (e) => {
+        e.stopPropagation();
+        if (flipped) return;
+        flipped = true;
+        tapContinue.classList.add('hidden');
+        tapContinue.removeEventListener('click', doFlip);
+        flipCKIn();
+        setTimeout(() => {
+          redrawBtn.classList.add('visible');
+          state = 'shown';
+        }, 1800);
+      };
+
+      tapContinue.addEventListener('click', doFlip);
     }, 600);
   }, 2800);
-
-  // 「再抽一張」等卡2 完全顯示後才出現（2800 + 600 + 1400 文字淡入完成）
-  setTimeout(() => {
-    redrawBtn.classList.add('visible');
-    state = 'shown';
-  }, 5200);
 }
 
 // ── 抽牌觸發 ──
@@ -1911,13 +2059,42 @@ function handleRedraw() {
     const contentEl = document.getElementById('ckBackContent');
     contentEl.classList.remove('show');
 
-    // 短暫停頓後顯示新卡片
+    // 重置「點擊繼續」提示
+    const tapContinue = document.getElementById('ckTapContinue');
+    tapContinue.classList.add('hidden');
+
+    // 短暫停頓後顯示新卡片，再重新給使用者點擊翻面
     setTimeout(() => {
-      showResultCard(false); // 立即隱藏提示，顯示新卡片
-      // 重新翻轉回正面（顯示新卡片）
-      flipCKIn();
-      redrawBtn.classList.add('visible');
-      state = 'shown';
+      // 填入新內容（保留背面讓用戶閱讀）
+      const pair = pickPair();
+      currentIC = pair.ic;
+      currentCK = pair.ck;
+      const isSpirit = pair.type === 'spirit';
+      fillIC(pair.ic, isSpirit);
+      if (isSpirit) { fillCK(null, pair.ic); } else { fillCK(pair.ck, null); }
+      showResultCard(false);
+      icWrap.style.display = 'block';
+      void icWrap.offsetWidth;
+      icWrap.classList.add('appear');
+
+      // 延遲再綁定點擊，避免誤觸
+      setTimeout(() => {
+        tapContinue.classList.remove('hidden');
+        let flipped = false;
+        const doFlip = (e) => {
+          e.stopPropagation();
+          if (flipped) return;
+          flipped = true;
+          tapContinue.classList.add('hidden');
+          tapContinue.removeEventListener('click', doFlip);
+          flipCKIn();
+          setTimeout(() => {
+            redrawBtn.classList.add('visible');
+            state = 'shown';
+          }, 1800);
+        };
+        tapContinue.addEventListener('click', doFlip);
+      }, 400);
     }, 400);
   });
 }
@@ -1932,10 +2109,12 @@ document.getElementById('ckExpandBtn').addEventListener('click', function() {
   const isVisible = deeperSection.classList.contains('visible');
   if (isVisible) {
     deeperSection.classList.remove('visible');
-    this.textContent = '更多探索';
+    this.classList.remove('expanded');
+    this.textContent = '深度理解 · 轉化方向';
   } else {
     deeperSection.classList.add('visible');
-    this.textContent = '收起';
+    this.classList.add('expanded');
+    this.textContent = '深度理解 · 轉化方向';
   }
 });
 
