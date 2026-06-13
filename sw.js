@@ -1,4 +1,4 @@
-const CACHE = 'daily-color-v14';
+const CACHE = 'daily-color-v15';
 const ASSETS = [
   './',
   './index.html',
