@@ -1101,6 +1101,86 @@
         </div>
         <div class="object-label">鏡子</div>
       </button>
+
+      <button class="object-btn" data-object="incense">
+        <div class="object-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- 香棒 -->
+            <line x1="32" y1="52" x2="32" y2="26" stroke-width="1.5"/>
+            <!-- 香座 -->
+            <ellipse cx="32" cy="53" rx="8" ry="2.5" stroke-width="1.2" fill="none"/>
+            <!-- 燃點 -->
+            <circle cx="32" cy="25" r="1.5" stroke-width="1"/>
+            <!-- 煙霧 -->
+            <path d="M32 24 Q 28 18 32 13 Q 36 8 32 3" stroke-width="1.2" fill="none" opacity="0.6"/>
+            <path d="M32 22 Q 36 17 32 12" stroke-width="0.8" fill="none" opacity="0.35"/>
+          </svg>
+        </div>
+        <div class="object-label">香</div>
+      </button>
+
+      <button class="object-btn" data-object="shell">
+        <div class="object-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- 貝殼外形 -->
+            <path d="M32 50 Q 14 46 12 32 Q 10 16 32 12 Q 54 16 52 32 Q 50 46 32 50Z" stroke-width="1.5" fill="none"/>
+            <!-- 螺旋紋 -->
+            <path d="M32 42 Q 22 38 22 30 Q 22 22 32 20 Q 42 22 40 30 Q 39 36 32 38" stroke-width="1" fill="none" opacity="0.5"/>
+            <path d="M32 34 Q 28 32 28 28 Q 29 24 32 24" stroke-width="0.8" fill="none" opacity="0.35"/>
+            <!-- 底部開口 -->
+            <path d="M26 50 Q 32 54 38 50" stroke-width="1.2" fill="none"/>
+          </svg>
+        </div>
+        <div class="object-label">貝殼</div>
+      </button>
+
+      <button class="object-btn" data-object="book">
+        <div class="object-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- 書封 -->
+            <rect x="12" y="14" width="40" height="38" rx="2" stroke-width="1.5" fill="none"/>
+            <!-- 書脊 -->
+            <line x1="28" y1="14" x2="28" y2="52" stroke-width="1.2"/>
+            <!-- 書頁線 -->
+            <line x1="33" y1="20" x2="46" y2="20" stroke-width="0.8" opacity="0.5"/>
+            <line x1="33" y1="26" x2="46" y2="26" stroke-width="0.8" opacity="0.5"/>
+            <line x1="33" y1="32" x2="46" y2="32" stroke-width="0.8" opacity="0.5"/>
+            <line x1="33" y1="38" x2="42" y2="38" stroke-width="0.8" opacity="0.35"/>
+            <!-- 書籤 -->
+            <path d="M20 14 L 20 24 L 23 21 L 26 24 L 26 14" stroke-width="1" fill="none" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="object-label">書</div>
+      </button>
+
+      <button class="object-btn" data-object="rain">
+        <div class="object-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- 雲 -->
+            <path d="M14 28 Q 14 20 22 20 Q 24 14 32 14 Q 40 14 42 20 Q 50 20 50 28 Q 50 34 42 34 L 22 34 Q 14 34 14 28Z" stroke-width="1.5" fill="none"/>
+            <!-- 雨滴 -->
+            <line x1="22" y1="40" x2="18" y2="50" stroke-width="1.2" opacity="0.7"/>
+            <line x1="30" y1="40" x2="26" y2="52" stroke-width="1.2" opacity="0.7"/>
+            <line x1="38" y1="40" x2="34" y2="52" stroke-width="1.2" opacity="0.7"/>
+            <line x1="46" y1="40" x2="42" y2="50" stroke-width="1.2" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="object-label">雨</div>
+      </button>
+
+      <button class="object-btn" data-object="stone">
+        <div class="object-icon">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <!-- 石頭主體 -->
+            <ellipse cx="32" cy="36" rx="20" ry="14" stroke-width="1.5" fill="none"/>
+            <!-- 光澤 -->
+            <path d="M22 28 Q 26 24 32 26" stroke-width="1" fill="none" opacity="0.35"/>
+            <!-- 第二顆小石 -->
+            <ellipse cx="44" cy="44" rx="8" ry="5" stroke-width="1" fill="none" opacity="0.45"/>
+          </svg>
+        </div>
+        <div class="object-label">石</div>
+      </button>
     </div>
 
     <div class="button-group">
@@ -1181,7 +1261,7 @@
       </div>
 
       <div class="result-section">
-        <div class="result-section-label">✨ 象徵與能量</div>
+        <div class="result-section-label">象徵與能量</div>
         <div class="result-section-content" id="result-message">
           <!-- 訊息動態填入 -->
         </div>
@@ -1199,7 +1279,7 @@
       <div class="result-divider"></div>
 
       <div class="result-section">
-        <div class="result-section-label">🌿 今天可以</div>
+        <div class="result-section-label">今天可以</div>
         <div class="result-section-content" id="result-action">
           <!-- 行動建議動態填入 -->
         </div>
@@ -1208,7 +1288,7 @@
       <div class="result-divider"></div>
 
       <div class="result-section">
-        <div class="result-section-label">🔄 轉化方向</div>
+        <div class="result-section-label">轉化方向</div>
         <div class="result-section-content" id="result-transform">
           <!-- 轉化建議動態填入 -->
         </div>
@@ -1282,7 +1362,12 @@ const OBJECTS = {
   river: { name: '河流', meaning: '流動與改變', scenario: '在轉折點或學習放手的時候' },
   letter: { name: '信封', meaning: '傳遞與連結', scenario: '需要表達或連結他人的時候' },
   plant: { name: '植物', meaning: '緩慢的成長', scenario: '想要穩定進展或觀察生長的時候' },
-  mirror: { name: '鏡子', meaning: '看見自己', scenario: '需要深入了解自己或面對真實的時候' }
+  mirror: { name: '鏡子', meaning: '看見自己', scenario: '需要深入了解自己或面對真實的時候' },
+  incense: { name: '香', meaning: '儀式與當下', scenario: '需要一個神聖的空間，讓自己沉澱的時候' },
+  shell: { name: '貝殼', meaning: '聆聽深處', scenario: '想靜靜聆聽內心、感受來自深處的聲音的時候' },
+  book: { name: '書', meaning: '記錄與見證', scenario: '需要整理思緒、把內在世界說清楚的時候' },
+  rain: { name: '雨', meaning: '洗滌與更新', scenario: '想放下積累已久的東西、重新開始的時候' },
+  stone: { name: '石', meaning: '紮根與承載', scenario: '需要穩定、沉靜，感受腳下力量的時候' }
 };
 
 const COLORS = {
@@ -3142,6 +3227,15 @@ document.querySelectorAll('.color-item').forEach(item => {
     document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
     swatch.classList.add('selected');
     selectedColor = swatch.dataset.color;
+    // 更新按鍵色系
+    const hex = COLORS[selectedColor]?.hex || '#8EC4D8';
+    const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    const darken = (v, a) => Math.round(v * (1-a)).toString(16).padStart(2,'0');
+    const deepHex = '#' + darken(r,0.15) + darken(g,0.15) + darken(b,0.15);
+    document.documentElement.style.setProperty('--page-accent', hex);
+    document.documentElement.style.setProperty('--page-accent-deep', deepHex);
+    document.documentElement.style.setProperty('--page-accent-line', `rgba(${r},${g},${b},0.65)`);
+    document.documentElement.style.setProperty('--page-accent-faint', `rgba(${r},${g},${b},0.14)`);
     // 啟用「看看提醒」按鈕
     const nextBtn = document.getElementById('next-to-result');
     if (nextBtn) {
@@ -3269,7 +3363,7 @@ function showResult() {
     document.getElementById('color-depth-theme').textContent = depth.theme;
     document.getElementById('color-depth-body').textContent = depth.body;
     document.getElementById('color-depth-emotion').textContent = depth.emotion;
-    document.getElementById('color-depth-awareness').textContent = '✦ ' + depth.awareness;
+    document.getElementById('color-depth-awareness').textContent = depth.awareness;
   }
 
   // 填入物件icon的簡單表示
@@ -3295,7 +3389,7 @@ async function catRoomShare() {
   const result = RESULTS[`${selectedObject}_${selectedColor}`];
   const transform = generateTransformSuggestions(selectedObject, selectedColor);
 
-  const fullMessage = `${result.title}\n\n${result.message}\n\n🌿 ${result.action}\n\n🔄 ${transform}`;
+  const fullMessage = `${result.title}\n\n${result.message}\n\n${result.action}\n\n${transform}`;
 
   const messages = buildRoomFlexMessage(
     objectData.name,

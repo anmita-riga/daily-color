@@ -1079,8 +1079,18 @@ const DEFAULTS = [
     name: '海底輪', en: 'Root Chakra', color: '#C17B7B',
     flow:      ['穩定', '扎根', '安全', '踏實'],
     imbalance: ['漂浮', '焦慮', '不安', '空洞'],
-    desc: '感受雙腳踩在地面的重量。\n你是安全的，你在這裡。',
-    action: '深呼吸三次，感受地板與椅子的支撐。',
+    descs: [
+      '感受雙腳踩在地面的重量。\n你是安全的，你在這裡。',
+      '不是每件事都需要現在解決。\n此刻，先讓身體安頓下來。',
+      '你的根在你自己身上。\n無論走到哪，你都帶著它。',
+      '有時候，安全感不是找到的，\n而是自己給的。'
+    ],
+    actions: [
+      '深呼吸三次，感受地板與椅子的支撐。',
+      '找一個你喜歡的地方，坐下來十分鐘，什麼都不用做。',
+      '慢慢走幾步路，感受每一步落地的重量。',
+      '對自己說：「我在這裡，我是安全的。」'
+    ],
     extra: {
       position: '脊椎底部', element: '地',
       insight:   '這是能量的起點\n像種子埋在土裡',
@@ -1092,8 +1102,18 @@ const DEFAULTS = [
     name: '臍輪', en: 'Sacral Chakra', color: '#C9976C',
     flow:      ['流動', '創造', '享受', '鮮活'],
     imbalance: ['麻木', '壓抑', '枯竭', '僵住'],
-    desc: '讓感受自由流動。\n不需要抓住，也不需要推開。',
-    action: '做一件純粹讓你開心的小事。',
+    descs: [
+      '讓感受自由流動。\n不需要抓住，也不需要推開。',
+      '你的感受不需要理由。\n它們只是想被聽見。',
+      '創造力不需要等靈感來。\n它就在你的手指間流動。',
+      '你有權利享受。\n快樂，是你本來就有的東西。'
+    ],
+    actions: [
+      '做一件純粹讓你開心的小事。',
+      '今天允許自己做一件「沒有意義」卻讓你喜悅的事。',
+      '隨手畫點什麼，不管看起來像什麼。',
+      '今天吃一樣你真正喜歡的東西，慢慢品嚐。'
+    ],
     extra: {
       position: '下腹部', element: '水',
       insight:   '能量開始流動與擴展',
@@ -1105,8 +1125,18 @@ const DEFAULTS = [
     name: '太陽神經叢', en: 'Solar Plexus', color: '#C9B86A',
     flow:      ['清晰', '自信', '行動', '有力'],
     imbalance: ['猶豫', '無力', '退縮', '過控'],
-    desc: '你內在有一份穩定的力量。\n它一直都在，不需要向外找。',
-    action: '寫下今天一件你做到的事。',
+    descs: [
+      '你內在有一份穩定的力量。\n它一直都在，不需要向外找。',
+      '猶豫不決的時候，先動第一步。\n身體比大腦先知道方向。',
+      '別人的評價是他們的事。\n你的行動，是你的事。',
+      '你不需要完美才有資格開始。\n你現在就已經足夠。'
+    ],
+    actions: [
+      '寫下今天一件你做到的事。',
+      '選一件拖很久的事，只做最小的第一步。',
+      '做一件只因為你自己想做的決定。',
+      '大聲說一遍：「我可以。」然後相信它。'
+    ],
     extra: {
       position: '肚臍附近', element: '火',
       insight:   '個體力量開始形成',
@@ -1118,8 +1148,18 @@ const DEFAULTS = [
     name: '心輪', en: 'Heart Chakra', color: '#7DAF88',
     flow:      ['開放', '溫柔', '連結', '流動'],
     imbalance: ['封閉', '疏離', '委屈', '緊繃'],
-    desc: '給自己與他人同等的溫柔。\n愛，從這裡開始流動。',
-    action: '對自己說一句你會對朋友說的話。',
+    descs: [
+      '給自己與他人同等的溫柔。\n愛，從這裡開始流動。',
+      '你可以敞開，也可以保護自己。\n兩件事可以同時存在。',
+      '愛不是犧牲自己去滿足別人。\n真正的愛，從自己開始。',
+      '有時候心裡有點重，\n那是因為你在意的事太多。'
+    ],
+    actions: [
+      '對自己說一句你會對朋友說的話。',
+      '把手放在心口，感受心跳，告訴它：「謝謝你。」',
+      '今天做一件善待自己的事，不用解釋。',
+      '寫下三件你珍惜的事，讓心輕一點。'
+    ],
     extra: {
       position: '胸口', element: '風',
       insight:   '從索取走向分享',
@@ -1131,8 +1171,18 @@ const DEFAULTS = [
     name: '喉輪', en: 'Throat Chakra', color: '#7AA2C4',
     flow:      ['表達', '真實', '自由', '清晰'],
     imbalance: ['噤聲', '迴避', '卡住', '過量'],
-    desc: '你的聲音值得被聽見。\n你的真實，值得被說出。',
-    action: '說出或寫下一件一直放在心裡的話。',
+    descs: [
+      '你的聲音值得被聽見。\n你的真實，值得被說出。',
+      '沉默不是因為你沒有話說。\n只是還沒找到安全的地方。',
+      '不是所有的話都要說給別人聽。\n有時候，說給自己聽就夠了。',
+      '說出你的界限，是一種愛的形式。\n不是自私，是真實。'
+    ],
+    actions: [
+      '說出或寫下一件一直放在心裡的話。',
+      '在日記裡寫下那句你說不出口的話。',
+      '對著鏡子說出你今天的感受。',
+      '想想有什麼你一直想說「不」的事，輕輕地說出來。'
+    ],
     extra: {
       position: '喉嚨', element: '空',
       insight:   '開始說出內在的聲音',
@@ -1144,8 +1194,18 @@ const DEFAULTS = [
     name: '眉心輪', en: 'Third Eye', color: '#7A7AAF',
     flow:      ['清醒', '直覺', '洞見', '專注'],
     imbalance: ['茫然', '混亂', '懷疑', '過載'],
-    desc: '安靜下來。\n你已經知道你需要知道的。',
-    action: '閉上眼睛一分鐘，不做任何事。',
+    descs: [
+      '安靜下來。\n你已經知道你需要知道的。',
+      '直覺不是神秘的東西，\n它是你長期觀察的總和。',
+      '有時候答案不是想出來的，\n而是讓它自然浮現的。',
+      '你比你以為的更了解自己。\n安靜一點，就能聽見。'
+    ],
+    actions: [
+      '閉上眼睛一分鐘，不做任何事。',
+      '問自己：「如果我早就知道答案，那個答案是什麼？」',
+      '今天讓大腦休息一下，去散步，不帶目的。',
+      '把你現在腦海中第一個浮現的畫面寫下來。'
+    ],
     extra: {
       position: '雙眉之間', element: '靈',
       insight:   '開始看見本質',
@@ -1157,8 +1217,18 @@ const DEFAULTS = [
     name: '頂輪', en: 'Crown Chakra', color: '#A882C2',
     flow:      ['通透', '開放', '寬廣', '連結'],
     imbalance: ['頑固', '斷開', '執著', '孤立'],
-    desc: '你不只是這個身體。\n你是更廣大存在的一部分。',
-    action: '望向天空，感受自己的渺小與自由。',
+    descs: [
+      '你不只是這個身體。\n你是更廣大存在的一部分。',
+      '放下一件你以為必須抓住的事。\n看看接下來發生什麼。',
+      '不是所有事都有答案。\n有時候，帶著問題生活就是一種智慧。',
+      '你是天與地之間的橋樑。\n既扎根，又開放。'
+    ],
+    actions: [
+      '望向天空，感受自己的渺小與自由。',
+      '今天練習讓一件事「自然流動」，不去控制它。',
+      '對自己說：「我不需要現在知道一切。」',
+      '站著，感受腳在地上，同時感受頭頂的廣闊。'
+    ],
     extra: {
       position: '頭頂', element: '無',
       insight:   '能量自然綻放',
@@ -1288,13 +1358,22 @@ const hint     = document.getElementById('hint');
 
 function showCard(i) {
   const c = chakras[i];
+  const def = DEFAULTS[i];
+  const descs   = c.descs   || def.descs;
+  const actions = c.actions || def.actions;
+  const r = Math.floor(Math.random() * descs.length);
 
   document.getElementById('cardStrip').style.background   = c.color;
   document.getElementById('cardDotIcon').style.background = c.color;
   document.getElementById('cardName').textContent          = c.name;
   document.getElementById('cardEn').textContent            = c.en;
-  document.getElementById('cardDesc').textContent          = c.desc;
-  document.getElementById('cardAction').textContent        = c.action;
+  const pickedDesc   = descs[r];
+  const pickedAction = actions[r];
+  document.getElementById('cardDesc').textContent   = pickedDesc;
+  document.getElementById('cardAction').textContent = pickedAction;
+  // store for share handlers
+  document.getElementById('cardWrap').dataset.desc   = pickedDesc;
+  document.getElementById('cardWrap').dataset.action = pickedAction;
 
   const statesEl = document.getElementById('cardStates');
   statesEl.innerHTML = '';
@@ -1387,9 +1466,10 @@ function showCard(i) {
       shareBtn.textContent = '傳送中…';
       shareBtn.disabled = true;
       try {
+        const cardEl = document.getElementById('cardWrap');
         await shareToLine(buildChakraFlexMessage([{
           name: cur.name, en: cur.en, color: cur.color,
-          desc: cur.desc, extra: cur.extra
+          desc: cardEl.dataset.desc, extra: cur.extra
         }]));
       } catch(e) {}
       shareBtn.textContent = '分享到 LINE ↗';
@@ -1411,7 +1491,8 @@ function showCard(i) {
       igBtn.textContent = '準備中…';
       igBtn.disabled = true;
       try {
-        await shareToInstagram(cur.name, cur.desc || cur.blessing || '', cur.color, cur.extra?.action || '');
+        const cardEl = document.getElementById('cardWrap');
+        await shareToInstagram(cur.name, cardEl.dataset.desc || '', cur.color, cardEl.dataset.action || '');
       } catch(e) {}
       igBtn.textContent = '分享到 IG ↗';
       igBtn.disabled = false;

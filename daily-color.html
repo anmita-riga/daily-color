@@ -262,14 +262,12 @@
     .ic-wrap {
       border-radius: 16px;
       padding: 2.8rem 2.4rem 2.6rem;
-      background: linear-gradient(160deg,
-        rgba(255, 252, 248, 0.97) 0%,
-        rgba(245, 235, 215, 0.85) 100%);
-      border: 1px solid rgba(180, 140, 60, 0.22);
+      background: rgba(196, 170, 223, 0.10);
+      border: 1px solid rgba(196, 170, 223, 0.28);
       box-shadow:
-        inset 3px 0 0 0 var(--gold),
-        0 12px 40px rgba(160, 120, 40, 0.12),
-        0 2px 8px rgba(0, 0, 0, 0.06);
+        inset 3px 0 0 0 var(--lavender),
+        0 12px 36px rgba(120, 90, 160, 0.10),
+        0 3px 10px rgba(0, 0, 0, 0.05);
       display: none;
       opacity: 0;
       transform: translateY(14px);
@@ -293,7 +291,7 @@
       font-family: "Cormorant Garamond", serif;
       font-size: 0.64rem;
       letter-spacing: 0.35em;
-      color: #8A78A8;
+      color: #5A4878;
       text-align: center;
       margin-bottom: 1.5rem;
       text-transform: uppercase;
@@ -305,7 +303,7 @@
       letter-spacing: 0.08em;
       line-height: 2.2;
       text-align: center;
-      color: #3A3255;
+      color: #2A2040;
       white-space: pre-line;
       padding: 0 1rem;
     }
@@ -313,7 +311,7 @@
     .ic-hint {
       text-align: center;
       font-size: 0.70rem;
-      color: #9B87BC;
+      color: #6A5888;
       letter-spacing: 0.08em;
       margin-top: 1.2rem;
       padding-bottom: 0.4rem;
@@ -1239,7 +1237,7 @@
     <div class="ic-strip" id="icStrip"></div>
     <div class="ic-label">今天的直覺訊息</div>
     <div class="ic-text" id="icText"></div>
-    <div class="ic-hint">✦ 接下來還有一張脈輪卡，讀完後輕輕點擊繼續</div>
+    <div class="ic-hint">接下來還有一張脈輪卡，讀完後輕輕點擊繼續</div>
   </div>
 
   <!-- ── 第二張：脈輪卡 ── -->
@@ -1715,63 +1713,63 @@ let icCards = (() => {
 const RESULT_CARDS = [
   {
     type: '今日訊息卡',
-    icon: '✨',
+    icon: '',
     title: '停止內耗，開始流動',
     deeper: '你一直在和自己對話，卻沒有真正聽自己。今天試試安靜下來。',
     action: '深呼吸 3 次，不要想著「應該做什麼」'
   },
   {
     type: '行動卡',
-    icon: '🎯',
+    icon: '',
     title: '小改變，大不同',
     deeper: '不用轉身離開，只需要轉個角度看。有時候新視角就是新答案。',
     action: '改變今天的一個小習慣，看看會發生什麼'
   },
   {
     type: '宇宙彩蛋',
-    icon: '🌙',
+    icon: '',
     title: '你已經在對的地方',
     deeper: '你一直在尋找答案，卻沒發現自己就在路上。過程本身就是答案。',
     action: '相信今天的每一個「碰巧」，它們都不是碰巧'
   },
   {
     type: '今日訊息卡',
-    icon: '✨',
+    icon: '',
     title: '感受，比理解更重要',
     deeper: '你的身體知道的比腦子多。今天多聽聽它在說什麼，而不是試圖理解。',
     action: '花 5 分鐘，只感受，不思考'
   },
   {
     type: '行動卡',
-    icon: '🎯',
+    icon: '',
     title: '溫柔地前進，不用全力衝刺',
     deeper: '世界不需要你用盡全力，它需要你活著。你有權利只是輕輕地走。',
     action: '今天做一件事時，試試用 70% 的力氣'
   },
   {
     type: '宇宙彩蛋',
-    icon: '🌙',
+    icon: '',
     title: '被看見，比被理解更療癒',
     deeper: '你不需要所有人都懂。有一個人看見你，就夠了。有時候那個人就是你自己。',
     action: '對著鏡子看著自己 1 分鐘，就只是看著'
   },
   {
     type: '今日訊息卡',
-    icon: '✨',
+    icon: '',
     title: '界線，是自愛的開始',
     deeper: '說不出來，是在保護什麼？也許是在保護一個你已經不需要保護的東西。',
     action: '寫下一件你想說但沒說的話。可以不寄出，但要寫出來'
   },
   {
     type: '行動卡',
-    icon: '🎯',
+    icon: '',
     title: '你的脆弱，是你的力量',
     deeper: '強大的人知道什麼時候該放下盔甲。允許自己脆弱，其實是在相信自己足夠強大。',
     action: '今天在一個信任的人面前，說出一個真話'
   },
   {
     type: '宇宙彩蛋',
-    icon: '🌙',
+    icon: '',
     title: '轉身不是放棄，是轉向',
     deeper: '有些事情值得轉身離開。不是失敗，是在跟自己協商一個更好的條件。',
     action: '想想有什麼是你可以放下的。不是全部，只是一部分'
@@ -1910,10 +1908,10 @@ function fillIC(ic, isSpirit = false) {
   const color = isSpirit ? ic.color : CHAKRA_DATA[ic.chakra].color;
   // 頂部細線
   strip.style.background = `linear-gradient(90deg, transparent, ${hexAlpha(color, 0.9)}, ${hexAlpha(color, 0.6)}, transparent)`;
-  // 卡片背景：半透明亮底 + 卡片色暈染
-  icWrap.style.background = `linear-gradient(160deg, rgba(255,252,248,0.92) 0%, ${hexAlpha(color, 0.18)} 100%)`;
-  icWrap.style.boxShadow = `inset 3px 0 0 0 ${hexAlpha(color, 1)}, 0 16px 48px ${hexAlpha(color, 0.20)}, 0 4px 12px rgba(0,0,0,0.10)`;
-  icWrap.style.borderColor = hexAlpha(color, 0.30);
+  // 卡片背景：平鋪脈輪淡彩
+  icWrap.style.background = hexAlpha(color, 0.10);
+  icWrap.style.boxShadow = `inset 3px 0 0 0 ${hexAlpha(color, 0.9)}, 0 12px 36px ${hexAlpha(color, 0.16)}, 0 3px 10px rgba(0,0,0,0.06)`;
+  icWrap.style.borderColor = hexAlpha(color, 0.28);
 }
 
 // ── 填充脈輪卡 或 靈性指引卡 ──
@@ -1934,7 +1932,7 @@ function fillCK(ck, spirit = null) {
     document.getElementById('ckDot').style.background = spirit.color;
     document.getElementById('ckName').textContent = spirit.title;
     document.getElementById('ckEn').textContent = spirit.category;
-    document.getElementById('ckElementLocation').textContent = '✨ ' + spirit.category;
+    document.getElementById('ckElementLocation').textContent = spirit.category;
     document.getElementById('ckBlessing').textContent = spirit.text;
     document.getElementById('ckAction').textContent = spirit.action;
 
@@ -1942,7 +1940,7 @@ function fillCK(ck, spirit = null) {
     fillBackCard(
       spirit.category,
       spirit.title,
-      '✨',
+      '',
       spirit.text,
       spirit.action,
       spirit.question || '這訊息對你的當下有什麼啟發？'
@@ -1956,9 +1954,7 @@ function fillCK(ck, spirit = null) {
     document.getElementById('ckDot').style.background = ck.color;
     document.getElementById('ckName').textContent = ck.name;
     document.getElementById('ckEn').textContent = ck.en;
-    const elementIcon = ck.element === '地' ? '🌍' : ck.element === '水' ? '💧' :
-                        ck.element === '火' ? '🔥' : ck.element === '風' ? '💨' :
-                        ck.element === '空' ? '☁️' : ck.element === '靈' ? '✨' : '⭕';
+    const elementIcon = '';
     document.getElementById('ckElementLocation').textContent = `${elementIcon} ${ck.element}元素 · ${ck.location}`;
     document.getElementById('ckBlessing').textContent = ck.blessing;
     document.getElementById('ckAction').textContent = ck.action;
@@ -1969,7 +1965,7 @@ function fillCK(ck, spirit = null) {
     fillBackCard(
       `今日訊息 · ${ck.name}`,
       ck.name,
-      '✨',
+      '',
       ck.deeper,
       ck.action,
       `你可以如何用 ${ck.name} 的能量轉化此刻？`
