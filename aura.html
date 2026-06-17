@@ -450,7 +450,63 @@
       margin: 0 auto 28px;
     }
 
-    /* Overlay to close panel */
+    /* ── Accordion ── */
+    .accordion {
+      margin: 0 20px 16px;
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .accordion-btn {
+      width: 100%;
+      background: rgba(255,255,255,0.03);
+      border: none;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+      text-align: left;
+    }
+    .accordion-arrow {
+      font-size: 20px;
+      color: var(--gold);
+      transition: transform 0.3s ease;
+      line-height: 1;
+    }
+    .accordion-btn.open .accordion-arrow {
+      transform: rotate(45deg);
+    }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .accordion-body.open {
+      max-height: 600px;
+    }
+    .accordion-body p {
+      font-size: 13px;
+      line-height: 2;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      padding: 0 20px 14px;
+    }
+    .accordion-body p:first-child { padding-top: 16px; }
+    .accordion-source {
+      font-size: 11px !important;
+      color: var(--text-muted) !important;
+      letter-spacing: 0.08em !important;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 12px !important;
+      margin-top: 4px;
+    }
+
+        /* Overlay to close panel */
     .overlay {
       position: fixed;
       inset: 0;
@@ -630,8 +686,19 @@
   <p class="story-quote">每個人的光場都是<em>獨一無二的顏色</em>。</p>
 </div>
 
-<!-- Aura Examples -->
-
+<!-- What is Aura -->
+<div class="accordion">
+  <button class="accordion-btn" onclick="toggleAccordion(this)">
+    <span>什麼是光場？</span>
+    <span class="accordion-arrow">﹢</span>
+  </button>
+  <div class="accordion-body">
+    <p>光場，又稱氣場或人體能量場，是包圍並滲透你整個身體的能量體。它不是抽象的概念——自二十世紀起，科學家們已能透過心電圖、腦波儀，乃至超導量子干涉震動磁量儀（SQUID）等精密儀器偵測到它的存在。</p>
+    <p>物理學家發現，人體不只是物質的集合，同時也是由能量場所組成。這個能量場如同海浪一般不斷波動、流動、變化著，它的密度、大小、顏色與頻率，反映著你當下的身體狀態、情緒與意識。</p>
+    <p>加州大學洛杉磯分校的研究更進一步證明：氣場的顏色與特定的頻率相對應，而脈輪的活動同時也會影響整個光場的運作。記憶、情緒與經歷，都會以能量的形式儲存在場域之中。</p>
+    <p class="accordion-source">— 參考《光之手：人體能量場療癒全書》芭芭拉・安・布藍能</p>
+  </div>
+</div>
 
 <!-- CTA -->
 <a href="https://www.instagram.com/anmita_riga" target="_blank" rel="noopener" class="cta-btn">
@@ -965,6 +1032,13 @@
     }
     requestAnimationFrame(animateParticles);
   }
+
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+
   animateParticles();
 </script>
 </body>
