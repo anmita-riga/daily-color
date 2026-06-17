@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>脈輪光點位置調整</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #2A2240;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      font-family: sans-serif;
+      color: #fff;
+    }
+    h2 {
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      color: #C4AADF;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 0.72rem;
+      color: #A89DB5;
+      margin-bottom: 2rem;
+      letter-spacing: 0.05em;
+    }
+
+    .cat-wrap {
+      position: relative;
+      width: min(90vw, 400px);
+    }
+    .cat-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    /* 格線輔助（可視化百分比） */
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .grid-line-h {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+    .grid-label {
+      position: absolute;
+      right: 4px;
+      font-size: 9px;
+      color: rgba(255,255,255,0.3);
+      transform: translateY(-8px);
+    }
+
+    /* 脈輪點 */
+    .dot {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: grab;
+      user-select: none;
+    }
+    .dot-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 0 10px currentColor;
+      transition: transform 0.2s;
+    }
+    .dot:hover .dot-circle { transform: scale(1.3); }
+
+    .dot-label {
+      position: absolute;
+      left: 26px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 10px;
+      white-space: nowrap;
+      color: rgba(255,255,255,0.85);
+      background: rgba(0,0,0,0.55);
+      padding: 2px 6px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    /* 拖拉座標顯示 */
+    #coords {
+      margin-top: 2rem;
+      background: rgba(196, 170, 223, 0.12);
+      border: 1px solid rgba(196, 170, 223, 0.30);
+      border-radius: 12px;
+      padding: 1.2rem 1.6rem;
+      width: min(90vw, 400px);
+    }
+    #coords h3 {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: #C4AADF;
+      margin-bottom: 0.8rem;
+    }
+    #coords table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+    }
+    #coords td {
+      padding: 0.3rem 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: #D8CFDF;
+    }
+    #coords td:first-child { color: #C4AADF; font-weight: bold; }
+    #coords td:nth-child(2) { color: #E8C97A; font-family: monospace; }
+
+    .copy-btn {
+      margin-top: 1rem;
+      background: transparent;
+      border: 1px solid rgba(232, 201, 122, 0.5);
+      color: #E8C97A;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      padding: 0.5rem 1.2rem;
+      border-radius: 20px;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+    }
+    .copy-btn:hover { background: rgba(232, 201, 122, 0.12); }
+    #copy-msg { font-size: 0.65rem; color: #7DAF88; text-align: center; margin-top: 0.5rem; height: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>脈輪光點位置調整</h2>
+  <p>拖動圓點到正確位置，下方會即時更新座標</p>
+
+  <div class="cat-wrap" id="catWrap">
+    <img src="cat-chakra-new.png" alt="脈輪貓" id="catImg">
+
+    <!-- 格線輔助 -->
+    <div class="grid-overlay" id="gridOverlay"></div>
+
+    <!-- 脈輪點（可拖拉） -->
+    <div class="dot" id="dot0" style="left:50%;top:77%;">
+      <div class="dot-circle" style="background:#C17B7B;color:#fff;">0</div>
+      <div class="dot-label">海底輪</div>
+    </div>
+    <div class="dot" id="dot1" style="left:50%;top:66%;">
+      <div class="dot-circle" style="background:#C9976C;">1</div>
+      <div class="dot-label">臍輪</div>
+    </div>
+    <div class="dot" id="dot2" style="left:50%;top:56%;">
+      <div class="dot-circle" style="background:#C9B86A;">2</div>
+      <div class="dot-label">太陽神經叢</div>
+    </div>
+    <div class="dot" id="dot3" style="left:50%;top:46%;">
+      <div class="dot-circle" style="background:#7DAF88;">3</div>
+      <div class="dot-label">心輪</div>
+    </div>
+    <div class="dot" id="dot4" style="left:50%;top:36%;">
+      <div class="dot-circle" style="background:#7AA2C4;">4</div>
+      <div class="dot-label">喉輪</div>
+    </div>
+    <div class="dot" id="dot5" style="left:50%;top:24%;">
+      <div class="dot-circle" style="background:#7A7AAF;">5</div>
+      <div class="dot-label">眉心輪</div>
+    </div>
+    <div class="dot" id="dot6" style="left:50%;top:13%;">
+      <div class="dot-circle" style="background:#A882C2;">6</div>
+      <div class="dot-label">頂輪</div>
+    </div>
+  </div>
+
+  <div id="coords">
+    <h3>目前座標（拖動後即時更新）</h3>
+    <table id="coordTable">
+      <tr><td>0 海底輪</td><td id="c0">left:50%, top:77%</td></tr>
+      <tr><td>1 臍輪</td><td id="c1">left:50%, top:66%</td></tr>
+      <tr><td>2 太陽神經叢</td><td id="c2">left:50%, top:56%</td></tr>
+      <tr><td>3 心輪</td><td id="c3">left:50%, top:46%</td></tr>
+      <tr><td>4 喉輪</td><td id="c4">left:50%, top:36%</td></tr>
+      <tr><td>5 眉心輪</td><td id="c5">left:50%, top:24%</td></tr>
+      <tr><td>6 頂輪</td><td id="c6">left:50%, top:13%</td></tr>
+    </table>
+    <button class="copy-btn" onclick="copyCoords()">複製座標給 Claude</button>
+    <div id="copy-msg"></div>
+  </div>
+
+  <script>
+    const wrap = document.getElementById('catWrap');
+
+    // 畫格線輔助
+    const grid = document.getElementById('gridOverlay');
+    for (let i = 10; i < 100; i += 10) {
+      const line = document.createElement('div');
+      line.className = 'grid-line-h';
+      line.style.top = i + '%';
+      const label = document.createElement('div');
+      label.className = 'grid-label';
+      label.style.top = i + '%';
+      label.textContent = i + '%';
+      grid.appendChild(line);
+      grid.appendChild(label);
+    }
+
+    // 儲存目前座標
+    const positions = {
+      0: { left: 50, top: 77 },
+      1: { left: 50, top: 66 },
+      2: { left: 50, top: 56 },
+      3: { left: 50, top: 46 },
+      4: { left: 50, top: 36 },
+      5: { left: 50, top: 24 },
+      6: { left: 50, top: 13 }
+    };
+
+    function updateCoord(id) {
+      const p = positions[id];
+      document.getElementById('c' + id).textContent =
+        `left:${p.left.toFixed(1)}%, top:${p.top.toFixed(1)}%`;
+    }
+
+    // 拖拉邏輯
+    document.querySelectorAll('.dot').forEach(dot => {
+      const id = parseInt(dot.id.replace('dot', ''));
+
+      let dragging = false;
+      let startX, startY, startLeft, startTop;
+
+      function onDown(e) {
+        dragging = true;
+        const touch = e.touches ? e.touches[0] : e;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        startLeft = positions[id].left;
+        startTop = positions[id].top;
+        e.preventDefault();
+      }
+
+      function onMove(e) {
+        if (!dragging) return;
+        const touch = e.touches ? e.touches[0] : e;
+        const rect = wrap.getBoundingClientRect();
+        const dx = (touch.clientX - startX) / rect.width  * 100;
+        const dy = (touch.clientY - startY) / rect.height * 100;
+        positions[id].left = Math.max(5, Math.min(95, startLeft + dx));
+        positions[id].top  = Math.max(3, Math.min(97, startTop  + dy));
+        dot.style.left = positions[id].left + '%';
+        dot.style.top  = positions[id].top  + '%';
+        updateCoord(id);
+        e.preventDefault();
+      }
+
+      function onUp() { dragging = false; }
+
+      dot.addEventListener('mousedown',  onDown);
+      dot.addEventListener('touchstart', onDown, { passive: false });
+      window.addEventListener('mousemove',  onMove);
+      window.addEventListener('touchmove',  onMove, { passive: false });
+      window.addEventListener('mouseup',  onUp);
+      window.addEventListener('touchend', onUp);
+    });
+
+    function copyCoords() {
+      let text = '';
+      const names = ['海底輪','臍輪','太陽神經叢','心輪','喉輪','眉心輪','頂輪'];
+      for (let i = 0; i <= 6; i++) {
+        const p = positions[i];
+        text += `data-i="${i}" ${names[i]}: left:${p.left.toFixed(1)}%, top:${p.top.toFixed(1)}%\n`;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        document.getElementById('copy-msg').textContent = '✓ 已複製！貼給 Claude 即可更新';
+        setTimeout(() => document.getElementById('copy-msg').textContent = '', 3000);
+      });
+    }
+  </script>
+</body>
+</html>

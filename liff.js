@@ -384,74 +384,178 @@ function buildChakraFlexMessage(activeChakras) {
 
 /**
  * 生成 Instagram Stories 用的圖片
- * @param {string} title - 標題
- * @param {string} text - 主要文字
- * @param {string} bgColor - 背景色
+ * @param {string} title - 標題（粗體大字）
+ * @param {string} text - 主要內文
+ * @param {string} bgColor - 主色調
+ * @param {string} [subtext] - 副文字（行動建議等）
  */
-function generateInstagramImage(title, text, bgColor = '#F5F3F8') {
+function generateInstagramImage(title, text, bgColor = '#F5F3F8', subtext = '') {
+  const W = 1080, H = 1920;
   const canvas = document.createElement('canvas');
-  canvas.width = 1080;
-  canvas.height = 1920;
+  canvas.width = W;
+  canvas.height = H;
   const ctx = canvas.getContext('2d');
 
-  // 背景
-  const gradient = ctx.createLinearGradient(0, 0, 0, 1920);
-  gradient.addColorStop(0, bgColor);
-  gradient.addColorStop(1, '#FFF8F5');
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, 1080, 1920);
+  // 背景漸層
+  const grad = ctx.createLinearGradient(0, 0, W * 0.4, H);
+  grad.addColorStop(0, bgColor);
+  grad.addColorStop(0.55, _blendHex(bgColor, '#FBF8FF', 0.55));
+  grad.addColorStop(1, '#F7F4FC');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
 
-  // 裝飾圓點
-  ctx.fillStyle = 'rgba(147,112,219,0.15)';
+  // 光圈裝飾
+  const drawCircle = (x, y, r, alpha) => {
+    const rg = ctx.createRadialGradient(x, y, 0, x, y, r);
+    rg.addColorStop(0, `rgba(255,255,255,${alpha})`);
+    rg.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = rg;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  };
+  drawCircle(160, 260, 260, 0.22);
+  drawCircle(920, 1680, 320, 0.18);
+  drawCircle(540, 960, 480, 0.08);
+
+  // 頂部品牌標籤
+  ctx.font = '500 36px "Noto Serif TC", serif';
+  ctx.fillStyle = 'rgba(90,80,100,0.45)';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('每 日 色 彩', W / 2, 160);
+
+  // 頂部細分隔線
+  ctx.strokeStyle = 'rgba(140,120,160,0.18)';
+  ctx.lineWidth = 1.5;
   ctx.beginPath();
-  ctx.arc(100, 150, 80, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.beginPath();
-  ctx.arc(980, 1800, 120, 0, Math.PI * 2);
-  ctx.fill();
+  ctx.moveTo(W / 2 - 120, 196);
+  ctx.lineTo(W / 2 + 120, 196);
+  ctx.stroke();
 
   // 標題
-  ctx.font = 'bold 72px "Noto Serif TC", serif';
-  ctx.fillStyle = '#5A5059';
-  ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillText(title, 540, 400);
+  const titleLines = _wrapText(ctx, title, 860, 'bold 88px "Noto Serif TC", serif');
+  ctx.font = 'bold 88px "Noto Serif TC", serif';
+  ctx.fillStyle = '#2E2840';
+  const titleBlockH = titleLines.length * 108;
+  const titleY = 520 - titleBlockH / 2;
+  titleLines.forEach((l, i) => ctx.fillText(l, W / 2, titleY + i * 108));
 
-  // 主文字
-  ctx.font = '48px "Noto Serif TC", serif';
-  ctx.fillStyle = '#3d3556';
-  const lineHeight = 80;
-  const maxWidth = 900;
-  let y = 700;
+  // 分隔線
+  const sepY = titleY + titleBlockH + 80;
+  ctx.strokeStyle = 'rgba(140,120,160,0.25)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - 200, sepY);
+  ctx.lineTo(W / 2 + 200, sepY);
+  ctx.stroke();
 
-  // 文字換行
-  const lines = [];
-  const words = text.split('');
-  let line = '';
-  for (let word of words) {
-    const testLine = line + word;
-    const metrics = ctx.measureText(testLine);
-    if (metrics.width > maxWidth) {
-      lines.push(line);
-      line = word;
-    } else {
-      line = testLine;
-    }
-  }
-  lines.push(line);
-
-  // 繪製每一行
-  lines.forEach((l, i) => {
-    ctx.fillText(l, 540, y + i * lineHeight);
+  // 主文字（正文）
+  ctx.font = '52px "Noto Serif TC", serif';
+  ctx.fillStyle = '#3D3558';
+  const textLines = _wrapText(ctx, text, 860, '52px "Noto Serif TC", serif');
+  let textY = sepY + 80;
+  textLines.forEach(l => {
+    ctx.fillText(l, W / 2, textY);
+    textY += 82;
   });
 
-  // Logo
-  ctx.font = '32px "Noto Serif TC", serif';
-  ctx.fillStyle = '#9b8db5';
-  ctx.textAlign = 'center';
-  ctx.fillText('每日色彩 Anmita Riga', 540, 1850);
+  // 副文字（行動建議）
+  if (subtext) {
+    textY += 40;
+    ctx.strokeStyle = 'rgba(140,120,160,0.18)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(W / 2 - 160, textY - 20);
+    ctx.lineTo(W / 2 + 160, textY - 20);
+    ctx.stroke();
+    ctx.font = '40px "Noto Serif TC", serif';
+    ctx.fillStyle = 'rgba(90,80,110,0.65)';
+    const subLines = _wrapText(ctx, subtext, 820, '40px "Noto Serif TC", serif');
+    subLines.forEach(l => {
+      ctx.fillText(l, W / 2, textY + 20);
+      textY += 62;
+    });
+  }
 
-  return canvas.toDataURL('image/png');
+  // 底部 logo
+  ctx.font = '500 34px "Noto Serif TC", serif';
+  ctx.fillStyle = 'rgba(140,120,160,0.5)';
+  ctx.textBaseline = 'alphabetic';
+  ctx.fillText('Anmita Riga', W / 2, H - 120);
+
+  return canvas.toDataURL('image/jpeg', 0.93);
+}
+
+function _wrapText(ctx, text, maxWidth, font) {
+  ctx.font = font;
+  const lines = [];
+  // 支援已有換行符
+  const paragraphs = text.split('\n');
+  for (const para of paragraphs) {
+    if (!para.trim()) { lines.push(''); continue; }
+    let line = '';
+    for (const ch of para) {
+      const test = line + ch;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = ch;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+  }
+  return lines;
+}
+
+function _blendHex(hex1, hex2, t) {
+  const p = h => [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+  const [r1,g1,b1] = p(hex1), [r2,g2,b2] = p(hex2);
+  const r = Math.round(r1*(1-t)+r2*t), g = Math.round(g1*(1-t)+g2*t), b = Math.round(b1*(1-t)+b2*t);
+  return `#${[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('')}`;
+}
+
+/**
+ * 分享到 Instagram（Web Share API → fallback 下載）
+ * @param {string} title
+ * @param {string} text
+ * @param {string} bgColor
+ * @param {string} [subtext]
+ */
+async function shareToInstagram(title, text, bgColor, subtext = '') {
+  const dataUrl = generateInstagramImage(title, text, bgColor, subtext);
+
+  // dataUrl → Blob → File
+  const res = await fetch(dataUrl);
+  const blob = await res.blob();
+  const file = new File([blob], 'daily-color.jpg', { type: 'image/jpeg' });
+
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try {
+      await navigator.share({
+        files: [file],
+        title: '每日色彩',
+        text: title
+      });
+      return;
+    } catch (e) {
+      if (e.name === 'AbortError') return; // 用戶取消，不做 fallback
+    }
+  }
+
+  // fallback：下載圖片
+  const a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = 'daily-color.jpg';
+  a.click();
+}
+
+// 已棄用，保留向下相容
+function _generateInstagramImageLegacy(title, text, bgColor) {
+  return generateInstagramImage(title, text, bgColor);
+}
 }
 
 /**

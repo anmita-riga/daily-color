@@ -254,13 +254,37 @@
       transition: filter 0.5s var(--ease-silk);
     }
 
-    .t-gold   .ticket-svg { filter: drop-shadow(0 8px 20px rgba(16,12,36,0.60)); }
-    .t-lav    .ticket-svg { filter: drop-shadow(0 8px 20px rgba(16,12,36,0.60)); }
-    .t-quartz .ticket-svg { filter: drop-shadow(0 8px 20px rgba(16,12,36,0.60)); }
+    /* 各票微微傾斜：塗鴉隨手放置感 */
+    .t-gold   .ticket-svg { filter: drop-shadow(0 8px 22px rgba(80,55,10,0.30));  transform: rotate(-1.5deg); }
+    .t-lav    .ticket-svg { filter: drop-shadow(0 8px 22px rgba(55,25,80,0.28));  transform: rotate(1.1deg);  }
+    .t-quartz .ticket-svg { filter: drop-shadow(0 8px 22px rgba(15,55,75,0.28));  transform: rotate(-0.7deg); }
 
-    .t-gold:hover   .ticket-svg { filter: drop-shadow(0 16px 36px rgba(16,12,36,0.65)) drop-shadow(0 0 28px rgba(232,201,122,0.28)); }
-    .t-lav:hover    .ticket-svg { filter: drop-shadow(0 16px 36px rgba(16,12,36,0.65)) drop-shadow(0 0 28px rgba(196,170,223,0.28)); }
-    .t-quartz:hover .ticket-svg { filter: drop-shadow(0 16px 36px rgba(16,12,36,0.65)) drop-shadow(0 0 28px rgba(142,196,216,0.28)); }
+    .t-gold:hover   .ticket-svg { filter: drop-shadow(0 14px 32px rgba(80,55,10,0.40)); transform: rotate(-1.5deg) translateY(-3px); }
+    .t-lav:hover    .ticket-svg { filter: drop-shadow(0 14px 32px rgba(55,25,80,0.38)); transform: rotate(1.1deg)  translateY(-3px); }
+    .t-quartz:hover .ticket-svg { filter: drop-shadow(0 14px 32px rgba(15,55,75,0.38)); transform: rotate(-0.7deg) translateY(-3px); }
+
+    /* 亮色票卷的深色文字 */
+    .t-gold   .tk-label, .t-lav .tk-label, .t-quartz .tk-label { color: #2A2040; }
+    .t-gold   .tk-eyebrow { color: #7A5810; opacity: 1; }
+    .t-lav    .tk-eyebrow { color: #5C3888; opacity: 1; }
+    .t-quartz .tk-eyebrow { color: #1C5870; opacity: 1; }
+    .t-gold   .tk-desc { color: #5C4820; }
+    .t-lav    .tk-desc { color: #483468; }
+    .t-quartz .tk-desc { color: #245060; }
+
+    /* 箭頭深色版本 */
+    .t-gold   .tk-arrow { background: rgba(100,70,10,0.45); }
+    .t-gold   .tk-arrow::after { border-top: 1px solid rgba(100,70,10,0.45); border-right: 1px solid rgba(100,70,10,0.45); }
+    .t-gold:hover   .tk-arrow { width: 38px; background: #7A5810; }
+    .t-gold:hover   .tk-arrow::after { border-color: #7A5810; }
+    .t-lav    .tk-arrow { background: rgba(80,40,120,0.45); }
+    .t-lav    .tk-arrow::after { border-top: 1px solid rgba(80,40,120,0.45); border-right: 1px solid rgba(80,40,120,0.45); }
+    .t-lav:hover    .tk-arrow { width: 38px; background: #5C3888; }
+    .t-lav:hover    .tk-arrow::after { border-color: #5C3888; }
+    .t-quartz .tk-arrow { background: rgba(20,70,100,0.45); }
+    .t-quartz .tk-arrow::after { border-top: 1px solid rgba(20,70,100,0.45); border-right: 1px solid rgba(20,70,100,0.45); }
+    .t-quartz:hover .tk-arrow { width: 38px; background: #1C5870; }
+    .t-quartz:hover .tk-arrow::after { border-color: #1C5870; }
 
     /* 票卷內容疊加在 SVG 上 */
     .ticket-content {
@@ -455,54 +479,32 @@
     <!-- 三入口 — 不規則票卷 -->
     <div class="tickets">
 
-      <!-- ① 今日祝福：橫式票，左右兩側半圓缺口 -->
+      <!-- ① 今日祝福 — 亮金色票，左右圓弧缺口，有機曲線邊緣 -->
       <a class="ticket-entry t-gold" href="daily-color.html" aria-label="今日祝福">
-        <svg class="ticket-svg" viewBox="0 0 360 118" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <!-- 票形：左右半圓缺口 -->
+        <svg class="ticket-svg" viewBox="0 0 360 126" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- 票形：頂底用貝茲曲線（微微弓形），左右圓弧 tab 缺口 -->
           <path d="
-            M 24 5
-            L 336 5 Q 353 5 353 22
-            L 353 47 A 13 13 0 0 0 353 71
-            L 353 96 Q 353 113 336 113
-            L 24 113 Q 7 113 7 96
-            L 7 71 A 13 13 0 0 0 7 47
-            L 7 22 Q 7 5 24 5 Z"
-            fill="rgba(28, 22, 44, 0.93)"
-            stroke="rgba(232,201,122,0.32)"
-            stroke-width="1.2"/>
-          <!-- 金色左邊條 -->
-          <rect x="7" y="5" width="5" height="108" rx="1.5"
-            fill="url(#gbar)"/>
-          <defs>
-            <linearGradient id="gbar" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#F0D898" stop-opacity="0.9"/>
-              <stop offset="50%"  stop-color="#E8C97A" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#D4AA50" stop-opacity="0.8"/>
-            </linearGradient>
-            <linearGradient id="lbar" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#D4C0EC" stop-opacity="0.9"/>
-              <stop offset="50%"  stop-color="#C4AADF" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#A882C0" stop-opacity="0.8"/>
-            </linearGradient>
-            <linearGradient id="qbar" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%"   stop-color="#A8D4E4" stop-opacity="0.9"/>
-              <stop offset="50%"  stop-color="#8EC4D8" stop-opacity="1"/>
-              <stop offset="100%" stop-color="#6AAEC4" stop-opacity="0.8"/>
-            </linearGradient>
-          </defs>
-          <!-- 虛線 -->
-          <line x1="16" y1="59" x2="350" y2="59"
-            stroke="rgba(232,201,122,0.18)" stroke-width="1" stroke-dasharray="5,5"/>
-          <!-- 右側小圓裝飾 -->
-          <circle cx="330" cy="26" r="5" fill="none"
-            stroke="rgba(232,201,122,0.22)" stroke-width="1"/>
-          <circle cx="330" cy="92" r="5" fill="none"
-            stroke="rgba(232,201,122,0.22)" stroke-width="1"/>
-          <!-- 頂部光暈 -->
-          <path d="M 14 5 L 340 5 Q 353 5 353 18 L 353 14 Q 353 5 340 5 L 20 5 Q 7 5 7 18 L 7 14 Q 7 5 20 5 Z"
-            fill="rgba(232,201,122,0.08)"/>
+            M 26 8
+            C 120 5 240 9 334 7 Q 350 7 351 20
+            L 351 50 Q 341 53 341 62 Q 341 71 351 74
+            L 351 106 Q 350 120 334 121
+            C 240 124 120 120 26 122 Q 9 120 8 107
+            L 8 74 Q 18 71 18 62 Q 18 53 8 50
+            L 8 20 Q 9 8 26 8 Z"
+            fill="#EED98A" stroke="rgba(160,118,18,0.28)" stroke-width="1"/>
+          <!-- 內框 — 柔和白線 -->
+          <rect x="26" y="20" width="308" height="86" rx="4"
+            fill="none" stroke="rgba(255,248,210,0.60)" stroke-width="1"/>
+          <!-- 四角心形 -->
+          <text x="44" y="42"  font-size="12" fill="rgba(255,245,200,0.70)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="316" y="42" font-size="12" fill="rgba(255,245,200,0.70)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="44" y="96"  font-size="12" fill="rgba(255,245,200,0.70)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="316" y="96" font-size="12" fill="rgba(255,245,200,0.70)" text-anchor="middle" font-family="serif">♡</text>
+          <!-- 中央橫虛線 -->
+          <line x1="34" y1="63" x2="326" y2="63"
+            stroke="rgba(255,240,180,0.38)" stroke-width="0.8" stroke-dasharray="5,6"/>
         </svg>
-        <div class="ticket-content">
+        <div class="ticket-content" style="padding: 0 1.8rem 0 2.4rem;">
           <div class="ticket-text">
             <div class="tk-eyebrow">Daily Blessing</div>
             <div class="tk-label">今日祝福</div>
@@ -512,32 +514,43 @@
         </div>
       </a>
 
-      <!-- ② 脈輪貓：頂部圓弧缺口（V 領式） -->
+      <!-- ② 覺察能量 — 柔薰衣草票，左右圓弧半圓鋸齒（郵票感） -->
       <a class="ticket-entry t-lav" href="chakra-cat.html" aria-label="覺察能量">
-        <svg class="ticket-svg" viewBox="0 0 360 128" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <svg class="ticket-svg" viewBox="0 0 360 122" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- 票形：左右各 5 個半圓打孔，頂底微S曲線 -->
           <path d="
-            M 24 5
-            L 144 5 Q 162 5 180 24 Q 198 5 216 5
-            L 336 5 Q 353 5 353 22
-            L 353 108 Q 353 123 336 123
-            L 24 123 Q 7 123 7 108
-            L 7 22 Q 7 5 24 5 Z"
-            fill="rgba(28, 22, 44, 0.93)"
-            stroke="rgba(196,170,223,0.32)"
-            stroke-width="1.2"/>
-          <!-- 薰衣草左邊條 -->
-          <rect x="7" y="5" width="5" height="118" rx="1.5" fill="url(#lbar)"/>
-          <!-- 虛線 -->
-          <line x1="16" y1="66" x2="350" y2="66"
-            stroke="rgba(196,170,223,0.18)" stroke-width="1" stroke-dasharray="5,5"/>
-          <!-- 星點裝飾 -->
-          <text x="330" y="34" font-size="11" fill="rgba(196,170,223,0.32)" text-anchor="middle" font-family="serif">✦</text>
-          <text x="330" y="110" font-size="11" fill="rgba(196,170,223,0.32)" text-anchor="middle" font-family="serif">✦</text>
-          <!-- 頂部光暈 -->
-          <path d="M 14 5 L 148 5 Q 164 5 180 20 Q 196 5 212 5 L 340 5 Q 353 5 353 18 L 353 12 Q 353 5 336 5 L 216 5 Q 200 5 180 22 Q 160 5 144 5 L 24 5 Q 7 5 7 18 L 7 12 Q 7 5 20 5 Z"
-            fill="rgba(196,170,223,0.08)"/>
+            M 24 7
+            C 130 4 240 8 336 6 Q 351 6 351 18
+            A 9 9 0 0 0 351 36
+            A 9 9 0 0 0 351 54
+            A 9 9 0 0 0 351 72
+            A 9 9 0 0 0 351 90
+            A 9 9 0 0 0 351 108
+            Q 351 118 336 119
+            C 240 122 130 118 24 120 Q 8 118 8 108
+            A 9 9 0 0 1 8 90
+            A 9 9 0 0 1 8 72
+            A 9 9 0 0 1 8 54
+            A 9 9 0 0 1 8 36
+            A 9 9 0 0 1 8 18
+            Q 8 6 24 7 Z"
+            fill="#D5BFEF" stroke="rgba(110,65,165,0.25)" stroke-width="1"/>
+          <!-- 內框 -->
+          <rect x="24" y="18" width="312" height="88" rx="4"
+            fill="none" stroke="rgba(255,250,255,0.55)" stroke-width="1"/>
+          <!-- 頂部三個小心形 -->
+          <text x="148" y="38" font-size="11" fill="rgba(255,250,255,0.62)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="180" y="38" font-size="11" fill="rgba(255,250,255,0.62)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="212" y="38" font-size="11" fill="rgba(255,250,255,0.62)" text-anchor="middle" font-family="serif">♡</text>
+          <!-- 分隔線 -->
+          <line x1="32" y1="90" x2="328" y2="90"
+            stroke="rgba(255,250,255,0.35)" stroke-width="0.8" stroke-dasharray="4,6"/>
+          <!-- 底部小心形 -->
+          <text x="148" y="108" font-size="11" fill="rgba(255,250,255,0.45)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="180" y="108" font-size="11" fill="rgba(255,250,255,0.45)" text-anchor="middle" font-family="serif">♡</text>
+          <text x="212" y="108" font-size="11" fill="rgba(255,250,255,0.45)" text-anchor="middle" font-family="serif">♡</text>
         </svg>
-        <div class="ticket-content">
+        <div class="ticket-content" style="padding: 0 1.8rem 0 2.4rem;">
           <div class="ticket-text">
             <div class="tk-eyebrow">Energy Awareness</div>
             <div class="tk-label">覺察能量</div>
@@ -547,35 +560,34 @@
         </div>
       </a>
 
-      <!-- ③ 靜觀空間：波浪底邊 -->
+      <!-- ③ 靜觀空間 — 柔藍票，上下波浪邊 -->
       <a class="ticket-entry t-quartz" href="cat-room.html" aria-label="靜觀空間">
-        <svg class="ticket-svg" viewBox="0 0 360 118" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <svg class="ticket-svg" viewBox="0 0 360 126" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- 票形：頂底都是波浪曲線，左右直邊略帶弧度 -->
           <path d="
-            M 24 5
-            L 336 5 Q 353 5 353 22
-            L 353 94
-            Q 339 90 325 94 Q 311 98 297 94 Q 283 90 269 94
-            Q 255 98 241 94 Q 227 90 213 94 Q 199 98 185 94
-            Q 171 90 157 94 Q 143 98 129 94 Q 115 90 101 94
-            Q  87 98  73 94 Q  59 90  45 94 Q  31 98  17 94
-            Q   7 91   7 96
-            L 7 22 Q 7 5 24 5 Z"
-            fill="rgba(28, 22, 44, 0.93)"
-            stroke="rgba(142,196,216,0.32)"
-            stroke-width="1.2"/>
-          <!-- 石英藍左邊條 -->
-          <rect x="7" y="5" width="5" height="89" rx="1.5" fill="url(#qbar)"/>
-          <!-- 虛線 -->
-          <line x1="16" y1="55" x2="350" y2="55"
-            stroke="rgba(142,196,216,0.18)" stroke-width="1" stroke-dasharray="5,5"/>
-          <!-- 右上角裝飾框 -->
-          <rect x="320" y="14" width="22" height="16" rx="3"
-            fill="none" stroke="rgba(142,196,216,0.20)" stroke-width="1"/>
-          <!-- 頂部光暈 -->
-          <path d="M 14 5 L 340 5 Q 353 5 353 18 L 353 12 Q 353 5 336 5 L 24 5 Q 7 5 7 18 L 7 12 Q 7 5 20 5 Z"
-            fill="rgba(142,196,216,0.08)"/>
+            M 14 20
+            Q 62 6 116 18
+            Q 170 30 224 14
+            Q 280 2 342 16
+            Q 352 18 352 26
+            L 352 100
+            Q 280 116 224 102
+            Q 170 90 116 108
+            Q 62 122 14 106
+            Q 6 104 6 96
+            L 6 26 Q 6 18 14 20 Z"
+            fill="#B4D8E7" stroke="rgba(30,100,130,0.25)" stroke-width="1"/>
+          <!-- 內框線 -->
+          <rect x="20" y="26" width="320" height="74" rx="4"
+            fill="none" stroke="rgba(255,255,255,0.52)" stroke-width="1"/>
+          <!-- 中央虛線 -->
+          <line x1="28" y1="63" x2="332" y2="63"
+            stroke="rgba(255,255,255,0.30)" stroke-width="0.8" stroke-dasharray="5,6"/>
+          <!-- 小星點裝飾 -->
+          <text x="308" y="48" font-size="11" fill="rgba(255,255,255,0.45)" text-anchor="middle" font-family="serif">✦</text>
+          <text x="308" y="82" font-size="11" fill="rgba(255,255,255,0.38)" text-anchor="middle" font-family="serif">✦</text>
         </svg>
-        <div class="ticket-content" style="padding-bottom: 1rem;">
+        <div class="ticket-content" style="padding: 0 1.8rem 0 2.4rem;">
           <div class="ticket-text">
             <div class="tk-eyebrow">Quiet Sanctuary</div>
             <div class="tk-label">靜觀空間</div>

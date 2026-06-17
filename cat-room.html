@@ -25,19 +25,19 @@
   <style>
     /* ── Design Tokens ── */
     :root {
-      --ink-deepest: #3A3255;
-      --ink-deep:    #47406A;
-      --gold:        #E8C97A;
-      --gold-soft:   #F0D898;
-      --gold-line:   rgba(232, 201, 122, 0.65);
-      --lavender:        #C4AADF;
-      --lavender-soft:   #D4C0EC;
-      --lavender-deep:   #9B82C4;
-      --quartz:        #8EC4D8;
-      --quartz-soft:   #A8D4E4;
-      --text-primary:   #F5EFF8;
-      --text-secondary: #D8CFDF;
-      --text-muted:     #A89DB5;
+      --ink-deepest: #F4F3F6;
+      --ink-deep:    #EAE8F0;
+      --gold:        #B8841E;
+      --gold-soft:   #CFA040;
+      --gold-line:   rgba(160, 110, 20, 0.40);
+      --lavender:        #7A5AAA;
+      --lavender-soft:   #9870C0;
+      --lavender-deep:   #5A3A88;
+      --quartz:        #3A7A9E;
+      --quartz-soft:   #4A8CB0;
+      --text-primary:   #1E2A30;
+      --text-secondary: #2A4050;
+      --text-muted:     #6A8090;
       --ease-silk: cubic-bezier(0.22, 0.61, 0.36, 1);
 
       /* 靜觀空間頁面專屬色 — 石英藍 */
@@ -232,8 +232,8 @@
 
     .objects-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.9rem;
       width: 100%;
       margin-bottom: 2rem;
     }
@@ -242,8 +242,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1rem;
-      padding: 1.8rem 1.4rem;
+      gap: 0.6rem;
+      padding: 1rem 0.6rem;
       border: 1px solid rgba(142, 196, 216, 0.30);
       border-radius: 16px;
       background: linear-gradient(160deg, rgba(255,255,255,0.82) 0%, rgba(224,242,248,0.60) 100%);
@@ -270,8 +270,8 @@
     }
 
     .object-icon {
-      width: 56px;
-      height: 56px;
+      width: 40px;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -299,7 +299,7 @@
     }
 
     .object-label {
-      font-size: 1rem;
+      font-size: 0.82rem;
       font-weight: 400;
       letter-spacing: 0.05em;
       text-align: center;
@@ -684,6 +684,18 @@
       color: #fff;
     }
 
+    .btn-ig {
+      background: transparent;
+      border-color: rgba(193, 53, 132, 0.5);
+      color: #C13584;
+    }
+
+    .btn-ig:hover {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      border-color: transparent;
+      color: #fff;
+    }
+
     /* ════════════════════════════════════════
        固定底部分享區
     ════════════════════════════════════════ */
@@ -831,7 +843,22 @@
       }
 
       .objects-grid {
-        gap: 1.2rem;
+        gap: 0.7rem;
+      }
+
+      .object-btn {
+        padding: 0.85rem 0.5rem;
+        gap: 0.5rem;
+        border-radius: 12px;
+      }
+
+      .object-icon {
+        width: 34px;
+        height: 34px;
+      }
+
+      .object-label {
+        font-size: 0.75rem;
       }
 
       .color-grid {
@@ -1233,6 +1260,7 @@
 <!-- 固定底部分享區 -->
 <div class="share-footer" id="share-footer">
   <button class="btn btn-line" id="line-share">分享到 LINE ↗</button>
+  <button class="btn btn-ig" id="ig-share">分享到 IG ↗</button>
   <button class="btn" id="back-home">回到首頁</button>
 </div>
 
@@ -3144,7 +3172,13 @@ document.getElementById('redraw-btn').addEventListener('click', () => {
   document.getElementById('share-footer').classList.remove('visible');
 });
 
-document.getElementById('line-share').addEventListener('click', shareToLine);
+document.getElementById('line-share').addEventListener('click', catRoomShare);
+document.getElementById('ig-share').addEventListener('click', () => {
+  if (!selectedObject || !selectedColor) return;
+  const result = RESULTS[`${selectedObject}_${selectedColor}`];
+  const colorData = COLORS[selectedColor];
+  shareToInstagram(result.title, result.message, colorData.hex, result.action);
+});
 document.getElementById('back-home').addEventListener('click', () => {
   window.location.href = 'index.html';
 });
@@ -3253,26 +3287,26 @@ function toggleColorDepth(toggleEl) {
   arrow.classList.toggle('open', !isOpen);
 }
 
-async function shareToLine() {
+async function catRoomShare() {
   if (!selectedObject || !selectedColor) return;
 
-  const objectName = OBJECTS[selectedObject].name;
-  const colorName = COLORS[selectedColor].name;
+  const objectData = OBJECTS[selectedObject];
+  const colorData = COLORS[selectedColor];
   const result = RESULTS[`${selectedObject}_${selectedColor}`];
   const transform = generateTransformSuggestions(selectedObject, selectedColor);
 
-  const message = `✨ 今天的靜觀提醒\n\n${result.title}\n\n${result.message}\n\n💭 ${result.reminder}\n\n🌿 ${result.action}\n\n🔄 轉化方向\n${transform}\n\n— 靜觀儀式`;
+  const fullMessage = `${result.title}\n\n${result.message}\n\n🌿 ${result.action}\n\n🔄 ${transform}`;
+
+  const messages = buildRoomFlexMessage(
+    objectData.name,
+    colorData.name,
+    colorData.name,
+    colorData.hex,
+    fullMessage
+  );
 
   try {
-    if (typeof liff !== 'undefined' && liff.isInClient && liff.isInClient()) {
-      await liff.sendMessages([{
-        type: 'text',
-        text: message
-      }]);
-    } else {
-      const url = encodeURIComponent(window.location.href);
-      window.open(`https://social-plugins.line.me/lineit/share?url=${url}`, '_blank');
-    }
+    await shareToLine(messages);
   } catch (e) {
     console.error('Share failed:', e);
   }

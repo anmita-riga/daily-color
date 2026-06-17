@@ -25,32 +25,27 @@
   <style>
     /* ── Design Tokens ── */
     :root {
-      --ink-deepest: #3A3255;
-      --ink-deep:    #47406A;
-      --gold:        #E8C97A;
-      --gold-soft:   #F0D898;
-      --gold-line:   rgba(232, 201, 122, 0.65);
-      --lavender:        #C4AADF;
-      --lavender-soft:   #D4C0EC;
-      --quartz:      #8EC4D8;
-      --text-primary:   #F5EFF8;
-      --text-secondary: #D8CFDF;
-      --text-muted:     #A89DB5;
+      --ink-deepest: #FBF6EE;
+      --ink-deep:    #F5EDE0;
+      --gold:        #B8841E;
+      --gold-soft:   #CFA040;
+      --gold-line:   rgba(160, 110, 20, 0.40);
+      --lavender:        #7A5AAA;
+      --lavender-soft:   #9870C0;
+      --quartz:      #3A7A9E;
+      --text-primary:   #2C2018;
+      --text-secondary: #4A3828;
+      --text-muted:     #8A7060;
       --ease-silk: cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body { background: var(--ink-deepest); }
+    html, body { background: #F4F3F6 !important; }
 
     body {
       min-height: 100vh;
-      background:
-        radial-gradient(ellipse 90% 45% at 50% 0%,   rgba(196, 170, 223, 0.28) 0%, transparent 60%),
-        radial-gradient(ellipse 65% 35% at 15% 40%,  rgba(232, 201, 122, 0.14) 0%, transparent 55%),
-        radial-gradient(ellipse 65% 35% at 85% 60%,  rgba(196, 170, 223, 0.20) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 40% at 50% 100%, rgba(232, 201, 122, 0.18) 0%, transparent 60%),
-        linear-gradient(180deg, var(--ink-deep) 0%, var(--ink-deepest) 50%, var(--ink-deep) 100%);
+      background: #F4F3F6;
       transition: none;
       display: flex;
       flex-direction: column;
@@ -65,43 +60,17 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 星塵粒子 */
+    /* 淡雅光暈 */
     body::before {
       content: '';
       position: fixed; inset: 0;
-      background-image:
-        radial-gradient(1.5px 1.5px at  8% 14%, rgba(232, 201, 122, 0.70), transparent),
-        radial-gradient(1px   1px   at 25% 28%, rgba(196, 170, 223, 0.55), transparent),
-        radial-gradient(1.5px 1.5px at 72% 18%, rgba(232, 201, 122, 0.60), transparent),
-        radial-gradient(1px   1px   at 90% 42%, rgba(196, 170, 223, 0.50), transparent),
-        radial-gradient(1px   1px   at 38% 65%, rgba(232, 201, 122, 0.45), transparent),
-        radial-gradient(1.5px 1.5px at 55% 82%, rgba(196, 170, 223, 0.60), transparent),
-        radial-gradient(1px   1px   at 18% 78%, rgba(232, 201, 122, 0.40), transparent),
-        radial-gradient(1.5px 1.5px at 48%  6%, rgba(245, 235, 210, 0.65), transparent);
-      pointer-events: none;
-      z-index: 0;
-      animation: starBreath 20s ease-in-out infinite;
-    }
-    @keyframes starBreath {
-      0%, 100% { opacity: 0.6; }
-      50%      { opacity: 1; }
-    }
-
-    /* 極光漂浮 */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 500px 320px at 20% 25%, rgba(196, 170, 223, 0.20) 0%, transparent 65%),
-        radial-gradient(ellipse 420px 280px at 82% 68%, rgba(232, 201, 122, 0.16) 0%, transparent 65%);
+        radial-gradient(ellipse 70% 50% at 15% 20%, rgba(180, 150, 220, 0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 45% at 85% 75%, rgba(160, 200, 180, 0.08) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
-      animation: auroraFlow 32s ease-in-out infinite alternate;
     }
-    @keyframes auroraFlow {
-      0%   { transform: translate(0, 0); opacity: 0.7; }
-      100% { transform: translate(-20px, 15px); opacity: 1; }
-    }
+    body::after { display: none; }
 
     /* ── 返回 ── */
     .back-link {
@@ -157,9 +126,9 @@
     /* ── 抽牌按鈕 ── */
     .draw-btn {
       background: linear-gradient(135deg,
-        rgba(232, 201, 122, 0.12) 0%,
-        rgba(196, 170, 223, 0.10) 100%);
-      border: 1px solid var(--gold-line);
+        rgba(200, 160, 60, 0.10) 0%,
+        rgba(160, 120, 200, 0.08) 100%);
+      border: 1px solid rgba(160, 120, 40, 0.35);
       color: var(--gold);
       font-family: "Noto Serif TC", serif;
       font-size: 0.88rem;
@@ -172,15 +141,15 @@
       margin-bottom: 2.4rem;
       position: relative;
       z-index: 1;
-      box-shadow: 0 4px 20px rgba(232, 201, 122, 0.12);
+      box-shadow: 0 4px 20px rgba(160, 120, 40, 0.10);
     }
     .draw-btn:hover {
       background: linear-gradient(135deg,
-        rgba(232, 201, 122, 0.22) 0%,
-        rgba(196, 170, 223, 0.18) 100%);
+        rgba(200, 160, 60, 0.18) 0%,
+        rgba(160, 120, 200, 0.14) 100%);
       border-color: var(--gold);
       color: var(--gold-soft);
-      box-shadow: 0 6px 28px rgba(232, 201, 122, 0.25);
+      box-shadow: 0 6px 28px rgba(160, 120, 40, 0.18);
       transform: translateY(-2px);
     }
     .draw-btn:active { transform: scale(0.98); }
@@ -293,14 +262,14 @@
     .ic-wrap {
       border-radius: 16px;
       padding: 2.8rem 2.4rem 2.6rem;
-      background: linear-gradient(180deg,
-        rgba(38, 32, 58, 0.88) 0%,
-        rgba(232, 201, 122, 0.09) 100%);
-      border: 1px solid rgba(232, 201, 122, 0.28);
+      background: linear-gradient(160deg,
+        rgba(255, 252, 248, 0.97) 0%,
+        rgba(245, 235, 215, 0.85) 100%);
+      border: 1px solid rgba(180, 140, 60, 0.22);
       box-shadow:
         inset 3px 0 0 0 var(--gold),
-        0 12px 40px rgba(20, 16, 38, 0.55),
-        0 0 32px rgba(232, 201, 122, 0.08);
+        0 12px 40px rgba(160, 120, 40, 0.12),
+        0 2px 8px rgba(0, 0, 0, 0.06);
       display: none;
       opacity: 0;
       transform: translateY(14px);
@@ -1350,7 +1319,7 @@
 
             <div style="display: flex; gap: 0.8rem; margin-top: 1.3rem; justify-content: center; flex-wrap: wrap;">
               <button class="ck-share line-btn ta" id="ckShare">分享到 LINE ↗</button>
-              <button class="ck-share ta" id="igBtn" style="border-color: #E1306C; color: #E1306C;">保存 IG 限動 ↗</button>
+              <button class="ck-share ta" id="igBtn" style="border-color: #C13584; color: #C13584;">分享到 IG ↗</button>
               <button class="ck-share ta" id="roomBtn" style="border-color: #c098ff; color: #c098ff;">進入房間</button>
             </div>
           </div>
@@ -1376,24 +1345,45 @@ const IC_DEFAULTS = [
   // 海底輪 (0)
   { text: '你已經在對的地方了\n什麼都不需要趕', chakra: 0, bg: '#f6f3ef' },
   { text: '落地，就是此刻最好的事', chakra: 0, bg: '#f5f2ee' },
+  { text: '你的根\n比你以為的還要深', chakra: 0, bg: '#f4f1ec' },
+  { text: '此刻的你\n已經足夠安全了', chakra: 0, bg: '#f6f2ed' },
+  { text: '不需要去任何地方\n你就是家', chakra: 0, bg: '#f5f3ee' },
   // 臍輪 (1)
   { text: '讓感受流動就好\n你不需要解釋它', chakra: 1, bg: '#fef6f0' },
   { text: '你的感受\n本身就是訊息', chakra: 1, bg: '#fdf5ee' },
+  { text: '允許自己\n想要你想要的', chakra: 1, bg: '#fef5ef' },
+  { text: '創造力不需要理由\n只需要你開始', chakra: 1, bg: '#fdf6f0' },
+  { text: '你的渴望\n是真實的，值得被珍重', chakra: 1, bg: '#fef7f1' },
   // 太陽神經叢 (2)
   { text: '你有力量\n比你知道的還要多', chakra: 2, bg: '#fefaf0' },
   { text: '不需要先準備好\n才能開始', chakra: 2, bg: '#fdfaf0' },
+  { text: '你說的算\n那就夠了', chakra: 2, bg: '#fefbf0' },
+  { text: '選擇是一種力量\n你今天選了什麼', chakra: 2, bg: '#fdfaf1' },
+  { text: '即使一小步\n也是你自己走的', chakra: 2, bg: '#fefaf2' },
   // 心輪 (3)
   { text: '今天，先對自己溫柔一點', chakra: 3, bg: '#f0f6f2' },
   { text: '你本身就夠好了\n什麼都不需要再加', chakra: 3, bg: '#f1f6f3' },
+  { text: '愛不需要賺取\n你值得被愛', chakra: 3, bg: '#f0f7f2' },
+  { text: '給自己一點耐心\n就像給朋友的那種', chakra: 3, bg: '#f1f7f4' },
+  { text: '你的心已經很努力了\n讓它休息一下', chakra: 3, bg: '#f2f7f4' },
   // 喉輪 (4)
   { text: '你想說的那句話\n值得被說出來', chakra: 4, bg: '#eff4fa' },
   { text: '你的真實\n是這個世界需要的', chakra: 4, bg: '#f0f5fb' },
+  { text: '沉默不是答案\n你的聲音也是', chakra: 4, bg: '#eff5fb' },
+  { text: '說出來\n不一定要完整，只要真實', chakra: 4, bg: '#f0f5fc' },
+  { text: '你有話要說\n那句話在等你', chakra: 4, bg: '#eff4fb' },
   // 眉心輪 (5)
   { text: '答案已在你心裡\n先安靜一下', chakra: 5, bg: '#f2f1f8' },
   { text: '你的直覺在說話\n試著聽它', chakra: 5, bg: '#f3f2f9' },
+  { text: '你已經知道了\n只是還沒說出口', chakra: 5, bg: '#f2f1f8' },
+  { text: '信任第一個感覺\n它通常是對的', chakra: 5, bg: '#f3f2f9' },
+  { text: '看見\n是改變的開始', chakra: 5, bg: '#f4f3fa' },
   // 頂輪 (6)
   { text: '不需要全都想清楚\n讓它自然發生', chakra: 6, bg: '#f7f0fc' },
   { text: '你是更廣大事物的一部分', chakra: 6, bg: '#f8f1fd' },
+  { text: '鬆開一點\n宇宙也在幫你', chakra: 6, bg: '#f7f0fd' },
+  { text: '這件事比你想的\n更有意義', chakra: 6, bg: '#f8f1fd' },
+  { text: '你不需要獨自扛著這一切', chakra: 6, bg: '#f9f2fe' },
 ];
 
 // ════════════════════════════════════════
@@ -1499,6 +1489,166 @@ const SPIRIT_GUIDES = [
   { title: '回歸中心', category: '能量護盾', color: '#8DADE8',
     text: '將散落在外的所有注意線程（Threads）收回。此時此刻，你就是自己宇宙唯一的重力場。',
     action: '回到你的中心。' },
+
+  // ✦ 系統校準（增補）
+  { title: '離線充電', category: '系統校準', color: '#E8A5C1',
+    text: '不需要隨時在線。偶爾的斷線，是讓系統重新找到自己運行頻率最有效的方式。',
+    action: '今天允許自己斷開一段時間。' },
+  { title: '延遲回應', category: '系統校準', color: '#E8A5C1',
+    text: '不是每個訊號都需要立即回應。某些數據需要在靜止中發酵，才能展示完整的意義。',
+    action: '給自己一點延遲思考的空間。' },
+  { title: '預設重置', category: '系統校準', color: '#E8A5C1',
+    text: '當運行模式變得沉重，試著回到出廠設定：呼吸、身體、此刻。最簡單的，往往最有效。',
+    action: '深呼吸，回到最基本的狀態。' },
+  { title: '錯誤容忍', category: '系統校準', color: '#E8A5C1',
+    text: '任何穩固的系統都內建容錯機制。你的失誤不是漏洞，而是系統自我學習的必要回饋。',
+    action: '對自己的失誤寬容一些。' },
+  { title: '後台靜默', category: '系統校準', color: '#E8A5C1',
+    text: '有些整理正在你意識不到的深處安靜進行著。你不需要監控每一個進程，信任後台的運作。',
+    action: '放下需要掌控一切的衝動，休息。' },
+  { title: '版本更新', category: '系統校準', color: '#E8A5C1',
+    text: '此刻的你，是目前為止最完整的版本。不是因為你沒有缺陷，而是因為你帶著所有的經歷在這裡。',
+    action: '承認你的成長，哪怕只是一點點。' },
+  { title: '優先級重排', category: '系統校準', color: '#E8A5C1',
+    text: '當待辦清單壓過了呼吸的節奏，是時候重新排列優先順序。什麼是真正重要的？從那裡開始。',
+    action: '今天只做一件最重要的事。' },
+  { title: '靜態分析', category: '系統校準', color: '#E8A5C1',
+    text: '在行動之前，先安靜地掃描自己的狀態。了解自己現在在哪裡，才知道下一步該往哪走。',
+    action: '花一分鐘安靜地觀察自己的狀態。' },
+  { title: '系統保護', category: '系統校準', color: '#E8A5C1',
+    text: '你不是機器，不需要持續高效運轉。保護你的系統，就是保護你繼續創造的能力。',
+    action: '今天在精疲力竭之前就停下來。' },
+  { title: '記憶釋放', category: '系統校準', color: '#E8A5C1',
+    text: '那些反覆播放的舊記憶，是系統在提醒你有未完成的整合。輕輕地看著它，然後讓它安靜下來。',
+    action: '對一段舊記憶說一聲：謝謝，我接收到了。' },
+
+  // ✦ 能量整合（增補）
+  { title: '頻率對齊', category: '能量整合', color: '#C9C084',
+    text: '當某件事讓你感到輕盈，那是你的能量場在說：這裡有共鳴。跟著輕盈走，不需要理由。',
+    action: '今天做一件讓你感到輕盈的事。' },
+  { title: '能量清空', category: '能量整合', color: '#C9C084',
+    text: '你不需要帶著所有人的期望移動。適時卸下那些不屬於你的重量，讓自己的場域保持清澈。',
+    action: '放下一個不屬於你的重量。' },
+  { title: '感知校準', category: '能量整合', color: '#C9C084',
+    text: '你感受到的，不一定是現實，但一定是真實的。讓感知帶領你進入更深的自我理解。',
+    action: '相信你現在的感受，給它空間。' },
+  { title: '慢速整合', category: '能量整合', color: '#C9C084',
+    text: '不是所有的體驗都能即時消化。允許某些事情慢慢沉澱，整合需要的只是時間和安靜。',
+    action: '不要急著得出結論，先讓它慢慢落地。' },
+  { title: '磁場淨化', category: '能量整合', color: '#C9C084',
+    text: '就像空氣在雨後變得清透，你的能量場也需要定期的淨化。釋放今天積累的雜質，讓場域歸零。',
+    action: '今天睡前做一次深呼吸的能量清空。' },
+  { title: '共鳴辨識', category: '能量整合', color: '#C9C084',
+    text: '注意那些讓你心跳加快、或讓你感到安靜喜悅的時刻——那是靈魂在標記屬於你的頻率。',
+    action: '今天記下一個讓你有共鳴的瞬間。' },
+  { title: '過渡地帶', category: '能量整合', color: '#C9C084',
+    text: '在兩個狀態之間的空隙裡，有一種特別的智慧。不要急著跨過去——在過渡地帶多停留一會兒。',
+    action: '允許自己在過渡期慢下來。' },
+  { title: '節律同步', category: '能量整合', color: '#C9C084',
+    text: '當你的內在節律與外在環境產生摩擦，不是你錯了，只是頻率暫時不同步。回到自己的節奏。',
+    action: '今天按照自己的節奏，而不是外部的速度。' },
+  { title: '深層聆聽', category: '能量整合', color: '#C9C084',
+    text: '在所有的聲音之下，有一個更安靜的聲音一直在說話。練習聆聽它，它是你最真實的內在指引。',
+    action: '今天給自己十分鐘，只是聆聽內在。' },
+  { title: '能量回流', category: '能量整合', color: '#C9C084',
+    text: '你放出去的溫柔、用心和真實，最終都會以某種形式回到你的場域。信任這個循環。',
+    action: '回想一件你為別人做的好事，感謝自己。' },
+
+  // ✦ 實相顯化（增補）
+  { title: '種子時刻', category: '實相顯化', color: '#9DB89C',
+    text: '每個你曾認真對自己許下的願，都在某個維度悄悄發芽。你沒有被遺忘，只是時機還在醞釀。',
+    action: '重新想起你曾許下的一個願望。' },
+  { title: '顯化節奏', category: '實相顯化', color: '#9DB89C',
+    text: '顯化不是強迫粒子就範，而是讓自己的頻率成為那個結果的磁場。放鬆，比努力更有力量。',
+    action: '放下對結果的控制，信任過程。' },
+  { title: '意識擴展', category: '實相顯化', color: '#9DB89C',
+    text: '你所看見的世界，從不超過你意識的邊界。每一次的開放，都在擴展你的實相版圖。',
+    action: '嘗試以一個新的角度看待今天的事。' },
+  { title: '場域校正', category: '實相顯化', color: '#9DB89C',
+    text: '當你的內在清晰，外部的事物自然會進行重新排列。先整理自己的場域，世界的回應會跟上。',
+    action: '整理一個內在或外在的小混亂。' },
+  { title: '吸引力場', category: '實相顯化', color: '#9DB89C',
+    text: '你不是在等待奇蹟，你就是在創造它。每一個有意識的選擇，都在重塑你周圍的引力場。',
+    action: '今天做一個與你的願景一致的選擇。' },
+  { title: '時機共識', category: '實相顯化', color: '#9DB89C',
+    text: '有些事情沒有在你以為的時間出現，是因為宇宙正在準備一個更完整的版本給你。耐心是一種信任。',
+    action: '對一件還沒到來的事說：我信任時機。' },
+  { title: '內在藍圖', category: '實相顯化', color: '#9DB89C',
+    text: '你心裡最深處渴望的生命樣貌，不是幻想，而是靈魂帶來的設計圖。它知道路怎麼走。',
+    action: '今天花幾分鐘想像你最渴望的生命狀態。' },
+  { title: '當下創造', category: '實相顯化', color: '#9DB89C',
+    text: '未來不是在別處等你，它正在此刻的每一個念頭和行動裡被塑造。你現在就在創造。',
+    action: '留意此刻的念頭，選擇一個更輕盈的方向。' },
+  { title: '豐盛接收', category: '實相顯化', color: '#9DB89C',
+    text: '接受好事降臨，也是一種練習。你值得被祝福，值得事情順利，值得感到喜悅。',
+    action: '練習說：我接受。讓好的事情落地。' },
+  { title: '現實重寫', category: '實相顯化', color: '#9DB89C',
+    text: '你對自己說的故事，決定了你看見什麼樣的世界。試著為今天的自己寫一個不同的版本。',
+    action: '把一個限制性的想法，改寫成開放的可能。' },
+
+  // ✦ 旅程探索（增補）
+  { title: '非線性路徑', category: '旅程探索', color: '#9D9EBD',
+    text: '靈魂的旅程從不是直線。那些繞道、停頓、折返，都是地圖上必要的座標，缺一不可。',
+    action: '接受此刻你所在的位置，不論是否如預期。' },
+  { title: '好奇模式', category: '旅程探索', color: '#9D9EBD',
+    text: '以探索者而非評判者的眼光看待自己的生命。好奇心，是讓一切保持開放的最輕盈的燃料。',
+    action: '今天帶著好奇心接近一件平常的事。' },
+  { title: '意外收穫', category: '旅程探索', color: '#9D9EBD',
+    text: '最珍貴的體驗往往不在計劃裡。讓今天的自己稍微放開劇本，看看宇宙安排了什麼意外。',
+    action: '今天允許一件事偏離你的計劃。' },
+  { title: '里程碑記錄', category: '旅程探索', color: '#9D9EBD',
+    text: '你走過的每一段路，都在你的靈魂資料庫裡留下了記錄。此刻的你，已是那段旅程的產物。',
+    action: '回想一件你走過後更強大的事。' },
+  { title: '新地圖開啟', category: '旅程探索', color: '#9D9EBD',
+    text: '你正在進入的，是一塊你從未踏過的領域。沒有前人的足跡不代表路不存在，你就是在開路。',
+    action: '對一件未知的事說：我願意探索。' },
+  { title: '轉捩點識別', category: '旅程探索', color: '#9D9EBD',
+    text: '有些時刻，你事後才知道那是個轉捩點。也許此刻正是其中之一。以敬意對待今天。',
+    action: '把今天當作一個重要時刻來對待。' },
+  { title: '旅伴相遇', category: '旅程探索', color: '#9D9EBD',
+    text: '某些人出現在你生命的特定章節，是為了與你交換某種頻率。感謝每一個在路上出現的靈魂。',
+    action: '想起一個曾影響你的人，在心裡感謝他。' },
+  { title: '休息站', category: '旅程探索', color: '#9D9EBD',
+    text: '長途旅程需要休息站。停下來不是放棄，是讓旅程得以持續的智慧。你現在可以停一下。',
+    action: '今天給自己一個真正的休息，不帶愧疚。' },
+  { title: '輕裝前行', category: '旅程探索', color: '#9D9EBD',
+    text: '旅途中帶太多行李會讓腳步沉重。什麼是你可以放下的？輕裝的旅人，走得更遠。',
+    action: '今天放下一件不再需要帶著走的事。' },
+  { title: '地平線凝視', category: '旅程探索', color: '#9D9EBD',
+    text: '把目光從腳下移向遠方的地平線。你走的每一步，都在把那條線往前推。它一直在移動。',
+    action: '今天花一點時間想像更遠的未來。' },
+
+  // ✦ 能量護盾（增補）
+  { title: '邊界設定', category: '能量護盾', color: '#8DADE8',
+    text: '設定邊界不是拒絕，而是在說：我知道哪裡是我，哪裡不是。清晰的邊界讓愛流動得更自由。',
+    action: '今天為自己設定一個小小的邊界。' },
+  { title: '靜默模式', category: '能量護盾', color: '#8DADE8',
+    text: '不是所有的問題都需要立刻回應。進入靜默，是讓你的能量場重新找到自己頻率的主動選擇。',
+    action: '今天給自己一段靜默的時間。' },
+  { title: '選擇性接收', category: '能量護盾', color: '#8DADE8',
+    text: '不是所有的頻率都值得你的天線對準。你有權決定接收什麼，屏蔽什麼，這是你的主權。',
+    action: '今天有意識地選擇你接收的訊息。' },
+  { title: '自我見證', category: '能量護盾', color: '#8DADE8',
+    text: '在所有外部評價的聲音之前，先成為自己最公正的見證人。你看見自己的眼光，比任何人都重要。',
+    action: '今天以溫柔的眼光看見自己一次。' },
+  { title: '核心穩定', category: '能量護盾', color: '#8DADE8',
+    text: '外部的風浪再大，你內在有一個點是不會被搖動的。找到那個點，它就是你的錨。',
+    action: '感受一下你身體的重心，從那裡穩定下來。' },
+  { title: '能量主權', category: '能量護盾', color: '#8DADE8',
+    text: '你的時間、注意力和情感，都是珍貴的能量資源。你有完全的主權決定把它們給誰、給多少。',
+    action: '今天至少一件事，把能量留給自己。' },
+  { title: '干擾過濾', category: '能量護盾', color: '#8DADE8',
+    text: '並非所有聲音都值得進入你的內在空間。練習辨識哪些是訊號，哪些只是背景雜訊。',
+    action: '今天關掉一個讓你分心或焦慮的資訊來源。' },
+  { title: '修復週期', category: '能量護盾', color: '#8DADE8',
+    text: '受傷之後需要修復期，這不是軟弱，而是有機體運作的自然規律。給自己的傷口足夠的時間。',
+    action: '承認自己正在修復中，不要催促自己復原。' },
+  { title: '內在聖殿', category: '能量護盾', color: '#8DADE8',
+    text: '在你意識最深處，有一個任何外力都無法侵入的空間。那是你永遠可以回去的聖殿。',
+    action: '閉上眼睛，想像你內在那個安全的空間。' },
+  { title: '自我盟約', category: '能量護盾', color: '#8DADE8',
+    text: '與自己許下一個約定：不管外部發生什麼，你都站在自己這邊。這是最重要的一種忠誠。',
+    action: '今天做一件對自己忠誠的事。' },
 ];
 
 const CHAKRA_DATA = [
@@ -2166,8 +2316,8 @@ document.getElementById('ckShare').addEventListener('click', async function() {
   this.disabled = false;
 });
 
-// ── Instagram 限動保存 ──
-document.getElementById('igBtn').addEventListener('click', function() {
+// ── Instagram 分享 ──
+document.getElementById('igBtn').addEventListener('click', async function() {
   if (!currentIC) return;
 
   let chakra;
@@ -2179,24 +2329,15 @@ document.getElementById('igBtn').addEventListener('click', function() {
     chakra = CHAKRA_DATA[Math.floor(Math.random() * CHAKRA_DATA.length)];
   }
 
-  // 生成圖片
-  const bgColor = currentCK ? currentCK.color : CHAKRA_DATA[currentIC.chakra].color;
-  const imageData = generateInstagramImage(chakra.name, currentIC.text, bgColor);
-
-  // 下載圖片
-  const link = document.createElement('a');
-  link.href = imageData;
-  link.download = `daily-color-${new Date().toISOString().slice(0, 10)}.png`;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-
-  // 提示用戶
+  const bgColor = chakra.color || '#C4AADF';
   const orig = this.textContent;
-  this.textContent = '已保存 ✓';
-  setTimeout(() => {
-    this.textContent = orig;
-  }, 2000);
+  this.textContent = '準備中…';
+  this.disabled = true;
+  try {
+    await shareToInstagram(chakra.name, currentIC.text, bgColor, chakra.action || '');
+  } catch(e) {}
+  this.textContent = orig;
+  this.disabled = false;
 });
 
 // ── LIFF 初始化 + 個人化問候 ──
