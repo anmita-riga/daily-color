@@ -816,6 +816,35 @@
       flex-shrink: 0;
     }
 
+    /* ── Back to Top ── */
+    .back-to-top {
+      position: fixed;
+      bottom: calc(28px + env(safe-area-inset-bottom));
+      right: 20px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, background 0.2s;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .back-to-top:hover { background: rgba(255,255,255,0.14); }
+
     /* ── Sections ── */
     .page-section {
       display: none;
@@ -1899,6 +1928,9 @@
 
 </div><!-- /section-service -->
 
+<!-- Back to Top -->
+<button class="back-to-top" id="back-to-top" aria-label="回到頂部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <!-- Card Sheet -->
 <div class="card-sheet" id="card-sheet">
   <button class="panel-close" id="card-sheet-close">✕</button>
@@ -2339,6 +2371,19 @@
     btn.classList.toggle('open');
     body.classList.toggle('open');
   }
+
+  // Back to top
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+
+  // Drawer swipe-left to close
+  let touchStartX = 0;
+  drawer.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  drawer.addEventListener('touchend', e => {
+    if (touchStartX - e.changedTouches[0].clientX > 60) closeDrawer();
+  }, { passive: true });
 
 </script>
 </body>
