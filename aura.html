@@ -1207,29 +1207,35 @@
     activeLayer = n;
     const d = LAYERS[n];
 
-    // Dim other layers
     document.querySelectorAll('.aura-layer').forEach(el => {
       const ln = parseInt(el.dataset.layer);
       el.classList.toggle('dimmed', ln !== n);
       el.classList.toggle('active', ln === n);
     });
-
-    // Highlight legend
     document.querySelectorAll('.legend-item').forEach(el => {
       el.classList.toggle('active', parseInt(el.dataset.layer) === n);
     });
 
-    // Fill panel
-    document.getElementById('panel-dot').style.cssText = `background:${d.color}; box-shadow:0 0 10px ${d.color};`;
-    document.getElementById('panel-layer-name').textContent = `第 ${n} 層`;
-    document.getElementById('panel-title').textContent = d.name;
-    document.getElementById('panel-subtitle').textContent = d.subtitle;
-    document.getElementById('panel-body').textContent = d.body;
-
-    const kwContainer = document.getElementById('panel-keywords');
-    kwContainer.innerHTML = d.keywords.map(k =>
-      `<span class="keyword-tag">${k}</span>`
-    ).join('');
+    if (isDamagedMode) {
+      const dmg = DAMAGE_DATA[n];
+      document.getElementById('panel-dot').style.cssText = `background:${dmg.color}; box-shadow:0 0 10px ${dmg.color};`;
+      document.getElementById('panel-layer-name').textContent = `第 ${n} 層 · 破損`;
+      document.getElementById('panel-title').textContent = d.name;
+      document.getElementById('panel-subtitle').textContent = '可能出現的影響';
+      document.getElementById('panel-body').innerHTML = dmg.items.map(i =>
+        `<p style="margin:0 0 8px;font-size:13.5px;line-height:1.8;color:var(--text-secondary)">· ${i}</p>`
+      ).join('');
+      document.getElementById('panel-keywords').innerHTML = '';
+    } else {
+      document.getElementById('panel-dot').style.cssText = `background:${d.color}; box-shadow:0 0 10px ${d.color};`;
+      document.getElementById('panel-layer-name').textContent = `第 ${n} 層`;
+      document.getElementById('panel-title').textContent = d.name;
+      document.getElementById('panel-subtitle').textContent = d.subtitle;
+      document.getElementById('panel-body').textContent = d.body;
+      document.getElementById('panel-keywords').innerHTML = d.keywords.map(k =>
+        `<span class="keyword-tag">${k}</span>`
+      ).join('');
+    }
 
     document.getElementById('panel-purify-list').innerHTML = d.purify.map(p =>
       `<span class="purify-tag">✦ ${p}</span>`
@@ -1318,33 +1324,6 @@
     document.body.style.background = '#0D0A14';
   }
 
-  // Hook into openLayer / closePanel
-  const _origOpenLayer = openLayer;
-  window._openLayerWithFx = function(n) {
-    _origOpenLayer(n);
-    tintBg(n);
-  };
-  const _origClose = closePanel;
-  window._closePanelWithFx = function() {
-    _origClose();
-    resetBg();
-  };
-  document.querySelectorAll('.aura-layer').forEach(el => {
-    el.onclick = e => { e.stopPropagation(); window._openLayerWithFx(parseInt(el.dataset.layer)); };
-  });
-  document.querySelectorAll('.legend-item').forEach(el => {
-    el.onclick = () => window._openLayerWithFx(parseInt(el.dataset.layer));
-  });
-  document.getElementById('panel-close').onclick = window._closePanelWithFx;
-  document.getElementById('overlay').onclick = window._closePanelWithFx;
-
-
-  function toggleAccordion(btn) {
-    const body = btn.nextElementSibling;
-    btn.classList.toggle('open');
-    body.classList.toggle('open');
-  }
-
   // ── 破損資料 ──
   const DAMAGE_DATA = {
     1: { color: '#FF6060', items: ['長期疲勞、睡再多都覺得累', '免疫力下降、身體容易出狀況', '對自己的身體感到疏離或陌生'] },
@@ -1358,56 +1337,35 @@
 
   // ── 模式切換 ──
   let isDamagedMode = false;
-  const auraSvg = document.getElementById('aura-svg');
-  const introEl = document.querySelector('.intro p');
 
   document.getElementById('mode-toggle-btn').addEventListener('click', e => {
     const opt = e.target.closest('.mode-opt');
     if (!opt) return;
-    const mode = opt.dataset.mode;
-    isDamagedMode = mode === 'damaged';
-
+    isDamagedMode = opt.dataset.mode === 'damaged';
     document.querySelectorAll('.mode-opt').forEach(o => o.classList.remove('active'));
     opt.classList.add('active');
-
-    auraSvg.classList.toggle('damaged', isDamagedMode);
-    introEl.textContent = isDamagedMode
-      ? '點擊任一層，了解破洞或能量滯留時的影響'
-      : '每個人都被七層能量包裹著\n點擊任一層，感受它正在說的話';
-
+    document.getElementById('aura-svg').classList.toggle('damaged', isDamagedMode);
     closePanel();
+    resetBg();
   });
 
-  // 覆寫 openLayer 讓破損模式顯示不同內容
-  const _origOpenLayer = openLayer;
-  window.openLayer = function(n) {
-    if (!isDamagedMode) { _origOpenLayer(n); return; }
+  // ── 背景暈染 ──
+  window._openLayerWithFx = function(n) { openLayer(n); tintBg(n); };
+  window._closePanelWithFx = function() { closePanel(); resetBg(); };
+  document.querySelectorAll('.aura-layer').forEach(el => {
+    el.onclick = e => { e.stopPropagation(); window._openLayerWithFx(parseInt(el.dataset.layer)); };
+  });
+  document.querySelectorAll('.legend-item').forEach(el => {
+    el.onclick = () => window._openLayerWithFx(parseInt(el.dataset.layer));
+  });
+  document.getElementById('panel-close').onclick = window._closePanelWithFx;
+  document.getElementById('overlay').onclick = window._closePanelWithFx;
 
-    activeLayer = n;
-    const d = LAYERS[n];
-    const dmg = DAMAGE_DATA[n];
-
-    document.querySelectorAll('.aura-layer').forEach(el => {
-      const ln = parseInt(el.dataset.layer);
-      el.classList.toggle('dimmed', ln !== n);
-      el.classList.toggle('active', ln === n);
-    });
-    document.querySelectorAll('.legend-item').forEach(el => {
-      el.classList.toggle('active', parseInt(el.dataset.layer) === n);
-    });
-
-    document.getElementById('panel-dot').style.cssText = `background:${dmg.color}; box-shadow:0 0 10px ${dmg.color};`;
-    document.getElementById('panel-layer-name').textContent = `第 ${n} 層 · 破損`;
-    document.getElementById('panel-title').textContent = d.name;
-    document.getElementById('panel-subtitle').textContent = '可能出現的影響';
-    document.getElementById('panel-body').innerHTML = dmg.items.map(i => `<p style="margin:0 0 8px;font-size:13.5px;line-height:1.8;color:var(--text-secondary)">· ${i}</p>`).join('');
-    document.getElementById('panel-keywords').innerHTML = '';
-    document.getElementById('panel-purify-list').innerHTML = d.purify.map(p => `<span class="purify-tag">✦ ${p}</span>`).join('');
-
-    document.getElementById('info-panel').classList.add('visible');
-    document.getElementById('overlay').classList.add('visible');
-    pulseLayer(n);
-  };
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    btn.classList.toggle('open');
+    body.classList.toggle('open');
+  }
 
 </script>
 </body>
