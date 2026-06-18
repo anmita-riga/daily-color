@@ -444,31 +444,31 @@
 
     .color-guide {
       margin: 8px 0 4px;
-      padding: 0 16px;
+      padding: 0;
     }
     .color-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 12px;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px 8px;
       padding: 8px 0 16px;
+      justify-items: center;
     }
     .color-swatch {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       cursor: pointer;
+      width: 100%;
     }
     .swatch-dot {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      transition: transform 0.25s, box-shadow 0.25s;
-      box-shadow: 0 0 14px rgba(255,255,255,0.08);
+      transition: transform 0.25s, filter 0.25s;
     }
     .color-swatch.active .swatch-dot {
-      transform: scale(1.22);
+      transform: scale(1.2);
       animation: orbPulse 2s ease-in-out infinite;
     }
     @keyframes orbPulse {
@@ -510,17 +510,17 @@
     }
     .damage-cards-label {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
+      font-size: 11px;
       letter-spacing: 0.22em;
       color: rgba(255,200,120,0.6);
       text-transform: uppercase;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .damage-cards-strip {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
@@ -529,12 +529,12 @@
     }
     .damage-cards-strip::-webkit-scrollbar { display: none; }
     .damage-card {
-      flex: 0 0 200px;
+      flex: 0 0 160px;
       scroll-snap-align: start;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.09);
       border-radius: 12px;
-      padding: 16px 14px 14px;
+      padding: 14px 12px 12px;
       cursor: pointer;
       transition: background 0.2s, border-color 0.2s;
     }
@@ -682,7 +682,7 @@
     .drawer-icon { font-size: 18px; opacity: 0.6; }
 
     /* ── Sections ── */
-    .page-section { display: none; }
+    .page-section { display: none; width: 100%; padding: 0 20px; box-sizing: border-box; }
     .page-section.active { display: block; }
 
     /* ── CTA ── */
