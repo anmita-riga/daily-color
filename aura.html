@@ -442,6 +442,70 @@
       border-radius: 20px;
     }
 
+    .color-guide {
+      margin: 8px 0 4px;
+      padding: 0 16px;
+    }
+    .color-guide-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .color-strip {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 4px 0 10px;
+      scrollbar-width: none;
+    }
+    .color-strip::-webkit-scrollbar { display: none; }
+    .color-swatch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .swatch-dot {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.2s;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+    .color-swatch.active .swatch-dot {
+      border-color: rgba(255,255,255,0.6);
+      transform: scale(1.15);
+    }
+    .color-swatch span {
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .color-meaning {
+      font-size: 12.5px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      border-left: 2px solid rgba(201,168,76,0.3);
+      display: none;
+    }
+    .color-meaning.visible { display: block; }
+    .color-meaning-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: 0.08em;
+    }
+
     /* ── CTA ── */
     .cta-btn {
       display: flex;
@@ -1034,6 +1098,58 @@
   </div>
 </div>
 
+<!-- Color Guide -->
+<div class="color-guide">
+  <div class="color-guide-label">光場色彩解讀</div>
+  <div class="color-strip" id="color-strip">
+    <div class="color-swatch" data-color="red">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#FF7070,#CC2020)"></div>
+      <span>紅</span>
+    </div>
+    <div class="color-swatch" data-color="orange">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#FFB060,#E06010)"></div>
+      <span>橙</span>
+    </div>
+    <div class="color-swatch" data-color="yellow">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#FFE860,#CCA800)"></div>
+      <span>黃</span>
+    </div>
+    <div class="color-swatch" data-color="green">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#80FFB0,#20A050)"></div>
+      <span>綠</span>
+    </div>
+    <div class="color-swatch" data-color="blue">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#80CCFF,#1060CC)"></div>
+      <span>藍</span>
+    </div>
+    <div class="color-swatch" data-color="indigo">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#9080FF,#3020AA)"></div>
+      <span>靛</span>
+    </div>
+    <div class="color-swatch" data-color="violet">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#E0A0FF,#9020DD)"></div>
+      <span>紫</span>
+    </div>
+    <div class="color-swatch" data-color="white">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#FFFFFF,#AAAACC)"></div>
+      <span>白</span>
+    </div>
+    <div class="color-swatch" data-color="gold">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#FFE080,#CC8800)"></div>
+      <span>金</span>
+    </div>
+    <div class="color-swatch" data-color="pink">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#FFB0D0,#DD4488)"></div>
+      <span>粉</span>
+    </div>
+    <div class="color-swatch" data-color="gray">
+      <div class="swatch-dot" style="background:radial-gradient(circle,#888899,#333344)"></div>
+      <span>暗</span>
+    </div>
+  </div>
+  <div class="color-meaning" id="color-meaning"></div>
+</div>
+
 <!-- Legend -->
 <div class="layer-legend" id="layer-legend">
   <!-- filled by JS -->
@@ -1441,6 +1557,40 @@
   document.getElementById('resonance-msg').textContent = DAILY_MSGS[todayN];
   document.getElementById('daily-resonance').addEventListener('click', () => {
     window._openLayerWithFx(todayN);
+  });
+
+  // ── 顏色解讀 ──
+  const COLOR_MEANINGS = {
+    red:    { title: '紅色', text: '強烈的生命力與根基能量。明亮的紅代表活力充沛、熱情、行動力強；暗沉的紅則可能是憤怒、壓抑或過度緊繃的能量。' },
+    orange: { title: '橙色', text: '創造力與情感流動的顏色。出現橙色代表充滿創意、情感豐富；若混濁則可能是情緒壓抑或對自我價值的懷疑。' },
+    yellow: { title: '黃色', text: '思維清晰、意志活躍的象徵。明亮的黃色出現在頭部周圍，代表專注、邏輯清晰；混濁的黃則可能是過度分析或自我批評。' },
+    green:  { title: '綠色', text: '療癒與平衡的顏色，與心的能量相關。明亮的草綠代表愛的流動、同理心；暗綠混褐則可能是嫉妒或壓抑的負面情緒。' },
+    blue:   { title: '藍色', text: '平靜、溝通與靈性感知的顏色。天空藍代表表達清晰、內心平靜；深藍或灰藍則可能是溝通受阻或過度封閉。' },
+    indigo: { title: '靛藍色', text: '直覺與洞察的顏色，與第三眼相關。靛藍出現代表直覺敏銳、靈性感知開啟；若模糊則可能是與內在感知斷線。' },
+    violet: { title: '紫色', text: '靈性轉化與高我連結的頻率。紫色代表靈性意識提升、與更高維度連結；混濁的紫則可能是靈性自我過度膨脹或迷失方向。' },
+    white:  { title: '白色', text: '純淨與整體性的象徵，最高頻率的光。白色代表能量場完整、受到保護；閃爍的白光通常出現在深度療癒或靈性開啟時。' },
+    gold:   { title: '金色', text: '健康連結與神性智慧的顏色。金色能量帶代表人際關係健康、充滿愛與信任；腦下垂體發出金光，與深度靈視和冥想狀態相關。' },
+    pink:   { title: '粉紅色', text: '無條件的愛與溫柔能量。粉紅色代表處於愛的狀態、對自己和他人充滿慈悲；深度戀愛或心輪開啟時，氣場中常出現粉紅光。' },
+    gray:   { title: '暗沉 / 灰色', text: '能量滯留或需要淨化的信號。灰色或混濁的顏色代表壓抑的情緒、能量堵塞；出現在身體特定部位時，可能對應該區域的緊繃或疾病前兆。' },
+  };
+
+  document.querySelectorAll('.color-swatch').forEach(el => {
+    el.addEventListener('click', () => {
+      const key = el.dataset.color;
+      const m = COLOR_MEANINGS[key];
+      const isActive = el.classList.contains('active');
+
+      document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+      const box = document.getElementById('color-meaning');
+
+      if (isActive) {
+        box.classList.remove('visible');
+        return;
+      }
+      el.classList.add('active');
+      box.innerHTML = `<div class="color-meaning-title">${m.title}</div>${m.text}`;
+      box.classList.add('visible');
+    });
   });
 
   function toggleAccordion(btn) {
