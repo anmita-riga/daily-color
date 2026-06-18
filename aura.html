@@ -86,6 +86,48 @@
       letter-spacing: 0.05em;
     }
 
+    .daily-resonance {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 12px;
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .daily-resonance:hover { background: rgba(255,255,255,0.07); }
+    .resonance-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    .resonance-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .resonance-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      color: var(--text-primary);
+    }
+    .resonance-msg {
+      width: 100%;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      line-height: 1.6;
+      text-align: center;
+    }
+
     /* ── SVG Stage ── */
     .aura-stage {
       position: relative;
@@ -779,6 +821,12 @@
 <div class="intro">
   <h1>你的七層光場</h1>
   <p>每個人都被七層能量包裹著<br>點擊任一層，感受它正在說的話</p>
+  <div class="daily-resonance" id="daily-resonance">
+    <span class="resonance-label">今日共鳴</span>
+    <span class="resonance-dot" id="resonance-dot"></span>
+    <span class="resonance-name" id="resonance-name"></span>
+    <span class="resonance-msg" id="resonance-msg"></span>
+  </div>
 </div>
 
 <!-- SVG Aura -->
@@ -1360,6 +1408,26 @@
   });
   document.getElementById('panel-close').onclick = window._closePanelWithFx;
   document.getElementById('overlay').onclick = window._closePanelWithFx;
+
+  // ── 今日共鳴層 ──
+  const DAILY_MSGS = {
+    1: '今天，先好好照顧自己的身體。',
+    2: '允許自己感受，不需要解釋。',
+    3: '放下腦袋裡的雜訊，相信你已經足夠。',
+    4: '今天適合去愛，也允許被愛。',
+    5: '你有話想說嗎？今天是說出來的好時機。',
+    6: '相信你的第一直覺，它比你想的更準。',
+    7: '你來這裡是有原因的。記得你是誰。',
+  };
+  const todayN = (new Date().getDate() % 7) + 1;
+  const todayLayer = LAYERS[todayN];
+  document.getElementById('resonance-dot').style.cssText =
+    `background:${todayLayer.color}; box-shadow:0 0 7px ${todayLayer.color};`;
+  document.getElementById('resonance-name').textContent = todayLayer.name;
+  document.getElementById('resonance-msg').textContent = DAILY_MSGS[todayN];
+  document.getElementById('daily-resonance').addEventListener('click', () => {
+    window._openLayerWithFx(todayN);
+  });
 
   function toggleAccordion(btn) {
     const body = btn.nextElementSibling;
