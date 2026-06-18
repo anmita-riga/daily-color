@@ -1075,7 +1075,7 @@
 <body>
 
 <header>
-  <a href="daily-color.html" class="back-btn" id="back-btn">← 返回</a>
+  <a href="daily-color.html" class="back-btn" id="back-btn" onclick="if(!document.getElementById('section-explore').classList.contains('active')){event.preventDefault();['explore','knowledge','service'].forEach(function(s){document.getElementById('section-'+s).classList.toggle('active',s==='explore');});document.querySelectorAll('.drawer-item').forEach(function(i){i.classList.toggle('active',i.dataset.section==='explore');});window.scrollTo({top:0,behavior:'smooth'});}">← 返回</a>
   <span class="page-title">能 量 場</span>
   <button class="hamburger" id="hamburger-btn" aria-label="選單" onclick="document.getElementById('drawer').classList.add('open');document.getElementById('drawer-overlay').classList.add('open');">
     <span></span><span></span><span></span>
