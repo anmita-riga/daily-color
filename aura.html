@@ -561,15 +561,28 @@
       text-transform: uppercase;
       margin-bottom: 10px;
     }
-    .damage-card-desc {
-      font-size: 12px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+    .damage-card-desc { display: none; }
+    .damage-detail {
       display: none;
+      margin-top: 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,200,120,0.15);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--text-secondary);
     }
-    .damage-card.active .damage-card-desc { display: block; }
+    .damage-detail.visible { display: block; }
+    .damage-detail-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
     .damage-card-cause {
-      margin-top: 8px;
+      margin-top: 10px;
       font-size: 11px;
       color: var(--text-muted);
       line-height: 1.6;
@@ -1343,6 +1356,7 @@
     </div>
 
   </div>
+  <div class="damage-detail" id="damage-detail"></div>
 </div>
 
 <!-- Interaction Cards -->
@@ -1395,6 +1409,7 @@
     </div>
 
   </div>
+  <div class="damage-detail" id="interaction-detail"></div>
 </div>
 
 <!-- Space Cards -->
@@ -1450,6 +1465,7 @@
     </div>
 
   </div>
+  <div class="damage-detail" id="space-detail"></div>
 </div>
 
 <!-- What is Aura -->
@@ -1900,15 +1916,30 @@
   });
 
   // Card strip interaction (damage, interaction, space)
-  ['damage-cards-strip','interaction-cards-strip','space-cards-strip'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('click', e => {
+  const CARD_DETAIL_MAP = {
+    'damage-cards-strip': 'damage-detail',
+    'interaction-cards-strip': 'interaction-detail',
+    'space-cards-strip': 'space-detail'
+  };
+  Object.keys(CARD_DETAIL_MAP).forEach(stripId => {
+    const strip = document.getElementById(stripId);
+    const detail = document.getElementById(CARD_DETAIL_MAP[stripId]);
+    if (!strip || !detail) return;
+    strip.addEventListener('click', e => {
       const card = e.target.closest('.damage-card');
       if (!card) return;
       const isActive = card.classList.contains('active');
-      el.querySelectorAll('.damage-card').forEach(c => c.classList.remove('active'));
-      if (!isActive) card.classList.add('active');
+      strip.querySelectorAll('.damage-card').forEach(c => c.classList.remove('active'));
+      if (isActive) { detail.classList.remove('visible'); detail.innerHTML = ''; return; }
+      card.classList.add('active');
+      const nameEl = card.querySelector('.damage-card-name');
+      const descEl = card.querySelector('.damage-card-desc');
+      const causeEl = card.querySelector('.damage-card-cause');
+      detail.innerHTML =
+        '<div class="damage-detail-title">' + (nameEl ? nameEl.textContent : '') + '</div>' +
+        (descEl ? descEl.innerHTML : '');
+      detail.classList.add('visible');
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     });
   });
 
