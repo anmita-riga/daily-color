@@ -580,6 +580,39 @@
       letter-spacing: 0.06em;
     }
 
+    /* ── Tab Bar ── */
+    .tab-bar {
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(10,8,20,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin: 0 -20px;
+      padding: 0 20px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 13px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn.active {
+      color: var(--text-primary);
+      border-bottom-color: rgba(255,200,120,0.7);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
     /* ── CTA ── */
     .cta-btn {
       display: flex;
@@ -966,6 +999,15 @@
   <span class="page-title">能 量 場</span>
   <span style="width:40px"></span>
 </header>
+
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="explore">探索光場</button>
+  <button class="tab-btn" data-tab="service">服務介紹</button>
+</div>
+
+<!-- Tab: Explore -->
+<div class="tab-panel active" id="tab-explore">
 
 <div class="intro">
   <h1>你的七層光場</h1>
@@ -1450,6 +1492,11 @@
   </div>
 </div>
 
+</div><!-- /tab-explore -->
+
+<!-- Tab: Service -->
+<div class="tab-panel" id="tab-service">
+
 <!-- Service Section -->
 <div class="service-section">
   <p class="service-title">✦ 光場繪製 · 服務流程 ✦</p>
@@ -1498,6 +1545,8 @@
   </span>
   <span class="cta-arrow">→</span>
 </a>
+
+</div><!-- /tab-service -->
 
 <!-- Overlay -->
 <div class="overlay" id="overlay"></div>
@@ -1839,6 +1888,15 @@
       box.innerHTML = `<div class="color-meaning-title">${m.title}</div>${m.text}`;
       box.classList.add('visible');
     });
+  });
+
+  // Tab switching
+  document.querySelector('.tab-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + tab));
   });
 
   // Card strip interaction (damage, interaction, space)
