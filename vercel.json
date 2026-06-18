@@ -1,14 +1,17 @@
 {
   "buildCommand": "",
   "outputDirectory": ".",
-  "rewrites": [
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
     {
-      "source": "/:path((?!.*\\.).*)",
-      "destination": "/$1.html"
-    },
-    {
-      "source": "/",
-      "destination": "/index.html"
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
     }
   ]
 }
