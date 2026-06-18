@@ -123,42 +123,88 @@
       padding: 3rem 1.5rem 4rem;
     }
 
+    /* ── 返回行星按鈕 ── */
     .back-link {
       position: fixed;
-      top: 1.2rem;
-      left: 1.4rem;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 0.8rem;
-      letter-spacing: 0.22em;
-      color: var(--page-accent-deep);
+      top: 1rem; left: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       text-decoration: none;
       z-index: 100;
-      transition: all 0.4s var(--ease-silk);
-      font-weight: 400;
-      opacity: 0.8;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      -webkit-tap-highlight-color: transparent;
     }
-    .back-link:hover {
-      color: var(--page-accent);
-      transform: translateX(-4px);
-      opacity: 1;
+    .back-link::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #D8F0F8, #A8D4E4 55%, #8EC4D8);
+      box-shadow: 0 3px 12px rgba(142, 196, 216, 0.5), 0 0 0 1px rgba(142, 196, 216, 0.3);
+      flex-shrink: 0;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      animation: backPlanetFloat 4s ease-in-out infinite;
+    }
+    .back-link span {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: #6A8898;
+      font-weight: 400;
+      opacity: 0.85;
+    }
+    .back-link:hover::before {
+      transform: scale(1.15);
+      box-shadow: 0 5px 18px rgba(142, 196, 216, 0.7), 0 0 0 3px rgba(142, 196, 216, 0.2);
+    }
+    .back-link:hover span { opacity: 1; color: #4A6878; }
+
+    @keyframes backPlanetFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-4px); }
     }
 
-    /* ── 底部回首頁鏈接 ── */
+    /* ── 底部回首頁行星按鈕 ── */
     .footer-home-link {
-      display: inline-block;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
       margin-top: 3rem;
       margin-bottom: 2rem;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.28em;
-      color: #8AAABB;
       text-decoration: none;
-      transition: all 0.4s var(--ease-silk);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .footer-home-link::before {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #D8F0F8, #A8D4E4 55%, #8EC4D8);
+      box-shadow: 0 4px 16px rgba(142, 196, 216, 0.45), 0 0 0 1px rgba(142, 196, 216, 0.25);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      animation: footerPlanetFloat 5s ease-in-out infinite;
+    }
+    .footer-home-link span {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      color: #7A9AAA;
       font-weight: 400;
     }
-    .footer-home-link:hover {
-      color: var(--page-accent-deep);
-      transform: translateY(-2px);
+    .footer-home-link:hover::before {
+      transform: scale(1.12);
+      box-shadow: 0 8px 24px rgba(142, 196, 216, 0.65), 0 0 0 3px rgba(142, 196, 216, 0.2);
+    }
+    .footer-home-link:hover span { color: #4A6878; }
+
+    @keyframes footerPlanetFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-6px); }
     }
 
     /* ════════════════════════════════════════
@@ -1161,7 +1207,7 @@
   </div>
 </div>
 
-<a class="back-link" href="index.html">← 返回</a>
+<a class="back-link" href="index.html"><span>首 頁</span></a>
 
 <div class="container">
   <!-- 第一步：物件選擇 -->
@@ -1593,7 +1639,7 @@
 </div>
 
 <!-- ── 回首頁 ── -->
-<a href="index.html" class="footer-home-link">首 頁</a>
+<a href="index.html" class="footer-home-link"><span>首 頁</span></a>
 
 <script>
 // ════════════════════════════════════════
