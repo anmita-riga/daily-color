@@ -47,7 +47,12 @@
 
     body {
       min-height: 100vh;
-      background: #F4F3F6 !important;
+      background:
+        radial-gradient(ellipse 120% 80% at 50% 30%, rgba(212, 192, 240, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 70% at 20% 60%, rgba(196, 170, 223, 0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 60% at 80% 70%, rgba(142, 196, 216, 0.04) 0%, transparent 55%),
+        radial-gradient(ellipse 110% 75% at 50% 80%, rgba(196, 170, 223, 0.03) 0%, transparent 60%),
+        #F4F3F6 !important;
       transition: none;
       font-family: "Noto Serif TC", Georgia, serif;
       font-weight: 300;
@@ -61,16 +66,36 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 星塵粒子 */
-    /* 淡雅光暈 */
+    /* 柔焦光場 — 宇宙呼吸 */
     body::before {
       content: '';
       position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 15% 20%, rgba(180, 150, 220, 0.10) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 45% at 85% 75%, rgba(160, 200, 180, 0.08) 0%, transparent 70%);
+        radial-gradient(ellipse 80% 60% at 50% 25%, rgba(180, 150, 220, 0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 15% 70%, rgba(196, 170, 223, 0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 75% 55% at 85% 65%, rgba(142, 196, 216, 0.05) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
+      animation: aura-float 24s ease-in-out infinite;
+    }
+
+    @keyframes aura-float {
+      0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.8;
+      }
+      25% {
+        transform: translateY(8px);
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateY(0px);
+        opacity: 0.8;
+      }
+      75% {
+        transform: translateY(-8px);
+        opacity: 0.85;
+      }
     }
     body::after { display: none; }
 
@@ -116,9 +141,15 @@
     /* ── 標題 ── */
     .header {
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 1.8rem;
       position: relative;
       z-index: 1;
+    }
+
+    @media (max-width: 479px) {
+      .header {
+        margin-bottom: 1.2rem;
+      }
     }
     .header h1 {
       font-size: 1rem;
@@ -138,11 +169,11 @@
     /* ── 黑貓 ── */
     .cat-wrap {
       width: 100%;
-      max-width: min(90vw, 400px);
+      max-width: min(90vw, 600px);
       flex-shrink: 0;
       position: relative;
       overflow: visible;
-      margin-bottom: 1rem;
+      margin-bottom: 1.6rem;
       z-index: 1;
     }
     .cat-img {
@@ -179,7 +210,7 @@
       transform: translate(-50%, -50%) scale(1.15);
     }
 
-    /* ── 光點 ── */
+    /* ── 光點 — 預設呼吸動畫 ── */
     .chakra-dot {
       width: 13px;
       height: 13px;
@@ -190,13 +221,28 @@
       z-index: 2;
       box-shadow: 0 0 6px var(--ck-color);
       transition: all 0.22s ease;
+      animation: chakra-breath 3s ease-in-out infinite;
     }
+
+    /* 呼吸動畫 */
+    @keyframes chakra-breath {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 6px var(--ck-color), 0 0 12px rgba(255,255,255,0.1);
+      }
+      50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 10px var(--ck-color), 0 0 20px rgba(255,255,255,0.15);
+      }
+    }
+
     .chakra-group:not(.active):hover .chakra-dot {
       transform: scale(1.8);
       box-shadow: 0 0 16px var(--ck-color), 0 0 32px rgba(255,255,255,0.2);
+      animation: none;
     }
 
-    /* ── 環（預設隱藏） ── */
+    /* ── 環（選中時光暈） ── */
     .chakra-ring {
       position: absolute;
       inset: 0;
@@ -204,6 +250,44 @@
       border: 1.5px solid var(--ck-color);
       opacity: 0;
       pointer-events: none;
+      transition: all 0.4s ease;
+    }
+
+    /* 選中時的波紋光暈 */
+    .chakra-group.active .chakra-ring {
+      opacity: 0.6;
+      animation: chakra-ripple 2s ease-out infinite;
+    }
+
+    @keyframes chakra-ripple {
+      0% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    /* 點擊閃光效果 */
+    .chakra-dot.flash {
+      animation: chakra-flash 0.5s ease-out;
+    }
+
+    @keyframes chakra-flash {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 8px var(--ck-color), 0 0 20px var(--ck-color);
+      }
+      50% {
+        transform: scale(1.3);
+        box-shadow: 0 0 20px var(--ck-color), 0 0 40px rgba(255,255,255,0.4);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 6px var(--ck-color), 0 0 12px rgba(255,255,255,0.1);
+      }
     }
 
     /* ══════════════════════════════════════
@@ -417,20 +501,21 @@
 
     /* ── 提示文字 ── */
     .hint {
-      margin-top: 2rem;
-      font-size: 0.76rem;
-      letter-spacing: 0.24em;
-      color: var(--text-muted);
+      margin-top: 1.4rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      color: rgba(138, 112, 96, 0.55);
       text-align: center;
       transition: opacity 0.5s ease;
       font-weight: 300;
-      animation: hint-pulse-once 2.2s ease-in-out 0.8s;
+      animation: hint-breathe 3.5s ease-in-out 0.6s infinite;
       position: relative;
       z-index: 1;
+      line-height: 1.6;
     }
-    @keyframes hint-pulse-once {
-      0% { opacity: 0.5; }
-      50% { opacity: 1; }
+    @keyframes hint-breathe {
+      0%, 100% { opacity: 0.45; }
+      50% { opacity: 0.75; }
       100% { opacity: 0.7; }
     }
 
@@ -481,10 +566,12 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 30%, rgba(196,170,223,0.06) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(232,201,122,0.04) 0%, transparent 50%);
+        radial-gradient(ellipse 100% 80% at 50% 20%, var(--card-tint, rgba(196,170,223,0.08)) 0%, transparent 50%),
+        radial-gradient(circle at 20% 30%, rgba(196,170,223,0.04) 0%, transparent 55%),
+        radial-gradient(circle at 80% 70%, rgba(232,201,122,0.03) 0%, transparent 55%);
       pointer-events: none;
       z-index: 0;
+      transition: background 0.6s ease;
     }
 
     .card-strip {
@@ -878,7 +965,7 @@
     /* 小螢幕 (< 480px) — 手機 */
     @media (max-width: 479px) {
       body {
-        padding: 3rem 1rem 4rem;
+        padding: 2.8rem 1rem 4rem;
       }
       .header h1 {
         font-size: 0.95rem;
@@ -887,8 +974,8 @@
         font-size: 0.65rem;
       }
       .cat-wrap {
-        max-width: 80vw;
-        margin-bottom: 0.8rem;
+        max-width: 94vw;
+        margin-bottom: 1.2rem;
       }
       .chakra-group {
         width: 22px;
@@ -985,50 +1072,50 @@
 
   <!-- 海底輪：雙腿之間底部 -->
   <!-- 海底輪：雙腿之間底部 -->
-  <div class="chakra-group" data-i="0" style="left:50.3%;top:72.4%;--ck-color:#C17B7B;">
+  <div class="chakra-group" data-i="0" style="left:50.3%;top:71.8%;--ck-color:#C17B7B;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 臍輪：下腹 -->
-  <div class="chakra-group" data-i="1" style="left:50.3%;top:65.8%;--ck-color:#C9976C;">
+  <div class="chakra-group" data-i="1" style="left:50.3%;top:65.2%;--ck-color:#C9976C;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 太陽神經叢：肚臍上方 -->
-  <div class="chakra-group" data-i="2" style="left:50.3%;top:59.0%;--ck-color:#C9B86A;">
+  <div class="chakra-group" data-i="2" style="left:50.3%;top:58.4%;--ck-color:#C9B86A;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 心輪：胸口中央 -->
-  <div class="chakra-group" data-i="3" style="left:50.3%;top:51.6%;--ck-color:#7DAF88;">
+  <div class="chakra-group" data-i="3" style="left:50.3%;top:51.0%;--ck-color:#7DAF88;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 喉輪：頭身交界 -->
-  <div class="chakra-group" data-i="4" style="left:50.3%;top:45.2%;--ck-color:#7AA2C4;">
+  <div class="chakra-group" data-i="4" style="left:50.3%;top:44.6%;--ck-color:#7AA2C4;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 眉心輪：兩眼之間 -->
-  <div class="chakra-group" data-i="5" style="left:50.3%;top:30.6%;--ck-color:#7A7AAF;">
+  <div class="chakra-group" data-i="5" style="left:50.3%;top:24.2%;--ck-color:#7A7AAF;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
   <!-- 頂輪：頭頂正中 -->
-  <div class="chakra-group" data-i="6" style="left:50.3%;top:22.6%;--ck-color:#A882C2;">
+  <div class="chakra-group" data-i="6" style="left:50.3%;top:16.2%;--ck-color:#A882C2;">
     <div class="chakra-ring r1"></div>
     <div class="chakra-ring r2"></div>
     <div class="chakra-dot"></div>
   </div>
 </div>
 
-<p class="hint" id="hint">點擊任一光點</p>
+<p class="hint" id="hint">今天的身體想說些什麼？</p>
 
 <!-- ── 卡片 ── -->
 <div class="card-wrap" id="cardWrap">
@@ -1365,6 +1452,9 @@ function showCard(i) {
 
   document.getElementById('cardStrip').style.background   = c.color;
   document.getElementById('cardDotIcon').style.background = c.color;
+  // 設定卡片背景色暈為脈輪色
+  const cardEl = document.getElementById('cardWrap');
+  cardEl.style.setProperty('--card-tint', hexAlpha(c.color, 0.10));
   document.getElementById('cardName').textContent          = c.name;
   document.getElementById('cardEn').textContent            = c.en;
   const pickedDesc   = descs[r];
@@ -1535,6 +1625,12 @@ document.querySelectorAll('.chakra-group').forEach(g => {
 
     activeI = i;
     g.classList.add('active');
+    // 觸發點擊閃光效果
+    const dot = g.querySelector('.chakra-dot');
+    if (dot) {
+      dot.classList.add('flash');
+      setTimeout(() => dot.classList.remove('flash'), 500);
+    }
     startEffect(g, i);
     showCard(i);
   });

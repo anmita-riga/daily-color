@@ -55,13 +55,13 @@
     body {
       min-height: 100vh;
       background:
-        radial-gradient(ellipse 100% 55% at 50% 0%,   rgba(255, 255, 255, 0.90) 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 10% 30%,   rgba(142, 196, 216, 0.30) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 45% at 92% 20%,   rgba(196, 228, 240, 0.38) 0%, transparent 55%),
-        radial-gradient(ellipse 80% 50% at 50% 100%,  rgba(220, 240, 248, 0.45) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 40% at 20% 80%,   rgba(255, 242, 220, 0.35) 0%, transparent 55%),
-        radial-gradient(ellipse 55% 40% at 80% 65%,   rgba(208, 236, 244, 0.30) 0%, transparent 55%),
-        linear-gradient(170deg, #E8F6FB 0%, #F4FAFD 30%, #FDF8F2 65%, #EDF7FB 100%);
+        radial-gradient(ellipse 120% 65% at 50% -10%, rgba(255, 248, 240, 0.95) 0%, transparent 55%),
+        radial-gradient(ellipse 90% 60% at 15% 25%, rgba(220, 180, 200, 0.35) 0%, transparent 65%),
+        radial-gradient(ellipse 80% 55% at 88% 18%, rgba(200, 220, 240, 0.40) 0%, transparent 60%),
+        radial-gradient(ellipse 100% 60% at 50% 110%, rgba(240, 220, 230, 0.50) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 12% 70%, rgba(255, 235, 210, 0.32) 0%, transparent 60%),
+        radial-gradient(ellipse 75% 55% at 85% 70%, rgba(215, 235, 250, 0.28) 0%, transparent 58%),
+        linear-gradient(165deg, #FAF6F0 0%, #F8F4F9 25%, #F4F8FA 55%, #FAF8F2 85%, #F6F9FB 100%);
       font-family: "Noto Serif TC", Georgia, serif;
       font-weight: 300;
       color: #4A5A6A;
@@ -73,39 +73,43 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 柔光流動 */
+    /* 多層柔光流動 — 暖調強化 */
     body::before {
       content: '';
       position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 600px 400px at 15% 20%, rgba(142, 196, 216, 0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 500px 350px at 85% 15%, rgba(196, 228, 240, 0.22) 0%, transparent 55%),
-        radial-gradient(ellipse 550px 380px at 70% 75%, rgba(255, 235, 200, 0.20) 0%, transparent 55%),
-        radial-gradient(ellipse 450px 320px at 25% 80%, rgba(180, 220, 236, 0.16) 0%, transparent 55%);
+        radial-gradient(ellipse 800px 500px at 10% 15%, rgba(220, 140, 160, 0.28) 0%, transparent 70%),
+        radial-gradient(ellipse 700px 420px at 90% 18%, rgba(180, 200, 240, 0.32) 0%, transparent 65%),
+        radial-gradient(ellipse 750px 480px at 80% 85%, rgba(255, 200, 160, 0.30) 0%, transparent 68%),
+        radial-gradient(ellipse 650px 400px at 15% 75%, rgba(200, 220, 210, 0.20) 0%, transparent 62%),
+        radial-gradient(ellipse 600px 350px at 50% 45%, rgba(240, 180, 210, 0.15) 0%, transparent 72%);
       pointer-events: none;
       z-index: 0;
       animation: dawnFlow 28s ease-in-out infinite alternate;
     }
     @keyframes dawnFlow {
-      0%   { opacity: 0.7; transform: scale(1); }
-      50%  { opacity: 1;   transform: scale(1.04); }
-      100% { opacity: 0.8; transform: scale(1) translate(12px, -8px); }
+      0%   { opacity: 0.70; transform: scale(0.96) translate(-5px, 0); }
+      50%  { opacity: 1; transform: scale(1.08) translate(10px, -8px); }
+      100% { opacity: 0.72; transform: scale(0.98) translate(-10px, 8px); }
     }
 
-    /* 暖光暈染 */
+    /* 暖光暈染 — 強化橘粉色 */
     body::after {
       content: '';
       position: fixed; inset: 0;
       background:
-        radial-gradient(ellipse 400px 280px at 50% 8%,  rgba(255, 248, 230, 0.55) 0%, transparent 60%),
-        radial-gradient(ellipse 360px 260px at 80% 90%, rgba(142, 196, 216, 0.20) 0%, transparent 55%);
+        radial-gradient(ellipse 550px 360px at 45% -5%, rgba(255, 235, 200, 0.75) 0%, transparent 68%),
+        radial-gradient(ellipse 480px 320px at 75% 100%, rgba(220, 170, 190, 0.35) 0%, transparent 65%),
+        radial-gradient(ellipse 450px 280px at 20% 55%, rgba(200, 215, 240, 0.22) 0%, transparent 62%),
+        radial-gradient(ellipse 380px 240px at 85% 40%, rgba(250, 180, 140, 0.20) 0%, transparent 60%);
       pointer-events: none;
       z-index: 0;
-      animation: warmGlow 22s ease-in-out infinite alternate;
+      animation: warmGlow 24s ease-in-out infinite alternate;
     }
     @keyframes warmGlow {
-      0%   { opacity: 0.6; transform: translate(0, 0); }
-      100% { opacity: 1;   transform: translate(-15px, 10px); }
+      0%   { opacity: 0.6; transform: translate(-8px, 0) scale(0.98); }
+      50%  { opacity: 0.95; transform: translate(8px, -5px) scale(1.03); }
+      100% { opacity: 0.68; transform: translate(-5px, 8px) scale(1); }
     }
 
     .container {
@@ -191,39 +195,79 @@
     }
 
     .step-title {
-      font-size: 1.55rem;
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: #3A5060;
-      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.10em;
+      background: linear-gradient(135deg, #5A6A7A 0%, #8A4A7A 50%, #7A6A9A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.8rem;
+      animation: titleGlow 0.8s ease-out;
+    }
+
+    @keyframes titleGlow {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .step-subtitle {
-      font-size: 0.88rem;
-      letter-spacing: 0.05em;
-      color: #6A8898;
-      line-height: 1.9;
+      font-size: 0.90rem;
+      letter-spacing: 0.06em;
+      color: #7A6A8A;
+      line-height: 1.8;
       font-weight: 300;
+      opacity: 0.85;
+      animation: fadeIn 0.8s ease-out 0.2s both;
     }
 
     /* ── 選擇計數器 ── */
     .selection-counter {
       margin-top: 1.2rem;
-      font-size: 0.84rem;
-      letter-spacing: 0.08em;
-      color: var(--page-accent-deep);
+      font-size: 0.82rem;
+      letter-spacing: 0.10em;
+      color: #6A7A8A;
       font-weight: 400;
-      padding: 0.6rem 1.2rem;
-      background: rgba(142, 196, 216, 0.15);
-      border: 1px solid rgba(142, 196, 216, 0.35);
-      border-radius: 20px;
+      padding: 0.7rem 1.6rem;
+      background: linear-gradient(135deg, rgba(200, 160, 180, 0.12) 0%, rgba(180, 200, 220, 0.10) 100%);
+      border: 1.5px solid rgba(180, 140, 180, 0.40);
+      border-radius: 24px;
       display: inline-block;
-      transition: all 0.3s ease;
+      transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+      position: relative;
+      overflow: hidden;
     }
+
+    .selection-counter::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .selection-counter:hover {
+      background: linear-gradient(135deg, rgba(200, 160, 180, 0.18) 0%, rgba(180, 200, 220, 0.15) 100%);
+      border-color: rgba(180, 140, 180, 0.60);
+      transform: translateY(-2px);
+    }
+
+    .selection-counter:hover::before {
+      transform: translateX(100%);
+    }
+
     .selection-counter.selected {
-      background: rgba(142, 196, 216, 0.25);
-      color: var(--page-accent-deep);
-      border-color: rgba(142, 196, 216, 0.55);
+      background: linear-gradient(135deg, rgba(220, 140, 160, 0.25) 0%, rgba(180, 180, 220, 0.22) 100%);
+      color: #5A5A7A;
+      border-color: rgba(200, 120, 170, 0.65);
+      box-shadow: 0 6px 20px rgba(200, 140, 180, 0.18);
     }
 
     /* ════════════════════════════════════════
@@ -233,40 +277,76 @@
     .objects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 0.9rem;
+      gap: 1rem;
       width: 100%;
-      margin-bottom: 2rem;
+      margin-bottom: 1.8rem;
     }
 
     .object-btn {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.6rem;
-      padding: 1rem 0.6rem;
-      border: 1px solid rgba(142, 196, 216, 0.30);
-      border-radius: 16px;
-      background: linear-gradient(160deg, rgba(255,255,255,0.82) 0%, rgba(224,242,248,0.60) 100%);
+      gap: 0.5rem;
+      padding: 1.2rem 0.8rem;
+      border: 1.5px solid rgba(180, 140, 180, 0.35);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,248,242,0.90) 0%, rgba(240,232,248,0.75) 100%);
       cursor: pointer;
-      transition: all 0.4s var(--ease-silk);
-      box-shadow: 0 4px 16px rgba(100,160,190,0.10);
+      transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      box-shadow:
+        0 6px 20px rgba(150, 100, 160, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4);
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .object-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.4s ease;
     }
 
     .object-btn:hover {
-      transform: translateY(-4px);
-      border-color: rgba(142, 196, 216, 0.55);
-      background: linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(210,238,248,0.75) 100%);
-      box-shadow: 0 12px 28px rgba(100,160,190,0.18);
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(200, 140, 170, 0.55);
+      background: linear-gradient(135deg, rgba(255,248,242,0.95) 0%, rgba(230,220,245,0.85) 100%);
+      box-shadow:
+        0 14px 36px rgba(150, 100, 160, 0.18),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+    }
+
+    .object-btn:hover::before {
+      opacity: 1;
     }
 
     .object-btn.selected {
-      border-color: var(--page-accent);
-      background: linear-gradient(160deg, rgba(255,255,255,0.96) 0%, rgba(195,232,245,0.70) 100%);
-      box-shadow: inset 3px 0 0 0 var(--page-accent), 0 8px 24px rgba(142,196,216,0.22);
+      border-color: rgba(200, 120, 170, 0.70);
+      background: linear-gradient(135deg, rgba(255,248,242,0.96) 0%, rgba(220,200,240,0.80) 100%);
+      box-shadow:
+        inset 4px 0 0 0 var(--page-accent),
+        0 12px 32px rgba(150, 100, 160, 0.20),
+        inset 0 1px 2px rgba(255, 255, 255, 0.5);
+      animation: btn-select 0.5s ease-out;
+    }
+
+    @keyframes btn-select {
+      0% {
+        transform: scale(0.95);
+        box-shadow:
+          inset 4px 0 0 0 var(--page-accent),
+          0 0 0 0 rgba(150, 100, 160, 0.3);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow:
+          inset 4px 0 0 0 var(--page-accent),
+          0 12px 32px rgba(150, 100, 160, 0.20);
+      }
     }
 
     .object-icon {
@@ -339,8 +419,10 @@
       border-radius: 16px;
       cursor: pointer;
       transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      border: 2px solid transparent;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+      border: 2.5px solid rgba(200, 160, 180, 0.20);
+      box-shadow:
+        0 8px 24px rgba(150, 100, 160, 0.12),
+        inset 0 1px 3px rgba(255, 255, 255, 0.3);
       position: relative;
       overflow: hidden;
     }
@@ -349,22 +431,57 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 50%);
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6) 0%, transparent 55%);
       opacity: 0;
       transition: opacity 0.4s ease;
     }
 
-    .color-swatch:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+    .color-swatch::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
     }
 
-    .color-swatch:hover::before { opacity: 1; }
+    .color-swatch:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow:
+        0 20px 56px rgba(150, 100, 160, 0.20),
+        inset 0 1px 3px rgba(255, 255, 255, 0.4);
+      border-color: rgba(200, 140, 170, 0.40);
+    }
+
+    .color-swatch:hover::before {
+      opacity: 1;
+    }
+
+    .color-swatch:hover::after {
+      opacity: 1;
+    }
 
     .color-swatch.selected {
-      border-color: #8b7f94;
-      transform: scale(1.04);
-      box-shadow: 0 20px 56px rgba(0, 0, 0, 0.15);
+      border-color: rgba(200, 120, 170, 0.75);
+      transform: scale(1.06);
+      box-shadow:
+        0 24px 68px rgba(150, 100, 160, 0.28),
+        inset 0 1px 3px rgba(255, 255, 255, 0.4);
+      animation: pulse-select 0.6s ease-out;
+    }
+
+    @keyframes pulse-select {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(200, 120, 170, 0.4);
+      }
+      50% {
+        transform: scale(1.08);
+      }
+      100% {
+        transform: scale(1.06);
+        box-shadow: 0 24px 68px rgba(150, 100, 160, 0.28);
+      }
     }
 
     .color-label {
@@ -439,41 +556,91 @@
 
     .result-card {
       width: 100%;
-      background: linear-gradient(160deg, rgba(255,255,255,0.90) 0%, rgba(220,242,250,0.75) 100%);
-      border: 1px solid rgba(142, 196, 216, 0.35);
-      padding: 3rem 2.5rem;
-      border-radius: 28px;
+      max-width: 500px;
+      background: linear-gradient(135deg, rgba(255,248,242,0.96) 0%, rgba(245,235,255,0.90) 50%, rgba(240,248,252,0.88) 100%);
+      border: 1.5px solid rgba(200, 160, 200, 0.40);
+      padding: 1.2rem 1.1rem;
+      border-radius: 18px;
       box-shadow:
-        inset 3px 0 0 0 var(--page-accent),
-        0 12px 40px rgba(100,160,190,0.14),
-        0 4px 12px rgba(100,160,190,0.08);
-      margin-bottom: 2.5rem;
+        inset 4px 0 0 0 var(--page-accent),
+        0 20px 60px rgba(150,110,200,0.14),
+        0 6px 16px rgba(150,110,200,0.10);
+      margin-bottom: 1rem;
+      margin-left: auto;
+      margin-right: auto;
       position: relative;
       overflow: hidden;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: card-enter 0.6s ease-out;
+      transition: all 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    @media (min-width: 480px) {
+      .result-card {
+        padding: 1.5rem 1.3rem;
+        max-width: 540px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .result-card {
+        padding: 2rem 1.8rem;
+        max-width: 600px;
+      }
+    }
+
+    .result-card:hover {
+      box-shadow:
+        inset 4px 0 0 0 var(--page-accent),
+        0 24px 72px rgba(150,110,200,0.16),
+        0 8px 20px rgba(150,110,200,0.12);
+      transform: translateY(-4px);
+    }
+
+    @keyframes card-enter {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .result-card::before {
       content: '';
       position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--page-accent), transparent);
+      z-index: 2;
+    }
+
+    .result-card::after {
+      content: '';
+      position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 25% 25%, rgba(142,196,216,0.12) 0%, transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(255,235,200,0.10) 0%, transparent 40%);
+        radial-gradient(circle at 20% 15%, rgba(200,160,200,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 85% 85%, rgba(255,235,200,0.06) 0%, transparent 45%),
+        radial-gradient(ellipse 120% 80% at 50% 30%, rgba(240,220,250,0.04) 0%, transparent 60%);
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
     .result-header {
       position: relative;
       z-index: 1;
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 0.8rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
+      gap: 0.5rem;
     }
 
     .result-icons {
@@ -484,8 +651,8 @@
     }
 
     .result-icon {
-      width: 48px;
-      height: 48px;
+      width: 24px;
+      height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -495,61 +662,101 @@
       width: 100%;
       height: 100%;
       stroke: #5A4A7A;
-      stroke-width: 1.2;
+      stroke-width: 0.8;
       fill: none;
-      opacity: 0.8;
+      opacity: 0.70;
     }
 
     .result-color-badge {
       display: inline-block;
-      width: 32px;
-      height: 32px;
+      width: 20px;
+      height: 20px;
       border-radius: 50%;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     }
 
     .result-title {
-      font-size: 1.6rem;
+      font-size: 0.95rem;
       font-weight: 400;
-      letter-spacing: 0.06em;
-      color: #2A4A5A;
-      margin-bottom: 0;
-      line-height: 1.5;
+      letter-spacing: 0.04em;
+      color: #4A3A5A;
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+      animation: text-reveal 0.8s ease-out 0.15s both;
+    }
+
+    @keyframes text-reveal {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .result-section {
       position: relative;
       z-index: 1;
-      margin-bottom: 2rem;
+      margin-bottom: 0.7rem;
     }
 
     .result-section-label {
       font-family: "Cormorant Garamond", serif;
-      font-size: 0.70rem;
-      letter-spacing: 0.22em;
+      font-size: 0.55rem;
+      letter-spacing: 0.18em;
       color: var(--page-accent-deep);
-      margin-bottom: 0.9rem;
+      margin-bottom: 0.3rem;
       font-weight: 500;
+      opacity: 0.80;
+      text-transform: uppercase;
     }
 
     .result-section-content {
-      font-size: 1.05rem;
-      line-height: 2.1;
-      letter-spacing: 0.02em;
-      color: #2A4A5A;
-      padding: 1.4rem 1.6rem;
-      background: rgba(255, 255, 255, 0.65);
-      border: 1px solid rgba(142, 196, 216, 0.25);
-      border-left: 3px solid rgba(142, 196, 216, 0.55);
-      border-radius: 12px;
+      font-size: 0.78rem;
+      line-height: 1.6;
+      letter-spacing: 0.005em;
+      color: #3A4A5A;
+      padding: 0.8rem 1rem;
+      background: linear-gradient(135deg, rgba(255, 250, 245, 0.75) 0%, rgba(245, 240, 255, 0.65) 100%);
+      border: 1px solid rgba(200, 160, 200, 0.28);
+      border-left: 3px solid var(--page-accent);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      animation: content-slide 0.6s ease-out 0.25s both;
+    }
+
+    .result-section-content:hover {
+      background: linear-gradient(135deg, rgba(255, 250, 245, 0.85) 0%, rgba(245, 240, 255, 0.75) 100%);
+      box-shadow: 0 8px 24px rgba(150, 110, 200, 0.10);
+      transform: translateX(4px);
+    }
+
+    @keyframes content-slide {
+      0% {
+        opacity: 0;
+        transform: translateX(-12px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .result-divider {
       height: 1px;
-      background: linear-gradient(90deg, transparent, var(--page-accent-line), transparent);
-      margin: 1.8rem 0;
+      background: linear-gradient(90deg, transparent, var(--page-accent), transparent);
+      margin: 0.6rem 0;
       position: relative;
       z-index: 1;
+      opacity: 0.5;
+      animation: divider-glow 3s ease-in-out infinite;
+    }
+
+    @keyframes divider-glow {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.7; }
     }
 
     /* ════════════════════════════════════════
@@ -642,29 +849,54 @@
 
     .btn {
       background: linear-gradient(135deg,
-        rgba(142, 196, 216, 0.18) 0%,
-        rgba(180, 225, 240, 0.12) 100%);
-      border: 1px solid rgba(142, 196, 216, 0.55);
+        rgba(200, 160, 200, 0.20) 0%,
+        rgba(220, 180, 220, 0.12) 100%);
+      border: 1.5px solid rgba(200, 160, 200, 0.50);
       color: var(--page-accent-deep);
       font-family: "Noto Serif TC", serif;
-      font-size: 0.88rem;
-      letter-spacing: 0.25em;
-      padding: 0.9rem 2.8rem;
+      font-size: 0.90rem;
+      letter-spacing: 0.28em;
+      padding: 1rem 3rem;
       border-radius: 100px;
       cursor: pointer;
       transition: all 0.4s var(--ease-silk);
       font-weight: 400;
-      box-shadow: 0 4px 16px rgba(142, 196, 216, 0.15);
+      box-shadow: 0 6px 20px rgba(200, 160, 200, 0.18);
+      position: relative;
+    }
+
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(255, 255, 255, 0.3), transparent);
+      border-radius: 100px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .btn:hover {
       background: linear-gradient(135deg,
-        rgba(142, 196, 216, 0.30) 0%,
-        rgba(180, 225, 240, 0.22) 100%);
+        rgba(200, 160, 200, 0.32) 0%,
+        rgba(220, 180, 220, 0.24) 100%);
       border-color: var(--page-accent);
-      color: #2A6A80;
-      box-shadow: 0 6px 24px rgba(142, 196, 216, 0.28);
-      transform: translateY(-2px);
+      color: #3A5A6A;
+      box-shadow: 0 8px 28px rgba(200, 160, 200, 0.32);
+      transform: translateY(-3px);
+      animation: btn-pulse 1.2s ease-in-out infinite;
+    }
+
+    .btn:hover::after {
+      opacity: 1;
+    }
+
+    @keyframes btn-pulse {
+      0%, 100% {
+        box-shadow: 0 8px 28px rgba(200, 160, 200, 0.32);
+      }
+      50% {
+        box-shadow: 0 8px 40px rgba(200, 160, 200, 0.48);
+      }
     }
 
     .btn:disabled {
@@ -706,17 +938,18 @@
       left: 0;
       right: 0;
       background: linear-gradient(180deg,
-        rgba(238, 247, 251, 0) 0%,
-        rgba(220, 242, 250, 0.88) 25%,
-        rgba(210, 238, 248, 0.97) 100%);
-      border-top: 1px solid rgba(142, 196, 216, 0.25);
-      padding: 2.5rem 1.8rem 2.2rem;
+        rgba(255, 250, 245, 0) 0%,
+        rgba(245, 240, 255, 0.85) 20%,
+        rgba(240, 248, 252, 0.95) 100%);
+      border-top: 2px solid rgba(200, 160, 200, 0.25);
+      padding: 2rem 1.6rem 2rem;
       display: none;
-      gap: 1.2rem;
+      gap: 1rem;
       justify-content: center;
+      flex-wrap: wrap;
       z-index: 20;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .share-footer.visible {
@@ -726,6 +959,21 @@
     .share-footer .btn {
       width: auto;
       white-space: nowrap;
+      font-size: 0.85rem;
+      padding: 0.8rem 2rem;
+    }
+
+    @media (max-width: 480px) {
+      .share-footer {
+        padding: 1.2rem 1rem 1.2rem;
+        gap: 0.8rem;
+      }
+      .share-footer .btn {
+        font-size: 0.80rem;
+        padding: 0.7rem 1.6rem;
+        flex: 1 1 calc(50% - 0.4rem);
+        min-width: 140px;
+      }
     }
 
     /* ════════════════════════════════════════
@@ -1637,7 +1885,82 @@ const COLOR_DEPTH = {
     emotion: '不想張揚 / 渴望沉澱的優雅 / 對自身價值的確認',
     awareness: '你不需要完美才有價值，溫潤本身就是一種珍貴。'
   },
-};
+
+  // ═══ 新物件：香、貝殼、書、雨、石 ═══
+  incense_quartz: { message: '石英粉的溫柔籠罩著這一炷香的升起。煙絲在粉霧中蜿蜒，像夢的邊緣那樣柔軟而不確定。你不需要抓住任何東西，只需讓自己被這份溫柔接住。儀式不是為了完美，而是為了回到自己。', reminder: '石英粉的香煙提醒你，放鬆本身就是一種抵達。', action: '點燃一支香，靜坐五分鐘，只觀察煙的形狀變化，不做任何判斷。' },
+  incense_mauve: { message: '霧紫的深邃裡，香的氣息像一道隱形的門。你走進去，發現內在有一片沒有語言的空間。神祕不是需要解開的謎，而是可以居住的地方。讓香火帶你更深一點，不必害怕那裡的黑暗。', reminder: '霧紫的香煙提醒你，深邃之處藏著你還未認識的自己。', action: '在昏暗的房間裡點香，閉眼靜坐，讓霧紫的神祕感帶你做一次內在漫遊。' },
+  incense_moonlight: { message: '月光白的純淨與香的神聖相遇，空氣變得透明而清明。這一刻沒有雜質，只有此時此地的呼吸。空靈不是脫離，而是更深地存在於當下。讓這縷白煙清洗你心裡積累的霧氣。', reminder: '月光白的香煙提醒你，清明本來就是你的本質。', action: '打開窗戶，在晨光中點一支香，深呼吸三次，感受空氣與香氣同時進入身體。' },
+  incense_mistblue: { message: '霧藍的冷靜讓香的儀式有了距離感，那是一種允許自己旁觀的距離。不是疏離，而是不被情緒淹沒的清醒。香火在霧藍的光線裡燃燒，理性與神聖並不矛盾。你可以清醒地走進神聖。', reminder: '霧藍的香煙提醒你，保持距離有時候是一種深刻的愛護。', action: '今天用觀察者的眼光記錄自己的一個情緒反應，不評判，只記錄。' },
+  incense_sage: { message: '鼠尾草綠的古老氣息與香的淨化力量合而為一。這是大地的記憶，療癒的智慧從土壤深處升起。你不是第一個在這裡點燃一炷香的人，無數的手在你之前做過同樣的動作。香讓你與更古老的什麼相連。', reminder: '鼠尾草綠的香煙提醒你，療癒的根在古老的地方。', action: '在戶外或靠近植物的地方點香，感受自然氣息與香氣交融，讓身體紮根於此刻。' },
+  incense_apricot: { message: '暖杏色的溫暖把香的儀式變成了一種懷抱。記憶的溫度藏在煙裡，像祖母廚房裡的氣味那樣熟悉而安全。儀式感可以是溫暖的，不一定莊嚴肅穆。讓這炷香帶你回到某個你曾被好好愛過的地方。', reminder: '暖杏色的香煙提醒你，溫暖是你隨時可以召喚的記憶。', action: '點香的同時，回憶一個讓你感到被愛的場景，在心裡對那個時刻說一聲謝謝。' },
+  incense_blush: { message: '淡玫瑰的嬌嫩讓你看見香火也有脆弱的一面。火焰在微風中搖曳，那份不穩定是真實的，也是美麗的。你的柔情不是軟弱，而是願意被觸動的勇氣。讓這炷香見證你今天的嬌嫩。', reminder: '淡玫瑰的香煙提醒你，脆弱是連結的入口。', action: '今天允許自己對某件事感到脆弱，不要立刻解決它，只是讓那個感覺存在片刻。' },
+  incense_petal: { message: '花瓣粉的純真賦予香的儀式一種新生的氣息。每一次點燃都是一個開始，不帶任何過去的重量。純真不是無知，而是願意以嶄新的眼光看見同一件事。這炷香是今天的第一個呼吸。', reminder: '花瓣粉的香煙提醒你，每個當下都可以是全新的起點。', action: '今天做一件從未做過的小事，哪怕只是走一條不同的路，讓新鮮感進入你的日常。' },
+  incense_dustyrose: { message: '舊玫瑰的成熟氣息讓香的儀式有了歷練的重量。這不是初次點燃，而是在無數次之後依然選擇這個動作。豐盛不是擁有很多，而是深深地活過。這炷香是你所有走過的路的見證。', reminder: '舊玫瑰的香煙提醒你，歲月在你身上留下的是智慧，不是傷痕。', action: '寫下三件你因為經歷過困難而學到的事，感謝那些讓你成熟的時刻。' },
+  incense_nude: { message: '裸膚的本質讓香的神聖回歸到最赤裸的狀態。去掉所有修飾，只剩下一縷煙和一個真實的你。儀式最深的意義不在形式，而在於你願意誠實地面對自己。讓香火照亮你最真實的那個角落。', reminder: '裸膚的香煙提醒你，真實是最深的神聖。', action: '在香燃燒的時間裡，誠實地對自己說出一件你一直迴避承認的事。' },
+  incense_lavender: { message: '薰衣草的夢境氣息與香的神聖空間交織，帶你進入半醒半夢的靈感地帶。創意從這個門檻上誕生，在完全清醒之前，在完全沉睡之前。讓香火守護這片朦朧，讓靈感自由浮現。', reminder: '薰衣草的香煙提醒你，夢境是靈感最誠實的來源。', action: '點香後閉眼五分鐘，讓任何浮現的意象或想法自由流動，起來後立刻記錄下來。' },
+  incense_iris: { message: '鳶尾紫的靈性與香的轉化力量共鳴，在這一刻你站在兩個世界的交界。洞見不是思考出來的，而是在靜默中降臨的。讓香火燒去表面的雜念，讓更深的看見浮現。你比你以為的更有智慧。', reminder: '鳶尾紫的香煙提醒你，靈性的洞見在安靜中等著你。', action: '靜坐時提出一個困擾你的問題，然後放下它，讓答案在今天的某個時刻自然浮現。' },
+  incense_plum: { message: '梅子深紫的力量讓香的儀式有了尊嚴的底色。你不是在請求什麼，你是在宣告你的存在。沉澱不是消極，而是讓深層的力量累積。這炷香是你給自己的一個莊嚴的承諾。', reminder: '梅子深紫的香煙提醒你，你的存在本身就值得被鄭重對待。', action: '今天做一個小小的承諾給自己，並且兌現它，讓自己體驗言出必行的力量。' },
+  incense_lilac: { message: '淡丁香的輕盈讓香的儀式變得像一個輕柔的觸碰。不是每次儀式都需要沉重，有時候輕輕地就夠了。細膩的感知是一種天賦，你能感受到別人錯過的微小美好。這炷香是給你敏銳心靈的禮物。', reminder: '淡丁香的香煙提醒你，輕輕地觸碰也能留下深深的印記。', action: '今天注意三個通常被忽略的小細節，一片葉子的紋路，光線的顏色，呼吸的節奏。' },
+  incense_sky: { message: '天空藍的開闊讓香的煙絲有了向上延伸的可能。自由不是沒有邊界，而是在邊界內找到無限的可能。讓這炷香帶你想起，你的心可以和天空一樣寬廣。此刻的你不被任何事情困住。', reminder: '天空藍的香煙提醒你，開闊是你原本就擁有的內在空間。', action: '今天找一個可以看到天空的地方，靜站五分鐘，讓視野的開闊進入你的身體感知。' },
+  incense_dusk: { message: '黃昏藍的過渡時刻讓香的儀式有了等待的溫柔。在白天與夜晚之間，在已知與未知之間，香火靜靜地燃燒著。過渡不是失落，而是一種必要的呼吸。你現在所在的地方，本身就是一個完整的所在。', reminder: '黃昏藍的香煙提醒你，過渡期有它自己的美麗和意義。', action: '在傍晚時分點香，在黃昏的光線裡坐著，感受白天結束的儀式感。' },
+  incense_navy: { message: '深海藍的深沉讓香的儀式有了勇氣的重量。你點燃這炷香，不是因為一切都好，而是因為你決定繼續。專注不是逃避，而是選擇把力量放在此刻能做的事上。深海的壓力造就了珍珠。', reminder: '深海藍的香煙提醒你，在最深的地方依然可以找到方向。', action: '今天專注完成一件你一直在拖延的事，哪怕只是第一個小步驟。' },
+  incense_pearl: { message: '珍珠白的清澈讓香的神聖空間變得光潔如洗。優雅不是刻意為之，而是內在清明的自然流露。這炷香清洗的不只是空氣，還有你心裡積累的混濁。清澈之後，你能更清晰地看見真正重要的事。', reminder: '珍珠白的香煙提醒你，清澈是你最優雅的狀態。', action: '今天清理一個物理空間，桌面、抽屜或手機桌面，讓外在的整潔帶來內在的清明。' },
+  incense_mint: { message: '薄荷綠的清新為香的儀式注入了呼吸的能量。每一次吸氣都是一次恢復，每一次吐氣都是一次放下。儀式的核心是呼吸，一切都從這裡開始。讓薄荷的清涼和香的溫暖在你的肺裡相遇。', reminder: '薄荷綠的香煙提醒你，呼吸本身就是最基本的自我照顧。', action: '做十次有意識的深呼吸，吸氣四秒，屏息四秒，吐氣六秒，感受身體的即時變化。' },
+  incense_eucalyptus: { message: '尤加利的療癒氣息與香的淨化力量雙重作用於這個空間。某些傷口需要被煙燻過才能癒合，某些念頭需要被香氣轉化才能放下。讓這炷香成為你今天的淨化儀式，安慰那些還在疼痛的地方。', reminder: '尤加利的香煙提醒你，療癒是一個過程，你已經在路上了。', action: '今天對自己說一句療癒的話，就像對一個受傷的朋友說的那種，然後真的相信它。' },
+  incense_moss: { message: '苔蘚綠的靜默為香的儀式創造了一個隱匿的空間。在這裡不需要表演，不需要被看見，只需要真實地存在。耐心是一種主動的靜待，讓時間做它需要做的事。這炷香守護著你的靜默。', reminder: '苔蘚綠的香煙提醒你，靜默是靈魂最深的語言。', action: '今天找一段完全安靜的時間，不開音樂，不看手機，只是讓靜默存在至少十分鐘。' },
+  incense_celadon: { message: '青瓷綠的從容讓香的儀式有了不爭不搶的優雅。不急不緩，不爭不搶，在這個節奏裡你發現自己呼吸變深了。寧靜穩定的最高境界就是這種無需證明的從容，你就是你，不多也不少，也不需要任何人的確認。讓青瓷綠的香提醒你這份從容的本質。', reminder: '青瓷綠的香煙提醒你，真正的穩定不需要任何外在的證明。', action: '今天注意一次你想要被認可或證明的衝動，練習讓它過去，不去追逐那個確認。' },
+  incense_clay: { message: '陶土棕的踏實讓香的儀式有了手作的溫度。筆在紙上的觸感，手腕的移動，墨水滲入纖維的痕跡，這些都是真實存在的。香的氣息也是真實的，它讓你的思維回到身體，回到此刻。讓陶土的溫度透過香進入你的手。', reminder: '陶土棕的香煙提醒你，書寫是思想落地生根的方式。', action: '今天用手寫而不是打字記錄什麼，感受筆和紙的物理觸感，讓記錄更有身體的臨場感。' },
+  incense_amber: { message: '琥珀黃的光芒讓香的儀式有了創造的火焰。不只是淨化，今天的香是創造，是讓你內在的光芒透過煙線顯現。活力和創意在香的升起中得到出口，讓那個有話想說的你放開來說。讓琥珀的光照亮你香的頁面。', reminder: '琥珀黃的香煙提醒你，你的創造力是一直都在的光。', action: '今天花十分鐘做一件純粹創意的事，塗鴉、寫詩或排列什麼，不求結果，只求過程。' },
+  incense_sand: { message: '沙丘米的漂浮讓香的煙絲像是在遼闊的空曠裡飄散。你不需要有目的地，有時候漂浮本身就是答案。儀式感可以是沒有方向的，只是讓自己存在於這個無邊的空間裡。讓香火帶你漂向更遠的地方。', reminder: '沙丘米的香煙提醒你，有時候漂浮也是一種自由的形式。', action: '今天讓自己有一段沒有計劃的時間，隨興走走，看看你的腳帶你去哪裡。' },
+  incense_terra: { message: '赤陶磚的熱情讓香的儀式有了行動的力量。不只是沉思，今天的儀式是一個出發的訊號。堅定不是從不懷疑，而是帶著懷疑依然前進。讓這炷香燃燒你內心準備好行動的那個部分。', reminder: '赤陶磚的香煙提醒你，儀式結束後，行動才是真正的開始。', action: '今天為一個你在心裡計劃很久的目標採取一個具體的第一步，不論多小。' },
+  incense_smoke: { message: '煙霧灰的朦朧讓香的儀式有了過渡期的質感。你看不清前方，但香火依然燃燒著，照亮腳下這一步。模糊不是失敗，而是轉化正在發生的信號。讓這炷香陪你度過這段看不清楚的時光。', reminder: '煙霧灰的香煙提醒你，在模糊中繼續燃燒本身就是一種勇氣。', action: '今天把你對某個不確定事物的真實感受寫下來，不需要找到答案，只是讓感受有個地方落腳。' },
+  incense_fog: { message: '晨霧白的柔和讓香的儀式成為清晨最美麗的開始。霧中的石香有種神祕的存在感，若隱若現，卻依然穩固地在那裡。靜好是晨霧的禮物，穩定是香的禮物，兩者相遇，帶來了一種靜中有定的美麗。', reminder: '晨霧白的香煙提醒你，靜好的根基讓每一個清晨都成為穩定的開始。', action: '明天早晨，在做任何事之前，先點香靜坐三分鐘，讓這個靜好的狀態帶入一天。' },
+  incense_charcoal: { message: '炭灰的清醒讓香的儀式有了簡潔有力的質地。去掉一切多餘，香的本質是清醒的重量。在炭灰的靜默裡，香的氣息更加清晰。你不需要更多，你只需要更清楚地知道你已經有的是什麼。', reminder: '炭灰的香煙提醒你，清醒的眼光是最珍貴的禮物。', action: '今天從日程表中刪除一件不必要的事，把那個時間留給真正重要的事。' },
+  incense_ivory: { message: '象牙白的溫潤讓香的儀式有了被珍藏的質感。不是所有香都被人點燃，被你選中的那一炷，因為你的珍視而有了不同的意義。時間的重量和珍視的溫潤相遇，讓香成為你的陪伴，你的見證。讓象牙白的香提醒你，被珍視的存在才是最有意義的承載。', reminder: '象牙白的香煙提醒你，你的存在因為你珍視自己而有了更深的意義。', action: '今天用你最喜歡的方式對待自己，就像對待一件值得珍惜的事物，讓這份珍視進入你的日常。' },
+
+  shell_quartz: { message: '石英粉的溫柔包裹著這枚貝殼，就像海浪溫柔地把它帶上岸。你撿起它，是因為內在某個聲音說：這是給你的。柔軟中的堅硬藏在這份粉霧的溫柔裡，等你細細感受。讓貝殼貼著你的耳朵，聽聽那個溫柔的深處在說什麼。', reminder: '石英粉的貝殼提醒你，最溫柔的地方往往藏著最深的智慧。', action: '找一個安靜的地方，把手放在心口，輕聲問自己：我內在最溫柔的聲音現在想說什麼？' },
+  shell_mauve: { message: '霧紫的深邃讓這枚貝殼像是從夢境深處撈起的寶物。內在的智慧總是帶著一點神祕的顏色，不是一眼就能看穿的。聆聽這份深邃，不要急著理解，讓它在你心裡慢慢展開。貝殼等待了很久，才等到你來傾聽。', reminder: '霧紫的貝殼提醒你，內在的深處有神祕的答案等著被聆聽。', action: '今天做一次十分鐘的內在聆聽，閉眼，問自己一個問題，然後安靜地等待任何出現的感受或畫面。' },
+  shell_moonlight: { message: '月光白的純淨讓這枚貝殼在你手心裡發出柔和的光。來自深處的智慧有時候是清明的，像月光一樣不刺眼卻照亮了一切。空靈不是遙遠，而是近在你的呼吸裡。讓貝殼的清白提醒你，你的內在本就是清明的。', reminder: '月光白的貝殼提醒你，清明是你本來的面目，不需要尋找，只需要回到。', action: '今天花五分鐘做清空練習，把所有念頭想像成雲朵，看著它們飄過，不跟隨任何一朵。' },
+  shell_mistblue: { message: '霧藍的冷靜讓你能夠與貝殼保持一種理性的距離。聆聽內在不代表被情緒淹沒，有時候你需要這份霧藍的清醒才能聽清楚內心真正的聲音。距離讓你看得更清，不是更遠。貝殼在霧藍的光裡等你用清醒的耳朵傾聽。', reminder: '霧藍的貝殼提醒你，理性的距離有時候讓聆聽更加清晰。', action: '今天對一個讓你情緒激動的事情，嘗試用第三人稱描述它，看看距離感帶來什麼不同的觀點。' },
+  shell_sage: { message: '鼠尾草綠的古老氣息讓這枚貝殼有了大地的重量。來自深處的智慧有多深？深到比你的記憶更古老。海洋和大地都有自己的療癒語言，貝殼是它們留給你的字條。讓這抹古綠提醒你，紮根於大地是內在智慧的起點。', reminder: '鼠尾草綠的貝殼提醒你，古老的智慧早在你出生前就在等你了。', action: '今天去找一個自然環境，坐在那裡靜靜感受十分鐘，讓大地的古老智慧進入你的骨髓。' },
+  shell_apricot: { message: '暖杏色的懷舊把貝殼變成了一個時光容器。你曾經在某個下雨的下午撿起過一枚貝殼，那時候的你是什麼感受？那個孩子的直覺，才是最真實的內在智慧。讓暖杏的溫度帶你回到那個簡單的聆聽。', reminder: '暖杏色的貝殼提醒你，童年的直覺是最純粹的內在智慧。', action: '今天在雨聲中做一件讓你想起童年溫暖的小事，喝一杯熱可可，或是縮在毯子裡看一本書。' },
+  shell_blush: { message: '淡玫瑰的脆弱讓這枚貝殼看起來格外柔情。聆聽內在需要一種嬌嫩的勇氣。不是每個聲音都是有力的，有些聲音輕如蜂翅，需要你非常安靜才能聽見。貝殼的柔情藏在它看似堅硬的外殼之下，就像你的柔情藏在你的日常防護之下。', reminder: '淡玫瑰的貝殼提醒你，脆弱的聲音才是最真實的內在低語。', action: '今天允許自己對一個人說出一個脆弱的感受，用「我感到…」開頭，不加解釋和辯護。' },
+  shell_petal: { message: '花瓣粉的純真讓貝殼重新變成了一個驚奇。你第一次把貝殼放在耳邊時的那種純真，現在還在嗎？新生的眼光聽見的聲音是不同的，沒有先入為主，沒有已知的過濾。讓這枚粉色的貝殼帶你回到第一次聆聽的狀態。', reminder: '花瓣粉的貝殼提醒你，以純真之心聆聽，你能聽見不同的聲音。', action: '今天做一件平常的事時，假裝這是你第一次做，看看這個「初學者的心」帶來什麼不同。' },
+  shell_dustyrose: { message: '舊玫瑰的豐盛讓這枚貝殼有了歲月的重量。來自深處的智慧是需要時間累積的，每一個傷口，每一次等待，都成為了貝殼裡的迴聲。你的歷練本身就是一種智慧，不需要向外尋找。讓舊玫瑰的貝殼告訴你，你已經擁有你需要的了。', reminder: '舊玫瑰的貝殼提醒你，你走過的每條路都成為了你內在的智慧。', action: '今天回顧一個你曾經以為是失敗的經歷，辨認它教給你的禮物。' },
+  shell_nude: { message: '裸膚的本質讓貝殼回到最赤裸的狀態，沒有裝飾，只有真實的形狀。你的內在聲音在最誠實的時候是什麼樣的？不是你希望自己是怎樣的，而是你真實的樣子。讓裸膚的貝殼邀請你與自己的真實相遇。', reminder: '裸膚的貝殼提醒你，真實的內在聲音不需要任何包裝。', action: '今天在日記裡寫下你真實的狀態，不美化，不評判，就是此刻真實的你是什麼樣子。' },
+  shell_lavender: { message: '薰衣草的夢境讓這枚貝殼成為進入潛意識的入口。你在夢裡聽見過什麼？那些畫面和聲音都是內在智慧的語言。等待是貝殼的本質，它等待著你願意傾聽的那一刻。讓薰衣草的靈感輕輕搖醒你的夢中記憶。', reminder: '薰衣草的貝殼提醒你，夢境是內在最誠實的信使。', action: '今晚睡前準備紙筆放在床頭，明天醒來的第一件事是寫下記得的任何夢境片段。' },
+  shell_iris: { message: '鳶尾紫的靈性讓這枚貝殼有了洞見的深度。柔軟中的堅硬是一種靈性的悖論，最柔軟的地方承載著最堅定的真理。轉化從聆聽開始，當你真正聽見內在的聲音，你就開始改變了。貝殼在等你，洞見也在等你。', reminder: '鳶尾紫的貝殼提醒你，真正的聆聽帶來轉化的力量。', action: '今天靜坐時，對自己提問：如果我真的聽從內心的指引，我會做什麼不同的決定？' },
+  shell_plum: { message: '梅子深紫的力量讓這枚貝殼有了尊嚴的存在感。循環是貝殼的智慧，漲潮與退潮，生命的節奏從不停歇。在這份沉澱裡你發現，等待是有力量的，不是被動的。讓梅子的深紫賦予你等待的尊嚴。', reminder: '梅子深紫的貝殼提醒你，耐心等待是一種深沉的力量。', action: '今天對一件你急切想要結果的事，有意識地放下催促，讓它按自己的節奏發展。' },
+  shell_lilac: { message: '淡丁香的細膩讓你聽見了貝殼裡最輕微的聲音。聆聽內在需要這種輕盈的敏感，不是用力去抓，而是輕輕地靠近。你的感知比你以為的更細緻，只是平時太嘈雜了。讓淡丁香的輕觸帶你進入更細膩的傾聽。', reminder: '淡丁香的貝殼提醒你，最輕的聲音有時傳遞最重要的訊息。', action: '今天在嘈雜的環境裡嘗試聽見一個最細微的聲音，練習讓感知變得更細緻。' },
+  shell_sky: { message: '天空藍的開闊讓這枚貝殼的迴聲有了延伸的空間。來自深處的智慧需要足夠的開闊才能被聽見，逼仄的心容不下智慧的聲音。讓天空的可能性進入你的聆聽，你會驚訝地發現內在有多寬廣。貝殼與天空其實是同樣的深。', reminder: '天空藍的貝殼提醒你，開闊的心聽見的聲音也是開闊的。', action: '今天讓自己有一段「不需要思考任何問題」的時間，只是讓心空著，看看什麼自然流入。' },
+  shell_dusk: { message: '黃昏藍的過渡讓貝殼的等待有了美麗的顏色。你現在或許正處於一個過渡的時刻，不確定下一步，帶著一點沉靜的不安。這是正常的，黃昏也只是在等待夜的到來。讓這枚黃昏藍的貝殼陪伴你的等待。', reminder: '黃昏藍的貝殼提醒你，過渡中的等待本身就是一個必要的季節。', action: '今天寫下你對「過渡期」的感受，不試圖解決，只是讓感受被記錄和承認。' },
+  shell_navy: { message: '深海藍的深沉讓貝殼有了深海的智慧。最古老的智慧在海的最深處，沉默、黑暗、充滿壓力，卻也孕育著最不可思議的生命。你的深處也是如此，那些你從未觸及的地方，藏著你最勇敢的力量。', reminder: '深海藍的貝殼提醒你，你的深處比你所知道的更廣大。', action: '今天問自己一個你一直害怕面對的問題，把它寫下來，然後坐著與這個問題共處五分鐘。' },
+  shell_pearl: { message: '珍珠白的光潔讓這枚貝殼有了優雅的自持。貝殼的智慧是清澈的，不帶雜質，像珍珠一樣從沙礫中磨練出光澤。你的內在光澤也是這樣來的，不是天生光亮，而是被生命的沙礫磨出來的。', reminder: '珍珠白的貝殼提醒你，你的光澤是你的經歷磨出來的，珍貴而真實。', action: '今天辨認一個讓你感到驕傲的個人特質，思考它是如何在困難中被磨練出來的。' },
+  shell_mint: { message: '薄荷綠的清新讓聆聽貝殼成為一種恢復的儀式。當你把貝殼放在耳邊，你也在做一次呼吸的邀請，讓新鮮的覺知進來。聆聽內在本質上是一種呼吸，吸入覺察，呼出習慣性的遮蔽。讓薄荷的清涼洗亮你的聆聽。', reminder: '薄荷綠的貝殼提醒你，每次真正的聆聽都是一次清新的恢復。', action: '今天每當你注意到自己的思緒散亂，就深吸一口氣，讓這個呼吸把你帶回當下的聆聽。' },
+  shell_eucalyptus: { message: '尤加利的療癒氣息讓這枚貝殼成為撫慰的容器。你帶著什麼樣的傷在尋找貝殼？也許你需要的不是答案，而是一個願意容納你所有聲音的空間。尤加利說：你可以在這裡療癒，慢慢來，不用急。', reminder: '尤加利的貝殼提醒你，療癒需要空間，你值得擁有這個空間。', action: '今天給自己一個「無需生產力」的小時，做任何讓你感到被安慰的事，不管看起來多不「有用」。' },
+  shell_moss: { message: '苔蘚綠的靜默讓貝殼的等待有了深深的耐心。苔蘚是最有耐心的植物，它在石頭上等了幾百年才長成這片綠。貝殼也等了很久，等著你今天把它撿起。靜默不是沒有生命，而是生命在最緩慢最深沉地進行著。', reminder: '苔蘚綠的貝殼提醒你，靜默和等待本身就是一種茁壯的方式。', action: '今天花一段時間獨處，在靜默裡等待，看看在行動前等待帶來什麼洞見。' },
+  shell_celadon: { message: '青瓷綠的從容讓這枚貝殼有了從容的美感。循環裡每一個回歸都是珍貴的，每一次你重新回到自己，都是一個值得慶祝的典雅時刻。讓青瓷的寧靜告訴你，一切都在它該在的節奏裡。', reminder: '青瓷綠的貝殼提醒你，從容地臣服於生命的循環是最深的智慧。', action: '今天辨認生活中一個你一直在抗拒的循環，嘗試以接受代替抵抗，看看感受有何不同。' },
+  shell_clay: { message: '陶土棕的踏實讓這枚貝殼有了手作的溫度。聆聽內在不是一個飄在空中的練習，它需要接地，需要身體的參與。用雙手握住貝殼，讓它的重量提醒你，你有一個身體，這個身體也是內在智慧的一部分。', reminder: '陶土棕的貝殼提醒你，身體的感知是內在智慧最直接的語言。', action: '今天做一次身體掃描，從頭到腳慢慢感受每個部位，問每個部位：你此刻有什麼感覺？' },
+  shell_amber: { message: '琥珀黃的光芒讓貝殼成為一個發光的容器。來自深處的智慧有時候是燦爛的，充滿活力，帶著創造的衝動。你不需要總是往深暗處尋找答案，有時智慧是明亮的，是一個讓你心跳加速的靈感。', reminder: '琥珀黃的貝殼提醒你，內在的智慧有時以明亮的熱情顯現。', action: '今天跟隨一個讓你興奮的念頭，哪怕只是花十分鐘去探索它，讓那份活力帶領你。' },
+  shell_sand: { message: '沙丘米的漂浮讓這枚貝殼有了遼闊的歸屬。它從哪裡來？它在沙灘上漂浮了多久？等待本身就是旅行的一部分，你也在一個無邊的旅程裡漂浮。讓沙丘的空曠告訴你，漂浮也是一種深刻的聆聽方式。', reminder: '沙丘米的貝殼提醒你，在漂浮中也能聽見自己真實的聲音。', action: '今天讓自己在漫遊和停駐之間自由切換，不強迫自己要漂浮還是紮根，讓兩者都有位置。' },
+  shell_terra: { message: '赤陶磚的熱情讓這枚貝殼有了行動的呼召。聆聽內在不只是為了安慰，有時候你聽見的聲音是一個清晰的行動指令。堅定不是從不懷疑，而是帶著懷疑依然前進。讓赤陶磚的熱情點燃你的回應。', reminder: '赤陶磚的貝殼提醒你，在聆聽之後，行動是對內在聲音最深的尊重。', action: '今天把你長期聽見但一直沒有回應的一個內在聲音，採取一個小小的行動來回應它。' },
+  shell_smoke: { message: '煙霧灰的朦朧讓貝殼的聲音有了過渡的質感。你聽見的也許不是清晰的訊息，而是一種感覺，一種還沒有成形的知道。讓這份模糊存在，在煙霧裡，智慧正在成形。', reminder: '煙霧灰的貝殼提醒你，在模糊中繼續聆聽，答案正在浮現。', action: '今天把你現在腦海中還沒有清晰成形的感受寫下來，只是讓它被記錄，不強求它立刻說清楚。' },
+  shell_fog: { message: '晨霧白的柔和讓這枚貝殼在清晨的靜好裡閃著光。清晨是內在聲音最清晰的時刻，在一天的喧囂遮蓋它之前。朝露般的貝殼，新鮮、輕盈、只屬於這個清晨。讓晨霧白的貝殼帶你進入每日的第一次聆聽。', reminder: '晨霧白的貝殼提醒你，清晨的第一個念頭往往最接近你的真實。', action: '明天早晨醒來後的第一件事，不看手機，先安靜地聆聽你內在有什麼想說的。' },
+  shell_charcoal: { message: '炭灰的沉穩讓貝殼的聆聽有了清醒的質地。簡潔的清醒讓你聽見的聲音更加純粹，沒有多餘的情緒染色，只是事實本身。有時候你需要這種炭灰的冷靜才能真正聽清楚內心真正的聲音。', reminder: '炭灰的貝殼提醒你，清醒的眼光讓聆聽更加清晰。', action: '今天對一個讓你混亂的情境，用「觀察者」的眼光客觀記錄事實，看看事實和你的感受有什麼差距。' },
+  shell_ivory: { message: '象牙白的溫潤讓這枚貝殼有了被珍視的光澤。循環裡每一個回歸都是珍貴的，每一次你重新回到自己，都在加深對內在聲音的珍視。被珍視的存在是最有意義的承載。讓象牙白的貝殼成為你和自己之間的溫柔契約。', reminder: '象牙白的貝殼提醒你，珍視內在的聲音，是與自己最溫柔的約定。', action: '今天用你珍視任何寶貴之物的方式，對待你自己的內在聲音——帶著敬畏和溫柔。' },
+
+  book_quartz: { message: '石英粉的溫柔讓書寫成為一件擁抱自己的事。你拿起筆，不是為了記錄重要的事，而是為了讓自己的感受有個落腳之處。這份粉霧的柔軟告訴你，書寫不需要正確，只需要真實。讓紙頁接住你今天的重量。', reminder: '石英粉的書本提醒你，書寫是你給自己最溫柔的禮物。', action: '今天不設主題地寫三頁，讓筆帶著你走，看看什麼從意識底部自然浮現。' },
+  book_mauve: { message: '霧紫的深邃讓對話內心成為一次神祕的探索。你問，然後等待，答案從內在的某個深暗處緩緩升起。書頁是你的鏡子，它只反映你放進去的，所以那個深邃是屬於你的。讓霧紫的書提醒你，對話內心是勇敢的探索。', reminder: '霧紫的書本提醒你，對話內心是勇敢的探索，不是迷失。', action: '今天在日記裡和「另一個自己」對話，用問答的形式，讓兩個聲音交替說話。' },
+  book_moonlight: { message: '月光白的清明讓整理思緒成為一次純粹的空靈感。整理思緒不是把混亂硬塞入秩序，而是讓清明自然浮現，就像月光透過水面映出清晰的倒影。讓這本月光白的書提醒你，清明是書寫的自然結果，不是前提。', reminder: '月光白的書本提醒你，書寫之後你會比之前更清明。', action: '今天把一個讓你感到混亂的思緒寫下來，不求解答，只是寫，看看書寫本身帶來了什麼清明。' },
+  book_mistblue: { message: '霧藍的冷靜讓書寫有了理性觀察的距離。你是自己生命的記錄者，用霧藍的冷靜眼光記錄，不被情緒帶走。這種距離不是冷漠，而是讓你能更清楚地看見整個圖景。見證自己需要這份清醒的旁觀。', reminder: '霧藍的書本提醒你，用冷靜的眼光觀察自己，是一種深刻的自愛。', action: '今天以「觀察者」的視角寫下今天發生的一件事，不加情緒評判，只是描述你看到了什麼。' },
+  book_sage: { message: '鼠尾草綠的古老氣息讓書寫成為與時間對話的儀式。那些記錄在書頁上的文字，總有一天會成為古老的智慧，你正在為未來的自己或他人留下什麼？書寫是紮根於時間之中的行為，每一個字都是一個腳印。', reminder: '鼠尾草綠的書本提醒你，你的文字是留給時間的禮物。', action: '今天寫一封信給十年後的自己，告訴那個未來的你，現在的你在學習什麼。' },
+  book_apricot: { message: '暖杏色的懷舊讓對話內心成為一次溫暖的回家。翻開舊日記，那些過去的字跡是另一個你在說話。溫暖地對待過去的自己，就像對待一個曾經努力過的老朋友。書寫是時間給你的禮物，讓你與自己的歷史相遇。', reminder: '暖杏色的書本提醒你，你的過去是值得溫柔對待的故事。', action: '今天翻閱一本過去的日記或筆記，以溫暖和理解的眼光看待那時候的自己。' },
+  book_blush: { message: '淡玫瑰的脆弱讓書寫成為安全袒露的空間。你可以在這些紙頁上說你在任何地方都說不出口的話。柔情需要容器，書頁是最安全的那個。讓你的嬌嫩在這裡存在，不需要堅強，不需要表演。', reminder: '淡玫瑰的書本提醒你，最脆弱的真話值得被記錄下來。', action: '今天在日記裡寫一件你覺得「不應該」感覺的感受，讓它被承認，讓它被看見。' },
+  book_petal: { message: '花瓣粉的純真讓書寫成為重新發現的驚喜。記錄自我不是抓住不放，而是每次翻閱都像第一次認識自己。帶著孩子的純真去書寫，沒有批判，沒有「應該」，只有好奇。讓花瓣的輕盈帶走你對書寫的包袱。', reminder: '花瓣粉的書本提醒你，對自己保持好奇心是最美麗的書寫態度。', action: '今天用畫圖代替文字，把你的心情畫出來，不需要畫得好，只需要畫得真實。' },
+  book_dustyrose: { message: '舊玫瑰的豐盛讓書寫有了歷練的榮光。你見證了自己的時間，那些書頁是你存在過的證明。豐盛不是擁有很多，而是深深地活過，並且把活過的痕跡留下。讓舊玫瑰的書本提醒你，你書寫過的每個字都是你豐盛生命的見證。', reminder: '舊玫瑰的書本提醒你，你書寫過的每個字都是你豐盛生命的見證。', action: '今天回顧一年前的日記或筆記，感謝那時候認真記錄自己的你。' },
+  book_nude: { message: '裸膚的本質讓書寫回到最赤裸的誠實。沒有美麗的句子，沒有刻意的修辭，只是你最真實的樣子落在紙頁上。這種赤裸需要勇氣，但也帶來了最深的解脫。讓裸膚的書頁見證你最真實的存在。', reminder: '裸膚的書本提醒你，最誠實的書寫是最深的自由。', action: '今天在日記裡寫下你最不想承認的一個想法，允許它存在，讓它被看見。' },
+  book_lavender: { message: '薰衣草的夢境讓書寫成為潛意識的出口。夢的語言是意象和感受，試著用這種語言記錄你的內在世界。靈感從半醒半睡的地方湧現，薰衣草的氣息打開了那扇門。讓你的書寫漫遊在夢與醒之間。', reminder: '薰衣草的書本提醒你，夢的語言也是一種書寫的語言。', action: '今天試著用意象和隱喻來寫日記，不用邏輯敘述，讓詩的語言來描述你的感受。' },
+  book_iris: { message: '鳶尾紫的靈性讓書寫成為一種靈魂的顯影。當你書寫，你在讓
 
 // 結果訊息矩陣（10物件 × 6顏色 = 60組合）
 // 每個訊息結合：物件潛意識含義 + 顏色心理能量
