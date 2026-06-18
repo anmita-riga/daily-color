@@ -784,6 +784,28 @@
     .drawer-item.active::before { height: 60%; }
     .drawer-icon { font-size: 18px; opacity: 0.6; }
 
+    .drawer-subitem {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 28px 9px 48px;
+      font-size: 13px;
+      letter-spacing: 0.07em;
+      color: rgba(255,255,255,0.35);
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: left;
+      transition: color 0.2s;
+    }
+    .drawer-subitem:hover { color: rgba(255,255,255,0.7); }
+    .drawer-subitem::before {
+      content: '–';
+      font-size: 11px;
+      opacity: 0.4;
+    }
+
     /* ── Sections ── */
     .page-section {
       display: none;
@@ -1209,6 +1231,11 @@
   <button class="drawer-item" data-section="knowledge">
     <span class="drawer-icon">✦</span>光場知識
   </button>
+  <button class="drawer-subitem" data-anchor="anchor-size">光場的大小與形狀</button>
+  <button class="drawer-subitem" data-anchor="anchor-change">光場如何隨時間變化</button>
+  <button class="drawer-subitem" data-anchor="anchor-chakra">脈輪與光場的關係</button>
+  <button class="drawer-subitem" data-anchor="anchor-care">日常保養光場的方式</button>
+  <button class="drawer-subitem" data-anchor="anchor-protection">能量防護</button>
   <button class="drawer-item" data-section="service">
     <span class="drawer-icon">◇</span>服務介紹
   </button>
@@ -1748,7 +1775,7 @@
 
 
 <!-- Size & Shape -->
-<div class="accordion">
+<div class="accordion" id="anchor-size">
   <button class="accordion-btn" onclick="toggleAccordion(this)">
     <span>光場的大小與形狀</span>
     <span class="accordion-arrow">﹢</span>
@@ -1761,7 +1788,7 @@
 </div>
 
 <!-- Changes over time -->
-<div class="accordion">
+<div class="accordion" id="anchor-change">
   <button class="accordion-btn" onclick="toggleAccordion(this)">
     <span>光場如何隨時間變化</span>
     <span class="accordion-arrow">﹢</span>
@@ -1774,7 +1801,7 @@
 </div>
 
 <!-- Chakras -->
-<div class="accordion">
+<div class="accordion" id="anchor-chakra">
   <button class="accordion-btn" onclick="toggleAccordion(this)">
     <span>脈輪與光場的關係</span>
     <span class="accordion-arrow">﹢</span>
@@ -1787,7 +1814,7 @@
 </div>
 
 <!-- Daily care -->
-<div class="accordion">
+<div class="accordion" id="anchor-care">
   <button class="accordion-btn" onclick="toggleAccordion(this)">
     <span>日常保養光場的方式</span>
     <span class="accordion-arrow">﹢</span>
@@ -1803,7 +1830,7 @@
 </div>
 
 <!-- Energy protection -->
-<div class="accordion">
+<div class="accordion" id="anchor-protection">
   <button class="accordion-btn" onclick="toggleAccordion(this)">
     <span>能量防護</span>
     <span class="accordion-arrow">﹢</span>
@@ -2239,6 +2266,24 @@
   document.getElementById('hamburger-btn').addEventListener('click', openDrawer);
   drawerOverlay.addEventListener('click', closeDrawer);
   drawer.addEventListener('click', e => {
+    const subitem = e.target.closest('.drawer-subitem');
+    if (subitem) {
+      const anchorId = subitem.dataset.anchor;
+      // Switch to knowledge section
+      document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === 'section-knowledge'));
+      document.querySelectorAll('.drawer-item').forEach(i => i.classList.toggle('active', i.dataset.section === 'knowledge'));
+      closeDrawer();
+      setTimeout(() => {
+        const target = document.getElementById(anchorId);
+        if (!target) return;
+        // Open accordion if not already open
+        const btn = target.querySelector('.accordion-btn');
+        const body = target.querySelector('.accordion-body');
+        if (btn && !btn.classList.contains('open')) { btn.classList.add('open'); body.classList.add('open'); }
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 320);
+      return;
+    }
     const item = e.target.closest('.drawer-item');
     if (!item) return;
     const sec = item.dataset.section;
