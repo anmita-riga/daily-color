@@ -404,6 +404,17 @@
       border-radius: 20px;
     }
 
+    .panel-color-note {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border-left: 2px solid rgba(201,168,76,0.3);
+    }
     .panel-purify-wrap {
       margin-top: 16px;
       padding-top: 14px;
@@ -1139,6 +1150,7 @@
   <div class="panel-divider"></div>
   <div class="panel-body" id="panel-body"></div>
   <div class="panel-keywords" id="panel-keywords"></div>
+  <div class="panel-color-note" id="panel-color-note"></div>
   <div class="panel-purify-wrap" id="panel-purify-wrap">
     <div class="panel-purify-title">淨化方式</div>
     <div class="panel-purify-list" id="panel-purify-list"></div>
@@ -1156,6 +1168,7 @@
       imbalance: '容易疲倦、睡再多也沒精神、身體莫名疼痛、感覺身體不像自己的。',
       keywords: ['身體', '生命力', '細胞記憶', '健康基礎', '根基'],
       purify: ['泡鹽水澡', '曬太陽', '赤腳踩地', '充足睡眠'],
+      colorNote: '紅橙色 · 1000–2000 Hz · 生命力強、身體能量活躍',
     },
     2: {
       color: '#FF90BB',
@@ -1166,6 +1179,7 @@
       imbalance: '情緒起伏很大、容易被別人的感受淹沒、說不清楚自己真正要什麼。',
       keywords: ['情緒波動', '感受', '渴望', '關係磁場', '敏感'],
       purify: ['允許自己哭泣釋放', '寫情緒日記', '靠近水（泡澡 / 游泳）', '聲音療癒'],
+      colorNote: '玫瑰粉 · 情緒流動的顏色 · 顏色明亮代表情感豐富且開放',
     },
     3: {
       color: '#FFCC80',
@@ -1176,6 +1190,7 @@
       imbalance: '腦子停不下來、重複同樣的擔憂迴路、對自己很嚴苛、覺得自己「不夠好」。',
       keywords: ['思維模式', '信念', '邏輯', '自我對話', '意識'],
       purify: ['冥想', '減少資訊攝取', '花時間獨處', '呼吸練習'],
+      colorNote: '明亮黃色 · 500–700 Hz · 思維清晰、意識活躍時特別明顯',
     },
     4: {
       color: '#FFF080',
@@ -1186,6 +1201,7 @@
       imbalance: '在關係裡感到孤立、付出很多卻收不到愛、難以信任別人，或害怕被拋棄。',
       keywords: ['無條件的愛', '靈魂連結', '夢境', '同理心', '橋梁'],
       purify: ['與真正愛你的人相處', '在大自然中獨處', '心輪冥想', '玫瑰精油'],
+      colorNote: '草綠色至金色 · 健康的愛與連結呈現明亮金色光帶',
     },
     5: {
       color: '#80FFD0',
@@ -1196,6 +1212,7 @@
       imbalance: '感覺人生沒有方向、做什麼都提不起勁、覺得自己「不知道為何而活」。',
       keywords: ['靈魂使命', '天賦', '真實自我', '高維藍圖', '意志'],
       purify: ['唱歌 / 哼唱', '說出真心話', '寫作表達', '頌缽聲音療癒'],
+      colorNote: '天空藍 · 250–750 Hz · 與真實自我對齊時發出藍白光',
     },
     6: {
       color: '#90CAFF',
@@ -1206,6 +1223,7 @@
       imbalance: '直覺變鈍、與自己的內心失去連結、感受不到生命的美或意義。',
       keywords: ['直覺', '靈性體驗', '神聖之愛', '高我', '冥想'],
       purify: ['深度冥想', '做夢日記', '凝視燭光或星空', '靛藍 / 紫色光想像'],
+      colorNote: '靛藍色 · 珍珠白光 · 靈性開啟時帶有玫瑰金的光澤',
     },
     7: {
       color: '#D8AAFF',
@@ -1216,6 +1234,7 @@
       imbalance: '感到深層的孤單或虛無、對存在本身感到疑惑、與「更大力量」完全切斷。',
       keywords: ['宇宙意識', '靈魂智慧', '神性', '源頭連結', '完整性'],
       purify: ['靜默獨處', '靈性閱讀或學習', '祈禱或感恩練習', '紫水晶'],
+      colorNote: '紫白色 · 1000–2000 Hz · 最高頻率的光，連結宇宙意識',
     },
   };
 
@@ -1279,6 +1298,7 @@
       ).join('');
     }
 
+    document.getElementById('panel-color-note').textContent = d.colorNote || '';
     document.getElementById('panel-purify-list').innerHTML = d.purify.map(p =>
       `<span class="purify-tag">✦ ${p}</span>`
     ).join('');
