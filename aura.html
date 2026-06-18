@@ -536,16 +536,22 @@
     /* ── Damage Cards ── */
     .damage-cards-section {
       margin: 60px 0 8px;
+      border-radius: 16px;
+      padding: 20px 16px 16px;
+      background: color-mix(in srgb, var(--section-color, transparent) 5%, transparent);
+      border: 1px solid color-mix(in srgb, var(--section-color, rgba(255,255,255,0.06)) 15%, rgba(255,255,255,0.04));
+      margin-left: -16px;
+      margin-right: -16px;
     }
     .damage-cards-label {
       font-family: 'Cormorant Garamond', serif;
       font-size: 10px;
       letter-spacing: 0.28em;
-      color: rgba(255,200,120,0.5);
+      color: color-mix(in srgb, var(--section-color, rgba(255,200,120,0.5)) 80%, rgba(255,255,255,0.3));
       text-transform: uppercase;
       margin-bottom: 16px;
       padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid color-mix(in srgb, var(--section-color, rgba(255,255,255,0.06)) 20%, rgba(255,255,255,0.04));
     }
     .damage-cards-strip {
       display: flex;
@@ -1497,7 +1503,7 @@
   <div class="color-meaning" id="color-meaning"></div>
 </div>
 
-<div class="damage-cards-section">
+<div class="damage-cards-section" style="--section-color: #FF7070;">
   <div class="damage-cards-label">光場受損的常見模式</div>
   <div class="damage-cards-strip" id="damage-cards-strip">
 
@@ -1565,7 +1571,7 @@
 </div>
 
 <!-- Interaction Cards -->
-<div class="damage-cards-section">
+<div class="damage-cards-section" style="--section-color: #90CAF9;">
   <div class="damage-cards-label">光場與他人的互動</div>
   <div class="damage-cards-strip" id="interaction-cards-strip">
 
@@ -1618,7 +1624,7 @@
 </div>
 
 <!-- Space Cards -->
-<div class="damage-cards-section">
+<div class="damage-cards-section" style="--section-color: #80CBC4;">
   <div class="damage-cards-label">空間與場所的影響</div>
   <div class="damage-cards-strip" id="space-cards-strip">
 
