@@ -506,6 +506,80 @@
       letter-spacing: 0.08em;
     }
 
+    /* ── Damage Cards ── */
+    .damage-cards-section {
+      margin: 28px 0 8px;
+    }
+    .damage-cards-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .damage-cards-strip {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+    .damage-cards-strip::-webkit-scrollbar { display: none; }
+    .damage-card {
+      flex: 0 0 200px;
+      scroll-snap-align: start;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 12px;
+      padding: 16px 14px 14px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .damage-card:hover, .damage-card.active {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,200,120,0.3);
+    }
+    .damage-card-icon {
+      width: 48px;
+      height: 36px;
+      margin-bottom: 10px;
+    }
+    .damage-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    .damage-card-en {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .damage-card-desc {
+      font-size: 12px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      display: none;
+    }
+    .damage-card.active .damage-card-desc { display: block; }
+    .damage-card-cause {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .damage-card-cause strong {
+      color: rgba(255,200,120,0.8);
+      font-weight: 400;
+      letter-spacing: 0.06em;
+    }
+
     /* ── CTA ── */
     .cta-btn {
       display: flex;
@@ -1162,6 +1236,73 @@
   <p class="story-quote">每個人的光場都是<em>獨一無二的顏色</em>。</p>
 </div>
 
+<!-- Damage Cards -->
+<div class="damage-cards-section">
+  <div class="damage-cards-label">光場受損的常見模式</div>
+  <div class="damage-cards-strip" id="damage-cards-strip">
+
+    <div class="damage-card" data-id="hole">
+      <svg class="damage-card-icon" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="18" rx="20" ry="14" stroke="rgba(255,180,100,0.4)" stroke-width="1.2"/>
+        <ellipse cx="24" cy="18" rx="20" ry="14" stroke="rgba(255,180,100,0.15)" stroke-width="6"/>
+        <ellipse cx="30" cy="10" rx="4" ry="3" fill="rgba(10,8,20,0.9)" stroke="rgba(255,100,80,0.6)" stroke-width="1"/>
+        <ellipse cx="16" cy="24" rx="3" ry="2.2" fill="rgba(10,8,20,0.9)" stroke="rgba(255,100,80,0.5)" stroke-width="0.8"/>
+      </svg>
+      <div class="damage-card-name">破洞</div>
+      <div class="damage-card-en">Hole / Tear</div>
+      <div class="damage-card-desc">
+        光場某處出現缺口，保護力下降，外部能量容易從破損處滲入。破洞的位置對應到受影響的能量層與身體部位。
+        <div class="damage-card-cause"><strong>常見成因</strong>　長期壓力、創傷事件、手術、過度給予而未補充自身能量。</div>
+      </div>
+    </div>
+
+    <div class="damage-card" data-id="crack">
+      <svg class="damage-card-icon" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="18" rx="20" ry="14" stroke="rgba(255,180,100,0.4)" stroke-width="1.2"/>
+        <polyline points="20,6 24,14 19,18 26,30" stroke="rgba(255,120,80,0.8)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="30,8 33,16 29,20" stroke="rgba(255,120,80,0.5)" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="damage-card-name">裂縫</div>
+      <div class="damage-card-en">Crack / Fissure</div>
+      <div class="damage-card-desc">
+        光場表面出現細長裂縫，能量從縫隙緩慢流失。裂縫常沿著身體縱向延伸，與長期未處理的情緒傷口有關。
+        <div class="damage-card-cause"><strong>常見成因</strong>　長期壓抑情緒、關係衝突積累、身體慢性疼痛。</div>
+      </div>
+    </div>
+
+    <div class="damage-card" data-id="block">
+      <svg class="damage-card-icon" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="24" cy="18" rx="20" ry="14" stroke="rgba(255,180,100,0.4)" stroke-width="1.2"/>
+        <ellipse cx="22" cy="20" rx="7" ry="5" fill="rgba(80,60,120,0.5)" stroke="rgba(160,100,200,0.6)" stroke-width="1"/>
+        <ellipse cx="22" cy="20" rx="4" ry="2.8" fill="rgba(60,40,100,0.7)"/>
+      </svg>
+      <div class="damage-card-name">能量塊</div>
+      <div class="damage-card-en">Energy Block</div>
+      <div class="damage-card-desc">
+        能量無法流動，形成濃稠的滯留區塊。常呈現深色、混濁的視覺感，能量塊所在之處對應情緒或身體的卡住狀態。
+        <div class="damage-card-cause"><strong>常見成因</strong>　未釋放的悲傷、恐懼、憤怒，或長期壓抑某種感受。</div>
+      </div>
+    </div>
+
+    <div class="damage-card" data-id="cord">
+      <svg class="damage-card-icon" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="18" rx="16" ry="12" stroke="rgba(255,180,100,0.4)" stroke-width="1.2"/>
+        <path d="M34,12 C38,10 44,14 46,18" stroke="rgba(255,100,120,0.7)" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <circle cx="34" cy="12" r="2" fill="rgba(255,100,120,0.5)" stroke="rgba(255,100,120,0.8)" stroke-width="0.8"/>
+        <path d="M34,24 C38,26 42,22 46,20" stroke="rgba(255,100,120,0.5)" stroke-width="0.8" stroke-linecap="round" stroke-dasharray="2 2"/>
+        <circle cx="34" cy="24" r="1.5" fill="rgba(255,100,120,0.4)" stroke="rgba(255,100,120,0.6)" stroke-width="0.8"/>
+      </svg>
+      <div class="damage-card-name">能量索</div>
+      <div class="damage-card-en">Energy Cord</div>
+      <div class="damage-card-desc">
+        光場與他人之間形成能量連結索，能量從此流出或對方的能量從此流入。健康的關係有細緻的光索；不健康的關係則形成粗重、黏稠的能量索。
+        <div class="damage-card-cause"><strong>常見成因</strong>　依附關係、未了結的情感、控制型互動、能量吸血鬼型的人際關係。</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- What is Aura -->
 <div class="accordion">
   <button class="accordion-btn" onclick="toggleAccordion(this)">
@@ -1591,6 +1732,15 @@
       box.innerHTML = `<div class="color-meaning-title">${m.title}</div>${m.text}`;
       box.classList.add('visible');
     });
+  });
+
+  // Damage cards interaction
+  document.getElementById('damage-cards-strip').addEventListener('click', e => {
+    const card = e.target.closest('.damage-card');
+    if (!card) return;
+    const isActive = card.classList.contains('active');
+    document.querySelectorAll('.damage-card').forEach(c => c.classList.remove('active'));
+    if (!isActive) card.classList.add('active');
   });
 
   function toggleAccordion(btn) {
