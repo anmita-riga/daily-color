@@ -1070,6 +1070,18 @@
       display: none;
     }
     .overlay.visible { display: block; }
+  /* ── Desktop (768px+) ── */
+  @media (min-width: 768px) {
+    header { max-width: 480px; margin: 0 auto; width: 100%; }
+    .page-section { max-width: 480px; margin: 0 auto; }
+    .aura-stage { width: min(360px, 80vw); }
+    .color-strip { grid-template-columns: repeat(6, 1fr); }
+    .damage-card { flex: 0 0 180px; }
+    .accordion { margin: 0 0 10px; }
+    .service-section { margin: 8px 0 24px; }
+    .cta-btn { margin: 8px 0 36px; }
+    .drawer { width: 260px; }
+  }
   </style>
 </head>
 <body>
