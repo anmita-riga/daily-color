@@ -508,15 +508,17 @@
 
     /* ── Damage Cards ── */
     .damage-cards-section {
-      margin: 28px 0 8px;
+      margin: 32px 0 8px;
     }
     .damage-cards-label {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 13px;
-      letter-spacing: 0.18em;
-      color: var(--text-muted);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      color: rgba(255,200,120,0.6);
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .damage-cards-strip {
       display: flex;
@@ -1300,56 +1302,6 @@
 </div>
 
 <!-- Color Guide -->
-<div class="color-guide">
-  <div class="color-guide-label">光場色彩解讀</div>
-  <div class="color-strip" id="color-strip">
-    <div class="color-swatch" data-color="red">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#FF7070,#CC2020)"></div>
-      <span>紅</span>
-    </div>
-    <div class="color-swatch" data-color="orange">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#FFB060,#E06010)"></div>
-      <span>橙</span>
-    </div>
-    <div class="color-swatch" data-color="yellow">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#FFE860,#CCA800)"></div>
-      <span>黃</span>
-    </div>
-    <div class="color-swatch" data-color="green">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#80FFB0,#20A050)"></div>
-      <span>綠</span>
-    </div>
-    <div class="color-swatch" data-color="blue">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#80CCFF,#1060CC)"></div>
-      <span>藍</span>
-    </div>
-    <div class="color-swatch" data-color="indigo">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#9080FF,#3020AA)"></div>
-      <span>靛</span>
-    </div>
-    <div class="color-swatch" data-color="violet">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#E0A0FF,#9020DD)"></div>
-      <span>紫</span>
-    </div>
-    <div class="color-swatch" data-color="white">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#FFFFFF,#AAAACC)"></div>
-      <span>白</span>
-    </div>
-    <div class="color-swatch" data-color="gold">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#FFE080,#CC8800)"></div>
-      <span>金</span>
-    </div>
-    <div class="color-swatch" data-color="pink">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#FFB0D0,#DD4488)"></div>
-      <span>粉</span>
-    </div>
-    <div class="color-swatch" data-color="gray">
-      <div class="swatch-dot" style="background:radial-gradient(circle,#888899,#333344)"></div>
-      <span>暗</span>
-    </div>
-  </div>
-  <div class="color-meaning" id="color-meaning"></div>
-</div>
 
 <!-- Legend -->
 <div class="layer-legend" id="layer-legend">
@@ -1368,6 +1320,30 @@
 
 <!-- Section: Knowledge -->
 <div class="page-section" id="section-knowledge">
+
+<div class="intro">
+  <h1>光場知識</h1>
+  <p>了解光場的運作方式<br>以及它如何影響你的日常生活</p>
+</div>
+
+<!-- Color Guide -->
+<div class="color-guide">
+  <div class="damage-cards-label">光場色彩解讀</div>
+  <div class="color-strip" id="color-strip">
+    <div class="color-swatch" data-color="red"><div class="swatch-dot" style="background:radial-gradient(circle,#FF7070,#CC2020)"></div><span>紅</span></div>
+    <div class="color-swatch" data-color="orange"><div class="swatch-dot" style="background:radial-gradient(circle,#FFB060,#E06010)"></div><span>橙</span></div>
+    <div class="color-swatch" data-color="yellow"><div class="swatch-dot" style="background:radial-gradient(circle,#FFE860,#CCA800)"></div><span>黃</span></div>
+    <div class="color-swatch" data-color="green"><div class="swatch-dot" style="background:radial-gradient(circle,#80FFB0,#20A050)"></div><span>綠</span></div>
+    <div class="color-swatch" data-color="blue"><div class="swatch-dot" style="background:radial-gradient(circle,#80CCFF,#1060CC)"></div><span>藍</span></div>
+    <div class="color-swatch" data-color="indigo"><div class="swatch-dot" style="background:radial-gradient(circle,#9080FF,#3020AA)"></div><span>靛</span></div>
+    <div class="color-swatch" data-color="violet"><div class="swatch-dot" style="background:radial-gradient(circle,#E0A0FF,#9020DD)"></div><span>紫</span></div>
+    <div class="color-swatch" data-color="white"><div class="swatch-dot" style="background:radial-gradient(circle,#FFFFFF,#AAAACC)"></div><span>白</span></div>
+    <div class="color-swatch" data-color="gold"><div class="swatch-dot" style="background:radial-gradient(circle,#FFE080,#CC8800)"></div><span>金</span></div>
+    <div class="color-swatch" data-color="pink"><div class="swatch-dot" style="background:radial-gradient(circle,#FFB0D0,#DD4488)"></div><span>粉</span></div>
+    <div class="color-swatch" data-color="gray"><div class="swatch-dot" style="background:radial-gradient(circle,#888899,#333344)"></div><span>暗</span></div>
+  </div>
+  <div class="color-meaning" id="color-meaning"></div>
+</div>
 
 <div class="damage-cards-section">
   <div class="damage-cards-label">光場受損的常見模式</div>
@@ -1544,6 +1520,9 @@
   </div>
   <div class="damage-detail" id="space-detail"></div>
 </div>
+
+<!-- Accordion section label -->
+<div class="damage-cards-label" style="margin: 32px 16px 16px;">深入了解</div>
 
 <!-- What is Aura -->
 <div class="accordion">
