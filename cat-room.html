@@ -111,57 +111,96 @@
       transition: all 0.2s ease;
     }
 
+    /* 各部位顏色 */
+    :root {
+      --c-head:   210, 195, 240; /* 淡紫 — 頭腦、眼睛 */
+      --c-throat: 170, 215, 225; /* 水藍 — 喉嚨 */
+      --c-chest:  240, 185, 195; /* 玫瑰粉 — 胸口、肩膀 */
+      --c-arm:    240, 210, 175; /* 暖杏 — 上臂、前臂 */
+      --c-belly:  200, 225, 185; /* 薄荷綠 — 腹部 */
+      --c-low:    175, 215, 200; /* 鼠尾草 — 下腹 */
+      --c-leg:    185, 210, 240; /* 天藍 — 大腿、小腿 */
+      --c-foot:   195, 185, 235; /* 薰衣草 — 腳踝、腳掌 */
+      --c-joint:  220, 205, 175; /* 金米 — 髖、膝、肘、腕 */
+    }
+
     .zone-shape {
-      fill: rgba(200, 210, 230, 0.22);
-      stroke: rgba(160, 180, 210, 0.35);
       stroke-width: 1.5;
-      transition: all 0.2s ease;
+      transition: all 0.22s ease;
     }
 
-    .body-zone:hover .zone-shape {
-      fill: rgba(180, 200, 230, 0.38);
-      stroke: rgba(140, 170, 210, 0.65);
-    }
+    /* 預設各區域顏色 */
+    [data-part="head"] .zone-shape,
+    [data-part="eyes"] .zone-shape      { fill: rgba(var(--c-head), 0.28);   stroke: rgba(var(--c-head), 0.55); }
+    [data-part="throat"] .zone-shape    { fill: rgba(var(--c-throat), 0.3);  stroke: rgba(var(--c-throat), 0.6); }
+    [data-part="chest"] .zone-shape,
+    [data-part="shoulders"] .zone-shape { fill: rgba(var(--c-chest), 0.3);   stroke: rgba(var(--c-chest), 0.6); }
+    [data-part="upper_arms"] .zone-shape,
+    [data-part="forearms"] .zone-shape  { fill: rgba(var(--c-arm), 0.3);     stroke: rgba(var(--c-arm), 0.6); }
+    [data-part="belly"] .zone-shape     { fill: rgba(var(--c-belly), 0.3);   stroke: rgba(var(--c-belly), 0.6); }
+    [data-part="lower_belly"] .zone-shape { fill: rgba(var(--c-low), 0.3);   stroke: rgba(var(--c-low), 0.6); }
+    [data-part="thighs"] .zone-shape,
+    [data-part="shins"] .zone-shape     { fill: rgba(var(--c-leg), 0.28);    stroke: rgba(var(--c-leg), 0.55); }
+    [data-part="feet"] .zone-shape,
+    [data-part="ankles"] .zone-shape    { fill: rgba(var(--c-foot), 0.28);   stroke: rgba(var(--c-foot), 0.55); }
+    [data-part="hips"] .zone-shape,
+    [data-part="knees"] .zone-shape,
+    [data-part="elbows"] .zone-shape,
+    [data-part="wrists"] .zone-shape    { fill: rgba(var(--c-joint), 0.28);  stroke: rgba(var(--c-joint), 0.55); stroke-dasharray: 3 2; }
 
+    /* Hover — 加深 */
+    [data-part="head"]:hover .zone-shape,
+    [data-part="eyes"]:hover .zone-shape      { fill: rgba(var(--c-head), 0.48);   stroke: rgba(var(--c-head), 0.8); }
+    [data-part="throat"]:hover .zone-shape    { fill: rgba(var(--c-throat), 0.5);  stroke: rgba(var(--c-throat), 0.85); }
+    [data-part="chest"]:hover .zone-shape,
+    [data-part="shoulders"]:hover .zone-shape { fill: rgba(var(--c-chest), 0.5);   stroke: rgba(var(--c-chest), 0.85); }
+    [data-part="upper_arms"]:hover .zone-shape,
+    [data-part="forearms"]:hover .zone-shape  { fill: rgba(var(--c-arm), 0.5);     stroke: rgba(var(--c-arm), 0.85); }
+    [data-part="belly"]:hover .zone-shape     { fill: rgba(var(--c-belly), 0.5);   stroke: rgba(var(--c-belly), 0.85); }
+    [data-part="lower_belly"]:hover .zone-shape { fill: rgba(var(--c-low), 0.5);   stroke: rgba(var(--c-low), 0.85); }
+    [data-part="thighs"]:hover .zone-shape,
+    [data-part="shins"]:hover .zone-shape     { fill: rgba(var(--c-leg), 0.48);    stroke: rgba(var(--c-leg), 0.8); }
+    [data-part="feet"]:hover .zone-shape,
+    [data-part="ankles"]:hover .zone-shape    { fill: rgba(var(--c-foot), 0.48);   stroke: rgba(var(--c-foot), 0.8); }
+    [data-part="hips"]:hover .zone-shape,
+    [data-part="knees"]:hover .zone-shape,
+    [data-part="elbows"]:hover .zone-shape,
+    [data-part="wrists"]:hover .zone-shape    { fill: rgba(var(--c-joint), 0.48);  stroke: rgba(var(--c-joint), 0.85); stroke-dasharray: none; }
+
+    /* Selected — 飽和加框 */
     .body-zone.selected .zone-shape {
-      fill: rgba(142, 196, 216, 0.42);
-      stroke: rgba(100, 170, 200, 0.8);
-      stroke-width: 2;
+      stroke-width: 2.2;
+      stroke-dasharray: none !important;
+      filter: brightness(1.05);
     }
+    [data-part="head"].selected .zone-shape,
+    [data-part="eyes"].selected .zone-shape      { fill: rgba(var(--c-head), 0.6);   stroke: rgba(var(--c-head), 1); }
+    [data-part="throat"].selected .zone-shape    { fill: rgba(var(--c-throat), 0.62); stroke: rgba(var(--c-throat), 1); }
+    [data-part="chest"].selected .zone-shape,
+    [data-part="shoulders"].selected .zone-shape { fill: rgba(var(--c-chest), 0.62); stroke: rgba(var(--c-chest), 1); }
+    [data-part="upper_arms"].selected .zone-shape,
+    [data-part="forearms"].selected .zone-shape  { fill: rgba(var(--c-arm), 0.62);   stroke: rgba(var(--c-arm), 1); }
+    [data-part="belly"].selected .zone-shape     { fill: rgba(var(--c-belly), 0.62); stroke: rgba(var(--c-belly), 1); }
+    [data-part="lower_belly"].selected .zone-shape { fill: rgba(var(--c-low), 0.62); stroke: rgba(var(--c-low), 1); }
+    [data-part="thighs"].selected .zone-shape,
+    [data-part="shins"].selected .zone-shape     { fill: rgba(var(--c-leg), 0.6);    stroke: rgba(var(--c-leg), 1); }
+    [data-part="feet"].selected .zone-shape,
+    [data-part="ankles"].selected .zone-shape    { fill: rgba(var(--c-foot), 0.6);   stroke: rgba(var(--c-foot), 1); }
+    [data-part="hips"].selected .zone-shape,
+    [data-part="knees"].selected .zone-shape,
+    [data-part="elbows"].selected .zone-shape,
+    [data-part="wrists"].selected .zone-shape    { fill: rgba(var(--c-joint), 0.6);  stroke: rgba(var(--c-joint), 1); }
 
     .zone-label {
       font-family: "Noto Serif TC", serif;
       font-size: 10px;
-      fill: rgba(80, 90, 110, 0.55);
+      fill: rgba(70, 70, 90, 0.6);
       text-anchor: middle;
       dominant-baseline: middle;
       pointer-events: none;
       transition: fill 0.2s;
     }
-
-    .body-zone.selected .zone-label {
-      fill: rgba(60, 120, 160, 0.9);
-      font-size: 10.5px;
-    }
-
-    /* 關節圓點 — 稍微突出 */
-    .joint-zone .zone-shape {
-      fill: rgba(180, 195, 225, 0.28);
-      stroke: rgba(150, 170, 210, 0.5);
-      stroke-width: 1.2;
-      stroke-dasharray: 3 2;
-    }
-    .joint-zone:hover .zone-shape {
-      fill: rgba(160, 185, 225, 0.45);
-      stroke: rgba(120, 160, 210, 0.75);
-      stroke-dasharray: none;
-    }
-    .joint-zone.selected .zone-shape {
-      fill: rgba(120, 185, 220, 0.48);
-      stroke: rgba(90, 160, 205, 0.9);
-      stroke-width: 2;
-      stroke-dasharray: none;
-    }
+    .body-zone.selected .zone-label { fill: rgba(50, 60, 80, 0.92); }
 
     /* cute face */
     .face-feature { pointer-events: none; }
