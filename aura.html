@@ -425,6 +425,26 @@
       border-radius: 20px;
     }
 
+    .panel-chakra {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 5px 14px;
+      margin-bottom: 16px;
+    }
+    .panel-chakra-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .panel-chakra:empty { display: none; }
+
     /* 色彩訊號 */
     .panel-color-note {
       display: flex;
@@ -2199,6 +2219,7 @@
   <div class="panel-subtitle" id="panel-subtitle"></div>
   <div class="panel-divider"></div>
   <div class="panel-body" id="panel-body"></div>
+  <div class="panel-chakra" id="panel-chakra"></div>
   <div class="panel-section-label" id="panel-keywords-label">關鍵字</div>
   <div class="panel-keywords" id="panel-keywords"></div>
   <div class="panel-section-label" id="panel-color-label">色彩訊號</div>
@@ -2216,6 +2237,7 @@
       name: '乙太層',
       en: 'Etheric Body',
       subtitle: '第一層 · 生命藍圖',
+      chakra: { name: '海底輪', en: 'Muladhara', color: '#FF6B6B' },
       body: '最靠近肉體的一層，是身體的能量模板。它記錄著你所有的細胞記憶與身體藍圖，健康的乙太層呈現明亮的紅橙色光芒，在身體周圍約 2–5 公分處流動。',
       imbalance: '容易疲倦、睡再多也沒精神、身體莫名疼痛、感覺身體不像自己的。',
       keywords: ['身體', '生命力', '細胞記憶', '健康基礎', '根基'],
@@ -2227,6 +2249,7 @@
       name: '情感層',
       en: 'Emotional Body',
       subtitle: '第二層 · 情緒之海',
+      chakra: { name: '臍輪', en: 'Svadhisthana', color: '#FFB74D' },
       body: '承載著你所有的情感——喜悅、悲傷、恐懼、渴望。它的顏色隨情緒流動，這一層容易受到他人能量影響，也是吸引同頻之人的磁場所在。',
       imbalance: '情緒起伏很大、容易被別人的感受淹沒、說不清楚自己真正要什麼。',
       keywords: ['情緒波動', '感受', '渴望', '關係磁場', '敏感'],
@@ -2238,6 +2261,7 @@
       name: '心智層',
       en: 'Mental Body',
       subtitle: '第三層 · 思想之光',
+      chakra: { name: '太陽神經叢輪', en: 'Manipura', color: '#FFF176' },
       body: '思想、信念與意識模式的居所。它通常呈現明亮的黃色，在頭部周圍特別明顯。當你高度專注或創意湧現時，這一層會閃爍著金黃光芒。',
       imbalance: '腦子停不下來、重複同樣的擔憂迴路、對自己很嚴苛、覺得自己「不夠好」。',
       keywords: ['思維模式', '信念', '邏輯', '自我對話', '意識'],
@@ -2249,6 +2273,7 @@
       name: '星光層',
       en: 'Astral Body',
       subtitle: '第四層 · 愛的橋梁',
+      chakra: { name: '心輪', en: 'Anahata', color: '#81C784' },
       body: '連接物質界與靈性界的橋梁，是愛的頻率居住之處。人際連結、無條件之愛、夢境旅行與靈魂契約，都在這一層留下印記。',
       imbalance: '在關係裡感到孤立、付出很多卻收不到愛、難以信任別人，或害怕被拋棄。',
       keywords: ['無條件的愛', '靈魂連結', '夢境', '同理心', '橋梁'],
@@ -2260,6 +2285,7 @@
       name: '乙太模板層',
       en: 'Etheric Template',
       subtitle: '第五層 · 神聖藍圖',
+      chakra: { name: '喉輪', en: 'Vishuddha', color: '#64B5F6' },
       body: '存在於靈性層次的身體藍圖，承載著你這一世的靈魂使命與天賦密碼。當你對準自己的真實道路時，這一層會發出強烈的藍白光。',
       imbalance: '感覺人生沒有方向、做什麼都提不起勁、覺得自己「不知道為何而活」。',
       keywords: ['靈魂使命', '天賦', '真實自我', '高維藍圖', '意志'],
@@ -2271,6 +2297,7 @@
       name: '天界層',
       en: 'Celestial Body',
       subtitle: '第六層 · 神聖之愛',
+      chakra: { name: '眉心輪', en: 'Ajna', color: '#CE93D8' },
       body: '直覺、靈感與神聖之愛的源泉。它呈現珍珠般的乳白光芒，交織著玫瑰金與天藍。深度冥想、藝術創作、與高我溝通的體驗，都源自這一層的開啟。',
       imbalance: '直覺變鈍、與自己的內心失去連結、感受不到生命的美或意義。',
       keywords: ['直覺', '靈性體驗', '神聖之愛', '高我', '冥想'],
@@ -2282,6 +2309,7 @@
       name: '因果層',
       en: 'Ketheric Body',
       subtitle: '第七層 · 宇宙意識',
+      chakra: { name: '頂輪', en: 'Sahasrara', color: '#C9A84C' },
       body: '最外層，是連接宇宙意識與源頭能量的光網。它包裹並守護著所有內層，承載著你所有轉世的靈魂智慧，是你與神性合一的接口。',
       imbalance: '感到深層的孤單或虛無、對存在本身感到疑惑、與「更大力量」完全切斷。',
       keywords: ['宇宙意識', '靈魂智慧', '神性', '源頭連結', '完整性'],
@@ -2349,6 +2377,10 @@
     }
 
     document.getElementById('panel-color-note').textContent = d.colorNote || '';
+    const chakraEl = document.getElementById('panel-chakra');
+    if (d.chakra) {
+      chakraEl.innerHTML = `<span class="panel-chakra-dot" style="background:${d.chakra.color};box-shadow:0 0 6px ${d.chakra.color};"></span>${d.chakra.name} · ${d.chakra.en}`;
+    } else { chakraEl.innerHTML = ''; }
     document.getElementById('panel-purify-list').innerHTML = d.purify.map(p =>
       `<span class="purify-tag">✦ ${p}</span>`
     ).join('');
