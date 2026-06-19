@@ -874,6 +874,8 @@
       width: calc(100% - 28px);
     }
     .drawer-subitem:hover { color: rgba(255,200,120,0.85); }
+    .drawer-subitem.active { color: rgba(255,200,120,0.95); }
+    .drawer-subitem.active::before { background: rgba(201,168,76,0.6); }
     .drawer-subitem::before {
       content: '·';
       font-size: 16px;
@@ -1316,6 +1318,9 @@
       margin: 0;
     }
     .accordion-body p:first-child { padding-top: 12px; }
+    .knowledge-panel { display: none; }
+    .knowledge-panel.active { display: block; }
+
     .deep-link-card {
       display: flex;
       align-items: center;
@@ -1408,11 +1413,11 @@
   <button class="drawer-item" data-section="knowledge">
     <span class="drawer-icon">✦</span>光場知識
   </button>
-  <button class="drawer-subitem" data-anchor="anchor-size">光場的大小與形狀</button>
-  <button class="drawer-subitem" data-anchor="anchor-change">光場如何隨時間變化</button>
-  <button class="drawer-subitem" data-anchor="anchor-chakra">脈輪與光場的關係</button>
-  <button class="drawer-subitem" data-anchor="anchor-care">日常保養光場的方式</button>
-  <button class="drawer-subitem" data-anchor="anchor-protection">能量防護</button>
+  <button class="drawer-subitem" data-subpanel="colors">色彩的語言</button>
+  <button class="drawer-subitem" data-subpanel="damage">光場受損模式</button>
+  <button class="drawer-subitem" data-subpanel="interaction">人際互動</button>
+  <button class="drawer-subitem" data-subpanel="space">空間影響</button>
+  <button class="drawer-subitem" data-subpanel="basics">基礎知識</button>
   <button class="drawer-subitem" data-href="seven-year.html">光場的七年發展週期</button>
   <button class="drawer-subitem" data-href="children-aura.html">孩童的光場與成長環境</button>
   <button class="drawer-item" data-section="service">
@@ -1653,6 +1658,7 @@
   <p>了解光場的運作方式<br>以及它如何影響你的日常生活</p>
 </div>
 
+<div class="knowledge-panel active" id="kp-colors">
 <!-- Color Guide -->
 <div class="color-guide">
   <div class="damage-cards-label">色彩的語言</div>
@@ -1675,7 +1681,9 @@
   </div>
   <div class="color-meaning" id="color-meaning"></div>
 </div>
+</div><!-- /kp-colors -->
 
+<div class="knowledge-panel" id="kp-damage">
 <div class="damage-cards-section" style="--section-color: #FF7070;">
   <div class="damage-cards-label">光場受損的常見模式</div>
   <div class="damage-cards-strip" id="damage-cards-strip">
@@ -1742,7 +1750,9 @@
   </div>
   <div class="damage-detail" id="damage-detail"></div>
 </div>
+</div><!-- /kp-damage -->
 
+<div class="knowledge-panel" id="kp-interaction">
 <!-- Interaction Cards -->
 <div class="damage-cards-section" style="--section-color: #90CAF9;">
   <div class="damage-cards-label">光場與他人的互動</div>
@@ -1795,7 +1805,9 @@
   </div>
   <div class="damage-detail" id="interaction-detail"></div>
 </div>
+</div><!-- /kp-interaction -->
 
+<div class="knowledge-panel" id="kp-space">
 <!-- Space Cards -->
 <div class="damage-cards-section" style="--section-color: #80CBC4;">
   <div class="damage-cards-label">空間與場所的影響</div>
@@ -1851,7 +1863,9 @@
   </div>
   <div class="damage-detail" id="space-detail"></div>
 </div>
+</div><!-- /kp-space -->
 
+<div class="knowledge-panel" id="kp-basics">
 <!-- Accordion section label -->
 <div class="damage-cards-label" style="margin: 32px 16px 16px;">深入了解</div>
 
@@ -1982,6 +1996,8 @@
   </div>
   <div class="deep-link-arrow">→</div>
 </a>
+
+</div><!-- /kp-basics -->
 
 </div><!-- /section-knowledge -->
 
@@ -2480,20 +2496,16 @@
         window.location.href = subitem.dataset.href;
         return;
       }
-      const anchorId = subitem.dataset.anchor;
-      // Switch to knowledge section
-      document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === 'section-knowledge'));
-      document.querySelectorAll('.drawer-item').forEach(i => i.classList.toggle('active', i.dataset.section === 'knowledge'));
-      closeDrawer();
-      setTimeout(() => {
-        const target = document.getElementById(anchorId);
-        if (!target) return;
-        // Open accordion if not already open
-        const btn = target.querySelector('.accordion-btn');
-        const body = target.querySelector('.accordion-body');
-        if (btn && !btn.classList.contains('open')) { btn.classList.add('open'); body.classList.add('open'); }
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 320);
+      if (subitem.dataset.subpanel) {
+        const panelId = 'kp-' + subitem.dataset.subpanel;
+        document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === 'section-knowledge'));
+        document.querySelectorAll('.drawer-item').forEach(i => i.classList.toggle('active', i.dataset.section === 'knowledge'));
+        document.querySelectorAll('.knowledge-panel').forEach(p => p.classList.toggle('active', p.id === panelId));
+        document.querySelectorAll('.drawer-subitem').forEach(s => s.classList.toggle('active', s === subitem));
+        closeDrawer();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
       return;
     }
     const item = e.target.closest('.drawer-item');
@@ -2501,6 +2513,10 @@
     const sec = item.dataset.section;
     document.querySelectorAll('.drawer-item').forEach(i => i.classList.toggle('active', i === item));
     document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === 'section-' + sec));
+    if (sec === 'knowledge') {
+      document.querySelectorAll('.knowledge-panel').forEach((p, i) => p.classList.toggle('active', i === 0));
+      document.querySelectorAll('.drawer-subitem[data-subpanel]').forEach((s, i) => s.classList.toggle('active', i === 0));
+    }
     closeDrawer();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
