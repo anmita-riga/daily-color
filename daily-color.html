@@ -1972,6 +1972,15 @@ function fillCK(ck, spirit = null) {
     document.getElementById('ckCardQuestion').textContent = question;
   };
 
+  // ck-back 卡片本身跟隨同一顏色
+  const ckColor = spirit ? spirit.color : ck.color;
+  const ckBack = document.querySelector('.ck-back');
+  if (ckBack) {
+    ckBack.style.background = `linear-gradient(160deg, rgba(255,252,248,0.95) 0%, ${hexAlpha(ckColor, 0.18)} 100%)`;
+    ckBack.style.borderColor = hexAlpha(ckColor, 0.38);
+    ckBack.style.boxShadow = `inset 3px 0 0 0 ${hexAlpha(ckColor, 0.9)}, 0 16px 48px ${hexAlpha(ckColor, 0.18)}`;
+  }
+
   if (spirit) {
     // 靈性指引卡：5 層結構
     document.getElementById('ckStrip').style.background = spirit.color;
