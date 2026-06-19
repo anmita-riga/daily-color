@@ -570,23 +570,27 @@
 
     /* 點擊繼續提示 */
     .ck-tap-continue {
-      margin-top: 1.8rem;
-      opacity: 0;
-      animation: tapPulse 1.8s ease-in-out infinite;
+      margin-top: 2rem;
+      animation: tapPulse 2s ease-in-out infinite;
       cursor: pointer;
+      text-align: center;
     }
     .ck-tap-continue span {
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
-      color: var(--gold);
-      border: 1px solid var(--gold-line);
-      border-radius: 20px;
-      padding: 0.5rem 1.2rem;
+      display: inline-block;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: #6A48A8;
+      background: linear-gradient(135deg, rgba(201,180,232,0.28) 0%, rgba(245,233,168,0.22) 100%);
+      border: 1.5px solid rgba(180,148,220,0.65);
+      border-radius: 100px;
+      padding: 0.85rem 2rem;
+      box-shadow: 0 3px 16px rgba(180,148,220,0.22);
     }
     .ck-tap-continue.hidden { display: none; }
     @keyframes tapPulse {
-      0%, 100% { opacity: 0.5; }
-      50%       { opacity: 1; }
+      0%, 100% { opacity: 0.8; transform: translateY(0); }
+      50%       { opacity: 1;   transform: translateY(-3px); box-shadow: 0 6px 24px rgba(180,148,220,0.35); }
     }
 
     /* 隱藏舊的不用樣式 */
@@ -2284,9 +2288,13 @@ function handleRedraw() {
       fillIC(pair.ic, isSpirit);
       if (isSpirit) { fillCK(null, pair.ic); } else { fillCK(pair.ck, null); }
       showResultCard(false);
-      icWrap.style.display = 'block';
-      void icWrap.offsetWidth;
-      icWrap.classList.add('appear');
+      if (isSpirit) {
+        icWrap.style.display = 'none';
+      } else {
+        icWrap.style.display = 'block';
+        void icWrap.offsetWidth;
+        icWrap.classList.add('appear');
+      }
 
       // 延遲再綁定點擊，避免誤觸
       setTimeout(() => {
