@@ -1366,14 +1366,11 @@
             </div>
 
 
-            <div style="display: flex; gap: 0.8rem; margin-top: 1.3rem; justify-content: center;">
+            <div style="display: flex; gap: 0.8rem; margin-top: 1.3rem; justify-content: center; padding-bottom: 0.8rem;">
               <button class="ck-share line-btn ta" id="ckShare">分享到 LINE ↗</button>
               <button class="ck-share ta" id="igBtn" style="border-color: #C13584; color: #C13584;">分享到 IG ↗</button>
             </div>
-            <div style="text-align:center; margin-top: 0.3rem; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(160,130,200,0.55);">儲存圖片後，上傳到 IG 限動</div>
-            <div style="display: flex; justify-content: center; margin-top: 0.7rem; padding-bottom: 0.4rem;">
-              <button class="ck-share ta" id="roomBtn" style="border-color: #c098ff; color: #c098ff;">進入房間</button>
-            </div>
+            <div style="text-align:center; margin-bottom: 0.4rem; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(160,130,200,0.55);">儲存圖片後，上傳到 IG 限動</div>
           </div>
         </div>
 
@@ -1381,6 +1378,11 @@
     </div>
   </div>
 
+</div>
+
+<!-- ── 卡片下方行動區 ── -->
+<div style="display:flex; flex-direction:column; align-items:center; gap:1rem; margin-top:1.8rem;">
+  <button class="ck-share ta" id="roomBtn" style="border-color: #c098ff; color: #c098ff; opacity:0; pointer-events:none;">進入房間</button>
 </div>
 
 <!-- ── 再抽一張 ── -->
@@ -2041,11 +2043,20 @@ function fillCK(ck, spirit = null) {
 // ── 文字淡入（節奏感分層）──
 function animateCKText() {
   const elements = document.querySelectorAll('#ckFront .ta');
-  // 分三批淡入：脈輪名稱 → 祝福文字 → 行動建議
   const delays = [0, 120, 240, 360, 520, 800, 1100, 1400];
   elements.forEach((el, i) => {
     setTimeout(() => el.classList.add('in'), 300 + (delays[i] ?? i * 150));
   });
+  const roomBtn = document.getElementById('roomBtn');
+  if (roomBtn) {
+    roomBtn.style.opacity = '0';
+    roomBtn.style.pointerEvents = 'none';
+    setTimeout(() => {
+      roomBtn.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      roomBtn.style.opacity = '0.7';
+      roomBtn.style.pointerEvents = 'all';
+    }, 1600);
+  }
 }
 
 // ── 粒子 ──
