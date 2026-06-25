@@ -447,19 +447,7 @@
     }
 
     /* 3D 場景 */
-    .ck-3d-scene { width: 100%; }
-    .ck-3d {
-      width: 100%;
-      position: relative;
-      min-height: 420px;
-    }
-
-    /* 通用面 */
-    .ck-face {
-      width: 100%;
-      border-radius: 24px;
-      overflow: hidden;
-    }
+    /* ck-scene 淡入 */
 
     /* 背面（結果卡片區） */
     .ck-back {
@@ -665,12 +653,9 @@
       opacity: 0.55;
     }
 
-    /* 正面 */
+    /* 正面 — 普通卡片，不再需要 3D */
     .ck-front {
-      position: absolute;
-      top: 0; left: 0; right: 0;
       width: 100%;
-      min-height: 420px;
       background: linear-gradient(160deg,
         rgba(255, 252, 248, 0.95) 0%,
         rgba(240, 232, 255, 0.85) 100%);
@@ -678,18 +663,15 @@
       box-shadow:
         inset 3px 0 0 0 var(--lavender),
         0 16px 48px rgba(90, 70, 130, 0.18);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       overflow: hidden;
       border-radius: 24px;
       opacity: 0;
-      transition: opacity 0.6s ease;
-      pointer-events: none;
-      z-index: 2;
+      transform: translateY(16px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.23,1,0.32,1);
     }
-    .ck-front.visible {
+    .ck-front.appear {
       opacity: 1;
-      pointer-events: all;
+      transform: translateY(0);
     }
 
     .ck-front::before {
@@ -1349,53 +1331,7 @@
   <!-- ── 第二張：脈輪卡 ── -->
   <div class="ck-scene" id="ckScene">
     <div class="particle-field" id="particleField"></div>
-    <div class="ck-3d-scene">
-      <div class="ck-3d" id="ck3d">
-
-        <!-- 背面 — 結果卡片區 -->
-        <div class="ck-face ck-back">
-          <div class="ck-back-strip"></div>
-
-          <!-- 初始提示 -->
-          <div class="ck-back-hint" id="ckBackHint">
-            <div class="ck-back-hint-icon">◇</div>
-            <div>點擊下方按鈕<br>看看今天宇宙想提醒你什麼</div>
-          </div>
-
-          <!-- 結果卡片內容 -->
-          <div class="ck-back-content" id="ckBackContent">
-            <!-- 第一層：訊息類別 -->
-            <div class="ck-layer-1" id="ckCardType"></div>
-
-            <!-- 第二層：卡牌名稱 -->
-            <div class="ck-layer-2">
-              <div class="ck-back-card-icon" id="ckCardIcon"></div>
-              <div class="ck-back-card-title" id="ckCardTitle"></div>
-            </div>
-
-            <!-- 第三層：核心訊息 -->
-            <div class="ck-layer-3" id="ckCardDeeper"></div>
-
-            <!-- 第四層：行動建議 -->
-            <div class="ck-layer-4">
-              <div class="ck-back-card-action" id="ckCardAction"></div>
-            </div>
-
-            <!-- 第五層：自我提問 -->
-            <div class="ck-layer-5" id="ckCardQuestion"></div>
-
-            <!-- 點擊繼續 -->
-            <div class="ck-tap-continue" id="ckTapContinue">
-              <span>準備好了，點這裡繼續 ↓</span>
-            </div>
-          </div>
-
-          <div class="ck-back-aura"></div>
-          <div class="ck-back-symbol">◈</div>
-        </div>
-
-        <!-- 正面 -->
-        <div class="ck-face ck-front" id="ckFront">
+        <div class="ck-front" id="ckFront">
           <div class="ck-strip"  id="ckStrip"></div>
           <div class="ck-body">
             <div class="ck-meta">
@@ -1427,9 +1363,6 @@
             <div style="text-align:center; margin-bottom: 0.4rem; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(160,130,200,0.55);">儲存圖片後，上傳到 IG 限動</div>
           </div>
         </div>
-
-      </div>
-    </div>
   </div>
 
 </div>
@@ -2025,27 +1958,14 @@ function fillIC(ic, isSpirit = false) {
 
 // ── 填充脈輪卡 或 靈性指引卡 ──
 function fillCK(ck, spirit = null) {
-  // 填充背卡：5 層結構
-  const fillBackCard = (type, title, icon, message, action, question) => {
-    document.getElementById('ckCardType').textContent = type;
-    document.getElementById('ckCardIcon').textContent = icon;
-    document.getElementById('ckCardTitle').textContent = title;
-    document.getElementById('ckCardDeeper').textContent = message;
-    document.getElementById('ckCardAction').textContent = action;
-    document.getElementById('ckCardQuestion').textContent = question;
-  };
-
-  // ck-back 卡片本身跟隨同一顏色
   const ckColor = spirit ? spirit.color : ck.color;
-  const ckBack = document.querySelector('.ck-back');
-  if (ckBack) {
-    ckBack.style.background = `linear-gradient(160deg, rgba(255,252,248,0.95) 0%, ${hexAlpha(ckColor, 0.18)} 100%)`;
-    ckBack.style.borderColor = hexAlpha(ckColor, 0.38);
-    ckBack.style.boxShadow = `inset 3px 0 0 0 ${hexAlpha(ckColor, 0.9)}, 0 16px 48px ${hexAlpha(ckColor, 0.18)}`;
-  }
+
+  // 卡片邊框顏色跟隨脈輪色
+  const ckFront = document.getElementById('ckFront');
+  ckFront.style.borderColor = hexAlpha(ckColor, 0.38);
+  ckFront.style.boxShadow = `inset 3px 0 0 0 ${hexAlpha(ckColor, 0.9)}, 0 16px 48px ${hexAlpha(ckColor, 0.18)}`;
 
   if (spirit) {
-    // 靈性指引卡：5 層結構
     document.getElementById('ckStrip').style.background = spirit.color;
     document.getElementById('ckDot').style.background = spirit.color;
     document.getElementById('ckName').textContent = spirit.title;
@@ -2053,41 +1973,17 @@ function fillCK(ck, spirit = null) {
     document.getElementById('ckElementLocation').textContent = spirit.category;
     document.getElementById('ckBlessing').textContent = spirit.text;
     document.getElementById('ckAction').textContent = spirit.action;
-
-    // 背卡內容：新的 5 層結構
-    fillBackCard(
-      spirit.category,
-      spirit.title,
-      '',
-      spirit.text,
-      spirit.action,
-      spirit.question || '這訊息對你的當下有什麼啟發？'
-    );
-
     document.getElementById('ckDeeperSection').style.display = 'none';
   } else {
-    // 脈輪卡：5 層結構
     document.getElementById('ckStrip').style.background = ck.color;
     document.getElementById('ckDot').style.background = ck.color;
     document.getElementById('ckName').textContent = ck.name;
     document.getElementById('ckEn').textContent = ck.en;
-    const elementIcon = '';
-    document.getElementById('ckElementLocation').textContent = `${elementIcon} ${ck.element}元素 · ${ck.location}`;
+    document.getElementById('ckElementLocation').textContent = `${ck.element}元素 · ${ck.location}`;
     document.getElementById('ckBlessing').textContent = ck.blessing;
     document.getElementById('ckAction').textContent = ck.action;
     document.getElementById('ckDeeper').textContent = ck.deeper;
     document.getElementById('ckTransform').textContent = ck.transform;
-
-    // 背卡內容：新的 5 層結構
-    fillBackCard(
-      `今日訊息 · ${ck.name}`,
-      ck.name,
-      '',
-      ck.deeper,
-      ck.action,
-      `你可以如何用 ${ck.name} 的能量轉化此刻？`
-    );
-
     document.getElementById('ckDeeperSection').style.display = 'block';
   }
   document.querySelectorAll('#ckFront .ta').forEach(el => el.classList.remove('in'));
@@ -2152,31 +2048,6 @@ function spawnHalo(target) {
 }
 
 // ── 翻到正面 ──
-function flipCKIn() {
-  const ckBack = document.querySelector('.ck-back');
-  const ckFront = document.querySelector('.ck-front');
-
-  ckBack.classList.add('hidden');
-  ckFront.classList.add('visible');
-
-  setTimeout(() => {
-    animateCKText();
-  }, 300);
-}
-
-// ── 翻回背面 ──
-function flipCKOut(cb) {
-  const ckBack = document.querySelector('.ck-back');
-  const ckFront = document.querySelector('.ck-front');
-
-  ckFront.classList.remove('visible');
-  ckBack.classList.remove('hidden');
-
-  setTimeout(() => {
-    if (cb) cb();
-  }, 600);
-}
-
 // ── 顯示一組牌 ──
 function showPair(pair) {
   currentIC = pair.ic;
@@ -2185,13 +2056,8 @@ function showPair(pair) {
   const cardColor = isSpirit ? pair.ic.color : pair.ck.color;
 
   fillIC(pair.ic, isSpirit);
-  if (isSpirit) {
-    fillCK(null, pair.ic);
-  } else {
-    fillCK(pair.ck, null);
-  }
+  if (isSpirit) { fillCK(null, pair.ic); } else { fillCK(pair.ck, null); }
 
-  // 背景色漸層：在深紫底色上加入卡片色光暈
   const tintColor = pageTint(cardColor);
   document.body.style.backgroundColor = tintColor;
   document.body.style.backgroundImage = `
@@ -2201,59 +2067,37 @@ function showPair(pair) {
     radial-gradient(ellipse 80% 40% at 50% 100%, rgba(232,201,122,0.18) 0%, transparent 60%)
   `;
 
-  if (isSpirit) {
-    // 靈性指引卡：跳過第一張，直接顯示
-    icWrap.style.display = 'none';
+  function showCKCard() {
     ckScene.classList.add('active');
-    showResultCard(true);
+    const ckFront = document.getElementById('ckFront');
+    void ckFront.offsetWidth;
+    ckFront.classList.add('appear');
+    animateCKText();
     setTimeout(() => {
       ckScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 200);
+    }, 300);
+    setTimeout(() => {
+      redrawBtn.classList.add('visible');
+      state = 'shown';
+    }, 1200);
+  }
+
+  if (isSpirit) {
+    icWrap.style.display = 'none';
+    showCKCard();
     return;
   }
 
-  // 卡1：直覺祝福 淡入
+  // 卡1 淡入
   icWrap.style.display = 'block';
   void icWrap.offsetWidth;
   icWrap.classList.add('appear');
-
-  // 卡1 出現後，自動平滑捲動到卡1 讓用戶閱讀
   setTimeout(() => {
     icWrap.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 200);
 
-  // 卡2：延遲 2.8 秒再出現（讓用戶充分閱讀卡1）
-  setTimeout(() => {
-    ckScene.classList.add('active');
-    showResultCard(true);
-
-    // 捲動到卡2 讓用戶閱讀背面
-    setTimeout(() => {
-      ckScene.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 300);
-
-    // 延遲 0.6 秒再綁定點擊，避免滾動瞬間誤觸
-    setTimeout(() => {
-      const tapContinue = document.getElementById('ckTapContinue');
-      tapContinue.classList.remove('hidden');
-
-      let flipped = false;
-      const doFlip = (e) => {
-        e.stopPropagation();
-        if (flipped) return;
-        flipped = true;
-        tapContinue.classList.add('hidden');
-        tapContinue.removeEventListener('click', doFlip);
-        flipCKIn();
-        setTimeout(() => {
-          redrawBtn.classList.add('visible');
-          state = 'shown';
-        }, 1800);
-      };
-
-      tapContinue.addEventListener('click', doFlip);
-    }, 600);
-  }, 2800);
+  // 卡2 延遲 2.5s 自動出現
+  setTimeout(showCKCard, 2500);
 }
 
 // ── 抽牌觸發 ──
@@ -2282,106 +2126,27 @@ function handleDraw(selectedCard) {
   }, 750);
 }
 
-// ── 顯示結果卡片 ──
-function showResultCard(delayHide = false) {
-  const resultCard = RESULT_CARDS[Math.floor(Math.random() * RESULT_CARDS.length)];
-  const hintEl = document.getElementById('ckBackHint');
-  const contentEl = document.getElementById('ckBackContent');
-
-  // 填充卡片內容
-  document.getElementById('ckCardType').textContent = resultCard.type;
-  document.getElementById('ckCardIcon').textContent = resultCard.icon;
-  document.getElementById('ckCardTitle').textContent = resultCard.title;
-  document.getElementById('ckCardDeeper').textContent = resultCard.deeper;
-  document.getElementById('ckCardAction').textContent = resultCard.action;
-
-  // 立即顯示內容（淡入）
-  contentEl.classList.add('show');
-
-  // 延遲隱藏提示（讓用戶先看到提示文字）
-  if (delayHide) {
-    setTimeout(() => {
-      hintEl.style.opacity = '0';
-      setTimeout(() => {
-        hintEl.style.display = 'none';
-        hintEl.style.opacity = '1';
-      }, 500);
-    }, 800);
-  } else {
-    // 立即隱藏提示
-    hintEl.style.display = 'none';
-  }
-}
-
 // ── 換一張 ──
-function resetTarotSpread() {
-  backScene.style.display = 'block';
-  backScene.classList.remove('fading');
-  document.querySelectorAll('.tarot-card').forEach(card => {
-    card.classList.remove('selected', 'fading-out');
-  });
-}
-
 function handleRedraw() {
   if (state !== 'shown') return;
   state = 'animating';
 
   redrawBtn.classList.remove('visible');
 
-  // 卡1 淡出
+  // 淡出卡1
   icWrap.classList.remove('appear');
+  setTimeout(() => { icWrap.style.display = 'none'; }, 500);
+
+  // 淡出卡2
+  const ckFront = document.getElementById('ckFront');
+  ckFront.classList.remove('appear');
+  ckScene.classList.remove('active');
+  document.querySelectorAll('#ckFront .ta').forEach(el => el.classList.remove('in'));
+
   setTimeout(() => {
-    icWrap.style.display = 'none';
-  }, 650);
-
-  // 卡2 翻回背面，然後顯示新的結果卡片
-  flipCKOut(() => {
-    // 清空舊的卡片
-    const contentEl = document.getElementById('ckBackContent');
-    contentEl.classList.remove('show');
-
-    // 重置「點擊繼續」提示
-    const tapContinue = document.getElementById('ckTapContinue');
-    tapContinue.classList.add('hidden');
-
-    // 短暫停頓後顯示新卡片，再重新給使用者點擊翻面
-    setTimeout(() => {
-      // 填入新內容（保留背面讓用戶閱讀）
-      const pair = pickPair();
-      currentIC = pair.ic;
-      currentCK = pair.ck;
-      const isSpirit = pair.type === 'spirit';
-      fillIC(pair.ic, isSpirit);
-      if (isSpirit) { fillCK(null, pair.ic); } else { fillCK(pair.ck, null); }
-      showResultCard(false);
-      if (isSpirit) {
-        icWrap.style.display = 'none';
-      } else {
-        icWrap.style.display = 'block';
-        void icWrap.offsetWidth;
-        icWrap.classList.add('appear');
-      }
-
-      // 延遲再綁定點擊，避免誤觸
-      setTimeout(() => {
-        tapContinue.classList.remove('hidden');
-        let flipped = false;
-        const doFlip = (e) => {
-          e.stopPropagation();
-          if (flipped) return;
-          flipped = true;
-          tapContinue.classList.add('hidden');
-          tapContinue.removeEventListener('click', doFlip);
-          flipCKIn();
-          setTimeout(() => {
-            redrawBtn.classList.add('visible');
-            state = 'shown';
-          }, 1800);
-        };
-        tapContinue.addEventListener('click', doFlip);
-      }, 400);
-    }, 400);
-  });
+    const pair = pickPair();
+    showPair(pair);
+  }, 600);
 }
 
 document.querySelectorAll('.tarot-card').forEach(card => {
