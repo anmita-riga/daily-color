@@ -2383,9 +2383,23 @@
     if (d.chakra) {
       chakraEl.innerHTML = `<span class="panel-chakra-dot" style="background:${d.chakra.color};box-shadow:0 0 6px ${d.chakra.color};"></span>${d.chakra.name} · ${d.chakra.en}<a href="chakra-cat.html" style="margin-left:10px;font-size:11px;color:rgba(201,168,76,0.65);text-decoration:none;letter-spacing:0.08em;border-left:1px solid rgba(255,255,255,0.1);padding-left:10px;">深入了解 →</a>`;
     } else { chakraEl.innerHTML = ''; }
+    const purifyWrap = document.getElementById('panel-purify-wrap');
     document.getElementById('panel-purify-list').innerHTML = d.purify.map(p =>
       `<span class="purify-tag">✦ ${p}</span>`
     ).join('');
+    const existingProductLink = purifyWrap.querySelector('.panel-product-link');
+    if (existingProductLink) existingProductLink.remove();
+    if (n === 1 || n === 2) {
+      const productText = n === 1 ? '空間噴霧' : '光燭';
+      const link = document.createElement('a');
+      link.href = 'https://energy-works.vercel.app/works/demo-cat-spray';
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'panel-product-link';
+      link.style.cssText = 'display:inline-block;margin-top:12px;font-size:12px;letter-spacing:0.1em;color:rgba(201,168,76,0.65);text-decoration:none;border:1px solid rgba(201,168,76,0.2);border-radius:20px;padding:5px 14px;';
+      link.textContent = `也可以了解${productText} →`;
+      purifyWrap.appendChild(link);
+    }
 
     document.getElementById('info-panel').classList.add('visible');
     document.getElementById('overlay').classList.add('visible');
