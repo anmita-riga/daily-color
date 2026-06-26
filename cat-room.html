@@ -22,7 +22,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
+    body { animation: pageIn 0.5s ease both;
       min-height: 100dvh;
       background: linear-gradient(180deg, #EFF6FA 0%, #F4EFF8 50%, #EFF6FA 100%);
       font-family: "Noto Serif TC", Georgia, serif;
@@ -465,9 +465,22 @@
       color: #C0B0C0; text-align: center;
     }
 
+    @media (max-width: 480px) {
+      .step { padding: 1.2rem 1.2rem 4rem; }
+      .figure-wrap { max-width: min(85vw, 240px); }
+      .step-title { font-size: clamp(1.2rem, 5.5vw, 1.5rem); }
+      .step-hint { font-size: 0.7rem; margin-bottom: 1.2rem; }
+      .color-grid { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+      .btn-primary { padding: 12px 32px; font-size: 1rem; }
+      .result-card { padding: 1.4rem 1.2rem; }
+      .result-message { font-size: 0.78rem; }
+      .tag { font-size: 10px; padding: 3px 10px; }
+    }
     @media (max-width: 360px) {
       .color-grid { grid-template-columns: repeat(5, 1fr); }
+      .figure-wrap { max-width: 80vw; }
     }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>

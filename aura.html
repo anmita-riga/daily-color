@@ -26,7 +26,7 @@
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
+    body { animation: pageIn 0.5s ease both;
       background: var(--bg);
       color: var(--text-primary);
       font-family: 'Noto Serif TC', serif;
@@ -360,7 +360,7 @@
       margin-bottom: 12px;
     }
 
-    .panel-body {
+    .panel-body { animation: pageIn 0.5s ease both;
       font-size: 14px;
       line-height: 1.95;
       color: var(--text-secondary);
@@ -698,7 +698,7 @@
       border-radius: 1px;
       margin-bottom: 18px;
     }
-    .card-sheet-body {
+    .card-sheet-body { animation: pageIn 0.5s ease both;
       font-size: 14px;
       line-height: 2;
       color: var(--text-secondary);
@@ -1321,7 +1321,7 @@
     .accordion-btn.open .accordion-arrow {
       transform: rotate(45deg);
     }
-    .accordion-body {
+    .accordion-body { animation: pageIn 0.5s ease both;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.5s cubic-bezier(0.22,0.61,0.36,1);
@@ -1409,6 +1409,7 @@
     .cta-btn { margin: 8px 0 36px; }
     .drawer { width: 260px; }
   }
+  @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>

@@ -41,9 +41,9 @@
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html, body { background: #F4F3F6 !important; }
+    html, body { animation: pageIn 0.5s ease both; background: #F4F3F6 !important; }
 
-    body {
+    body { animation: pageIn 0.5s ease both;
       min-height: 100vh;
       background: #F4F3F6;
       transition: none;
@@ -692,7 +692,7 @@
       position: relative;
       z-index: 2;
     }
-    .ck-body {
+    .ck-body { animation: pageIn 0.5s ease both;
       padding: 1.8rem 1.8rem 1.7rem;
       position: relative;
       z-index: 1;
@@ -1034,7 +1034,7 @@
 
     /* 響應式優化 */
     @media (max-width: 479px) {
-      body {
+      body { animation: pageIn 0.5s ease both;
         padding: 2.8rem 1rem 4rem;
         font-size: 14px;
       }
@@ -1218,7 +1218,7 @@
 
     /* 平板版優化 */
     @media (min-width: 480px) and (max-width: 768px) {
-      body {
+      body { animation: pageIn 0.5s ease both;
         padding: 3.5rem 1.5rem 5rem;
       }
 
@@ -1272,7 +1272,7 @@
 
     /* 大螢幕優化 */
     @media (min-width: 769px) {
-      body {
+      body { animation: pageIn 0.5s ease both;
         padding: 4.5rem 2rem 6.5rem;
       }
 
@@ -1301,6 +1301,7 @@
         border-radius: 28px;
       }
     }
+  @keyframes pageIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
