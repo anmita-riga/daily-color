@@ -575,6 +575,7 @@
     }
     .damage-cards-strip {
       display: flex;
+      align-items: stretch;
       gap: 12px;
       overflow-x: scroll;
       scroll-snap-type: x mandatory;
@@ -585,7 +586,7 @@
     }
     .damage-cards-strip::-webkit-scrollbar { display: none; }
     .damage-card {
-      flex: 0 0 100px;
+      flex: 0 0 108px;
       scroll-snap-align: start;
       background: linear-gradient(150deg,
         color-mix(in srgb, var(--card-color, rgba(255,255,255,0.3)) 10%, transparent) 0%,
@@ -599,7 +600,7 @@
       transition: transform 0.28s ease, box-shadow 0.28s ease;
     }
     .damage-card:first-child {
-      flex: 0 0 112px;
+      flex: 0 0 108px;
     }
     .damage-card:hover, .damage-card.active {
       transform: translateY(-4px);
@@ -1439,6 +1440,7 @@
   <button class="drawer-subitem" data-subpanel="interaction">人際互動</button>
   <button class="drawer-subitem" data-subpanel="space">空間影響</button>
   <button class="drawer-subitem" data-subpanel="basics">基礎知識</button>
+  <button class="drawer-subitem" data-href="/chakra-basics">脈輪基本訊息</button>
   <button class="drawer-subitem" data-href="/seven-year">光場的七年發展週期</button>
   <button class="drawer-subitem" data-href="/children-aura">孩童的光場與成長環境</button>
   <button class="drawer-item" data-section="service">
@@ -2073,6 +2075,8 @@
 
 </div><!-- /kp-basics -->
 
+
+
 </div><!-- /section-knowledge -->
 
 <!-- Section: Service -->
@@ -2100,14 +2104,14 @@
       <div class="step-num">2</div>
       <div class="step-content">
         <div class="step-label">光場閱讀與繪製</div>
-        <div class="step-desc">以靈視角度連結你的能量場，感知七層光場的狀態，再以手繪方式呈現你獨有的能量樣貌與顏色。</div>
+        <div class="step-desc">以靈視角度連結你的能量場，以手繪方式呈現你獨有的能量樣貌與顏色。</div>
       </div>
     </div>
     <div class="service-step">
       <div class="step-num">3</div>
       <div class="step-content">
         <div class="step-label">接收你的光場畫作</div>
-        <div class="step-desc">收到專屬你的光場圖，附上各層能量解讀說明，了解此刻你真實的內在狀態。</div>
+        <div class="step-desc">收到專屬你的光場圖，附上此階段的重點訊息，聚焦於脈輪訊息與光場第三層以內的狀態解讀。</div>
       </div>
     </div>
   </div>
@@ -2680,6 +2684,19 @@
   drawer.addEventListener('touchend', e => {
     if (touchStartX - e.changedTouches[0].clientX > 60) closeDrawer();
   }, { passive: true });
+
+  // URL param: ?panel=chakra opens knowledge > chakra panel directly
+  const urlPanel = new URLSearchParams(location.search).get('panel');
+  if (urlPanel) {
+    const panelId = 'kp-' + urlPanel;
+    const targetPanel = document.getElementById(panelId);
+    if (targetPanel) {
+      document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === 'section-knowledge'));
+      document.querySelectorAll('.drawer-item').forEach(i => i.classList.toggle('active', i.dataset.section === 'knowledge'));
+      document.querySelectorAll('.knowledge-panel').forEach(p => p.classList.toggle('active', p.id === panelId));
+      document.querySelectorAll('.drawer-subitem[data-subpanel]').forEach(s => s.classList.toggle('active', s.dataset.subpanel === urlPanel));
+    }
+  }
 
 </script>
 </body>

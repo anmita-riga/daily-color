@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>脈輪基本訊息 · 光之手</title>
+<style>
+  :root {
+    --bg: #1a1530;
+    --gold: #C9A84C;
+    --text-primary: rgba(255,255,255,0.92);
+    --text-secondary: rgba(255,255,255,0.52);
+    --text-tertiary: rgba(255,255,255,0.3);
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.07);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Georgia', 'Noto Serif TC', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    position: relative;
+    text-align: center;
+    padding: 64px 24px 48px;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(126,87,194,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+  .page-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: rgba(126,87,194,0.8);
+    margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .page-intro {
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+  }
+
+  .chakra-card {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 3px solid var(--cc);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .chakra-orb {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .chakra-card-name {
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 2px;
+  }
+  .chakra-card-en {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 8px;
+  }
+  .chakra-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .chakra-tag {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--cc);
+    background: color-mix(in srgb, var(--cc) 12%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cc) 22%, transparent);
+    border-radius: 20px;
+    padding: 2px 10px;
+  }
+  .chakra-card-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.75;
+  }
+  .chakra-blocked {
+    margin-top: 8px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.3);
+    line-height: 1.6;
+  }
+  .chakra-blocked strong { color: rgba(255,255,255,0.45); }
+
+  .deep-link-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+    margin-top: 32px;
+  }
+  .deep-link-card:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(201,168,76,0.2);
+  }
+  .deep-link-title {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 4px;
+  }
+  .deep-link-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.6;
+  }
+  .deep-link-arrow {
+    font-size: 16px;
+    color: rgba(201,168,76,0.5);
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .back-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .back-cta a {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 10px 28px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .back-cta a:hover { color: var(--gold); border-color: rgba(201,168,76,0.3); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div><a class="back-link" href="/aura">← 返回光場知識</a></div>
+  <p class="page-eyebrow">CHAKRA · SEVEN ENERGY CENTERS</p>
+  <h1 class="page-title">脈輪基本訊息</h1>
+  <p class="page-intro">脈輪是沿脊椎排列的七個主要能量中心，每個脈輪對應特定的生命議題、情緒模式與身體部位，也與光場的七層結構相互對應。</p>
+</div>
+
+<div class="content">
+
+  <div class="chakra-card" style="--cc:#EF5350;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#FF6B6B,#C62828);box-shadow:0 0 12px rgba(239,83,80,0.4);"></div>
+    <div>
+      <div class="chakra-card-name">海底輪</div>
+      <div class="chakra-card-en">ROOT · MULADHARA · 第一脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">根植</span>
+        <span class="chakra-tag">安全感</span>
+        <span class="chakra-tag">生存本能</span>
+        <span class="chakra-tag">物質基礎</span>
+      </div>
+      <div class="chakra-card-desc">與大地連結的能量中心，關乎最基礎的安全感與生存需求。當你感到腳踏實地、對生活有基本的信任感，海底輪通常是平衡的。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　長期焦慮、對未來缺乏安全感、難以落實行動、身體疲憊或下半身問題。</div>
+    </div>
+  </div>
+
+  <div class="chakra-card" style="--cc:#FFA726;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#FFB74D,#E65100);box-shadow:0 0 12px rgba(255,167,38,0.4);"></div>
+    <div>
+      <div class="chakra-card-name">臍輪</div>
+      <div class="chakra-card-en">SACRAL · SVADHISTHANA · 第二脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">創造力</span>
+        <span class="chakra-tag">情感流動</span>
+        <span class="chakra-tag">愉悅</span>
+        <span class="chakra-tag">關係</span>
+      </div>
+      <div class="chakra-card-desc">掌管情感、創造與享樂的能量中心。這裡是生命的流動性所在——包括情感的起伏、藝術的衝動，以及與他人建立連結的渴望。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　情緒壓抑或失控、創作靈感枯竭、在親密關係中困難重重、罪惡感或羞愧感。</div>
+    </div>
+  </div>
+
+  <div class="chakra-card" style="--cc:#FDD835;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#FFF176,#F9A825);box-shadow:0 0 12px rgba(253,216,53,0.4);"></div>
+    <div>
+      <div class="chakra-card-name">太陽神經叢輪</div>
+      <div class="chakra-card-en">SOLAR PLEXUS · MANIPURA · 第三脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">意志力</span>
+        <span class="chakra-tag">自信</span>
+        <span class="chakra-tag">行動力</span>
+        <span class="chakra-tag">自我認同</span>
+      </div>
+      <div class="chakra-card-desc">個人力量與自我意志的所在。這個脈輪掌管你能否清楚地知道自己是誰、你想要什麼，以及有能力去實現它的信心。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　缺乏自信、容易受他人影響、控制慾或被控制感、消化系統問題。</div>
+    </div>
+  </div>
+
+  <div class="chakra-card" style="--cc:#66BB6A;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#A5D6A7,#2E7D32);box-shadow:0 0 12px rgba(102,187,106,0.4);"></div>
+    <div>
+      <div class="chakra-card-name">心輪</div>
+      <div class="chakra-card-en">HEART · ANAHATA · 第四脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">愛</span>
+        <span class="chakra-tag">療癒</span>
+        <span class="chakra-tag">同理心</span>
+        <span class="chakra-tag">接納</span>
+      </div>
+      <div class="chakra-card-desc">連結身體三輪與靈性三輪的橋梁。心輪是愛的中心——不只是對他人的愛，更包括對自己的接納與寬恕。心輪開放時，你能在給予與接受之間自在流動。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　難以接受愛、過度犧牲、心牆厚重、情感傷痛遲遲未能釋放。</div>
+    </div>
+  </div>
+
+  <div class="chakra-card" style="--cc:#42A5F5;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#90CAF9,#1565C0);box-shadow:0 0 12px rgba(66,165,245,0.4);"></div>
+    <div>
+      <div class="chakra-card-name">喉輪</div>
+      <div class="chakra-card-en">THROAT · VISHUDDHA · 第五脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">表達</span>
+        <span class="chakra-tag">真實</span>
+        <span class="chakra-tag">溝通</span>
+        <span class="chakra-tag">傾聽</span>
+      </div>
+      <div class="chakra-card-desc">說出真實自我的能量中心。喉輪不只關乎說話，也關乎你能否誠實地表達內在感受，以及是否願意聆聽他人與自己內在的聲音。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　壓抑真實感受、說話困難或過度話多、喉嚨反覆不適、對自己的聲音感到不安。</div>
+    </div>
+  </div>
+
+  <div class="chakra-card" style="--cc:#7E57C2;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#CE93D8,#6A1B9A);box-shadow:0 0 12px rgba(126,87,194,0.5);"></div>
+    <div>
+      <div class="chakra-card-name">眉心輪</div>
+      <div class="chakra-card-en">THIRD EYE · AJNA · 第六脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">直覺</span>
+        <span class="chakra-tag">洞見</span>
+        <span class="chakra-tag">靈視</span>
+        <span class="chakra-tag">清晰</span>
+      </div>
+      <div class="chakra-card-desc">超越表象看見本質的能力所在。這個脈輪與直覺、內在知曉，以及靈性感知有關。當它開放，你能更清楚地辨別什麼是真實的，不受表面現象迷惑。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　直覺模糊、思維混亂、頭痛或眉心緊繃、難以做決定或過度理性化。</div>
+    </div>
+  </div>
+
+  <div class="chakra-card" style="--cc:#C9A84C;">
+    <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%,#E8D5A3,#9E7C2A);box-shadow:0 0 12px rgba(201,168,76,0.4);"></div>
+    <div>
+      <div class="chakra-card-name">頂輪</div>
+      <div class="chakra-card-en">CROWN · SAHASRARA · 第七脈輪</div>
+      <div class="chakra-card-tags">
+        <span class="chakra-tag">靈性連結</span>
+        <span class="chakra-tag">覺知</span>
+        <span class="chakra-tag">合一</span>
+        <span class="chakra-tag">信任</span>
+      </div>
+      <div class="chakra-card-desc">與更高意識、宇宙或神性連結的能量入口。頂輪不是遠離塵世的出口，而是讓你在日常生活中也能感受到更大整體的臨在——你不孤單，你是一切的一部分。</div>
+      <div class="chakra-blocked"><strong>失衡訊號</strong>　感到與生命失去意義、靈性上的孤立感、對存在感到迷茫、過度依附物質世界。</div>
+    </div>
+  </div>
+
+  <a href="/chakra-dynamics" class="deep-link-card">
+    <div>
+      <div class="deep-link-title">脈輪動態與失衡模式</div>
+      <div class="deep-link-desc">過強與不足的差異、脈輪之間的連動，以及常見的能量組合模式。</div>
+    </div>
+    <div class="deep-link-arrow">→</div>
+  </a>
+
+  <a href="/chakra-cat" class="deep-link-card">
+    <div>
+      <div class="deep-link-title">用脈輪貓互動感受七個能量中心</div>
+      <div class="deep-link-desc">輕觸光點，感受身體此刻想說的故事。互動式脈輪體驗。</div>
+    </div>
+    <div class="deep-link-arrow">→</div>
+  </a>
+
+</div>
+
+<div class="back-cta">
+  <a href="/aura">← 返回光場知識</a>
+</div>
+
+</body>
+</html>

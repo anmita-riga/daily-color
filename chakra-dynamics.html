@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>脈輪動態與失衡模式 · 光之手</title>
+<style>
+  :root {
+    --bg: #1a1530;
+    --gold: #C9A84C;
+    --text-primary: rgba(255,255,255,0.92);
+    --text-secondary: rgba(255,255,255,0.52);
+    --text-tertiary: rgba(255,255,255,0.3);
+    --surface: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.07);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'Georgia', 'Noto Serif TC', serif;
+    font-size: 15px;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  .page-header {
+    position: relative;
+    text-align: center;
+    padding: 64px 24px 48px;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(126,87,194,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+  }
+  .back-link:hover { color: var(--gold); }
+  .page-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    color: rgba(126,87,194,0.8);
+    margin-bottom: 12px;
+  }
+  .page-title {
+    font-size: clamp(20px, 5vw, 28px);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .page-intro {
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+
+  .content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    color: rgba(201,168,76,0.6);
+    margin: 48px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.12);
+  }
+
+  /* ── 過強 / 不足 雙欄卡片 ── */
+  .balance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .balance-card {
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .balance-card.over {
+    background: rgba(255,120,80,0.06);
+    border: 1px solid rgba(255,120,80,0.14);
+  }
+  .balance-card.under {
+    background: rgba(100,160,255,0.06);
+    border: 1px solid rgba(100,160,255,0.14);
+  }
+  .balance-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .balance-card.over .balance-label { color: rgba(255,140,100,0.85); }
+  .balance-card.under .balance-label { color: rgba(120,180,255,0.85); }
+  .balance-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .balance-card.over .balance-dot { background: rgba(255,140,100,0.8); }
+  .balance-card.under .balance-dot { background: rgba(120,180,255,0.8); }
+
+  /* ── 脈輪區塊 ── */
+  .chakra-block {
+    margin-bottom: 32px;
+  }
+  .chakra-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .chakra-orb {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.8;
+  }
+  .chakra-title { font-size: 15px; letter-spacing: 0.07em; }
+  .chakra-en {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--text-tertiary);
+    margin-top: 1px;
+  }
+
+  /* ── 連動說明卡 ── */
+  .link-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 14px;
+  }
+  .link-card-title {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 10px;
+  }
+  .link-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── 組合模式 ── */
+  .pattern-card {
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  .pattern-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--pc);
+    opacity: 0.5;
+  }
+  .pattern-chakras {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .pattern-chip {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    border-radius: 20px;
+    padding: 3px 10px;
+    border: 1px solid;
+  }
+  .pattern-chip.strong {
+    color: rgba(255,140,100,0.9);
+    background: rgba(255,140,100,0.08);
+    border-color: rgba(255,140,100,0.2);
+  }
+  .pattern-chip.weak {
+    color: rgba(120,180,255,0.9);
+    background: rgba(120,180,255,0.08);
+    border-color: rgba(120,180,255,0.2);
+  }
+  .pattern-title {
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+  }
+  .pattern-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ── 上下三輪說明 ── */
+  .split-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .split-half {
+    border-radius: 14px;
+    padding: 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+  }
+  .split-half.earth {
+    background: rgba(100,180,80,0.05);
+    border: 1px solid rgba(100,180,80,0.12);
+  }
+  .split-half.sky {
+    background: rgba(126,87,194,0.06);
+    border: 1px solid rgba(126,87,194,0.14);
+  }
+  .split-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    margin-bottom: 8px;
+  }
+  .split-half.earth .split-label { color: rgba(120,200,100,0.8); }
+  .split-half.sky .split-label { color: rgba(170,140,255,0.8); }
+
+  .highlight-note {
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), rgba(201,168,76,0.02));
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 14px;
+  }
+
+  .back-cta {
+    text-align: center;
+    margin-top: 40px;
+  }
+  .back-cta a {
+    display: inline-block;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 40px;
+    padding: 10px 28px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .back-cta a:hover { color: var(--gold); border-color: rgba(201,168,76,0.3); }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div><a class="back-link" href="/aura?panel=chakra">← 返回脈輪基本訊息</a></div>
+  <p class="page-eyebrow">CHAKRA · DYNAMICS & BALANCE</p>
+  <h1 class="page-title">脈輪動態與失衡模式</h1>
+  <p class="page-intro">七個脈輪不是獨立運作的，它們之間持續地互相影響。一個脈輪過強或過弱，往往會在整個能量系統中形成連鎖反應。</p>
+</div>
+
+<div class="content">
+
+  <!-- ── 過強 vs 不足 ── -->
+  <div class="section-label">每個脈輪的兩種失衡</div>
+
+  <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:24px;">脈輪失衡不只有「堵塞」一種形式——它可以是能量積累過多的過度活躍，也可以是能量流動不足的萎縮狀態。兩種方向都會帶來困擾，只是表現方式不同。</p>
+
+  <!-- 海底輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #FF6B6B, #C62828);box-shadow:0 0 14px rgba(239,83,80,0.4);"></div>
+      <div>
+        <div class="chakra-title">海底輪</div>
+        <div class="chakra-en">ROOT · MULADHARA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        對物質世界的執著、貪婪、囤積傾向；對安全感的強迫性追求；固執、抗拒改變；身體過重或能量沉重感。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        長期焦慮、對未來缺乏信任；難以落地行動；身體失根感、頭重腳輕；財務或生活基礎持續不穩。
+      </div>
+    </div>
+  </div>
+
+  <!-- 臍輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #FFB74D, #E65100);box-shadow:0 0 14px rgba(255,167,38,0.4);"></div>
+      <div>
+        <div class="chakra-title">臍輪</div>
+        <div class="chakra-en">SACRAL · SVADHISTHANA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        情緒化、易被情感淹沒；上癮傾向（對食物、性、刺激感的過度依賴）；邊界模糊、容易與他人情緒融合。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        情感麻木、難以感受喜悅；創作靈感枯竭；性能量壓抑；對生命缺乏熱情，感覺平淡無味。
+      </div>
+    </div>
+  </div>
+
+  <!-- 太陽神經叢輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #FFF176, #F9A825);box-shadow:0 0 14px rgba(253,216,53,0.4);"></div>
+      <div>
+        <div class="chakra-title">太陽神經叢輪</div>
+        <div class="chakra-en">SOLAR PLEXUS · MANIPURA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        控制慾強、難以放鬆掌控；憤怒易怒、權力鬥爭；過度強調自我、競爭心重；消化系統緊張或過度運作。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        自我懷疑、缺乏自信；難以設定界限；容易受他人意見左右；行動力低落、拖延、被動。
+      </div>
+    </div>
+  </div>
+
+  <!-- 心輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #A5D6A7, #2E7D32);box-shadow:0 0 14px rgba(102,187,106,0.4);"></div>
+      <div>
+        <div class="chakra-title">心輪</div>
+        <div class="chakra-en">HEART · ANAHATA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        過度付出、失去自我邊界；以犧牲換取被愛；對他人情緒過度負責；難以拒絕、怕衝突。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        情感封閉、心牆厚重；難以接受愛或關心；孤立自己；對親密關係感到恐懼或冷漠。
+      </div>
+    </div>
+  </div>
+
+  <!-- 喉輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #90CAF9, #1565C0);box-shadow:0 0 14px rgba(66,165,245,0.4);"></div>
+      <div>
+        <div class="chakra-title">喉輪</div>
+        <div class="chakra-en">THROAT · VISHUDDHA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        話多、難以傾聽；以說話填滿空間、逃避沉默；言詞尖銳或說話傷人；習慣用語言控制他人。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        壓抑真實感受、不敢說出內心話；聲音弱小或說話顫抖；喉嚨反覆緊繃；害怕被批評或誤解。
+      </div>
+    </div>
+  </div>
+
+  <!-- 眉心輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #CE93D8, #6A1B9A);box-shadow:0 0 14px rgba(126,87,194,0.5);"></div>
+      <div>
+        <div class="chakra-title">眉心輪</div>
+        <div class="chakra-en">THIRD EYE · AJNA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        執著於靈性感知、脫離現實；過度分析、鑽牛角尖；幻想與現實邊界模糊；夢境過於強烈、難以入睡。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        直覺模糊、不相信自己的感受；思維混亂、難以做決定；只依賴邏輯、抗拒靈性維度；想像力受限。
+      </div>
+    </div>
+  </div>
+
+  <!-- 頂輪 -->
+  <div class="chakra-block">
+    <div class="chakra-header">
+      <div class="chakra-orb" style="background:radial-gradient(circle at 35% 35%, #E8D5A3, #9E7C2A);box-shadow:0 0 14px rgba(201,168,76,0.4);"></div>
+      <div>
+        <div class="chakra-title">頂輪</div>
+        <div class="chakra-en">CROWN · SAHASRARA</div>
+      </div>
+    </div>
+    <div class="balance-grid">
+      <div class="balance-card over">
+        <div class="balance-label"><span class="balance-dot"></span>過度活躍</div>
+        過度靈性化、輕視物質現實；脫離身體、難以接地；感覺超然但無法在日常生活中落實；頭部持續緊繃或光敏感。
+      </div>
+      <div class="balance-card under">
+        <div class="balance-label"><span class="balance-dot"></span>能量不足</div>
+        感到生命失去意義、靈性上的孤立感；對更大整體的連結感消失；思維僵化、封閉於有限的世界觀。
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 上下三輪 ── -->
+  <div class="section-label">下三輪與上三輪的失衡</div>
+
+  <p style="font-size:13px;color:var(--text-secondary);line-height:1.8;margin-bottom:18px;">七個脈輪以心輪為橋梁，分為下三輪（海底輪、臍輪、太陽神經叢）與上三輪（喉輪、眉心輪、頂輪）。當兩組之間出現明顯落差，會形成特定的能量模式。</p>
+
+  <div class="split-card">
+    <div class="split-half earth">
+      <div class="split-label">下三輪過強 · 上三輪弱</div>
+      高度重視物質安全、效率與控制；生活充實但感到空洞；難以連結直覺或靈性維度；行動力強但缺乏更深的意義感。
+    </div>
+    <div class="split-half sky">
+      <div class="split-label">上三輪過強 · 下三輪弱</div>
+      靈性感知開放、直覺豐富，但難以落地；財務或生活結構不穩；想法多但難以執行；感覺活在另一個維度。
+    </div>
+  </div>
+
+  <div class="highlight-note">
+    心輪是連結兩者的樞紐。當心輪堵塞時，能量無法在上下之間自由流動，整個系統容易出現分裂感——你要麼完全活在現實邏輯裡，要麼完全活在靈性感知裡，卻難以整合。
+  </div>
+
+  <!-- ── 連動關係 ── -->
+  <div class="section-label">脈輪之間的連動</div>
+
+  <div class="link-card">
+    <div class="link-card-title">海底輪不穩 → 影響全系統</div>
+    <p>海底輪是整個能量系統的根基。當它長期不穩，上方所有脈輪都難以真正開放——即使你在靈性上有所追求，那份連結也容易是飄浮的、沒有根的。就像一棵沒有根的樹，葉子可以長得茂盛，但風一吹就倒。</p>
+  </div>
+
+  <div class="link-card">
+    <div class="link-card-title">喉輪封閉 → 心輪積壓</div>
+    <p>當喉輪堵塞，心輪感受到的情緒找不到出口，便會在能量體中積累。長期下來，未被表達的愛、悲傷、憤怒或委屈，會以能量塊的形式留在情緒層，成為光場解讀中最常見的積壓模式之一。</p>
+  </div>
+
+  <div class="link-card">
+    <div class="link-card-title">太陽神經叢過強 → 壓制心輪</div>
+    <p>當個人意志與控制感過強，心輪的開放性往往受到壓抑。這樣的人在外表現得強勢有力，但在親密關係中卻容易出現情感隔離——因為開放心輪意味著脆弱，而這對過強的太陽神經叢來說是威脅。</p>
+  </div>
+
+  <div class="link-card">
+    <div class="link-card-title">眉心輪開放但海底輪弱</div>
+    <p>靈視與直覺的能力很強，但如果沒有穩固的根基支撐，接收到的訊息難以被整合與落實。能量上容易出現「上重下輕」的不平衡，在靈性修行中屬於常見且需要特別留意的模式。</p>
+  </div>
+
+  <!-- ── 常見組合模式 ── -->
+  <div class="section-label">常見的脈輪組合模式</div>
+
+  <div class="pattern-card" style="--pc: linear-gradient(90deg, rgba(255,167,38,0.6), rgba(239,83,80,0.6));">
+    <div class="pattern-chakras">
+      <span class="pattern-chip strong">太陽神經叢 ↑</span>
+      <span class="pattern-chip weak">心輪 ↓</span>
+      <span class="pattern-chip weak">喉輪 ↓</span>
+    </div>
+    <div class="pattern-title">強勢但情感封閉</div>
+    <div class="pattern-desc">行動力與意志力強，在工作或外部世界有能力感，但在親密關係中情感距離遠。不容易說出脆弱，也難以接受他人的關心。常見於長期需要「自我撐起一切」的人。</div>
+  </div>
+
+  <div class="pattern-card" style="--pc: linear-gradient(90deg, rgba(102,187,106,0.6), rgba(66,165,245,0.6));">
+    <div class="pattern-chakras">
+      <span class="pattern-chip strong">心輪 ↑</span>
+      <span class="pattern-chip weak">太陽神經叢 ↓</span>
+      <span class="pattern-chip weak">海底輪 ↓</span>
+    </div>
+    <div class="pattern-title">溫柔但失去自我</div>
+    <div class="pattern-desc">高度同理、付出型的人格，但因為缺乏根基與個人意志的支撐，容易在關係中失去自我，習慣以他人需求為優先。給予很多，卻很少知道自己真正需要什麼。</div>
+  </div>
+
+  <div class="pattern-card" style="--pc: linear-gradient(90deg, rgba(126,87,194,0.6), rgba(201,168,76,0.6));">
+    <div class="pattern-chakras">
+      <span class="pattern-chip strong">眉心輪 ↑</span>
+      <span class="pattern-chip strong">頂輪 ↑</span>
+      <span class="pattern-chip weak">海底輪 ↓</span>
+      <span class="pattern-chip weak">臍輪 ↓</span>
+    </div>
+    <div class="pattern-title">靈性豐富但難以落地</div>
+    <div class="pattern-desc">直覺感知強、對靈性有深度興趣，但在物質現實中常感到不穩定——財務、生活結構或身體健康容易被忽略。這種模式在靈性修行者中常見，根基的滋養往往是最重要的功課。</div>
+  </div>
+
+  <div class="pattern-card" style="--pc: linear-gradient(90deg, rgba(239,83,80,0.6), rgba(253,216,53,0.6));">
+    <div class="pattern-chakras">
+      <span class="pattern-chip strong">海底輪 ↑</span>
+      <span class="pattern-chip strong">太陽神經叢 ↑</span>
+      <span class="pattern-chip weak">眉心輪 ↓</span>
+      <span class="pattern-chip weak">頂輪 ↓</span>
+    </div>
+    <div class="pattern-title">穩固現實但感到空洞</div>
+    <div class="pattern-desc">生活有結構、務實、財務穩定，但對生命的意義感薄弱，不容易連結直覺或更深的靈性層次。有時會感到「一切都很好，但好像缺了什麼」，那個缺少的，往往是上方能量中心的聲音。</div>
+  </div>
+
+</div>
+
+<div class="back-cta">
+  <a href="/aura?panel=chakra">← 返回脈輪基本訊息</a>
+</div>
+
+</body>
+</html>
