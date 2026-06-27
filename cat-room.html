@@ -744,6 +744,7 @@
 <div class="share-footer" id="share-footer">
   <button class="share-btn" id="redraw-btn">再感受一次</button>
   <button class="share-btn line" id="line-share">分享到 LINE</button>
+  <button class="share-btn" id="ig-share" style="color:#C13584;border-color:rgba(193,53,132,0.35);">分享到 IG</button>
 </div>
 
 <script>
@@ -1200,6 +1201,106 @@ document.getElementById('line-share').addEventListener('click', async () => {
     }
   } catch (e) {
     console.error('Share failed:', e);
+  }
+});
+
+document.getElementById('ig-share').addEventListener('click', async () => {
+  if (!selectedColor || selectedParts.size === 0) return;
+  const parts = [...selectedParts].map(k => BODY_PARTS[k]).filter(Boolean);
+  const col = COLORS[selectedColor];
+  const colorKeys = Object.keys(COLORS);
+  const idx = colorKeys.indexOf(selectedColor) % 3;
+  const primary = parts[0];
+  const partNames = parts.map(p => p.name).join('、');
+  const phrase = primary.phrases[idx];
+
+  const btn = document.getElementById('ig-share');
+  btn.textContent = '準備中…'; btn.disabled = true;
+
+  try {
+    const SIZE = 1080;
+    const cv = document.createElement('canvas');
+    cv.width = SIZE; cv.height = SIZE;
+    const c = cv.getContext('2d');
+
+    // 背景
+    const hex = col.hex;
+    const r = parseInt(hex.slice(1,3),16), g2 = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+    c.fillStyle = `rgb(${Math.min(255,r+60)},${Math.min(255,g2+55)},${Math.min(255,b+55)})`;
+    c.fillRect(0,0,SIZE,SIZE);
+    const halo = c.createRadialGradient(SIZE/2,SIZE*0.4,0,SIZE/2,SIZE*0.4,SIZE*0.6);
+    halo.addColorStop(0, `rgba(255,255,255,0.35)`);
+    halo.addColorStop(1, 'rgba(0,0,0,0)');
+    c.fillStyle = halo; c.fillRect(0,0,SIZE,SIZE);
+
+    // 色條
+    c.fillStyle = hex; c.globalAlpha = 0.6; c.fillRect(0,0,SIZE,10); c.globalAlpha = 1;
+
+    // 裝飾圓環
+    c.strokeStyle = `rgba(255,255,255,0.12)`; c.lineWidth = 1.5;
+    [300,420,560].forEach(rad => {
+      c.beginPath(); c.arc(SIZE/2, SIZE*0.42, rad, 0, Math.PI*2); c.stroke();
+    });
+
+    // 部位
+    c.font = '300 32px "Noto Serif TC", serif';
+    c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.fillStyle = `rgba(${r},${g2},${b},0.9)`;
+    c.fillText(partNames, SIZE/2, 260);
+
+    // 主句
+    c.font = '400 52px "Noto Serif TC", serif';
+    c.fillStyle = 'rgba(50,40,60,0.88)';
+    const words = phrase.split('');
+    let line = '', lines = [], maxW = SIZE - 180;
+    for (const w of words) {
+      const test = line + w;
+      if (c.measureText(test).width > maxW && line) { lines.push(line); line = w; } else { line = test; }
+    }
+    if (line) lines.push(line);
+    lines.forEach((l, i) => c.fillText(l, SIZE/2, 420 + (i - (lines.length-1)/2) * 70));
+
+    // 分隔
+    const sep = c.createLinearGradient(SIZE/2-100,600,SIZE/2+100,600);
+    sep.addColorStop(0,'rgba(0,0,0,0)'); sep.addColorStop(0.5,`rgba(${r},${g2},${b},0.4)`); sep.addColorStop(1,'rgba(0,0,0,0)');
+    c.strokeStyle = sep; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(SIZE/2-100,600); c.lineTo(SIZE/2+100,600); c.stroke();
+
+    // 顏色
+    c.font = '300 28px "Noto Serif TC", serif';
+    c.fillStyle = `rgba(${r},${g2},${b},0.8)`;
+    c.fillText(col.name, SIZE/2, 650);
+
+    // 行動
+    c.font = '300 30px "Noto Serif TC", serif';
+    c.fillStyle = 'rgba(70,60,80,0.72)';
+    const aWords = primary.action.split('');
+    let aLine='', aLines=[];
+    for (const w of aWords) {
+      const test = aLine+w;
+      if (c.measureText(test).width > maxW-80 && aLine) { aLines.push(aLine); aLine=w; } else { aLine=test; }
+    }
+    if (aLine) aLines.push(aLine);
+    aLines.forEach((l,i) => c.fillText(l, SIZE/2, 760+(i-(aLines.length-1)/2)*48));
+
+    // 署名
+    c.font = '200 24px "Noto Serif TC", serif';
+    c.fillStyle = 'rgba(80,70,90,0.4)';
+    c.fillText('Anmita Riga · 聽見身體', SIZE/2, 980);
+
+    cv.toBlob(async blob => {
+      const file = new File([blob], 'body-message.png', { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file] });
+      } else {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'body-message.png'; a.click();
+      }
+      btn.textContent = '分享到 IG'; btn.disabled = false;
+    }, 'image/png');
+  } catch(e) {
+    btn.textContent = '分享到 IG'; btn.disabled = false;
   }
 });
 

@@ -591,6 +591,16 @@
       transform: translateY(0);
       pointer-events: all;
     }
+    .card-close-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      width: 100%; margin-top: 1rem;
+      background: none; border: 1px solid rgba(160,130,200,0.25);
+      border-radius: 24px; padding: 0.55rem 1rem;
+      font-family: inherit; font-size: 0.72rem; letter-spacing: 0.12em;
+      color: #9A80B8; cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .card-close-btn:hover { background: rgba(160,130,200,0.08); border-color: rgba(160,130,200,0.45); }
 
     .card {
       background: linear-gradient(160deg, rgba(255,253,250,0.98) 0%, rgba(245,238,255,0.92) 100%);
@@ -1634,6 +1644,20 @@ function showCard(i) {
     });
   }
   extraEl.appendChild(shareBtn);
+
+  // 關閉按鈕
+  let closeBtn = document.getElementById('cardCloseBtn');
+  if (!closeBtn) {
+    closeBtn = document.createElement('button');
+    closeBtn.id = 'cardCloseBtn';
+    closeBtn.className = 'card-close-btn';
+    closeBtn.innerHTML = '收起 ↑';
+    closeBtn.addEventListener('click', () => {
+      const active = document.querySelector('.chakra-group.active');
+      if (active) active.click();
+    });
+  }
+  extraEl.appendChild(closeBtn);
 
   // IG 分享按鈕
   let igBtn = document.getElementById('igShareBtn');
