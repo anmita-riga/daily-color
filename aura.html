@@ -1440,9 +1440,14 @@
   <button class="drawer-subitem" data-subpanel="interaction">人際互動</button>
   <button class="drawer-subitem" data-subpanel="space">空間影響</button>
   <button class="drawer-subitem" data-subpanel="basics">基礎知識</button>
-  <button class="drawer-subitem" data-href="/chakra-basics">脈輪基本訊息</button>
   <button class="drawer-subitem" data-href="/seven-year">光場的七年發展週期</button>
   <button class="drawer-subitem" data-href="/children-aura">孩童的光場與成長環境</button>
+  <button class="drawer-item" data-href="/chakra-basics">
+    <span class="drawer-icon">◈</span>脈輪知識
+  </button>
+  <button class="drawer-subitem" data-href="/chakra-basics">脈輪基本訊息</button>
+  <button class="drawer-subitem" data-href="/chakra-dynamics">脈輪動態與失衡模式</button>
+  <button class="drawer-subitem" data-href="/chakra-cat">脈輪貓互動體驗</button>
   <button class="drawer-item" data-section="service">
     <span class="drawer-icon">◇</span>服務介紹
   </button>
@@ -2614,6 +2619,7 @@
     }
     const item = e.target.closest('.drawer-item');
     if (!item) return;
+    if (item.dataset.href) { window.location.href = item.dataset.href; return; }
     const sec = item.dataset.section;
     document.querySelectorAll('.drawer-item').forEach(i => i.classList.toggle('active', i === item));
     document.querySelectorAll('.page-section').forEach(p => p.classList.toggle('active', p.id === 'section-' + sec));
