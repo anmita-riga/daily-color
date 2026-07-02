@@ -1547,6 +1547,15 @@
       <filter id="leak" x="-80%" y="-80%" width="260%" height="260%">
         <feGaussianBlur in="SourceGraphic" stdDeviation="7"/>
       </filter>
+      <!-- Hole edge glow: dark void with colored rim -->
+      <filter id="holeEdge" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+        <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <!-- Dark spot blur for 黯蛋 -->
+      <filter id="darkspot" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5"/>
+      </filter>
       <!-- Sweep shimmer gradient -->
       <linearGradient id="sweep-grad" x1="0" y1="0" x2="0" y2="1">
         <stop offset="0%"   stop-color="white" stop-opacity="0"/>
@@ -1566,9 +1575,11 @@
       <ellipse cx="170" cy="215" rx="152" ry="205" fill="none" stroke="#E0BBFF" stroke-width="2"   stroke-opacity="0.9" filter="url(#glow7)"/>
       <ellipse cx="170" cy="215" rx="152" ry="205" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.35"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="152" ry="205" fill="none" stroke="#C67FFF" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="22 9 45 6 18 11"/>
-        <circle cx="250" cy="92"  r="9" fill="#C67FFF" fill-opacity="0.55" filter="url(#leak)"/>
-        <circle cx="82"  cy="325" r="6" fill="#C67FFF" fill-opacity="0.4"  filter="url(#leak)"/>
+        <!-- 破洞 -->
+        <ellipse class="anim-hole" cx="248" cy="80" rx="13" ry="9" fill="rgba(4,2,12,0.92)" stroke="#C67FFF" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)"/>
+        <!-- 黯蛋 -->
+        <ellipse cx="80" cy="322" rx="16" ry="11" fill="rgba(6,3,18,0.75)" filter="url(#darkspot)"/>
+        <ellipse cx="155" cy="35"  rx="11" ry="7"  fill="rgba(6,3,18,0.6)"  filter="url(#darkspot)"/>
       </g>
     </g>
     <!-- Layer 6: Celestial -->
@@ -1577,8 +1588,8 @@
       <ellipse cx="170" cy="215" rx="138" ry="188" fill="none" stroke="#AADDFF" stroke-width="2"   stroke-opacity="0.9" filter="url(#glow6)"/>
       <ellipse cx="170" cy="215" rx="138" ry="188" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="138" ry="188" fill="none" stroke="#60AAFF" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="35 8 20 10 50 6"/>
-        <circle cx="285" cy="148" r="8" fill="#60AAFF" fill-opacity="0.5" filter="url(#leak)"/>
+        <ellipse class="anim-hole" cx="284" cy="148" rx="11" ry="8" fill="rgba(4,2,12,0.92)" stroke="#60AAFF" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)" style="animation-delay:0.7s"/>
+        <ellipse cx="68" cy="278" rx="14" ry="9" fill="rgba(5,3,16,0.72)" filter="url(#darkspot)"/>
       </g>
     </g>
     <!-- Layer 5: Etheric Template -->
@@ -1587,8 +1598,8 @@
       <ellipse cx="170" cy="215" rx="122" ry="171" fill="none" stroke="#99FFD6" stroke-width="2"   stroke-opacity="0.92" filter="url(#glow5)"/>
       <ellipse cx="170" cy="215" rx="122" ry="171" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="122" ry="171" fill="none" stroke="#4DFFA8" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="28 7 16 9 42 5"/>
-        <circle cx="57"  cy="112" r="7" fill="#4DFFA8" fill-opacity="0.5" filter="url(#leak)"/>
+        <ellipse class="anim-hole" cx="58" cy="112" rx="10" ry="7" fill="rgba(4,2,12,0.92)" stroke="#4DFFA8" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)" style="animation-delay:1.3s"/>
+        <ellipse cx="262" cy="320" rx="13" ry="9" fill="rgba(5,3,16,0.7)" filter="url(#darkspot)"/>
       </g>
     </g>
     <!-- Layer 4: Astral -->
@@ -1597,8 +1608,8 @@
       <ellipse cx="170" cy="215" rx="106" ry="152" fill="none" stroke="#FFEE88" stroke-width="2"   stroke-opacity="0.95" filter="url(#glow4)"/>
       <ellipse cx="170" cy="215" rx="106" ry="152" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.35"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="106" ry="152" fill="none" stroke="#FFE84D" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="32 9 18 12 44 7"/>
-        <circle cx="258" cy="288" r="7" fill="#FFE84D" fill-opacity="0.5" filter="url(#leak)"/>
+        <ellipse class="anim-hole" cx="258" cy="290" rx="10" ry="7" fill="rgba(4,2,12,0.92)" stroke="#FFE84D" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)" style="animation-delay:0.4s"/>
+        <ellipse cx="98" cy="128" rx="12" ry="8" fill="rgba(5,3,16,0.7)" filter="url(#darkspot)"/>
       </g>
     </g>
     <!-- Layer 3: Mental -->
@@ -1607,8 +1618,8 @@
       <ellipse cx="170" cy="215" rx="90" ry="133" fill="none" stroke="#FFCC88" stroke-width="2"   stroke-opacity="0.95" filter="url(#glow3)"/>
       <ellipse cx="170" cy="215" rx="90" ry="133" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="90" ry="133" fill="none" stroke="#FFB04D" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="24 8 38 6 15 10"/>
-        <circle cx="86"  cy="208" r="6" fill="#FFB04D" fill-opacity="0.5" filter="url(#leak)"/>
+        <ellipse class="anim-hole" cx="82" cy="208" rx="9" ry="6" fill="rgba(4,2,12,0.92)" stroke="#FFB04D" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)" style="animation-delay:1s"/>
+        <ellipse cx="242" cy="145" rx="11" ry="7" fill="rgba(5,3,16,0.68)" filter="url(#darkspot)"/>
       </g>
     </g>
     <!-- Layer 2: Emotional -->
@@ -1617,8 +1628,8 @@
       <ellipse cx="170" cy="215" rx="74" ry="114" fill="none" stroke="#FF99CC" stroke-width="2"   stroke-opacity="0.95" filter="url(#glow2)"/>
       <ellipse cx="170" cy="215" rx="74" ry="114" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.3"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="74" ry="114" fill="none" stroke="#FF7AA8" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="20 8 30 7 14 9"/>
-        <circle cx="218" cy="122" r="6" fill="#FF7AA8" fill-opacity="0.5" filter="url(#leak)"/>
+        <ellipse class="anim-hole" cx="216" cy="122" rx="9" ry="6" fill="rgba(4,2,12,0.92)" stroke="#FF7AA8" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)" style="animation-delay:1.6s"/>
+        <ellipse cx="128" cy="316" rx="10" ry="7" fill="rgba(5,3,16,0.68)" filter="url(#darkspot)"/>
       </g>
     </g>
     <!-- Layer 1: Etheric — innermost -->
@@ -1627,8 +1638,8 @@
       <ellipse cx="170" cy="215" rx="62" ry="96" fill="none" stroke="#FF9999" stroke-width="2"   stroke-opacity="0.95" filter="url(#glow1)"/>
       <ellipse cx="170" cy="215" rx="62" ry="96" fill="none" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.4"/>
       <g class="dmg-overlay">
-        <ellipse cx="170" cy="215" rx="62" ry="96" fill="none" stroke="#FF6060" stroke-width="1.5" stroke-opacity="0.7" stroke-dasharray="16 7 26 8 12 6"/>
-        <circle cx="162" cy="308" r="5" fill="#FF6060" fill-opacity="0.5" filter="url(#leak)"/>
+        <ellipse class="anim-hole" cx="162" cy="308" rx="8" ry="6" fill="rgba(4,2,12,0.92)" stroke="#FF6060" stroke-width="1.2" stroke-opacity="0.6" filter="url(#holeEdge)" style="animation-delay:0.2s"/>
+        <ellipse cx="222" cy="178" rx="9" ry="6" fill="rgba(5,3,16,0.65)" filter="url(#darkspot)"/>
       </g>
     </g>
 
