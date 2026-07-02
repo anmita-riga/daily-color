@@ -745,7 +745,6 @@
 <!-- Share Footer -->
 <div class="share-footer" id="share-footer">
   <button class="share-btn" id="redraw-btn">再感受一次</button>
-  <button class="share-btn line" id="line-share">分享到 LINE</button>
   <button class="share-btn" id="ig-share" style="color:#C13584;border-color:rgba(193,53,132,0.35);">分享到 IG</button>
 </div>
 
@@ -1184,27 +1183,6 @@ document.getElementById('redraw-btn').addEventListener('click', () => {
   document.getElementById('share-footer').classList.remove('visible');
 });
 
-document.getElementById('line-share').addEventListener('click', async () => {
-  if (!selectedColor || selectedParts.size === 0) return;
-  const parts = [...selectedParts].map(k => BODY_PARTS[k]).filter(Boolean);
-  const col = COLORS[selectedColor];
-  const colorKeys = Object.keys(COLORS);
-  const idx = colorKeys.indexOf(selectedColor) % 3;
-  const primary = parts[0];
-  const partNames = parts.map(p => p.name).join('、');
-  const phrase = primary.phrases[idx];
-
-  const text = `【聽見身體】\n\n今天有感覺的地方：${partNames}\n顏色心情：${col.name}\n\n${phrase}\n\n${primary.action}`;
-
-  try {
-    if (typeof buildRoomFlexMessage !== 'undefined') {
-      const msgs = buildRoomFlexMessage(partNames, col.name, col.name, col.hex, text);
-      await shareToLine(msgs);
-    }
-  } catch (e) {
-    console.error('Share failed:', e);
-  }
-});
 
 document.getElementById('ig-share').addEventListener('click', async () => {
   if (!selectedColor || selectedParts.size === 0) return;

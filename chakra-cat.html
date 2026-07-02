@@ -1623,29 +1623,6 @@ function showCard(i) {
   extraEl.appendChild(toggle);
   extraEl.appendChild(body);
 
-  // LINE 分享按鈕
-  let shareBtn = document.getElementById('lineShareBtn');
-  if (!shareBtn) {
-    shareBtn = document.createElement('button');
-    shareBtn.id = 'lineShareBtn';
-    shareBtn.className = 'line-share-btn';
-    shareBtn.textContent = '分享到 LINE ↗';
-    shareBtn.addEventListener('click', async () => {
-      const cur = chakras[activeI];
-      shareBtn.textContent = '傳送中…';
-      shareBtn.disabled = true;
-      try {
-        const cardEl = document.getElementById('cardWrap');
-        await shareToLine(buildChakraFlexMessage([{
-          name: cur.name, en: cur.en, color: cur.color,
-          desc: cardEl.dataset.desc, extra: cur.extra
-        }]));
-      } catch(e) {}
-      shareBtn.textContent = '分享到 LINE ↗';
-      shareBtn.disabled = false;
-    });
-  }
-  extraEl.appendChild(shareBtn);
 
   // 關閉按鈕
   let closeBtn = document.getElementById('cardCloseBtn');
