@@ -637,17 +637,23 @@
 
     /* Tap hint dots on cards */
     .damage-card::after {
-      content: '· · ·';
+      content: '點擊了解 ›';
       display: block;
-      font-size: 9px;
-      letter-spacing: 0.3em;
-      color: rgba(255,255,255,0.18);
-      margin-top: 12px;
+      font-size: 8.5px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.28);
+      margin-top: 10px;
       text-align: left;
     }
     .damage-card.active::after {
-      color: var(--card-color, rgba(255,200,120,0.4));
+      color: var(--card-color, rgba(255,200,120,0.5));
     }
+
+    @keyframes cardIntroHint {
+      0%, 100% { transform: translateY(0); box-shadow: none; }
+      50%       { transform: translateY(-6px); box-shadow: 0 10px 28px -4px color-mix(in srgb, var(--card-color, rgba(255,255,255,0.3)) 35%, transparent); }
+    }
+    .card-intro-hint { animation: cardIntroHint 0.9s ease-in-out 3; }
 
     /* Card Sheet (bottom sheet for card details) */
     .card-sheet {
@@ -2639,6 +2645,15 @@
         document.querySelectorAll('.drawer-subitem').forEach(s => s.classList.toggle('active', s === subitem));
         closeDrawer();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (panelId === 'kp-damage') {
+          const firstCard = document.querySelector('#damage-cards-strip .damage-card');
+          if (firstCard) {
+            firstCard.classList.remove('card-intro-hint');
+            void firstCard.offsetWidth;
+            firstCard.classList.add('card-intro-hint');
+            firstCard.addEventListener('animationend', () => firstCard.classList.remove('card-intro-hint'), { once: true });
+          }
+        }
         return;
       }
       return;
