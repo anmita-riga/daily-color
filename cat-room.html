@@ -695,6 +695,8 @@
     <div class="color-grid" id="grid-blue"></div>
     <span class="color-group-label">暖 · 中性</span>
     <div class="color-grid" id="grid-warm"></div>
+    <span class="color-group-label">紅 · 橙 · 黃 · 綠</span>
+    <div class="color-grid" id="grid-vivid"></div>
   </div>
 
   <button class="btn-primary" id="next-to-result" disabled>聽聽身體說什麼</button>
@@ -971,6 +973,15 @@ const COLORS = {
   fog:        { name: '晨霧白',   hex: '#E0DED8', group: 'warm',   energy: '柔和、靜好、朝露' },
   charcoal:   { name: '炭灰',     hex: '#787878', group: 'warm',   energy: '沉穩、清醒、簡潔' },
   ivory:      { name: '象牙白',   hex: '#F5F0E0', group: 'warm',   energy: '溫潤、典雅、珍貴' },
+  scarlet:    { name: '朱砂紅',   hex: '#D94040', group: 'vivid',  energy: '熱情、勇氣、生命力' },
+  rose:       { name: '玫瑰紅',   hex: '#C04060', group: 'vivid',  energy: '愛、渴望、心的呼喚' },
+  coral:      { name: '珊瑚橘',   hex: '#E86848', group: 'vivid',  energy: '活力、開朗、熱忱' },
+  tangerine:  { name: '夕陽橙',   hex: '#E89040', group: 'vivid',  energy: '溫暖、喜悅、豐盛' },
+  golden:     { name: '金黃',     hex: '#E8C020', group: 'vivid',  energy: '光明、信心、自我價值' },
+  lemon:      { name: '檸檬黃',   hex: '#D8D840', group: 'vivid',  energy: '清醒、思緒、輕盈感' },
+  chartreuse: { name: '黃綠',     hex: '#90C030', group: 'vivid',  energy: '成長、新生、轉變' },
+  emerald:    { name: '翡翠綠',   hex: '#208060', group: 'vivid',  energy: '豐盛、平衡、心輪開放' },
+  forest:     { name: '森林綠',   hex: '#2D6040', group: 'vivid',  energy: '穩定、紮根、自然力量' },
 };
 
 const COLOR_DEPTH = {
@@ -1004,6 +1015,15 @@ const COLOR_DEPTH = {
   fog:        { text: '晨霧白柔和靜好，像早晨還沒完全醒來的那個狀態。你選了它，也許你現在需要的就是這種半醒半夢的溫柔，不必太快進入正式的一天。' },
   charcoal:   { text: '炭灰沉穩清醒，是那種不多說話但每一句都算的顏色。你選了它，也許你現在需要一種清晰——不是繁複的分析，而是刪掉雜訊之後的本質。' },
   ivory:      { text: '象牙白溫潤典雅，是時間給的顏色。你選了它，也許你正在學習看見自己的珍貴——不是因為完美，不是因為達到什麼，而是因為你本來就是珍貴的。' },
+  scarlet:    { text: '朱砂紅是生命力本身的顏色。你選了它，也許你的某個地方正在燃燒，一種不能再壓著的能量——讓它出來，讓它帶著你往前走。' },
+  rose:       { text: '玫瑰紅是心的顏色，是渴望被愛、也願意去愛的那份勇氣。你選了它，也許你正在面對一段關係，或者你的心正在向某個方向敞開。' },
+  coral:      { text: '珊瑚橘帶著海的溫度和陽光的能量。你選了它，也許你需要一點熱忱回來——那種做事情時眼睛會亮的感覺，它還在，只是需要被點燃。' },
+  tangerine:  { text: '夕陽橙是一天結束前最飽滿的光。你選了它，也許你正在享受某件事的成熟，或者你需要被提醒：豐盛不是遙遠的事，此刻就有。' },
+  golden:     { text: '金黃是自我價值的顏色。你選了它，也許你正在重新確認自己是誰，或者你需要更多光明照進某個還沒被肯定的角落。你值得的，不只是別人說的那些。' },
+  lemon:      { text: '檸檬黃清醒而輕盈，像腦袋突然清明的那一刻。你選了它，也許你正需要思緒清晰——把那些混在一起的事情，一條一條地理出來。' },
+  chartreuse: { text: '黃綠是最新鮮的成長色，是春天剛冒出來的那一截嫩芽。你選了它，也許你正在長出什麼新的東西，還有點不確定，但它是活的，充滿力量。' },
+  emerald:    { text: '翡翠綠是心輪的顏色，飽和而深沉。你選了它，也許你的心正在打開——對自己，對他人，對這個世界。這種開放不是脆弱，是真正的力量。' },
+  forest:     { text: '森林綠是大地紮根的顏色。你選了它，也許你需要的是穩定——像一棵樹，不管外面刮什麼風，根還在。你的根在哪裡，去找到它。' },
 };
 
 // ════════════════════════════════════════
@@ -1018,11 +1038,11 @@ let selectedColor = null;
 // ════════════════════════════════════════
 
 function buildColorGrids() {
-  const groups = { pink: [], blue: [], warm: [] };
+  const groups = { pink: [], blue: [], warm: [], vivid: [] };
   Object.entries(COLORS).forEach(([key, c]) => {
     if (groups[c.group]) groups[c.group].push([key, c]);
   });
-  [['pink','grid-pink'],['blue','grid-blue'],['warm','grid-warm']].forEach(([g, id]) => {
+  [['pink','grid-pink'],['blue','grid-blue'],['warm','grid-warm'],['vivid','grid-vivid']].forEach(([g, id]) => {
     const grid = document.getElementById(id);
     groups[g].forEach(([key, c]) => {
       const el = document.createElement('div');
