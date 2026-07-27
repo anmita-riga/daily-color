@@ -232,6 +232,27 @@
     /* cute face */
     .face-feature { pointer-events: none; }
 
+    /* ── Extra parts (not on front figure) ── */
+    .extra-parts {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      justify-content: center; margin: 0.6rem 0 0.8rem;
+    }
+    .extra-part-btn {
+      font-family: "Noto Serif TC", serif;
+      font-size: 0.72rem; letter-spacing: 0.12em;
+      color: #8A7A9A; border: 1px solid rgba(160,140,190,0.35);
+      border-radius: 20px; padding: 6px 18px;
+      background: rgba(180,160,210,0.06);
+      cursor: pointer; transition: all 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .extra-part-btn:hover { background: rgba(180,160,210,0.14); }
+    .extra-part-btn.selected {
+      background: rgba(160,130,200,0.18);
+      border-color: rgba(150,120,190,0.6);
+      color: #6A5080;
+    }
+
     /* ── Selected tags ── */
     .selected-tags {
       display: flex; flex-wrap: wrap; gap: 6px;
@@ -674,6 +695,11 @@
     </svg>
   </div>
 
+  <!-- 正面圖沒有的部位 -->
+  <div class="extra-parts" id="extra-parts">
+    <div class="extra-part-btn" data-part="back" onclick="toggleExtraPart(this)">背部</div>
+  </div>
+
   <div class="selected-tags" id="selected-tags">
     <span style="font-size:11px;color:#C0B0C0;letter-spacing:0.08em">點選身體部位</span>
   </div>
@@ -935,6 +961,16 @@ const BODY_PARTS = {
       '在不確定的路上，一步一步地走'
     ],
     action: '轉動腳踝，感受連結大地的那個點，讓自己踏實地站著。'
+  },
+  back: {
+    name: '背部', chakra: '心輪',
+    meaning: '支撐與承擔',
+    phrases: [
+      '背部承載著你撐起的一切，它比你以為的更累',
+      '那些沒說出口的重量，有時候就住在背上',
+      '背部緊繃，是身體在說：你需要有人支持你了'
+    ],
+    action: '往後靠在椅背上，讓背部完全被支撐，深呼吸三次，允許自己被接住。'
   }
 };
 
@@ -1068,6 +1104,19 @@ function togglePart(group) {
   } else {
     selectedParts.add(part);
     group.classList.add('selected');
+  }
+  updateTags();
+  document.getElementById('next-to-color').disabled = selectedParts.size === 0;
+}
+
+function toggleExtraPart(btn) {
+  const part = btn.dataset.part;
+  if (selectedParts.has(part)) {
+    selectedParts.delete(part);
+    btn.classList.remove('selected');
+  } else {
+    selectedParts.add(part);
+    btn.classList.add('selected');
   }
   updateTags();
   document.getElementById('next-to-color').disabled = selectedParts.size === 0;
